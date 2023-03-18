@@ -1,0 +1,24 @@
+{
+  "name": "snap-drop",
+  "version": "1.0.0",
+  "description": "Snap Drop is a web app that let's it's user take photos and get them printed and delivered.",
+  "main": "index.js",
+  "scripts": {
+    "start:server": "cd server && nodemon index.js",
+    "start:client": "cd client && ng serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sajon5271/Snap-Drop.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sajon5271/Snap-Drop/issues"
+  },
+  "homepage": "https://github.com/Sajon5271/Snap-Drop#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+  }
+}
