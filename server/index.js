@@ -1,18 +1,23 @@
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv');
-}
 const express = require('express');
-const mongoose = require('mongoose');
-
+const cors = require('cors');
 const app = express();
+const router = require('./routes');
+
+const corsConfig = {
+  origin: 'http://localhost:4200',
+  credentials: true,
+};
+
+app.use(cors(corsConfig));
+app.use(express.json());
+app.use(router);
 
 (async function () {
   try {
-    await mongoose.connect(process.env.DB_URL);
     app.listen(process.env.PORT || 3000, () => {
       console.log('Server started on ' + (process.env.PORT || 3000));
     });
   } catch (error) {
-    console.log(error);
+    console.log(`Something went wrong! ${error}`);
   }
 })();
