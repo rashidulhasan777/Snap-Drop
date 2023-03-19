@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { OauthService } from 'src/app/services/oauth.service';
 
 @Component({
@@ -8,12 +9,25 @@ import { OauthService } from 'src/app/services/oauth.service';
 })
 export class LoginComponent {
   hidePassword = true;
-  constructor(private oauthService: OauthService) {}
+
+  constructor(
+    private oauthService: OauthService,
+    private formBuilder: FormBuilder
+  ) {}
+
+  loginInfo = this.formBuilder.group({
+    email: ['', [Validators.email, Validators.required]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
+  });
 
   googleOauth() {
-    // this.oauthService.googleOauthInit();
+    this.oauthService.googleOauthInit();
   }
-  facebookOauth() {}
+  facebookOauth() {
+    this.oauthService.fbOauthInit();
+  }
 
-  handleLogin() {}
+  handleLogin() {
+    
+  }
 }

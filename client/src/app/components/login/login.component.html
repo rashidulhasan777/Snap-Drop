@@ -16,10 +16,21 @@
     </button>
   </div>
   <div class="orText">Or,</div>
-  <form (submit)="handleLogin()" class="loginForm">
+  <form (submit)="handleLogin()" class="loginForm" [formGroup]="loginInfo">
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
-      <input matInput type="email" placeholder="Ex. abc@gmail.com" />
+      <input
+        matInput
+        type="email"
+        placeholder="Ex. abc@gmail.com"
+        formControlName="email"
+      />
+      <mat-error
+        *ngIf="
+          loginInfo.controls.email.touched && !loginInfo.controls.email.valid
+        "
+      >
+      </mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Password</mat-label>
@@ -27,6 +38,7 @@
         matInput
         [type]="!hidePassword ? 'text' : 'password'"
         placeholder="Type your password"
+        formControlName="password"
       />
       <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{
         !hidePassword ? "visibility_off" : "visibility"

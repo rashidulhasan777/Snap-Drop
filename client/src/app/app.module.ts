@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialComponentsModule } from './material-components/material-components.module';
 import { LoginComponent } from './components/login/login.component';
 import { FacebookLoginComponent } from './components/facebook-login/facebook-login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { FacebookLoginComponent } from './components/facebook-login/facebook-log
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialComponentsModule,
+    ReactiveFormsModule,
   ],
   bootstrap: [AppComponent],
 })
