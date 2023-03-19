@@ -5,7 +5,7 @@ import { FacebookLoginComponent } from './components/facebook-login/facebook-log
 
 const routes: Routes = [
   { path: 'oauth_google', component: GoogleLoginComponent },
-  { path: 'oauth_facebook', component: FacebookLoginComponent },
+  { path: 'oauth_fb', component: FacebookLoginComponent },
 ];
 
 @NgModule({

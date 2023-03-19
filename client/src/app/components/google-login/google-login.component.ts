@@ -17,7 +17,6 @@ export class GoogleLoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('here');
     if (localStorage.getItem('googleAccessToken')) {
       // navigate to client homepage
       return;

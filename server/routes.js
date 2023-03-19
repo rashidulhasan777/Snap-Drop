@@ -28,5 +28,6 @@ router.post('/order', authMiddleware.customer, orderController.createOrder);
 router.put('/order/:id', authMiddleware.lab, orderController.changeOrderStatus);
 
 router.post('/googleAccessCode', oauthController.googleAccessCode);
+router.post('/fbAccessCode', oauthController.fbAccessCode);
 
 module.exports = router;

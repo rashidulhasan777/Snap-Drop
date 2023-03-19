@@ -11,6 +11,9 @@ export class AppComponent {
   constructor(private oauthService: OauthService) {}
 
   googleOauth() {
-    this.oauthService.googleOauthInit()
+    this.oauthService.googleOauthInit();
+  }
+  fbOauth() {
+    this.oauthService.fbOauthInit();
   }
 }
