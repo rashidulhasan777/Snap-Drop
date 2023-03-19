@@ -30,4 +30,24 @@ export class OauthService {
       { code }
     );
   }
+
+  fbOauthInit() {
+    const client_id = '1869465020092669';
+    const redirect_uri = 'http://localhost:4200/oauth_fb';
+    const scopes = 'public_profile email';
+    const response_type = 'code';
+    const url = new URL('https://www.facebook.com/v11.0/dialog/oauth');
+    url.searchParams.append('client_id', client_id);
+    url.searchParams.append('redirect_uri', redirect_uri);
+    url.searchParams.append('scope', scopes);
+    url.searchParams.append('response_type', response_type);
+    window.location.href = url.toString();
+  }
+
+  fbOauthGetAccessCode(code: string): Observable<{ access_token: string }> {
+    return this.http.post<{ access_token: string }>(
+      this.backendRoot + '/fbAccessCode',
+      { code }
+    );
+  }
 }

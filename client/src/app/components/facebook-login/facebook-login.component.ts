@@ -4,20 +4,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { OauthService } from 'src/app/services/oauth.service';
 
 @Component({
-  selector: 'app-google-login',
-  templateUrl: './google-login.component.html',
-  styleUrls: ['./google-login.component.css'],
+  selector: 'app-facebook-login',
+  templateUrl: './facebook-login.component.html',
+  styleUrls: ['./facebook-login.component.css'],
 })
-export class GoogleLoginComponent implements OnInit {
+export class FacebookLoginComponent implements OnInit {
   constructor(
     private oauthService: OauthService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private http: HttpClient
   ) {}
-
   ngOnInit() {
-    if (localStorage.getItem('googleAccessToken')) {
+    if (localStorage.getItem('fbAccessToken')) {
       // navigate to client homepage
       return;
     }
@@ -26,10 +25,10 @@ export class GoogleLoginComponent implements OnInit {
       // if(params['error])
       if (params['code']) {
         this.oauthService
-          .googleOauthGetAccessCode(params['code'])
+          .fbOauthGetAccessCode(params['code'])
           .subscribe((res) => {
             console.log(res.access_token);
-            localStorage.setItem('googleAccessToken', res.access_token);
+            localStorage.setItem('fbAccessToken', res.access_token);
           });
       }
     });
