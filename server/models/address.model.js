@@ -1,21 +1,21 @@
 const mongoose = require("./../db");
 
-const imageSchema = mongoose.Schema({
-  photoSize: {
+const addressSchema = mongoose.Schema({
+  houseNo: {
     type: String
   },
-  orgFilename: {
+  roadNo: {
     type: String,
   },
-  apiFilename: {
+  area: {
     type: String,
   },
-  copies: {
+  postCode: {
     type: String,
   },
-  imageURL: {
+  District: {
     type: String,
   }
 });
 
-module.exports = {imageSchema}
+module.exports = {addressSchema}
