@@ -17,18 +17,20 @@ export class GoogleLoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log('here');
     if (localStorage.getItem('googleAccessToken')) {
       // navigate to client homepage
       return;
     }
     this.activatedRoute.queryParams.subscribe((params) => {
-      // console.log(params);
+      console.log(params);
+      // if(params['error])
       if (params['code']) {
         this.oauthService
           .googleOauthGetAccessCode(params['code'])
           .subscribe((res) => {
             console.log(res.access_token);
-            // localStorage.setItem('googleAccessToken', res.access_token);
+            localStorage.setItem('googleAccessToken', res.access_token);
           });
       }
     });

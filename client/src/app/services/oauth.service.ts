@@ -14,8 +14,7 @@ export class OauthService {
     const client_id =
       '861084726957-9qcs9ivbphq1043ls2b2me5obfhk48ut.apps.googleusercontent.com';
     const redirect_uri = 'http://localhost:4200/oauth_google';
-    const scopes =
-      'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile';
+    const scopes = 'profile email';
     const response_type = 'code';
     const url = new URL('https://accounts.google.com/o/oauth2/v2/auth');
     url.searchParams.append('client_id', client_id);
