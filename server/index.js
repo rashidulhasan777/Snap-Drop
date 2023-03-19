@@ -6,6 +6,7 @@ const cors = require('cors');
 const app = express();
 const router = require('./routes');
 
+
 const corsConfig = {
   origin: 'http://localhost:4200',
   credentials: true,
