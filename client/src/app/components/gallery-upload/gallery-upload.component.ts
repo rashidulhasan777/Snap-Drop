@@ -7,28 +7,42 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./gallery-upload.component.css'],
 })
 export class GalleryUploadComponent {
-  previews: File[] = [];
+  previews: { filename: string; data: File }[] = [];
+  pictureData = this.fb.array<FormGroup>([]);
 
   constructor(private fb: FormBuilder) {}
 
+  ngOnInit() {
+    this.pictureData.valueChanges.subscribe((res) => console.log(res));
+  }
+
   showPreview(event: Event) {
-    // console.log(event);
     const selectedFiles = (event.target as HTMLInputElement).files;
-    // console.log(files); // returns a file list
+    // returns a file list
     if (selectedFiles && selectedFiles[0]) {
       const numberOfFiles = selectedFiles.length;
-      // console.log(numberOfFiles);
       for (let i = 0; i < numberOfFiles; ++i) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
-          let imageData = e.target.result;
-          // console.log(imageData); // base 64 url returned
-          this.previews.push(imageData);
+          let data = e.target.result;
+          // base 64 url returned
+          if (this.previews.some((el) => el.filename === selectedFiles[i].name))
+            return;
+          this.previews.push({ filename: selectedFiles[i].name, data });
+          this.pictureData.push(
+            this.fb.group({
+              imageName: [selectedFiles[i].name],
+              size: ['4R'],
+              copies: [1],
+            })
+          );
         };
         reader.readAsDataURL(selectedFiles[i]);
       }
     }
   }
 
-  updateValues() {}
+  handleSubmit(){
+    
+  }
 }

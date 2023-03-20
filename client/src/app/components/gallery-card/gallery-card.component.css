@@ -1,0 +1,17 @@
+.gallery-card {
+  max-width: fit-content;
+  margin: 10px;
+}
+
+.gallery-image {
+  max-width: 250px;
+  margin-bottom: 20px;
+}
+
+.card-form {
+  max-width: 200px;
+}
+
+.size-input {
+  max-width: 70%;
+}
