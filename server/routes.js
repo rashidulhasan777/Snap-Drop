@@ -7,6 +7,12 @@ const oauthController = require('./controllers/oauth.controller');
 
 router.post('/login', userController.login);
 router.post('/register', userController.register);
+router.post('/oauthLogin', oauthController.oauthLogin);
+router.get(
+  '/user',
+  authMiddleware.authenticated,
+  userController.getUserDetails
+);
 
 // router.get("/order", orderController.getAllOrders);
 router.get(

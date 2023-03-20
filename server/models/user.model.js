@@ -1,4 +1,4 @@
-const mongoose = require("./../db");
+const mongoose = require('./../db');
 
 const userSchema = mongoose.Schema({
   name: {
@@ -17,6 +17,7 @@ const userSchema = mongoose.Schema({
   typeOfUser: {
     type: String,
     required: true,
+    default: 'customer',
   },
   profilePic: {
     type: String,
@@ -24,6 +25,9 @@ const userSchema = mongoose.Schema({
   address: {
     type: String,
   },
+  labId: {
+    type: String,
+  },
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model('User', userSchema);

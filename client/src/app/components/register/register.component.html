@@ -1,5 +1,5 @@
 <div class="containerLogin">
-  <h1 class="pageHeader">Login</h1>
+  <h1 class="pageHeader">Register</h1>
   <div class="oauthButtonContainer">
     <button mat-stroked-button (click)="googleOauth()" class="oauthButtons">
       <mat-icon svgIcon="google"></mat-icon>
@@ -17,7 +17,11 @@
   </div>
   <div class="orText">Or,</div>
   <mat-error *ngIf="errorMessage">{{ errorMessage }} </mat-error>
-  <form (submit)="handleLogin()" class="loginForm" [formGroup]="loginInfo">
+  <form
+    (submit)="handleRegister()"
+    class="loginForm"
+    [formGroup]="registerForm"
+  >
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
       <input
@@ -32,16 +36,23 @@
       <mat-label>Password</mat-label>
       <input
         matInput
-        [type]="!hidePassword ? 'text' : 'password'"
+        [type]="'password'"
         placeholder="Type your password"
         formControlName="password"
       />
-      <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{
-        !hidePassword ? "visibility_off" : "visibility"
-      }}</mat-icon>
+
       <mat-error *ngIf="passwordError">{{ passwordError }} </mat-error>
     </mat-form-field>
-    <button type="submit" mat-raised-button color="primary">Login</button>
+    <mat-form-field appearance="outline">
+      <mat-label>Confirm Password</mat-label>
+      <input
+        matInput
+        [type]="'password'"
+        placeholder="Re-Type your password"
+        formControlName="rePassword"
+      />
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="primary">Sign Up</button>
   </form>
-  <div>Don't have an account? <a routerLink="/register">Sign Up</a></div>
+  <div>Already have an account? <a routerLink="/login">Log in</a></div>
 </div>

@@ -1,4 +1,7 @@
 const axios = require('axios');
+const User = require('../models/user.model');
+const jwt = require('jsonwebtoken');
+const SECRET_KEY = process.env.JWT_SECRET;
 
 const googleAccessCode = async (req, res, next) => {
   const { code } = req.body;
@@ -39,4 +42,19 @@ const fbAccessCode = async (req, res, next) => {
   }
 };
 
-module.exports = { googleAccessCode, fbAccessCode };
+const oauthLogin = async (req, res, next) => {
+  const { email, name, profilePic } = req.body;
+  try {
+    let existingUser = await User.findOne({ email });
+    if (!existingUser) {
+      existingUser = await User.create({ email, name, profilePic });
+    }
+    const accessToken = jwt.sign({ _id: existingUser._id }, SECRET_KEY);
+    res.status(201).send({ accessToken });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ errorMessage: 'Something went wrong' });
+  }
+};
+
+module.exports = { googleAccessCode, fbAccessCode, oauthLogin };
