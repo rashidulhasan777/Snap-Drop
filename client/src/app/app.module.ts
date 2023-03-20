@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialComponentsModule } from './material-components/material-components.module';
 import { LoginComponent } from './components/login/login.component';
 import { FacebookLoginComponent } from './components/facebook-login/facebook-login.component';
+import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FacebookLoginComponent } from './components/facebook-login/facebook-log
     GoogleLoginComponent,
     LoginComponent,
     FacebookLoginComponent,
+    UserDashboardComponent,
   ],
   imports: [
     BrowserModule,
