@@ -1,14 +1,14 @@
 <mat-card class="gallery-card">
   <img mat-card-image [src]="image.imageURL" />
   <mat-card-content>
-    <form>
-      <mat-form-field class="img-format" appearance="fill">
+    <form [formGroup]="imageForm">
+      <mat-form-field class="img-format" appearance="outline">
         <mat-label>Format</mat-label>
         <input
           type="text"
           placeholder="Pick one"
           matInput
-          [formControl]="formatControl"
+          formControlName="size"
           [matAutocomplete]="auto"
         />
         <mat-autocomplete #auto="matAutocomplete">
@@ -19,6 +19,10 @@
             {{ option }}
           </mat-option>
         </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Copies</mat-label>
+        <input matInput type="number" formControlName="copies" />
       </mat-form-field>
     </form>
   </mat-card-content>

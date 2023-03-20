@@ -11,11 +11,6 @@ export class GalleryUploadComponent {
 
   constructor(private fb: FormBuilder) {}
 
-  uploadForm = this.fb.group({
-    avatar: [null],
-    name: [''],
-  });
-
   showPreview(event: Event) {
     // console.log(event);
     const selectedFiles = (event.target as HTMLInputElement).files;
@@ -34,4 +29,6 @@ export class GalleryUploadComponent {
       }
     }
   }
+
+  updateValues() {}
 }
