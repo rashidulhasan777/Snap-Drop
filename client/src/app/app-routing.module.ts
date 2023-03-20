@@ -24,10 +24,12 @@ import { RetakeComponent } from './components/retake/retake.component';
 import { RetakeDashboardComponent } from './components/lab-components/retake-dashboard/retake-dashboard.component';
 import { PassportPhotoInstructionsComponent } from './components/passport-photo-instructions/passport-photo-instructions.component';
 import { OrderStatusComponent } from './components/order-status/order-status.component';
+import { TakePictureComponent } from './components/take-picture/take-picture.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'passport', component: TakePictureComponent },
   { path: 'oauth_google', component: GoogleLoginComponent },
   { path: 'oauth_fb', component: FacebookLoginComponent },
   {

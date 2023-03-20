@@ -10,6 +10,7 @@ import { MaterialComponentsModule } from './material-components/material-compone
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
+import { WebcamModule } from 'ngx-webcam';
 
 //Components
 import { AppComponent } from './app.component';
@@ -45,6 +46,7 @@ import { PassportPhotoInstructionsComponent } from './components/passport-photo-
 export function playerFactory() {
   return import('lottie-web');
 }
+import { TakePictureComponent } from './components/take-picture/take-picture.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +78,7 @@ export function playerFactory() {
     RetakeDashboardComponent,
     OrderStatusComponent,
     PassportPhotoInstructionsComponent,
+    TakePictureComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,6 +89,7 @@ export function playerFactory() {
     LottieModule.forRoot({ player: playerFactory }),
     FormsModule,
     ReactiveFormsModule,
+    WebcamModule,
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
