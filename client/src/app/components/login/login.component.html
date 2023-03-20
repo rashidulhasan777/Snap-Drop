@@ -16,6 +16,7 @@
     </button>
   </div>
   <div class="orText">Or,</div>
+  <mat-error *ngIf="errorMessage">{{ errorMessage }} </mat-error>
   <form (submit)="handleLogin()" class="loginForm" [formGroup]="loginInfo">
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
@@ -25,12 +26,7 @@
         placeholder="Ex. abc@gmail.com"
         formControlName="email"
       />
-      <mat-error
-        *ngIf="
-          loginInfo.controls.email.touched && !loginInfo.controls.email.valid
-        "
-      >
-      </mat-error>
+      <mat-error *ngIf="emailError">{{ emailError }} </mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Password</mat-label>
@@ -43,6 +39,7 @@
       <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{
         !hidePassword ? "visibility_off" : "visibility"
       }}</mat-icon>
+      <mat-error *ngIf="passwordError">{{ passwordError }} </mat-error>
     </mat-form-field>
     <button type="submit" mat-raised-button color="primary">Login</button>
   </form>
