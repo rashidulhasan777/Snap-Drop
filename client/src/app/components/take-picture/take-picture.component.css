@@ -1,3 +1,17 @@
 .capturedImage {
   max-width: 100%;
 }
+
+.webcamContainer {
+  position: relative;
+  max-width: fit-content;
+}
+
+.outline {
+  position: absolute;
+  bottom: 2% !important;
+  left: 50% !important;
+  max-height: 98%;
+  /* left: 50%; */
+  transform: translate(-50%, 0%);
+}

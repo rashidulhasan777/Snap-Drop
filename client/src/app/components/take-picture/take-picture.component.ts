@@ -25,7 +25,6 @@ export class TakePictureComponent {
 
   ngOnInit() {
     this.windowWidth = window.innerWidth;
-    console.log(this.renderer);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -42,22 +41,6 @@ export class TakePictureComponent {
     link.click();
     link.remove();
 
-    const canvas = this.renderer.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    const image = new Image();
-
-    const degrees = 200;
-    image.onload = () => {
-      canvas.width = degrees % 180 === 0 ? image.width : image.height;
-      canvas.height = degrees % 180 === 0 ? image.height : image.width;
-
-      ctx.translate(canvas.width / 2, canvas.height / 2);
-      ctx.rotate((degrees * Math.PI) / 180);
-      ctx.drawImage(image, image.width / -2, image.height / -2);
-      this.dataUrl = canvas.toDataUrl();
-      console.log('here');
-    };
-    image.src = this.dataUrl;
     // const buff = Buffer.from(this.Image.imageAsBase64, 'base64');
   }
 
@@ -69,5 +52,12 @@ export class TakePictureComponent {
     return this.trigger.asObservable();
   }
 
-  downloadFile() {}
+  targetStyle() {
+    let x = 100 + Math.random() * 100;
+    let y = 100 + Math.random() * 100;
+    return {
+      top: `${x}px`,
+      left: `${y}px`,
+    };
+  }
 }

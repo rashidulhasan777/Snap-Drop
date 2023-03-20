@@ -1,13 +1,16 @@
-<webcam
-  class="camera"
-  [width]="windowWidth"
-  [trigger]="getTrigger()"
-  [captureImageData]="true"
-  *ngIf="cameraOpen"
-  [videoOptions]="cameraConfig"
-  (imageCapture)="saveImage($event)"
-  [imageQuality]="1"
-></webcam>
+<div #container class="webcamContainer">
+  <webcam
+    class="camera"
+    [width]="windowWidth"
+    [trigger]="getTrigger()"
+    [captureImageData]="true"
+    *ngIf="cameraOpen"
+    [videoOptions]="cameraConfig"
+    (imageCapture)="saveImage($event)"
+    [imageQuality]="1"
+  ></webcam>
+  <img class="outline" src="assets/outline.svg">
+</div>
 
 <button (click)="capture()">Capture</button>
 <img *ngIf="Image" [src]="dataUrl" class="capturedImage" />
