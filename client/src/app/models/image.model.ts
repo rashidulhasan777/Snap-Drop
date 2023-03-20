@@ -1,5 +1,5 @@
 export interface Image {
   photoSize: string;
   copies: number;
-  imageURL: string;
+  imageURL: string | File;
 }
