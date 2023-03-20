@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'oauth_google', component: GoogleLoginComponent },
   { path: 'oauth_fb', component: FacebookLoginComponent },
   { path: 'user_dashboard', component: UserDashboardComponent },
+  { path: 'gallery_upload', component: UserDashboardComponent },
   { path: '', pathMatch: 'full', component: AppComponent },
 ];
 

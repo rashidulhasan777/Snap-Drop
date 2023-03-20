@@ -1,0 +1,34 @@
+.upcoming-card-container {
+  padding: 5%;
+  margin-bottom: 10%;
+}
+
+.upcoming-card {
+  border: 1px solid gray;
+  background-color: #fac36b;
+}
+
+.upcoming-card-title {
+  font-size: 1.5em;
+  margin-bottom: 10%;
+}
+
+.upcoming-card-details {
+  font-size: 1em;
+}
+
+.upcoming-card-actions {
+  display: flex;
+  justify-content: end;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  padding: 5%;
+}
+
+.options-button {
+  width: 100%;
+  margin-bottom: 10%;
+}

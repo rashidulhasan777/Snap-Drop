@@ -2,16 +2,36 @@
 <div class="upcoming-card-container">
   <mat-card class="upcoming-card">
     <mat-card-header>
-      <mat-card-title>Upcoming Orders</mat-card-title>
+      <mat-card-title class="upcoming-card-title"
+        >Upcoming Orders</mat-card-title
+      >
     </mat-card-header>
     <mat-card-content>
-      <!-- <p>Upcoming {{}} order</p>
-    <p>{{ longText }}</p> -->
+      <p class="upcoming-card-details">
+        Upcoming {{ orders[0].orderType }} order
+      </p>
+      <p class="upcoming-card-details">{{ orders[0].orderStatus }}</p>
       <mat-divider></mat-divider>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
+    <mat-card-actions class="upcoming-card-actions">
+      <button mat-icon-button>
+        <mat-icon>read_more</mat-icon>
+      </button>
     </mat-card-actions>
   </mat-card>
+</div>
+
+<div class="options-container">
+  <div class="passport-button-container">
+    <a class="options-button" mat-stroked-button routerLink=".">
+      <mat-icon>camera</mat-icon>
+      <span>Take a passport photo</span>
+    </a>
+  </div>
+  <div class="gallery-button-container">
+    <a class="options-button" mat-stroked-button routerLink="/gallery_upload">
+      <mat-icon>cloud_upload</mat-icon>
+      <span>Upload pictures</span>
+    </a>
+  </div>
 </div>
