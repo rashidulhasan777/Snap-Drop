@@ -12,6 +12,7 @@ import { MaterialComponentsModule } from './material-components/material-compone
 import { LoginComponent } from './components/login/login.component';
 import { FacebookLoginComponent } from './components/facebook-login/facebook-login.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
+import { UserNavbarComponent } from './components/user-navbar/user-navbar.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { UserDashboardComponent } from './components/user-dashboard/user-dashboa
     LoginComponent,
     FacebookLoginComponent,
     UserDashboardComponent,
+    UserNavbarComponent,
   ],
   imports: [
     BrowserModule,
