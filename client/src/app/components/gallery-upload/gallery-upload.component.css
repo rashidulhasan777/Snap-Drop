@@ -1,0 +1,28 @@
+h3 {
+  text-align: center;
+}
+
+.gallery-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 75vh;
+  overflow-y: auto;
+}
+
+.gallery-cards-container {
+  margin-top: 10vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+
+.gallery-controls {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}

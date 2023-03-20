@@ -1,0 +1,33 @@
+<h3>Upload Photos</h3>
+
+<div class="gallery-container">
+  <div class="gallery-cards-container">
+    <app-gallery-card
+      *ngFor="let preview of previews"
+      [preview]="preview" (imageinfo)="updateValues()"
+    ></app-gallery-card>
+  </div>
+  <!-- <div *ngFor="let preview of previews">
+    <img [src]="preview" />
+  </div> -->
+  <input
+    #fileUpload
+    type="file"
+    accept="image/*"
+    (change)="showPreview($event)"
+    multiple
+    style="display: none"
+  />
+  <div class="gallery-controls">
+    <button mat-fab color="primary" (click)="fileUpload.click()">
+      <mat-icon>add</mat-icon>
+    </button>
+    <a
+      *ngIf="previews.length"
+      mat-flat-button
+      routerLink="/delivery_page"
+      color="primary"
+      >Next</a
+    >
+  </div>
+</div>

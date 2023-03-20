@@ -1,0 +1,29 @@
+<mat-card class="gallery-card">
+  <img mat-card-image [src]="image.imageURL" />
+  <mat-card-content>
+    <form [formGroup]="imageForm">
+      <mat-form-field class="img-format" appearance="outline">
+        <mat-label>Format</mat-label>
+        <input
+          type="text"
+          placeholder="Pick one"
+          matInput
+          formControlName="size"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let option of filteredFormatOptions | async"
+            [value]="option"
+          >
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Copies</mat-label>
+        <input matInput type="number" formControlName="copies" />
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+</mat-card>

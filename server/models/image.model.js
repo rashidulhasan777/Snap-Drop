@@ -1,15 +1,15 @@
-const mongoose = require("./../db");
+const mongoose = require('./../db');
 
 const imageSchema = mongoose.Schema({
   photoSize: {
-    type: String
+    type: String,
   },
   copies: {
-    type: String,
+    type: Number,
   },
   imageURL: {
     type: String,
-  }
+  },
 });
 
-module.exports = {imageSchema}
+module.exports = { imageSchema };
