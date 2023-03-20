@@ -14,6 +14,8 @@ import { LoginComponent } from './components/login/login.component';
 import { FacebookLoginComponent } from './components/facebook-login/facebook-login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
+import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
+import { UserNavbarComponent } from './components/user-navbar/user-navbar.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { RegisterComponent } from './components/register/register.component';
     LoginComponent,
     FacebookLoginComponent,
     RegisterComponent,
+    UserDashboardComponent,
+    UserNavbarComponent,
   ],
   imports: [
     BrowserModule,

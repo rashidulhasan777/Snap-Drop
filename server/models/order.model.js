@@ -25,6 +25,10 @@ const OrderSchema = mongoose.Schema({
     type: [imageSchema],
     required: true,
   },
+  orderType: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Order", OrderSchema);
