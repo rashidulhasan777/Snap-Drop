@@ -21,6 +21,9 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private router: Router
   ) {}
+  ngOnInit() {
+    if (this.authService.isLoggedIn()) this.router.navigate(['user_dashboard']);
+  }
 
   loginInfo = this.formBuilder.group({
     email: ['', [Validators.email, Validators.required]],

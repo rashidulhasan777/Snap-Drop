@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { OauthService } from 'src/app/services/oauth.service';
 
 @Component({
@@ -18,18 +19,35 @@ export class GoogleLoginComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem('googleAccessToken')) {
-      // navigate to client homepage
+      this.router.navigate(['user_dashboard']);
       return;
     }
     this.activatedRoute.queryParams.subscribe((params) => {
-      console.log(params);
       // if(params['error])
       if (params['code']) {
         this.oauthService
           .googleOauthGetAccessCode(params['code'])
           .subscribe((res) => {
-            console.log(res.access_token);
             localStorage.setItem('googleAccessToken', res.access_token);
+            this.http
+              .get('https://www.googleapis.com/userinfo/v2/me', {
+                headers: {
+                  Authorization: `Bearer ${res.access_token}`,
+                },
+              })
+              .subscribe((res: any) => {
+                const { name, email, picture } = res;
+                this.oauthService
+                  .oauthLogin({
+                    name,
+                    email,
+                    profilePic: picture,
+                  })
+                  .subscribe((res) => {
+                    localStorage.setItem('userAccessToken', res.access_token);
+                    this.router.navigate(['user_dashboard']);
+                  });
+              });
           });
       }
     });

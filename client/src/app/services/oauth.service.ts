@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class OauthService {
-  backendRoot = 'http://localhost:3000';
+  private backendRoot = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 
@@ -48,6 +48,17 @@ export class OauthService {
     return this.http.post<{ access_token: string }>(
       this.backendRoot + '/fbAccessCode',
       { code }
+    );
+  }
+
+  oauthLogin(user: {
+    name: string;
+    email: string;
+    profilePic: string;
+  }): Observable<{ access_token: string }> {
+    return this.http.post<{ access_token: string }>(
+      this.backendRoot + '/oauthLogin',
+      user
     );
   }
 }

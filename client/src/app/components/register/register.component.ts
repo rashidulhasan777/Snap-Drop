@@ -25,6 +25,9 @@ export class RegisterComponent {
     private formBuilder: FormBuilder,
     private router: Router
   ) {}
+  ngOnInit() {
+    if (this.authService.isLoggedIn()) this.router.navigate(['user_dashboard']);
+  }
 
   registerForm = this.formBuilder.group(
     {
