@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { OauthService } from 'src/app/services/oauth.service';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { Router } from '@angular/router';
 
@@ -38,15 +38,18 @@ export class LoginComponent {
     if (this.loginInfo.valid) {
       const { email, password } = this.loginInfo.value;
       if (email && password)
-        this.authService.login({ email, password }).subscribe({
-          next: (response) => {
-            localStorage.setItem('userAccessToken', response.access_token);
-            this.router.navigate(['user_dashboard']);
-          },
-          error: (response) => {
-            this.errorMessage = response.error.errorMessage;
-          },
-        });
+        this.authService
+          .login({ email, password })
+          .pipe(takeUntil(this.destroy$))
+          .subscribe({
+            next: (response) => {
+              localStorage.setItem('userAccessToken', response.access_token);
+              this.router.navigate(['user_dashboard']);
+            },
+            error: (response) => {
+              this.errorMessage = response.error.errorMessage;
+            },
+          });
     } else {
       this.errorMessage = 'Please fill in the form correctly';
     }

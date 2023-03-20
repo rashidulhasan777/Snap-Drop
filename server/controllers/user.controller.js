@@ -19,6 +19,7 @@ const register = async (req, res) => {
     const accessToken = jwt.sign({ _id }, SECRET_KEY);
     res.status(201).send({ accessToken });
   } catch (error) {
+    console.log(error);
     res.status(400).send({ errorMessage: 'Could not create user' });
   }
 };
@@ -36,8 +37,13 @@ const login = async (req, res) => {
     const accessToken = jwt.sign({ _id: user._id }, SECRET_KEY);
     res.status(200).send({ accessToken });
   } catch (error) {
+    console.log(error);
     res.status(401).send({ errorMessage: 'Password is incorrect' });
   }
 };
 
-module.exports = { register, login };
+const getUserDetails =  (req, res) => {
+  res.status(200).send(req.currentUser);
+};
+
+module.exports = { register, login, getUserDetails };

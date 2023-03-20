@@ -12,7 +12,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialComponentsModule } from './material-components/material-components.module';
 import { LoginComponent } from './components/login/login.component';
 import { FacebookLoginComponent } from './components/facebook-login/facebook-login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     GoogleLoginComponent,
     LoginComponent,
     FacebookLoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +29,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialComponentsModule,
+    FormsModule,
     ReactiveFormsModule,
   ],
   providers: [
