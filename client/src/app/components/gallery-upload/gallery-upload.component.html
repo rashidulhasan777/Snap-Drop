@@ -1,10 +1,42 @@
 <h3>Upload Photos</h3>
 
+<form
+  *ngIf="pictureData.length"
+  [formGroup]="applyToAllForm"
+  class="card-form"
+  (submit)="applyToAll()"
+>
+  <mat-form-field class="inputField" appearance="outline">
+    <mat-label>Format</mat-label>
+    <input
+      class="size-input"
+      type="text"
+      placeholder="Pick one"
+      matInput
+      formControlName="size"
+      [matAutocomplete]="auto"
+    />
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option
+        *ngFor="let option of filteredFormatOptions | async"
+        [value]="option"
+      >
+        {{ option }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field class="inputField" appearance="outline">
+    <mat-label>Copies</mat-label>
+    <input matInput type="number" formControlName="copies" />
+  </mat-form-field>
+  <button type="submit" mat-stroked-button>Apply</button>
+</form>
 <div class="gallery-cards-container">
   <app-gallery-card
     *ngFor="let preview of previews; let i = index"
     [preview]="preview.data"
     [imageForm]="pictureData.at(i)"
+    (deleteImage)="removeImage(i)"
   ></app-gallery-card>
 </div>
 
@@ -23,7 +55,6 @@
   <button
     *ngIf="previews.length"
     mat-fab
-    routerLink="/delivery_page"
     color="primary"
     (click)="handleSubmit()"
   >

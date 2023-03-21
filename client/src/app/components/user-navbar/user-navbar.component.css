@@ -1,6 +1,6 @@
 .user-navbar {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   height: 10%;
 }
 

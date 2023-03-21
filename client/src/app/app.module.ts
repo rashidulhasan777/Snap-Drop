@@ -9,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialComponentsModule } from './material-components/material-components.module';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
-
 //Components
 import { AppComponent } from './app.component';
 import { GoogleLoginComponent } from './components/google-login/google-login.component';
@@ -23,6 +22,7 @@ import { GalleryUploadComponent } from './components/gallery-upload/gallery-uplo
 import { DeliveryPageComponent } from './components/delivery-page/delivery-page.component';
 import { GalleryCardComponent } from './components/gallery-card/gallery-card.component';
 import { LabDashboardComponent } from './components/lab-dashboard/lab-dashboard.component';
+import { AddPassportPhotoComponent } from './components/add-passport-photo/add-passport-photo.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +37,7 @@ import { LabDashboardComponent } from './components/lab-dashboard/lab-dashboard.
     DeliveryPageComponent,
     GalleryCardComponent,
     LabDashboardComponent,
+    AddPassportPhotoComponent,
   ],
   imports: [
     BrowserModule,

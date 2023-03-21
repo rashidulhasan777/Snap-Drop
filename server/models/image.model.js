@@ -16,6 +16,16 @@ const imageSchema = mongoose.Schema({
   imageURL: {
     type: String,
   },
+  approved: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  typeOfImage: {
+    type: String,
+    required: true,
+    enum: ['passport', 'gallery'],
+  },
 });
 
 module.exports = { imageSchema };

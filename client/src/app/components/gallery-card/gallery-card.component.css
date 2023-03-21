@@ -1,17 +1,41 @@
 .gallery-card {
-  max-width: fit-content;
+  max-height: fit-content;
+  width: clamp(400px, 30%, 600px);
   margin: 10px;
+  position: relative;
 }
 
 .gallery-image {
-  max-width: 250px;
-  margin-bottom: 20px;
+  width: 156px;
+  height: 156px;
+  object-fit: cover;
 }
 
 .card-form {
   max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .size-input {
+  max-width: 70%;
+}
+
+.contentContainer {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-around;
+  padding: 15px !important;
+}
+
+.crossButton {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.inputField {
   max-width: 70%;
 }
