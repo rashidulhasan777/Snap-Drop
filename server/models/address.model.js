@@ -1,21 +1,18 @@
-const mongoose = require("./../db");
+const mongoose = require('./../db');
 
 const addressSchema = mongoose.Schema({
-  houseNo: {
-    type: String
-  },
-  roadNo: {
+  address: {
     type: String,
   },
-  area: {
-    type: String,
+  city_id: {
+    type: Number,
   },
-  postCode: {
-    type: String,
+  zone_id: {
+    type: Number,
   },
-  District: {
-    type: String,
-  }
+  area_id: {
+    type: Number,
+  },
 });
 
-module.exports = {addressSchema}
+module.exports = { addressSchema };

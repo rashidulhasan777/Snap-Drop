@@ -7,7 +7,7 @@ import { FacebookLoginComponent } from './components/facebook-login/facebook-log
 import { RegisterComponent } from './components/register/register.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { GalleryUploadComponent } from './components/gallery-upload/gallery-upload.component';
-import { DeliveryPageComponent } from './components/delivery-page/delivery-page.component';
+import { UserAddressComponent } from './components/user-address/user-address.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'oauth_fb', component: FacebookLoginComponent },
   { path: 'user_dashboard', component: UserDashboardComponent },
   { path: 'gallery_upload', component: GalleryUploadComponent },
-  { path: 'delivery_page', component: DeliveryPageComponent },
+  { path: 'user_address', component: UserAddressComponent },
   { path: '', pathMatch: 'full', component: AppComponent },
 ];
 

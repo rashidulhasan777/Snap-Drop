@@ -1,0 +1,18 @@
+.user-info-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.delivery-info-form {
+  margin-top: 5%;
+  padding-top: 5%;
+}
+
+.button-container {
+  margin-top: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

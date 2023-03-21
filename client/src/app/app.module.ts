@@ -9,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialComponentsModule } from './material-components/material-components.module';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
-
 //Components
 import { AppComponent } from './app.component';
 import { GoogleLoginComponent } from './components/google-login/google-login.component';
@@ -20,8 +19,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { UserNavbarComponent } from './components/user-navbar/user-navbar.component';
 import { GalleryUploadComponent } from './components/gallery-upload/gallery-upload.component';
-import { DeliveryPageComponent } from './components/delivery-page/delivery-page.component';
 import { GalleryCardComponent } from './components/gallery-card/gallery-card.component';
+import { UserAddressComponent } from './components/user-address/user-address.component';
 
 @NgModule({
   declarations: [
@@ -33,8 +32,8 @@ import { GalleryCardComponent } from './components/gallery-card/gallery-card.com
     UserDashboardComponent,
     UserNavbarComponent,
     GalleryUploadComponent,
-    DeliveryPageComponent,
     GalleryCardComponent,
+    UserAddressComponent,
   ],
   imports: [
     BrowserModule,
