@@ -1,42 +1,45 @@
-const mongoose = require("./../db");
-const imageSchema = require("./image.model")
+const mongoose = require('./../db');
+const { addressSchema } = require('./address.model');
+const imageSchema = require('./image.model');
 
-const OrderSchema = mongoose.Schema({
-  labId: {
-    type: String, //!depends on redx
+const OrderSchema = mongoose.Schema(
+  {
+    labId: {
+      type: String, //!depends on redx
+    },
+    customerId: {
+      type: String,
+      required: true,
+    },
+    parcelId: {
+      type: String,
+    },
+    photoType: {
+      type: String,
+    },
+    customerAddress: {
+      type: addressSchema,
+    },
+    orderStatus: {
+      type: String,
+      // enum: ['pending', 'approved', 'picked up for deliveryy']
+      default: 'pending',
+    },
+    instruction: {
+      type: String,
+    },
+    passportPictures: {
+      type: [imageSchema],
+    },
+    galleryPictures: {
+      type: [imageSchema],
+    },
+    orderType: {
+      type: String,
+      required: true,
+    },
   },
-  customerId: {
-    type: String,
-    required: true,
-  },
-  parcelId: {
-    type: String
-  },
-  photoType: {
-    type: String,
-  },
-  customerAddress: {
-    type: String,
-  },
-  orderStatus: {
-    type: String,
-    default: "pending",
-  },
-  orderDate: {
-    type: Date,
-    default: Date.now()
-  },
-  instruction: {
-    type: String,
-  },
-  pictures: {
-    type: [imageSchema],
-    required: true,
-  },
-  orderType: {
-    type: String,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 
-module.exports = mongoose.model("Order", OrderSchema);
+module.exports = mongoose.model('Order', OrderSchema);

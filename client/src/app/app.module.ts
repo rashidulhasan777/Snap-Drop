@@ -22,6 +22,7 @@ import { UserNavbarComponent } from './components/user-navbar/user-navbar.compon
 import { GalleryUploadComponent } from './components/gallery-upload/gallery-upload.component';
 import { DeliveryPageComponent } from './components/delivery-page/delivery-page.component';
 import { GalleryCardComponent } from './components/gallery-card/gallery-card.component';
+import { AddPassportPhotoComponent } from './components/add-passport-photo/add-passport-photo.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { GalleryCardComponent } from './components/gallery-card/gallery-card.com
     GalleryUploadComponent,
     DeliveryPageComponent,
     GalleryCardComponent,
+    AddPassportPhotoComponent,
   ],
   imports: [
     BrowserModule,

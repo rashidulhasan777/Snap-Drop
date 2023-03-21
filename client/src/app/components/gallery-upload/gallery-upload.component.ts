@@ -82,7 +82,12 @@ export class GalleryUploadComponent {
           this.pictureData.at(idx).patchValue({ remoteURL: el.secure_url });
         });
       },
-      complete: () => {},
+      complete: () => {
+        localStorage.setItem(
+          'userGalleryPictures',
+          JSON.stringify(this.pictureData.value)
+        );
+      },
     });
   }
 
