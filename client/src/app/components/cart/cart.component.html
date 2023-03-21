@@ -1,0 +1,64 @@
+<h2 class="heading">Your Cart</h2>
+<div *ngIf="hasOrder; else noOrders" class="cartContainer">
+  <div *ngIf="passportOrders.length">
+    <div class="card">
+      <div class="cardImageContainer">
+        <img [src]="passportOrders[0].link" class="cardImage" />
+        <div class="imageCount">{{ "x" + passportOrders.length }}</div>
+      </div>
+      <div class="detailsContainer">
+        <div class="detailsText">Passport Images</div>
+        <button
+          (click)="deletePassportOrder()"
+          class="deleteButton"
+          mat-icon-button
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="galleryOrders.length">
+    <div class="card">
+      <div class="cardImageContainer">
+        <img [src]="galleryOrders[0].remoteURL" class="cardImage" />
+        <div class="imageCount">{{ "x" + galleryOrders.length }}</div>
+      </div>
+      <div class="detailsContainer">
+        <div class="detailsText">Gallery Images</div>
+        <button
+          (click)="deleteGalleryOrder()"
+          class="deleteButton"
+          mat-icon-button
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="actionButtons">
+    <button
+      mat-stroked-button
+      color="primary"
+      class="buttonSize"
+      (click)="clearAll()"
+    >
+      <mat-icon>delete</mat-icon>Clear all items
+    </button>
+    <button
+      (click)="checkOut()"
+      mat-raised-button
+      color="primary"
+      class="buttonSize"
+    >
+      Checkout
+    </button>
+  </div>
+</div>
+
+<ng-template #noOrders>
+  <div class="noOrders">
+    You have no orders yet!
+    <div><a routerLink="/user_dashboard">Go home</a></div>
+  </div>
+</ng-template>

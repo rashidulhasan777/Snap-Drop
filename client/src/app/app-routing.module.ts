@@ -8,6 +8,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { GalleryUploadComponent } from './components/gallery-upload/gallery-upload.component';
 import { DeliveryPageComponent } from './components/delivery-page/delivery-page.component';
+import { CartComponent } from './components/cart/cart.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'user_dashboard', component: UserDashboardComponent },
   { path: 'gallery_upload', component: GalleryUploadComponent },
   { path: 'delivery_page', component: DeliveryPageComponent },
+  { path: 'cart', component: CartComponent },
   { path: '', pathMatch: 'full', component: AppComponent },
 ];
 
