@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { CloudinaryService } from 'src/app/services/cloudinary/cloudinary.service';
 
 @Component({
   selector: 'app-gallery-upload',
@@ -10,7 +13,11 @@ export class GalleryUploadComponent {
   previews: { filename: string; data: File }[] = [];
   pictureData = this.fb.array<FormGroup>([]);
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private cloudinary: CloudinaryService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     // this.pictureData.valueChanges.subscribe((res) => console.log(res));
@@ -34,6 +41,7 @@ export class GalleryUploadComponent {
               imageName: [selectedFiles[i].name],
               size: ['4R', Validators.required],
               copies: [1],
+              remoteURL: [''],
             })
           );
         };
@@ -42,7 +50,17 @@ export class GalleryUploadComponent {
     }
   }
 
-  handleSubmit() {}
+  handleSubmit() {
+    for (let i = 0; i < this.previews.length; ++i) {
+      this.cloudinary
+        .cloudUpload(this.previews[i].data, this.previews[i].filename)
+        .subscribe({
+          next: (res: any) => {
+            this.pictureData.value[i].remoteURL = res.secure_url;
+          },
+        });
+    }
+  }
 
   removeImage(index: number) {
     this.previews = this.previews.filter(
