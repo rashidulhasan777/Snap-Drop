@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CloudinaryService } from 'src/app/services/cloudinary/cloudinary.service';
-import { map, Observable, startWith } from 'rxjs';
+import { map, Observable, startWith, zip } from 'rxjs';
 
 @Component({
   selector: 'app-gallery-upload',
@@ -66,15 +66,24 @@ export class GalleryUploadComponent {
   }
 
   handleSubmit() {
+    const allSubscriptions = [];
     for (let i = 0; i < this.previews.length; ++i) {
-      this.cloudinary
-        .cloudUpload(this.previews[i].data, this.previews[i].filename)
-        .subscribe({
-          next: (res: any) => {
-            this.pictureData.value[i].remoteURL = res.secure_url;
-          },
-        });
+      allSubscriptions.push(
+        this.cloudinary.cloudUpload(
+          this.previews[i].data,
+          this.previews[i].filename
+        )
+      );
     }
+    const zipped = zip(...allSubscriptions);
+    zipped.subscribe({
+      next: (val) => {
+        val.forEach((el: any, idx) => {
+          this.pictureData.at(idx).patchValue({ remoteURL: el.secure_url });
+        });
+      },
+      complete: () => {},
+    });
   }
 
   removeImage(index: number) {

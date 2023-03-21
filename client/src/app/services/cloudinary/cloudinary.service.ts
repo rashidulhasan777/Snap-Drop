@@ -10,7 +10,7 @@ export class CloudinaryService {
   cloudUpload(file: File, filename: string) {
     const public_id = filename + '_' + Date.now();
     const formData = new FormData();
-    formData.append('image', file);
+    formData.append('file', file);
     formData.append('upload_preset', 'SnapDrop');
     formData.append('public_id', public_id);
 
