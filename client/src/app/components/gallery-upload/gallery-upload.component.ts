@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-gallery-upload',
@@ -13,7 +13,7 @@ export class GalleryUploadComponent {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
-    this.pictureData.valueChanges.subscribe((res) => console.log(res));
+    // this.pictureData.valueChanges.subscribe((res) => console.log(res));
   }
 
   showPreview(event: Event) {
@@ -32,7 +32,7 @@ export class GalleryUploadComponent {
           this.pictureData.push(
             this.fb.group({
               imageName: [selectedFiles[i].name],
-              size: ['4R'],
+              size: ['4R', Validators.required],
               copies: [1],
             })
           );
@@ -42,7 +42,12 @@ export class GalleryUploadComponent {
     }
   }
 
-  handleSubmit(){
-    
+  handleSubmit() {}
+
+  removeImage(index: number) {
+    this.previews = this.previews.filter(
+      (el) => el.filename !== this.pictureData.at(index).value.imageName
+    );
+    this.pictureData.removeAt(index);
   }
 }

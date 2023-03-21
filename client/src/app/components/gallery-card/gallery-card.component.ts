@@ -18,6 +18,7 @@ export class GalleryCardComponent {
   @Input() preview!: File;
   @Input() imageForm!: FormGroup;
 
+  @Output() deleteImage: EventEmitter<void> = new EventEmitter();
   image: Image = { copies: 1, photoSize: '4R', imageURL: '' };
 
   // imageForm = this.fb.group({
@@ -46,5 +47,9 @@ export class GalleryCardComponent {
     return this.formatOptions.filter((option) =>
       option.toLowerCase().includes(filterValue)
     );
+  }
+
+  removeImage() {
+    this.deleteImage.emit();
   }
 }

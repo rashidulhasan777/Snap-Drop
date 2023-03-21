@@ -5,6 +5,7 @@
     *ngFor="let preview of previews; let i = index"
     [preview]="preview.data"
     [imageForm]="pictureData.at(i)"
+    (deleteImage)="removeImage(i)"
   ></app-gallery-card>
 </div>
 

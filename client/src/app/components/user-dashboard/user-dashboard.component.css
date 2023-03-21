@@ -19,7 +19,7 @@
 
 .upcoming-card-actions {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .options-container {
