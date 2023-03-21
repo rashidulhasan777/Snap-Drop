@@ -15,4 +15,6 @@ export class PathaoService {
       this.baseUrl + '/delivery_access/pathao'
     );
   }
+
+  
 }

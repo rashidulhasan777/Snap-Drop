@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { PathaoService } from 'src/app/services/pathao.service';
 
 @Component({
   selector: 'app-user-address',
@@ -16,7 +17,24 @@ export class UserAddressComponent {
     zone: new FormControl('', [Validators.required]),
     area: new FormControl('', [Validators.required]),
   });
-  constructor(private fb: FormBuilder) {}
+
+  cities = [
+    { city_id: 1, city_name: 'Dhaka' },
+    { city_id: 2, city_name: 'Chittagong' },
+  ];
+
+  zones = [];
+  areas = [];
+
+  constructor(private fb: FormBuilder, private pathao: PathaoService) {}
+
+  ngOnInit() {
+    this.pathao.getPathaoAccessToken().subscribe({
+      next: (res) => {
+        localStorage.setItem('userAccessToken', res.pathaoToken);
+      },
+    });
+  }
 
   get email() {
     return this.deliveryInfoForm.get('email');

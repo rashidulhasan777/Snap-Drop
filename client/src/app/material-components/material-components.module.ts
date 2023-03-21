@@ -7,6 +7,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSelectModule } from '@angular/material/select';
 
 const MatComponents = [
   MatButtonModule,
@@ -16,6 +17,7 @@ const MatComponents = [
   MatMenuModule,
   MatCardModule,
   MatAutocompleteModule,
+  MatSelectModule,
 ];
 
 @NgModule({
