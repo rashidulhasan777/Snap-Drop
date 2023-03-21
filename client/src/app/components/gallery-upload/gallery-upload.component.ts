@@ -16,7 +16,7 @@ export class GalleryUploadComponent {
     size: ['4R', Validators.required],
     copies: [1, Validators.required],
   });
-  formatOptions: string[] = ['4R', '6R', '8R', '10R'];
+  formatOptions: string[] = ['4R', '6R', '8R', '100R'];
   filteredFormatOptions?: Observable<string[]>;
 
   constructor(private fb: FormBuilder, private cloudinary: CloudinaryService) {}
