@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-
 import { CloudinaryService } from 'src/app/services/cloudinary/cloudinary.service';
+import { map, Observable, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-gallery-upload',
@@ -13,14 +12,30 @@ export class GalleryUploadComponent {
   previews: { filename: string; data: File }[] = [];
   pictureData = this.fb.array<FormGroup>([]);
 
-  constructor(
-    private fb: FormBuilder,
-    private cloudinary: CloudinaryService,
-    private router: Router
-  ) {}
+  applyToAllForm = this.fb.group({
+    size: ['4R', Validators.required],
+    copies: [1, Validators.required],
+  });
+  formatOptions: string[] = ['4R', '6R', '8R', '10R'];
+  filteredFormatOptions?: Observable<string[]>;
+
+  constructor(private fb: FormBuilder, private cloudinary: CloudinaryService) {}
 
   ngOnInit() {
     // this.pictureData.valueChanges.subscribe((res) => console.log(res));
+    this.filteredFormatOptions = this.applyToAllForm.controls?.[
+      'size'
+    ].valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filter(value || ''))
+    );
+  }
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.formatOptions.filter((option) =>
+      option.toLowerCase().includes(filterValue)
+    );
   }
 
   showPreview(event: Event) {
@@ -67,5 +82,10 @@ export class GalleryUploadComponent {
       (el) => el.filename !== this.pictureData.at(index).value.imageName
     );
     this.pictureData.removeAt(index);
+  }
+  applyToAll() {
+    for (let i = 0; i < this.pictureData.length; i++) {
+      this.pictureData.at(i).patchValue(this.applyToAllForm.value);
+    }
   }
 }

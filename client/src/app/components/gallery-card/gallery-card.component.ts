@@ -1,11 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Image } from 'src/app/models/image.model';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
@@ -21,17 +16,11 @@ export class GalleryCardComponent {
   @Output() deleteImage: EventEmitter<void> = new EventEmitter();
   image: Image = { copies: 1, photoSize: '4R', imageURL: '' };
 
-  // imageForm = this.fb.group({
-  //   size: ['4R'],
-  //   copies: [1, Validators.required],
-  // });
-
-  formatOptions: string[] = ['4R', '6R', '8R'];
+  formatOptions: string[] = ['4R', '6R', '8R', '10R'];
   filteredFormatOptions?: Observable<string[]>;
 
-  constructor(private fb: FormBuilder) {}
+  constructor() {}
   ngOnInit() {
-    this.image.imageURL = this.preview;
     this.filteredFormatOptions = this.imageForm.controls?.[
       'size'
     ].valueChanges.pipe(
