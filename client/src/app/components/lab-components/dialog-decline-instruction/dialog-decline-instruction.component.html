@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Hi </h1>
+<div mat-dialog-content>
+  <p>What's is wrong in this image?</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Instruction for improvement</mat-label>
+    <input matInput >
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="" cdkFocusInitial (click)="onSubmit()">Confirm Decline</button>
+</div>

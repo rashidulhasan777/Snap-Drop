@@ -13,6 +13,7 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
+import {MatDialogModule} from '@angular/material/dialog';
 
 const MatComponents = [
   MatButtonModule,
@@ -27,7 +28,8 @@ const MatComponents = [
   MatSortModule,
   MatSidenavModule,
   MatToolbarModule,
-  MatListModule
+  MatListModule,
+  MatDialogModule
 ];
 
 @NgModule({

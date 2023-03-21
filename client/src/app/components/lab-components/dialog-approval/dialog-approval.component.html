@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Hi</h1>
+<div mat-dialog-content>
+  <p>Preview Image</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Decline</button>
+  <button mat-button [mat-dialog-close]="" cdkFocusInitial (click)="onApprove()">Approve</button>
+</div>

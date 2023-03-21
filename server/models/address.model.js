@@ -13,7 +13,7 @@ const addressSchema = mongoose.Schema({
   postCode: {
     type: String,
   },
-  District: {
+  district: {
     type: String,
   }
 });
