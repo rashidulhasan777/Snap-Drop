@@ -3,12 +3,20 @@ const imageSchema = require("./image.model")
 
 const OrderSchema = mongoose.Schema({
   labId: {
-    type: String,
-    // required: true,
+    type: String, //!depends on redx
   },
   customerId: {
     type: String,
     required: true,
+  },
+  parcelId: {
+    type: String
+  },
+  photoType: {
+    type: String,
+  },
+  customerAddress: {
+    type: String,
   },
   orderStatus: {
     type: String,

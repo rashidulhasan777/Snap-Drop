@@ -1,6 +1,15 @@
 const mongoose = require("./../db");
 
 const labDetailsSchema = mongoose.Schema({
+  labId: {
+    type: String
+  },
+  areaId: {
+    type: String
+  },
+  labName: {
+    type: String
+  },
   labAddress: {
     type: String,
     required: true,

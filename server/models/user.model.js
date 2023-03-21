@@ -1,4 +1,5 @@
 const mongoose = require('./../db');
+const addressSchema = require('./address.model');
 
 const userSchema = mongoose.Schema({
   name: {
@@ -23,7 +24,7 @@ const userSchema = mongoose.Schema({
     type: String,
   },
   address: {
-    type: String,
+    type: addressSchema,
   },
   labId: {
     type: String,

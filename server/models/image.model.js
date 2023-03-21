@@ -4,6 +4,12 @@ const imageSchema = mongoose.Schema({
   photoSize: {
     type: String,
   },
+  orgFilename: {
+    type: String,
+  },
+  apiFilename: {
+    type: String,
+  },
   copies: {
     type: Number,
   },
