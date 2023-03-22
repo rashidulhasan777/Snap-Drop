@@ -1,6 +1,9 @@
 <div class="user-navbar">
-  <button class="profile-button" mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon class="profile-button-icon">account_circle</mat-icon>
+  <button class="navbarIcons" mat-icon-button routerLink="/cart">
+    <mat-icon class="buttonIconCart">shopping_cart</mat-icon>
+  </button>
+  <button class="navbarIcons" mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon class="buttonIcon">account_circle</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
     <button (click)="logout()" mat-menu-item>Logout</button>
