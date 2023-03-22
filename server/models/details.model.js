@@ -1,6 +1,6 @@
-const mongoose = require("./../db");
+const mongoose = require('../db');
 
-const addressSchema = new mongoose.Schema({
+const detailsSchema = new mongoose.Schema({
   name: {
     type: String,
     // required: true, //!required for lab
@@ -34,4 +34,4 @@ const addressSchema = new mongoose.Schema({
   },
 });
 
-module.exports = addressSchema;
+module.exports = detailsSchema;

@@ -1,5 +1,5 @@
 const mongoose = require('./../db');
-const addressSchema = require('./address.model');
+const addressSchema = require('./details.model');
 const imageSchema = require('./image.model');
 
 const OrderSchema = new mongoose.Schema(
@@ -9,17 +9,13 @@ const OrderSchema = new mongoose.Schema(
     },
     customerId: {
       type: String,
-      required: true, 
+      required: true,
     },
     parcelId: {
       type: String,
     },
-    customerAddress: {
-      type: addressSchema,
-    },
     orderStatus: {
       type: String,
-      // enum: ['pending', 'approved', 'picked up for deliveryy']
       default: 'pending',
     },
     instruction: {
@@ -30,7 +26,7 @@ const OrderSchema = new mongoose.Schema(
     },
     galleryPictures: {
       type: [imageSchema],
-    }
+    },
   },
   { timestamps: true }
 );

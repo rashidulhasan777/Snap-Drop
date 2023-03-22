@@ -1,10 +1,7 @@
 const mongoose = require('./../db');
-const addressSchema = require('./address.model');
+const detailsSchema = require('./details.model');
 
 const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-  },
   email: {
     type: String,
     required: true,
@@ -21,8 +18,8 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
   address: {
-    type: addressSchema,
-    required: true
+    type: detailsSchema,
+    required: true,
   },
   labId: {
     type: String,
