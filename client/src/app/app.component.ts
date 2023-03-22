@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { OauthService } from './services/oauth.service';
+import { OauthService } from './services/oauth/oauth.service';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 

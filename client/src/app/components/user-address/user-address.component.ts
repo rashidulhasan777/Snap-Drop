@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { PathaoService } from 'src/app/services/pathao.service';
+import { PathaoService } from 'src/app/services/pathao/pathao.service';
 
 @Component({
   selector: 'app-user-address',
