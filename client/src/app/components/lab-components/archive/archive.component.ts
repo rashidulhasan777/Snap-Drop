@@ -18,27 +18,20 @@ export class ArchiveComponent implements AfterViewInit, OnInit{
   orders : Order[] =[];
   @ViewChild('sidenav') sidenav!: MatSidenav;
   isExpanded = true;
-  animal: string = '';
-  name: string = '';
   isShowing = false;
-  // events: string[] = [];
   opened: boolean = true;
+  displayedColumns: string[] = ['labId', 'orderStatus', 'instruction', 'button'];
+  dataSource: MatTableDataSource<Order> = new MatTableDataSource(this.orders);
+
+  constructor(public dialog: MatDialog, private orderService : OrderService) {}
+  
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   
   mouseenter() {
     if (!this.isExpanded) {
       this.isShowing = true;
     }
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogApprovalComponent, {
-      data: {name: this.name, animal: this.animal},
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
-    });
   }
 
   mouseleave() {
@@ -48,13 +41,7 @@ export class ArchiveComponent implements AfterViewInit, OnInit{
   }
 
 
-  displayedColumns: string[] = ['labId', 'orderStatus', 'instruction', 'button'];
-  dataSource: MatTableDataSource<Order> = new MatTableDataSource(this.orders);
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
-  constructor(public dialog: MatDialog, private orderService : OrderService) {}
   
   ngOnInit(){
     const orders = this.orderService.getOrdersbyStatus("readyToDeliver").subscribe((response) => {

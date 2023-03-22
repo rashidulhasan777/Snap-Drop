@@ -7,11 +7,11 @@ import { Order } from 'src/app/interfaces/order.interface';
   providedIn: 'root',
 })
 export class OrderService {
-  readonly pendingURL = 'http://127.0.0.1:3000/order';
+  readonly labURL = 'http://127.0.0.1:3000/order';
 
   constructor(private http: HttpClient) {}
 
   getOrdersbyStatus(status: String): Observable<Order[]> {
-    return this.http.get<Order[]>(this.pendingURL + '/' + status);
+    return this.http.get<Order[]>(this.labURL + '/' + status);
   }
 }
