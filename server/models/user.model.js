@@ -22,6 +22,7 @@ const userSchema = new mongoose.Schema({
   },
   address: {
     type: addressSchema,
+    required: true
   },
   labId: {
     type: String,

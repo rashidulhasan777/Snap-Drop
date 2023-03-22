@@ -56,10 +56,10 @@ export class PendingDashboardComponent implements AfterViewInit {
   isExpanded = true;
   animal: string = '';
   name: string = '';
-  showSubmenu: boolean = false;
   isShowing = false;
-  showSubSubMenu: boolean = false;
-
+  // events: string[] = [];
+  opened: boolean = true;
+  
   mouseenter() {
     if (!this.isExpanded) {
       this.isShowing = true;
@@ -83,8 +83,6 @@ export class PendingDashboardComponent implements AfterViewInit {
     }
   }
 
-  events: string[] = [];
-  opened: boolean = true;
 
   displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
   dataSource: MatTableDataSource<UserData>;

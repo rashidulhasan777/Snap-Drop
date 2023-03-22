@@ -11,10 +11,8 @@ const register = async (req, res) => {
   try {
     if (password === '') throw new Error();
     const hash = await bcrypt.hash(password, 10);
-    const newUser = await User.create({
-      ...req.body,
-      password: hash,
-    });
+    const user = {...req.body, password: hash};
+    const newUser = await User.create(user);
     const { _id } = newUser._id;
     const accessToken = jwt.sign({ _id }, SECRET_KEY);
     res.status(201).send({ accessToken });
