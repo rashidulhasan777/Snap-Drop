@@ -10,7 +10,7 @@ import { map, startWith } from 'rxjs/operators';
   styleUrls: ['./gallery-card.component.css'],
 })
 export class GalleryCardComponent {
-  @Input() preview!: File;
+  @Input() preview!: File | string;
   @Input() imageForm!: FormGroup;
 
   @Output() deleteImage: EventEmitter<void> = new EventEmitter();
@@ -27,7 +27,6 @@ export class GalleryCardComponent {
       startWith(''),
       map((value) => this._filter(value || ''))
     );
-    // console.log(this.preview);
   }
 
   private _filter(value: string): string[] {
