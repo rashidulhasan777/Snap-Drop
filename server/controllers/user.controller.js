@@ -11,7 +11,7 @@ const register = async (req, res) => {
   try {
     if (password === '') throw new Error();
     const hash = await bcrypt.hash(password, 10);
-    const user = {...req.body, password: hash};
+    const user = { ...req.body, password: hash };
     const newUser = await User.create(user);
     const { _id } = newUser._id;
     const accessToken = jwt.sign({ _id }, SECRET_KEY);
@@ -43,8 +43,22 @@ const login = async (req, res) => {
 const getUserDetails = (req, res) => {
   res.status(200).send(req.currentUser);
 };
-const updateUser = (req, res) => {
-  console.log(req.body);
+const updateUser = async (req, res) => {
+  // console.log(req.body);
+  try {
+    const user = await User.findByIdAndUpdate(
+      req.currentUser._id,
+      {
+        $set: { details: { ...req.body } },
+      },
+      { new: true }
+    );
+    req.currentUser = user;
+    res.status(201).send(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ errorMessage: 'Something went wrong' });
+  }
 };
 
 module.exports = { register, login, getUserDetails, updateUser };

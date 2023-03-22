@@ -47,10 +47,13 @@ const oauthLogin = async (req, res, next) => {
   try {
     let existingUser = await User.findOne({ email });
     if (!existingUser) {
-      existingUser = await User.create({ email, name, profilePic });
+      existingUser = await User.create({
+        email,
+        profilePic,
+      });
     }
-    const accessToken = jwt.sign({ _id: existingUser._id }, SECRET_KEY);
-    res.status(201).send({ accessToken });
+    const access_token = jwt.sign({ _id: existingUser._id }, SECRET_KEY);
+    res.status(201).send({ access_token });
   } catch (error) {
     console.log(error);
     res.status(500).send({ errorMessage: 'Something went wrong' });

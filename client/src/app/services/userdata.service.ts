@@ -13,6 +13,15 @@ export class UserdataService {
   constructor(private http: HttpClient) {}
 
   updateUserData(details: Details): Observable<User> {
-    return this.http.put<User>(this.baseUrl, details);
+    console.log(details)
+    return this.http.put<User>(this.baseUrl, details, {
+      headers: {
+        Authorization: `Bearer ${this.jwtToken}`,
+      },
+    });
+  }
+
+  get jwtToken() {
+    return localStorage.getItem('userAccessToken');
   }
 }

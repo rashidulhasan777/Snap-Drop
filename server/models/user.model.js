@@ -17,9 +17,8 @@ const userSchema = new mongoose.Schema({
   profilePic: {
     type: String,
   },
-  address: {
+  details: {
     type: detailsSchema,
-    required: true,
   },
   labId: {
     type: String,
