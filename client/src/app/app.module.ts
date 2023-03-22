@@ -20,7 +20,15 @@ import { UserDashboardComponent } from './components/user-dashboard/user-dashboa
 import { UserNavbarComponent } from './components/user-navbar/user-navbar.component';
 import { GalleryUploadComponent } from './components/gallery-upload/gallery-upload.component';
 import { GalleryCardComponent } from './components/gallery-card/gallery-card.component';
+import { LabDashboardComponent } from './components/lab-dashboard/lab-dashboard.component';
 import { AddPassportPhotoComponent } from './components/add-passport-photo/add-passport-photo.component';
+import { PendingDashboardComponent } from './components/lab-components/pending-dashboard/pending-dashboard.component';
+import { OrdersComponent } from './components/lab-components/orders/orders.component';
+import { PrintingComponent } from './components/lab-components/printing/printing.component';
+import { ArchiveComponent } from './components/lab-components/archive/archive.component';
+import { DialogApprovalComponent } from './components/lab-components/dialog-approval/dialog-approval.component';
+import { AllImagesPreviewComponent } from './components/lab-components/all-images-preview/all-images-preview.component';
+import { DialogDeclineInstructionComponent } from './components/lab-components/dialog-decline-instruction/dialog-decline-instruction.component';
 import { CartComponent } from './components/cart/cart.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { OrderDoneComponent } from './components/order-done/order-done.component';
@@ -37,7 +45,15 @@ import { UserAddressComponent } from './components/user-address/user-address.com
     UserNavbarComponent,
     GalleryUploadComponent,
     GalleryCardComponent,
+    LabDashboardComponent,
     AddPassportPhotoComponent,
+    PendingDashboardComponent,
+    OrdersComponent,
+    PrintingComponent,
+    ArchiveComponent,
+    DialogApprovalComponent,
+    AllImagesPreviewComponent,
+    DialogDeclineInstructionComponent,
     CartComponent,
     PaymentComponent,
     OrderDoneComponent,

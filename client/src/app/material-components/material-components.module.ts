@@ -7,6 +7,13 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatListModule} from '@angular/material/list';
+import {MatDialogModule} from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 
 const MatComponents = [
@@ -17,6 +24,13 @@ const MatComponents = [
   MatMenuModule,
   MatCardModule,
   MatAutocompleteModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatSidenavModule,
+  MatToolbarModule,
+  MatListModule,
+  MatDialogModule,
   MatSelectModule,
 ];
 

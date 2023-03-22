@@ -1,31 +1,17 @@
 const mongoose = require("./../db");
+const addressSchema = require('./address.model');
 
-const labDetailsSchema = mongoose.Schema({
-  labId: {
-    type: String
-  },
-  areaId: {
-    type: String
-  },
+const labDetailsSchema = new mongoose.Schema({
   labName: {
-    type: String
+    type: String,
   },
   labAddress: {
-    type: String,
+    type: addressSchema,
     required: true,
-  },
-  orderCountHistory: {
-    type: [Number],
   },
   completedOrders: {
     type: String,
-  },
-  orderList: {
-    type: [String],
-  },
-  averageCompletionTime: {
-    type: Number,
-  },
+  }
 });
 
 module.exports = mongoose.model("LabDetails", labDetailsSchema);
