@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Studio Gulshan",
+    "address": "Fuji Dhaka Gulshan Landmark Building - 12 DIT II Cir, Dhaka 1212",
+    "coordinates": {
+      "lat": 23.795120104296547,
+      "lng": 90.41358271024981
+    }
+  },
+  {
+    "name": "Studio Elephant Road",
+    "address": "Fuji Dhaka Bata Building - 52 New Elephant Rd, Dhaka 1205",
+    "coordinates": {
+      "lat": 23.739334600139916,
+      "lng": 90.38771432559186
+    }
+  },
+  {
+    "name": "Studio Mirpur",
+    "address": "Fuji Dhaka Mirpur 10 - Abdul Ali Madbor Mension (3th Floor) 10 South Golchottor, Mirpur 10 Roundabout, Dhaka 1216",
+    "coordinates": {
+      "lat": 23.8068021498279,
+      "lng": 90.36842884408959
+    }
+  },
+  {
+    "name": "Studio Uttara",
+    "address": "Fuji Dhaka Uttara Amir Complex - Amir complex, 1st floor (Shop No-8,20), Uttara,Dhaka, 1230",
+    "coordinates": {
+      "lat": 23.867605045539168,
+      "lng": 90.39984117493042
+    }
+  },
+  {
+    "name": "Studio Malibagh",
+    "address": "Fuji Dhaka Malibagh - 240 New Circular Rd, Dhaka 1205",
+    "coordinates": {
+      "lat": 23.74887398008348,
+      "lng": 90.40407728363381
+    }
+  },
+  {
+    "name": "Studio Victoria Park",
+    "address": "Fuji Dhaka Victoria Park - PC56+CQP, Dhaka",
+    "coordinates": {
+      "lat": 23.70861487765468,
+      "lng": 90.41196294126108
+    }
+  },
+  {
+    "name": "Studio Hatkhola",
+    "address": "Fuji Dhaka Hatkhola - 5 Abhay Das Ln, Dhaka",
+    "coordinates": {
+      "lat": 23.719489626386853,
+      "lng": 90.42152362265355
+    }
+  },
+  {
+    "name": "Studio Green Road",
+    "address": "Fuji Dhaka Green Road - 153, 1 Green Rd, Dhaka 1205",
+    "coordinates": {
+      "lat": 23.750312047969558,
+      "lng": 90.3866921424416
+    }
+  },
+  {
+    "name": "Studio Hatkhola",
+    "address": "Fuji Dhaka Hatkhola - 5 Abhay Das Ln, Dhaka",
+    "coordinates": {
+      "lat": 23.719489626386853,
+      "lng": 90.42152362265355
+    }
+  },
+  {
+    "name": "Studio Green Road",
+    "address": "Fuji Dhaka Green Road - 153, 1 Green Rd, Dhaka 1205",
+    "coordinates": {
+      "lat": 23.750312047969558,
+      "lng": 90.3866921424416
+    }
+  },
+  {
+    "name": "Studio Central Plaza",
+    "address": "Fuji Chittagong Central Plaza - Central Plaza, 561 O.R. Nizam Rd, Chattogram",
+    "coordinates": {
+      "lat": 22.359043762952734,
+      "lng": 91.82180892088087
+    }
+  },
+  {
+    "name": "Studio New Market",
+    "address": "Fuji Chittagong New Market - Biponi Bitan New Market, Jubilee Rd, Chattogram",
+    "coordinates": {
+      "lat": 22.359043762952734,
+      "lng": 91.82180892088087
+    }
+  }
+]
