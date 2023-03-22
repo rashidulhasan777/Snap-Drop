@@ -2,7 +2,7 @@ const mongoose = require('./../db');
 const { addressSchema } = require('./address.model');
 const imageSchema = require('./image.model');
 
-const OrderSchema = mongoose.Schema(
+const OrderSchema = new mongoose.Schema(
   {
     labId: {
       type: String, //!depends on redx
@@ -19,7 +19,7 @@ const OrderSchema = mongoose.Schema(
     },
     orderStatus: {
       type: String,
-      // enum: ['pending', 'approved', 'picked up for delivery']
+      // enum: ['pending', 'approved', 'picked up for deliveryy']
       default: 'pending',
     },
     instruction: {
@@ -30,7 +30,7 @@ const OrderSchema = mongoose.Schema(
     },
     galleryPictures: {
       type: [imageSchema],
-    },
+    }
   },
   { timestamps: true }
 );
