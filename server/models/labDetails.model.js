@@ -45,15 +45,9 @@ const labDetailsSchema = new mongoose.Schema({
     type: labAddressSchema,
     required: true,
   },
-  orderCountHistory: {
-    type: [Number],
-  },
   completedOrders: {
     type: String,
-  },
-  averageCompletionTime: {
-    type: Number,
-  },
+  }
 });
 
 module.exports = mongoose.model("LabDetails", labDetailsSchema);
