@@ -12,9 +12,36 @@ export class PathaoService {
 
   getPathaoAccessToken(): Observable<{ pathaoToken: string }> {
     return this.http.get<{ pathaoToken: string }>(
-      this.baseUrl + '/delivery_access/pathao'
+      `${this.baseUrl}/pathao/accessToken`
     );
   }
 
-  
+  getPathaoZone(
+    city_id: number
+  ): Observable<{ zone_id: number; zone_name: string }[]> {
+    return this.http.post<{ zone_id: number; zone_name: string }[]>(
+      `${this.baseUrl}/pathao/zones`,
+      {
+        pathaoToken: this.pathaoToken,
+        city_id,
+      }
+    );
+  }
+
+  getPathaoArea(
+    zone_id: number
+  ): Observable<{ area_id: number; area_name: string }[]> {
+    return this.http.post<{ area_id: number; area_name: string }[]>(
+      `${this.baseUrl}/pathao/areas`,
+      {
+        pathaoToken: this.pathaoToken,
+        zone_id,
+      }
+    );
+  }
+
+  get pathaoToken() {
+    return JSON.parse(localStorage.getItem('pathaoAccessToken') || "''")
+      .access_token;
+  }
 }

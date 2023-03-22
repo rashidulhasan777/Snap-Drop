@@ -37,6 +37,8 @@ router.put('/order/:id', authMiddleware.lab, orderController.changeOrderStatus);
 router.post('/googleAccessCode', oauthController.googleAccessCode);
 router.post('/fbAccessCode', oauthController.fbAccessCode);
 
-router.get('/delivery_access/pathao', pathaoController.pathaoAccessToken);
+router.get('/pathao/accessToken', pathaoController.pathaoAccessToken);
+router.post('/pathao/zones', pathaoController.pathaoZones);
+router.post('/pathao/areas', pathaoController.pathaoAreas);
 
 module.exports = router;

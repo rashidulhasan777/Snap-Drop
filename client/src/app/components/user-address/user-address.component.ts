@@ -18,21 +18,42 @@ export class UserAddressComponent {
     area: new FormControl('', [Validators.required]),
   });
 
-  cities = [
+  cities: { city_id: number; city_name: string }[] = [
     { city_id: 1, city_name: 'Dhaka' },
     { city_id: 2, city_name: 'Chittagong' },
   ];
 
-  zones = [];
-  areas = [];
+  zones: { zone_id: number; zone_name: string }[] = [];
+  areas: { area_id: number; area_name: string }[] = [];
 
   constructor(private fb: FormBuilder, private pathao: PathaoService) {}
 
   ngOnInit() {
     this.pathao.getPathaoAccessToken().subscribe({
       next: (res) => {
-        localStorage.setItem('userAccessToken', res.pathaoToken);
+        localStorage.setItem(
+          'pathaoAccessToken',
+          JSON.stringify(res.pathaoToken)
+        );
       },
+    });
+
+    this.city?.valueChanges.subscribe((cityVal) => {
+      this.pathao.getPathaoZone(Number(cityVal)).subscribe({
+        next: (res: any) => {
+          // console.log(res.zones);
+          this.zones = res.zones;
+        },
+      });
+    });
+
+    this.zone?.valueChanges.subscribe((zoneVal) => {
+      this.pathao.getPathaoArea(Number(zoneVal)).subscribe({
+        next: (res: any) => {
+          // console.log(res.areas);
+          this.areas = res.areas;
+        },
+      });
     });
   }
 
