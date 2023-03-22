@@ -38,8 +38,8 @@ export class UserAddressComponent {
       },
     });
 
-    this.city?.valueChanges.subscribe((cityVal) => {
-      this.pathao.getPathaoZone(Number(cityVal)).subscribe({
+    this.city?.valueChanges.subscribe((cityVal: any) => {
+      this.pathao.getPathaoZone(cityVal.city_id).subscribe({
         next: (res: any) => {
           // console.log(res.zones);
           this.zones = res.zones;

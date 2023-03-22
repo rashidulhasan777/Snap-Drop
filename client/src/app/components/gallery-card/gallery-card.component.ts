@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Image } from 'src/app/models/image.model';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -14,7 +13,6 @@ export class GalleryCardComponent {
   @Input() imageForm!: FormGroup;
 
   @Output() deleteImage: EventEmitter<void> = new EventEmitter();
-  image: Image = { copies: 1, photoSize: '4R', imageURL: '' };
 
   formatOptions: string[] = ['4R', '6R', '8R', '10R'];
   filteredFormatOptions?: Observable<string[]>;
