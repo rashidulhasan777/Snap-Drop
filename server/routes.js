@@ -28,11 +28,6 @@ router.get(
   orderController.getOrderByCustomerId
 );
 router.get(
-  '/orderbyStatusAndLabid/',
-  authMiddleware.customer,
-  orderController.getOrderByStatus
-);
-router.get(
   '/orderforLab/',
   authMiddleware.lab,
   orderController.getOrderByLabId

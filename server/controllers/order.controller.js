@@ -73,16 +73,6 @@ const getOrderByLabId = async (req, res) => {
   }
 };
 
-const getOrderByStatus = async (req, res) => {
-  try {
-    const orders = await Order.find({ orderStatus: req.currentUser.orderStatus });
-    res.status(201);
-    res.send(orders);
-  } catch (error) {
-    res.status(500).send({ errorMessage: "Something went wrong" });
-    res.send(error);
-  }
-};
 
 module.exports = {
   getAllOrders,
@@ -91,5 +81,4 @@ module.exports = {
   getOrderById,
   getOrderByCustomerId,
   getOrderByLabId,
-  getOrderByStatus
 };

@@ -11,4 +11,6 @@ const createLab = async (req, res) => {
     console.log(error);
   }
 };
+
+
 module.exports = { createLab };
