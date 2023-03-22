@@ -5,20 +5,20 @@
 <mat-sidenav-container class="example-container" autosize>
 	<mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()">
 		<mat-nav-list>
-			<mat-list-item class="parent">
+			<mat-list-item class="parent" routerLink="/pendingApproval">
 				<mat-icon mat-list-icon>autorenew </mat-icon>
 				<span class="full-width" *ngIf="isExpanded || isShowing"> Pending Approval </span>
 				<!-- <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon> -->
 			</mat-list-item>
-			<mat-list-item class="parent">
+			<mat-list-item class="parent" routerLink="/orders">
 				<mat-icon mat-list-icon>assignment</mat-icon>
 				<span class="full-width" *ngIf="isExpanded || isShowing"> Orders </span>
 			</mat-list-item>
-			<mat-list-item class="parent">
+			<mat-list-item class="parent" routerLink="/printing">
 				<mat-icon mat-list-icon>print</mat-icon>
 				<span class="full-width" *ngIf="isExpanded || isShowing"> Printing </span>
 			</mat-list-item>
-			<mat-list-item class="parent">
+			<mat-list-item class="parent" routerLink="/archive">
 				<mat-icon mat-list-icon>history</mat-icon>
 				<span class="full-width" *ngIf="isExpanded || isShowing"> Archive </span>
 			</mat-list-item>
@@ -28,7 +28,7 @@
 	</mat-sidenav>
 
 	<div class="example-sidenav-content">
-        <h2> Approval pending for Passport sized image</h2>
+        <h2> Orders which are currently processing</h2>
 		<mat-form-field>
             <mat-label>Filter</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>

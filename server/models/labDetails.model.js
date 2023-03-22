@@ -1,17 +1,48 @@
 const mongoose = require("./../db");
 
-const labDetailsSchema = mongoose.Schema({
-  labId: {
-    type: String
+const labAddressSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
   },
-  areaId: {
-    type: String
+  contact_name: {
+    type: String,
+    required: true,
+  },
+  contact_number: {
+    type: String,
+    required: true,
+  },
+  secondary_contact: {
+    type: String,
+  },
+  address: {
+    type: String,
+    required: true,
+  },
+  city_id: {
+    type: Number,
+    required: true,
+  },
+  zone_id: {
+    type: Number,
+    required: true,
+  },
+  area_id: {
+    type: Number,
+    required: true,
+  },
+});
+
+const labDetailsSchema = new mongoose.Schema({
+  labId: {
+    type: String,
   },
   labName: {
-    type: String
+    type: String,
   },
   labAddress: {
-    type: String,
+    type: labAddressSchema,
     required: true,
   },
   orderCountHistory: {

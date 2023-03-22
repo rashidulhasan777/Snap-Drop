@@ -1,7 +1,7 @@
 const mongoose = require('./../db');
 const addressSchema = require('./address.model');
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
   },

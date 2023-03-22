@@ -2,7 +2,7 @@ const mongoose = require('./../db');
 const { addressSchema } = require('./address.model');
 const imageSchema = require('./image.model');
 
-const OrderSchema = mongoose.Schema(
+const OrderSchema = new mongoose.Schema(
   {
     labId: {
       type: String, //!depends on redx

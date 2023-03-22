@@ -1,6 +1,6 @@
 const mongoose = require("./../db");
 
-const addressSchema = mongoose.Schema({
+const addressSchema = new mongoose.Schema({
   houseNo: {
     type: String
   },
