@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CloudinaryService } from 'src/app/services/cloudinary/cloudinary.service';
 import { map, Observable, startWith, zip } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gallery-upload',
@@ -19,7 +20,11 @@ export class GalleryUploadComponent {
   formatOptions: string[] = ['4R', '6R', '8R', '100R'];
   filteredFormatOptions?: Observable<string[]>;
 
-  constructor(private fb: FormBuilder, private cloudinary: CloudinaryService) {}
+  constructor(
+    private fb: FormBuilder,
+    private cloudinary: CloudinaryService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     const inCart: {
@@ -103,6 +108,7 @@ export class GalleryUploadComponent {
           'userGalleryPictures',
           JSON.stringify(this.pictureData.value)
         );
+        this.router.navigate(['cart']);
       },
     });
   }
