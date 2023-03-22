@@ -24,6 +24,8 @@ import { DeliveryPageComponent } from './components/delivery-page/delivery-page.
 import { GalleryCardComponent } from './components/gallery-card/gallery-card.component';
 import { AddPassportPhotoComponent } from './components/add-passport-photo/add-passport-photo.component';
 import { CartComponent } from './components/cart/cart.component';
+import { PaymentComponent } from './components/payment/payment.component';
+import { OrderDoneComponent } from './components/order-done/order-done.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { CartComponent } from './components/cart/cart.component';
     GalleryCardComponent,
     AddPassportPhotoComponent,
     CartComponent,
+    PaymentComponent,
+    OrderDoneComponent,
   ],
   imports: [
     BrowserModule,
