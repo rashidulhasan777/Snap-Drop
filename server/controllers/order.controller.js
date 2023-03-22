@@ -62,6 +62,18 @@ const getOrderByCustomerId = async (req, res) => {
   }
 };
 
+const getOrdersbyStatus = async (req, res) => {
+  const status = req.params.status;
+  try {
+    const orders = await Order.find({ orderStatus: status });
+    res.status(201);
+    res.send(orders);
+  } catch (error) {
+    res.status(500).send({ errorMessage: "Something went wrong" });
+    res.send(error);
+  }
+};
+
 const getOrderByLabId = async (req, res) => {
   try {
     const orders = await Order.find({ labId: req.currentUser._id });
@@ -81,4 +93,5 @@ module.exports = {
   getOrderById,
   getOrderByCustomerId,
   getOrderByLabId,
+  getOrdersbyStatus
 };
