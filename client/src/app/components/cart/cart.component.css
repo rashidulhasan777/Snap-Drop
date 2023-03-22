@@ -81,5 +81,9 @@ a {
 
 .cartContainer {
   position: relative;
-  height: 100%;
+  height: calc(100dvh - 125px);
+}
+
+:host {
+  max-height: 90vh;
 }
