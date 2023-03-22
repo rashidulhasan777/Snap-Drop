@@ -51,9 +51,6 @@ const labDetailsSchema = new mongoose.Schema({
   completedOrders: {
     type: String,
   },
-  orderList: {
-    type: [String],
-  },
   averageCompletionTime: {
     type: Number,
   },

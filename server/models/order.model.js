@@ -14,7 +14,7 @@ const OrderSchema = new mongoose.Schema(
     parcelId: {
       type: String,
     },
-    photoType: {
+    photoType: { //!
       type: String,
     },
     customerAddress: {
@@ -34,7 +34,7 @@ const OrderSchema = new mongoose.Schema(
     galleryPictures: {
       type: [imageSchema],
     },
-    orderType: {
+    orderType: { //!
       type: String,
       required: true,
     },

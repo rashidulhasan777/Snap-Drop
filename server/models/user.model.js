@@ -12,9 +12,6 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
   },
-  recentOrderStatus: {
-    type: String,
-  },
   typeOfUser: {
     type: String,
     required: true,

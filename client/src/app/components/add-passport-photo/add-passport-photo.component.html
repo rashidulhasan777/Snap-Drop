@@ -1,0 +1,13 @@
+<div class="gallery-controls" [ngClass]="{ bottom: images.length }">
+  <button mat-fab color="primary" routerLink="/camera">
+    <mat-icon>add</mat-icon>
+  </button>
+  <button
+    *ngIf="images.length"
+    mat-fab
+    color="primary"
+    (click)="handleSubmit()"
+  >
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+</div>

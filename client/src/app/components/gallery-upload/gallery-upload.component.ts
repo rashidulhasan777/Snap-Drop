@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CloudinaryService } from 'src/app/services/cloudinary/cloudinary.service';
 import { map, Observable, startWith, zip } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gallery-upload',
@@ -9,20 +10,40 @@ import { map, Observable, startWith, zip } from 'rxjs';
   styleUrls: ['./gallery-upload.component.css'],
 })
 export class GalleryUploadComponent {
-  previews: { filename: string; data: File }[] = [];
+  previews: { filename: string; data: File | string }[] = [];
   pictureData = this.fb.array<FormGroup>([]);
 
   applyToAllForm = this.fb.group({
     size: ['4R', Validators.required],
     copies: [1, Validators.required],
   });
-  formatOptions: string[] = ['4R', '6R', '8R', '10R'];
+  formatOptions: string[] = ['4R', '6R', '8R', '100R'];
   filteredFormatOptions?: Observable<string[]>;
 
-  constructor(private fb: FormBuilder, private cloudinary: CloudinaryService) {}
+  constructor(
+    private fb: FormBuilder,
+    private cloudinary: CloudinaryService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    // this.pictureData.valueChanges.subscribe((res) => console.log(res));
+    const inCart: {
+      imageName: string;
+      copies: number;
+      size: string;
+      remoteURL: string;
+    }[] = JSON.parse(localStorage.getItem('userGalleryPictures') || '[]');
+    inCart.forEach((el) => {
+      this.previews.push({ filename: el.imageName, data: el.remoteURL });
+      this.pictureData.push(
+        this.fb.group({
+          imageName: [el.imageName],
+          copies: [el.copies, Validators.required],
+          size: [el.size, Validators.required],
+          remoteURL: [el.remoteURL],
+        })
+      );
+    });
     this.filteredFormatOptions = this.applyToAllForm.controls?.[
       'size'
     ].valueChanges.pipe(
@@ -55,7 +76,7 @@ export class GalleryUploadComponent {
             this.fb.group({
               imageName: [selectedFiles[i].name],
               size: ['4R', Validators.required],
-              copies: [1],
+              copies: [1, Validators.required],
               remoteURL: [''],
             })
           );
@@ -66,11 +87,11 @@ export class GalleryUploadComponent {
   }
 
   handleSubmit() {
-    const allSubscriptions = [];
+    const allSubscriptions: Observable<any>[] = [];
     for (let i = 0; i < this.previews.length; ++i) {
       allSubscriptions.push(
         this.cloudinary.cloudUpload(
-          this.previews[i].data,
+          this.previews[i].data as File,
           this.previews[i].filename
         )
       );
@@ -87,6 +108,7 @@ export class GalleryUploadComponent {
           'userGalleryPictures',
           JSON.stringify(this.pictureData.value)
         );
+        this.router.navigate(['cart']);
       },
     });
   }
@@ -96,6 +118,8 @@ export class GalleryUploadComponent {
       (el) => el.filename !== this.pictureData.at(index).value.imageName
     );
     this.pictureData.removeAt(index);
+    if (!this.pictureData.length)
+      localStorage.removeItem('userGalleryPictures');
   }
   applyToAll() {
     for (let i = 0; i < this.pictureData.length; i++) {

@@ -9,7 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { Subject, take, takeUntil } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-import { OauthService } from 'src/app/services/oauth.service';
+import { OauthService } from 'src/app/services/oauth/oauth.service';
 
 @Component({
   selector: 'app-register',
