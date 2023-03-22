@@ -42,8 +42,11 @@ const login = async (req, res) => {
   }
 };
 
-const getUserDetails =  (req, res) => {
+const getUserDetails = (req, res) => {
   res.status(200).send(req.currentUser);
 };
+const updateUser = (req, res) => {
+  console.log(req.body)
+};
 
-module.exports = { register, login, getUserDetails };
+module.exports = { register, login, getUserDetails, updateUser };

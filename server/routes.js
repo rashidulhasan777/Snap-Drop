@@ -15,6 +15,8 @@ router.get(
   userController.getUserDetails
 );
 
+router.put('/user',authMiddleware.authenticated, userController.updateUser)
+
 // router.get("/order", orderController.getAllOrders);
 router.get(
   '/orderbyId/:id',

@@ -9,13 +9,13 @@ import { PathaoService } from 'src/app/services/pathao/pathao.service';
 })
 export class UserAddressComponent {
   deliveryInfoForm = this.fb.group({
-    name: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    phone: new FormControl('', [Validators.required]),
-    address: new FormControl('', [Validators.required]),
-    city: new FormControl('', [Validators.required]),
-    zone: new FormControl('', [Validators.required]),
-    area: new FormControl('', [Validators.required]),
+    name: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    phone: ['', [Validators.required, Validators.pattern(/[0-9]/)]],
+    address: ['', [Validators.required]],
+    city: ['', [Validators.required]],
+    zone: ['', [Validators.required]],
+    area: ['', [Validators.required]],
   });
 
   cities: { city_id: number; city_name: string }[] = [
@@ -41,16 +41,14 @@ export class UserAddressComponent {
     this.city?.valueChanges.subscribe((cityVal: any) => {
       this.pathao.getPathaoZone(cityVal.city_id).subscribe({
         next: (res: any) => {
-          console.log(res);
-          // this.zones = res.zones;
+          this.zones = res.zones;
         },
       });
     });
 
-    this.zone?.valueChanges.subscribe((zoneVal) => {
-      this.pathao.getPathaoArea(Number(zoneVal)).subscribe({
+    this.zone?.valueChanges.subscribe((zoneVal: any) => {
+      this.pathao.getPathaoArea(zoneVal.zone_id).subscribe({
         next: (res: any) => {
-          // console.log(res.areas);
           this.areas = res.areas;
         },
       });
@@ -74,10 +72,17 @@ export class UserAddressComponent {
   }
   get zone() {
     return this.deliveryInfoForm.get('zone');
-  }
+}
   get area() {
     return this.deliveryInfoForm.get('area');
   }
 
-  handleSubmit() {}
+  handleSubmit() {
+    if(this.deliveryInfoForm.valid){
+
+      const res = JSON.parse(JSON.stringify(this.deliveryInfoForm.value));
+      res.phone = '+880' + res.phone;
+      localStorage.setItem('userDetails', JSON.stringify(res));
+    }
+  }
 }

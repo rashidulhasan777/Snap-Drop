@@ -29,7 +29,12 @@
     <div>
       <mat-form-field class="phone" appearance="outline">
         <mat-label>Phone</mat-label>
+        <mat-error *ngIf="email?.errors?.['email']">Email is invalid</mat-error>
+        <span matPrefix>+880</span>
         <input matInput formControlName="phone" />
+        <mat-error *ngIf="phone?.errors?.['pattern']"
+          >Invalid Phone Number</mat-error
+        >
         <mat-error *ngIf="phone?.errors?.['required']"
           >Phone is required</mat-error
         >
@@ -62,7 +67,7 @@
       <mat-form-field class="zone" appearance="outline">
         <mat-label>Zone</mat-label>
         <mat-select formControlName="zone">
-          <mat-option *ngFor="let zone of zones" [value]="zone.zone_id">
+          <mat-option *ngFor="let zone of zones" [value]="zone">
             {{ zone.zone_name }}
           </mat-option>
         </mat-select>
@@ -75,7 +80,7 @@
       <mat-form-field class="area" appearance="outline">
         <mat-label>Area</mat-label>
         <mat-select formControlName="area">
-          <mat-option *ngFor="let area of areas" [value]="area.area_id">
+          <mat-option *ngFor="let area of areas" [value]="area">
             {{ area.area_name }}
           </mat-option>
         </mat-select>

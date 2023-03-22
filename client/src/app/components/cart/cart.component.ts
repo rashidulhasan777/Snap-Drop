@@ -17,7 +17,6 @@ export class CartComponent {
     this.galleryOrders = JSON.parse(
       localStorage.getItem('userGalleryPictures') || '[]'
     );
-    console.log(this.galleryOrders);
   }
 
   deletePassportOrder() {
