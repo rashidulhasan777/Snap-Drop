@@ -18,7 +18,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="galleryOrders.length">
+  <div *ngIf="galleryOrders.length" routerLink="/gallery_upload">
     <div class="card">
       <div class="cardImageContainer">
         <img [src]="galleryOrders[0].remoteURL" class="cardImage" />
