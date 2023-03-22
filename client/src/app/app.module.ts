@@ -25,6 +25,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { OrderDoneComponent } from './components/order-done/order-done.component';
 import { UserAddressComponent } from './components/user-address/user-address.component';
+import { InstructionsDialogComponent } from './components/instructions-dialog/instructions-dialog.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { UserAddressComponent } from './components/user-address/user-address.com
     PaymentComponent,
     OrderDoneComponent,
     UserAddressComponent,
+    InstructionsDialogComponent,
   ],
   imports: [
     BrowserModule,
