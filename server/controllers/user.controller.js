@@ -44,7 +44,7 @@ const getUserDetails = (req, res) => {
   res.status(200).send(req.currentUser);
 };
 const updateUser = (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
 };
 
 module.exports = { register, login, getUserDetails, updateUser };

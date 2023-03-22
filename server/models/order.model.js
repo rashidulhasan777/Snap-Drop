@@ -1,5 +1,4 @@
 const mongoose = require('./../db');
-const addressSchema = require('./details.model');
 const imageSchema = require('./image.model');
 
 const OrderSchema = new mongoose.Schema(

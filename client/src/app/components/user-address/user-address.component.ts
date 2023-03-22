@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { PathaoService } from 'src/app/services/pathao/pathao.service';
+import { UserdataService } from 'src/app/services/userdata.service';
 
 @Component({
   selector: 'app-user-address',
@@ -11,7 +12,15 @@ export class UserAddressComponent {
   deliveryInfoForm = this.fb.group({
     name: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
-    phone: ['', [Validators.required, Validators.pattern(/[0-9]/)]],
+    phone: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern(/[0-9]/),
+        Validators.maxLength(10),
+        Validators.minLength(10),
+      ],
+    ],
     address: ['', [Validators.required]],
     city: ['', [Validators.required]],
     zone: ['', [Validators.required]],
@@ -26,7 +35,11 @@ export class UserAddressComponent {
   zones: { zone_id: number; zone_name: string }[] = [];
   areas: { area_id: number; area_name: string }[] = [];
 
-  constructor(private fb: FormBuilder, private pathao: PathaoService) {}
+  constructor(
+    private fb: FormBuilder,
+    private pathao: PathaoService,
+    private userDataService: UserdataService
+  ) {}
 
   ngOnInit() {
     this.pathao.getPathaoAccessToken().subscribe({
@@ -72,17 +85,19 @@ export class UserAddressComponent {
   }
   get zone() {
     return this.deliveryInfoForm.get('zone');
-}
+  }
   get area() {
     return this.deliveryInfoForm.get('area');
   }
 
   handleSubmit() {
-    if(this.deliveryInfoForm.valid){
-
-      const res = JSON.parse(JSON.stringify(this.deliveryInfoForm.value));
-      res.phone = '+880' + res.phone;
-      localStorage.setItem('userDetails', JSON.stringify(res));
+    if (this.deliveryInfoForm.valid) {
+      const details = JSON.parse(JSON.stringify(this.deliveryInfoForm.value));
+      details.phone = '+880' + details.phone;
+      this.userDataService
+        .updateUserData(details)
+        .subscribe((res) => console.log(res));
+      // localStorage.setItem('userDetails', JSON.stringify(details));
     }
   }
 }

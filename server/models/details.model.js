@@ -1,9 +1,22 @@
 const mongoose = require('../db');
 
+const citySchema = new mongoose.Schema({
+  city_id: { type: Number, required: true },
+  city_name: { type: String, required: true },
+});
+const zoneSchema = new mongoose.Schema({
+  zone_id: { type: Number, required: true },
+  zone_name: { type: String, required: true },
+});
+const areaSchema = new mongoose.Schema({
+  area_id: { type: Number, required: true },
+  area_name: { type: String, required: true },
+});
+
 const detailsSchema = new mongoose.Schema({
   name: {
     type: String,
-    // required: true, //!required for lab
+    required: true,
   },
   contact_name: {
     type: String,
@@ -11,7 +24,7 @@ const detailsSchema = new mongoose.Schema({
   },
   contact_number: {
     type: String,
-    // required: true, //!required for lab
+    required: true,
   },
   secondary_contact: {
     type: String, //!used for lab
@@ -20,16 +33,16 @@ const detailsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  city_id: {
-    type: Number,
+  city: {
+    type: citySchema,
     required: true,
   },
-  zone_id: {
-    type: Number,
+  zone: {
+    type: zoneSchema,
     required: true,
   },
-  area_id: {
-    type: Number,
+  area: {
+    type: areaSchema,
     required: true,
   },
 });

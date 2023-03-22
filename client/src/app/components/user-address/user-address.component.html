@@ -32,7 +32,8 @@
         <mat-error *ngIf="email?.errors?.['email']">Email is invalid</mat-error>
         <span matPrefix>+880</span>
         <input matInput formControlName="phone" />
-        <mat-error *ngIf="phone?.errors?.['pattern']"
+        <mat-error
+          *ngIf="phone?.errors?.['pattern'] || phone?.errors?.['minlength'] || phone?.errors?.['maxlength']"
           >Invalid Phone Number</mat-error
         >
         <mat-error *ngIf="phone?.errors?.['required']"
