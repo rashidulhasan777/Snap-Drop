@@ -4,6 +4,7 @@ const authMiddleware = require('./middlewares/auth');
 const userController = require('./controllers/user.controller');
 const orderController = require('./controllers/order.controller');
 const oauthController = require('./controllers/oauth.controller');
+const pathaoController = require('./controllers/pathao.controller');
 
 router.post('/login', userController.login);
 router.post('/register', userController.register);
@@ -35,5 +36,9 @@ router.put('/order/:id', authMiddleware.lab, orderController.changeOrderStatus);
 
 router.post('/googleAccessCode', oauthController.googleAccessCode);
 router.post('/fbAccessCode', oauthController.fbAccessCode);
+
+router.get('/pathao/accessToken', pathaoController.pathaoAccessToken);
+router.post('/pathao/zones', pathaoController.pathaoZones);
+router.post('/pathao/areas', pathaoController.pathaoAreas);
 
 module.exports = router;

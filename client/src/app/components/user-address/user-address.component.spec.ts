@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeliveryPageComponent } from './delivery-page.component';
+import { UserAddressComponent } from './user-address.component';
 
-describe('DeliveryPageComponent', () => {
-  let component: DeliveryPageComponent;
-  let fixture: ComponentFixture<DeliveryPageComponent>;
+describe('UserAddressComponent', () => {
+  let component: UserAddressComponent;
+  let fixture: ComponentFixture<UserAddressComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DeliveryPageComponent ]
+      declarations: [ UserAddressComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DeliveryPageComponent);
+    fixture = TestBed.createComponent(UserAddressComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

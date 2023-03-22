@@ -1,0 +1,93 @@
+<div class="user-info-form">
+  <h1>Delivery Information</h1>
+  <form
+    [formGroup]="deliveryInfoForm"
+    (submit)="handleSubmit()"
+    class="delivery-info-form"
+  >
+    <div>
+      <mat-form-field class="name" appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+        <mat-error *ngIf="name?.errors?.['required']"
+          >Name is required</mat-error
+        >
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field class="email" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" />
+        <mat-error *ngIf="email?.errors?.['email']">Email is invalid</mat-error>
+        <mat-error *ngIf="email?.errors?.['required']"
+          >Email is required</mat-error
+        >
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field class="phone" appearance="outline">
+        <mat-label>Phone</mat-label>
+        <input matInput formControlName="phone" />
+        <mat-error *ngIf="phone?.errors?.['required']"
+          >Phone is required</mat-error
+        >
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field class="address" appearance="outline">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address" />
+        <mat-error *ngIf="address?.errors?.['required']"
+          >Address is required</mat-error
+        >
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="city" appearance="outline">
+        <mat-label>City</mat-label>
+        <mat-select formControlName="city">
+          <mat-option *ngFor="let city of cities" [value]="city.city_id">
+            {{ city.city_name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="city?.errors?.['required']"
+          >City is required</mat-error
+        >
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="zone" appearance="outline">
+        <mat-label>Zone</mat-label>
+        <mat-select formControlName="zone">
+          <mat-option *ngFor="let zone of zones" [value]="zone.zone_id">
+            {{ zone.zone_name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="zone?.errors?.['required']"
+          >Zone is required</mat-error
+        >
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="area" appearance="outline">
+        <mat-label>Area</mat-label>
+        <mat-select formControlName="area">
+          <mat-option *ngFor="let area of areas" [value]="area.area_id">
+            {{ area.area_name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="area ?.errors?.['required']"
+          >Area is required</mat-error
+        >
+      </mat-form-field>
+    </div>
+    <div class="button-container">
+      <button mat-flat-button color="primary" (click)="handleSubmit()">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
