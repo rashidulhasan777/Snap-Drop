@@ -14,15 +14,12 @@ const OrderSchema = mongoose.Schema(
     parcelId: {
       type: String,
     },
-    photoType: {
-      type: String,
-    },
     customerAddress: {
       type: addressSchema,
     },
     orderStatus: {
       type: String,
-      // enum: ['pending', 'approved', 'picked up for deliveryy']
+      // enum: ['pending', 'approved', 'picked up for delivery']
       default: 'pending',
     },
     instruction: {
@@ -33,10 +30,6 @@ const OrderSchema = mongoose.Schema(
     },
     galleryPictures: {
       type: [imageSchema],
-    },
-    orderType: {
-      type: String,
-      required: true,
     },
   },
   { timestamps: true }
