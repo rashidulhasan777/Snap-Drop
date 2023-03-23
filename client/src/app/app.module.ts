@@ -33,7 +33,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { OrderDoneComponent } from './components/order-done/order-done.component';
 import { UserAddressComponent } from './components/user-address/user-address.component';
-import { InstructionsDialogComponent } from './components/instructions-dialog/instructions-dialog.component';
+import { PassportPhotoInstructionsComponent } from './components/passport-photo-instructions/passport-photo-instructions.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +59,7 @@ import { InstructionsDialogComponent } from './components/instructions-dialog/in
     PaymentComponent,
     OrderDoneComponent,
     UserAddressComponent,
-    InstructionsDialogComponent,
+    PassportPhotoInstructionsComponent,
   ],
   imports: [
     BrowserModule,
