@@ -48,10 +48,11 @@ export class UserAddressComponent {
 
   ngOnInit() {
     this.userDataService.getUser().subscribe((res) => {
+      this.User = res;
       if (res.details) {
         this.hasPreviousInfo = true;
-        this.User = res;
       } else {
+        this.name?.setValue(res.name || '');
         this.hasPreviousInfo = false;
       }
     });
