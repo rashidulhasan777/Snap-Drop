@@ -4,9 +4,11 @@ const authMiddleware = require('./middlewares/auth');
 const userController = require('./controllers/user.controller');
 const orderController = require('./controllers/order.controller');
 const oauthController = require('./controllers/oauth.controller');
+const cartController = require('./controllers/cart.controller');
 const labController = require('./controllers/lab.controller');
 const pathaoController = require('./controllers/pathao.controller');
 
+//User Routes
 router.post('/login', userController.login);
 router.post('/register', userController.register);
 router.post('/oauthLogin', oauthController.oauthLogin);
@@ -15,10 +17,13 @@ router.get(
   authMiddleware.authenticated,
   userController.getUserDetails
 );
+router.put('/user', authMiddleware.authenticated, userController.updateUser);
 
-router.put('/user',authMiddleware.authenticated, userController.updateUser)
+//Oauth Routes
+router.post('/googleAccessCode', oauthController.googleAccessCode);
+router.post('/fbAccessCode', oauthController.fbAccessCode);
 
-// router.get("/order", orderController.getAllOrders);
+// Order Routes
 router.get(
   '/orderbyId/:id',
   authMiddleware.authenticated,
@@ -37,12 +42,15 @@ router.get(
 router.post('/order', authMiddleware.customer, orderController.createOrder);
 router.put('/order/:id', authMiddleware.lab, orderController.changeOrderStatus);
 
-router.post('/googleAccessCode', oauthController.googleAccessCode);
-router.post('/fbAccessCode', oauthController.fbAccessCode);
+//Cart Routes
+router.put('/cart', authMiddleware.customer, cartController.updateUserCart);
+router.get('/cart', authMiddleware.customer, cartController.getUserCart);
 
-router.post('/lab', labController.createLab)
+//Pathao Routes
 router.get('/pathao/accessToken', pathaoController.pathaoAccessToken);
 router.post('/pathao/zones', pathaoController.pathaoZones);
 router.post('/pathao/areas', pathaoController.pathaoAreas);
 
+//Internal Route for lab
+router.post('/lab', labController.createLab);
 module.exports = router;
