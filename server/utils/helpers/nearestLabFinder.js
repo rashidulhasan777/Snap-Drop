@@ -6,10 +6,10 @@ const axios = require('axios');
 const client = new Client({});
 
 const userLocationFinder = async (area, zone, city, country) => {
-  console.log(process.env.MAPS_API_KEY);
   const args = {
     params: {
-      key: process.env.MAPS_API_KEY,
+      // key: process.env.MAPS_API_KEY, // replace the line below with this when integrating it with server
+      key: 'AIzaSyAhkieTsOpkBf6tw71b4Y2cUL4RTRasYGo',
       address: `${area}, ${zone}, ${city}, ${country}`,
     },
   };
