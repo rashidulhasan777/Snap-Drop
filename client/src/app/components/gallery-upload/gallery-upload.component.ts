@@ -5,6 +5,7 @@ import { map, Observable, startWith, zip } from 'rxjs';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { Cart } from 'src/app/interfaces/cart.interface';
+import { ImageInterface } from 'src/app/interfaces/image.interface';
 
 @Component({
   selector: 'app-gallery-upload',
@@ -30,22 +31,20 @@ export class GalleryUploadComponent {
   ) {}
 
   ngOnInit() {
-    const inCart: {
-      imageName: string;
-      copies: number;
-      size: string;
-      remoteURL: string;
-    }[] = JSON.parse(localStorage.getItem('userGalleryPictures') || '[]');
-    inCart.forEach((el) => {
-      this.previews.push({ filename: el.imageName, data: el.remoteURL });
-      this.pictureData.push(
-        this.fb.group({
-          imageName: [el.imageName],
-          copies: [el.copies, Validators.required],
-          size: [el.size, Validators.required],
-          remoteURL: [el.remoteURL],
-        })
-      );
+    let inCart: ImageInterface[] = [];
+    this.cartService.getCart().subscribe((res) => {
+      inCart = res.galleryPictures || [];
+      inCart.forEach((el) => {
+        this.previews.push({ filename: el.orgFilename, data: el.imageURL });
+        this.pictureData.push(
+          this.fb.group({
+            imageName: [el.orgFilename],
+            copies: [el.copies, Validators.required],
+            size: [el.photoSize, Validators.required],
+            remoteURL: [el.imageURL],
+          })
+        );
+      });
     });
     this.filteredFormatOptions = this.applyToAllForm.controls?.[
       'size'
