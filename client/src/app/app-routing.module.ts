@@ -14,6 +14,8 @@ import { ArchiveComponent } from './components/lab-components/archive/archive.co
 import { DialogApprovalComponent } from './components/lab-components/dialog-approval/dialog-approval.component';
 import { CartComponent } from './components/cart/cart.component';
 import { UserAddressComponent } from './components/user-address/user-address.component';
+import { OrderDoneComponent } from './components/order-done/order-done.component';
+import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -28,6 +30,8 @@ const routes: Routes = [
   { path: 'printing', component: PrintingComponent },
   { path: 'archive', component: ArchiveComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'order_summary', component: OrderSummaryComponent },
+  { path: 'order_done', component: OrderDoneComponent },
   { path: 'user_address', component: UserAddressComponent },
   { path: '', pathMatch: 'full', component: AppComponent },
 ];

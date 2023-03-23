@@ -2,7 +2,7 @@ const Carts = require('../models/cart.model');
 
 const getUserCart = async (req, res, next) => {
   try {
-    const userCart = await Carts.find({ userId: req.currentUser._id });
+    const userCart = await Carts.findOne({ userId: req.currentUser._id });
     res.status(200).send(userCart);
   } catch (error) {
     console.log(error);
@@ -11,7 +11,7 @@ const getUserCart = async (req, res, next) => {
 };
 const updateUserCart = async (req, res, next) => {
   try {
-    const userCart = await Carts.findAndUpdate(
+    const userCart = await Carts.findOneAndUpdate(
       { userId: req.currentUser._id },
       req.body,
       { upsert: true, new: true, setDefaultsOnInsert: true }

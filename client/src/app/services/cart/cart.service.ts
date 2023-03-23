@@ -19,7 +19,11 @@ export class CartService {
   }
 
   getCart(): Observable<Cart> {
-    return this.http.get<Cart>(this.baseUrl);
+    return this.http.get<Cart>(this.baseUrl, {
+      headers: {
+        Authorization: `Bearer ${this.jwtToken}`,
+      },
+    });
   }
 
   private get jwtToken() {

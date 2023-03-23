@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ImageInterface } from 'src/app/interfaces/image.interface';
 import { CartService } from 'src/app/services/cart/cart.service';
 
@@ -10,10 +11,11 @@ import { CartService } from 'src/app/services/cart/cart.service';
 export class CartComponent {
   passportOrders: ImageInterface[] = [];
   galleryOrders: ImageInterface[] = [];
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private router: Router) {}
 
   ngOnInit() {
     this.cartService.getCart().subscribe((res) => {
+      console.log(res);
       this.passportOrders = res.passportPictures || [];
       this.galleryOrders = res.galleryPictures || [];
     });
@@ -37,5 +39,7 @@ export class CartComponent {
     this.deletePassportOrder();
   }
 
-  checkOut() {}
+  checkOut() {
+    this.router.navigate(['user_address']);
+  }
 }
