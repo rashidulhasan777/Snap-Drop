@@ -1,5 +1,5 @@
 const mongoose = require('./../db');
-const addressSchema = require('./details.model');
+const detailsSchema = require('./details.model');
 const imageSchema = require('./image.model');
 
 const OrderSchema = new mongoose.Schema(
@@ -17,6 +17,10 @@ const OrderSchema = new mongoose.Schema(
     orderStatus: {
       type: String,
       default: 'pending',
+    },
+    orderDelivaryDetails: {
+      type: detailsSchema,
+      required: true,
     },
     instruction: {
       type: String,

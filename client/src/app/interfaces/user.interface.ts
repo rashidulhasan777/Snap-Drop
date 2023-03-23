@@ -1,10 +1,11 @@
+import { Details } from './details.interface';
+
 export interface User {
   _id?: string;
   name?: string;
   email: string;
-  recentOrderStatus?: string;
   typeOfUser: 'customer' | 'lab';
   profilePic?: string;
-  address?: string;
+  details?: Details;
   labId?: string;
 }
