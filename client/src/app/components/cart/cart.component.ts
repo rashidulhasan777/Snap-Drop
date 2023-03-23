@@ -36,6 +36,8 @@ export class CartComponent {
 
   clearAll() {
     this.cartService.clearCart().subscribe();
+    this.galleryOrders = [];
+    this.passportOrders = [];
   }
 
   checkOut() {

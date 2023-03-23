@@ -1,5 +1,6 @@
 import { Details } from './details.interface';
 import { ImageInterface } from './image.interface';
+import { Price } from './price.interface';
 
 export interface Order {
   labId: string;
@@ -10,6 +11,8 @@ export interface Order {
   instruction?: string;
   passportPictures?: ImageInterface[];
   galleryPictures?: ImageInterface[];
+  totalPrice: Price;
+  paid?: boolean;
   createdAt?: Date;
   updatedAt?: Date;
 }

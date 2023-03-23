@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Order } from 'src/app/interfaces/order.interface';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { OrderService } from 'src/app/services/orders/order.service';
+import { PriceCalculationService } from 'src/app/services/price-calculation/price-calculation.service';
 
 @Component({
   selector: 'app-order-done',
@@ -10,35 +11,17 @@ import { OrderService } from 'src/app/services/orders/order.service';
 })
 export class OrderDoneComponent {
   userInstruction: string | null = '';
-  CompletedOrder: Order = { labId: '' };
+  CompletedOrder: Order = {
+    labId: '',
+    totalPrice: { passport: 0, gallery: 0, shipping: 0, total: 0 },
+  };
   errorMessage = '';
   nothingInCart = false;
   constructor(
     private cartService: CartService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private priceCalcultor: PriceCalculationService
   ) {}
 
-  ngOnInit() {
-    this.userInstruction = localStorage.getItem('instructionFromUser');
-    this.cartService.getCart().subscribe({
-      next: (res) => {
-        const order: Order = {
-          labId: 'sss', //Needs to change
-          passportPictures: res.passportPictures,
-          galleryPictures: res.galleryPictures,
-          instruction: this.userInstruction || '',
-        };
-        this.orderService.createOrder(order).subscribe((res) => {
-          this.CompletedOrder = res;
-          setTimeout(() => {
-            this.cartService.clearCart().subscribe();
-          }, 5000);
-        });
-      },
-      error: (res) => {
-        this.errorMessage = res.error.errorMessage;
-        this.nothingInCart = true;
-      },
-    });
-  }
+  ngOnInit() {}
 }

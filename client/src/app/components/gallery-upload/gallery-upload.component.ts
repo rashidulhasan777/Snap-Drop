@@ -33,6 +33,7 @@ export class GalleryUploadComponent {
   ngOnInit() {
     let inCart: ImageInterface[] = [];
     this.cartService.getCart().subscribe((res) => {
+      if (!res) return;
       inCart = res.galleryPictures || [];
       inCart.forEach((el) => {
         this.previews.push({ filename: el.orgFilename, data: el.imageURL });
