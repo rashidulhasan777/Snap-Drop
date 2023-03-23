@@ -7,15 +7,34 @@ import { Order } from 'src/app/interfaces/order.interface';
   providedIn: 'root',
 })
 export class OrderService {
-  readonly labURL = 'http://127.0.0.1:3000/order';
+  private readonly baseUrl = 'http://localhost:3000/order';
 
   constructor(private http: HttpClient) {}
 
   getOrdersbyStatus(status: string): Observable<Order[]> {
-    return this.http.get<Order[]>(this.labURL + '/' + status);
+    return this.http.get<Order[]>(this.baseUrl + '/' + status, {
+      headers: {
+        Authorization: `Bearer ${this.jwtToken}`,
+      },
+    });
   }
 
-  changeOrderStatus(id : string, body: {orderStatus:string}){
-    return this.http.put(this.labURL+'/'+id, body)
+  changeOrderStatus(id: string, body: { orderStatus: string }) {
+    return this.http.put(this.baseUrl + '/' + id, body, {
+      headers: {
+        Authorization: `Bearer ${this.jwtToken}`,
+      },
+    });
+  }
+
+  createOrder(order: Order): Observable<Order> {
+    return this.http.post<Order>(this.baseUrl, order, {
+      headers: {
+        Authorization: `Bearer ${this.jwtToken}`,
+      },
+    });
+  }
+  private get jwtToken() {
+    return localStorage.getItem('userAccessToken');
   }
 }

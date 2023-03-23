@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Cart } from 'src/app/interfaces/cart.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { CartService } from 'src/app/services/cart/cart.service';
@@ -12,6 +13,7 @@ import { UserdataService } from 'src/app/services/userdata.service';
 export class OrderSummaryComponent {
   User?: User;
   Cart!: Cart;
+  instruction: string = '';
 
   galleryPicturePrice = [
     {
@@ -44,7 +46,8 @@ export class OrderSummaryComponent {
 
   constructor(
     private cartService: CartService,
-    private userDataService: UserdataService
+    private userDataService: UserdataService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -77,5 +80,11 @@ export class OrderSummaryComponent {
       }
     }
     return total;
+  }
+
+  initiatePayment() {
+    if (this.instruction)
+      localStorage.setItem('instructionFromUser', this.instruction);
+    this.router.navigate(['order_done']);
   }
 }

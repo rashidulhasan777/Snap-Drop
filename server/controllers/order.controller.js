@@ -1,4 +1,4 @@
-const Order = require("./../models/order.model");
+const Order = require('./../models/order.model');
 
 const getAllOrders = async (req, res) => {
   try {
@@ -14,12 +14,13 @@ const createOrder = async (req, res) => {
     const result = await Order.create({
       ...req.body,
       customerId: req.currentUser._id,
+      orderDelivaryDetails: req.currentUser.details,
     });
     res.status(201);
     res.send(result);
     return result;
   } catch (error) {
-    res.status(500).send({ errorMessage: "Something went wrong" });
+    res.status(500).send({ errorMessage: 'Something went wrong' });
     console.log(error);
   }
 };
@@ -34,7 +35,7 @@ const changeOrderStatus = async (req, res) => {
     });
     res.status(201).send(order);
   } catch (error) {
-    res.status(500).send({ errorMessage: "Something went wrong" });
+    res.status(500).send({ errorMessage: 'Something went wrong' });
     console.log(error);
   }
 };
@@ -46,7 +47,7 @@ const getOrderById = async (req, res) => {
     res.status(200);
     res.send(order);
   } catch (error) {
-    res.status(500).send({ errorMessage: "Something went wrong" });
+    res.status(500).send({ errorMessage: 'Something went wrong' });
     res.send(error);
   }
 };
@@ -57,7 +58,7 @@ const getOrderByCustomerId = async (req, res) => {
     res.status(201);
     res.send(orders);
   } catch (error) {
-    res.status(500).send({ errorMessage: "Something went wrong" });
+    res.status(500).send({ errorMessage: 'Something went wrong' });
     res.send(error);
   }
 };
@@ -69,7 +70,7 @@ const getOrdersbyStatus = async (req, res) => {
     res.status(201);
     res.send(orders);
   } catch (error) {
-    res.status(500).send({ errorMessage: "Something went wrong" });
+    res.status(500).send({ errorMessage: 'Something went wrong' });
     res.send(error);
   }
 };
@@ -80,11 +81,10 @@ const getOrderByLabId = async (req, res) => {
     res.status(201);
     res.send(orders);
   } catch (error) {
-    res.status(500).send({ errorMessage: "Something went wrong" });
+    res.status(500).send({ errorMessage: 'Something went wrong' });
     res.send(error);
   }
 };
-
 
 module.exports = {
   getAllOrders,
@@ -93,5 +93,5 @@ module.exports = {
   getOrderById,
   getOrderByCustomerId,
   getOrderByLabId,
-  getOrdersbyStatus
+  getOrdersbyStatus,
 };

@@ -31,8 +31,18 @@
     {{ User?.details?.city?.city_name }}
   </div>
 </div>
+<div class="instructionWrapper">
+  <mat-form-field class="instructionField" appearance="outline"
+    ><mat-label>Instructions (Optional)</mat-label
+    ><textarea
+      [(ngModel)]="instruction"
+      matInput
+      placeholder="Give specific instuctions"
+    ></textarea>
+  </mat-form-field>
+</div>
 
-<button mat-stroked-button class="payButton">
+<button mat-stroked-button class="payButton" (click)="initiatePayment()">
   <div class="button_text">
     <div>Pay</div>
     <div class="forBorder"></div>

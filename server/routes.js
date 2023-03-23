@@ -1,4 +1,4 @@
-const router = require("express").Router();
+const router = require('express').Router();
 
 const authMiddleware = require('./middlewares/auth');
 const userController = require('./controllers/user.controller');
@@ -13,7 +13,7 @@ router.post('/login', userController.login);
 router.post('/register', userController.register);
 router.post('/oauthLogin', oauthController.oauthLogin);
 router.get(
-  "/user",
+  '/user',
   authMiddleware.authenticated,
   userController.getUserDetails
 );
@@ -30,18 +30,27 @@ router.get(
   orderController.getOrderById
 );
 router.get(
-  "/order/:status",
-  // authMiddleware.lab,
+  '/order/:status',
+  authMiddleware.lab,
   orderController.getOrdersbyStatus
 );
-router.get("/orderbyCustomer/", authMiddleware.customer, orderController.getOrderByCustomerId);
-router.get("/orderforLab/", authMiddleware.lab, orderController.getOrderByLabId);
-router.post("/order", authMiddleware.customer, orderController.createOrder);
-router.put("/order/:id", authMiddleware.lab, orderController.changeOrderStatus);
+router.get(
+  '/orderbyCustomer/',
+  authMiddleware.customer,
+  orderController.getOrderByCustomerId
+);
+router.get(
+  '/orderforLab/',
+  authMiddleware.lab,
+  orderController.getOrderByLabId
+);
+router.post('/order', authMiddleware.customer, orderController.createOrder);
+router.put('/order/:id', authMiddleware.lab, orderController.changeOrderStatus);
 
 //Cart Routes
 router.put('/cart', authMiddleware.customer, cartController.updateUserCart);
 router.get('/cart', authMiddleware.customer, cartController.getUserCart);
+router.delete('/cart', authMiddleware.customer, cartController.clearCart);
 
 //Pathao Routes
 router.get('/pathao/accessToken', pathaoController.pathaoAccessToken);
@@ -50,4 +59,5 @@ router.post('/pathao/areas', pathaoController.pathaoAreas);
 
 //Internal Route for lab
 router.post('/lab', labController.createLab);
+
 module.exports = router;

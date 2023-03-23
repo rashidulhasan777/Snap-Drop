@@ -46,3 +46,11 @@
 .forBorder {
   border: 1px solid black;
 }
+.instructionField {
+  width: calc(100% - 20px);
+}
+.instructionWrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

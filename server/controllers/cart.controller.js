@@ -23,7 +23,20 @@ const updateUserCart = async (req, res, next) => {
   }
 };
 
+const clearCart = async (req, res, next) => {
+  try {
+    await Carts.findOneAndDelete({
+      userId: req.currentUser._id,
+    });
+    res.sendStatus(204);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ errorMessage: 'Something went wrong' });
+  }
+};
+
 module.exports = {
   getUserCart,
   updateUserCart,
+  clearCart,
 };

@@ -22,11 +22,11 @@ export class CartComponent {
   }
 
   deletePassportOrder() {
-    this.cartService.updateCart({ passportPictures: [] });
+    this.cartService.updateCart({ passportPictures: [] }).subscribe();
     this.passportOrders = [];
   }
   deleteGalleryOrder() {
-    this.cartService.updateCart({ galleryPictures: [] });
+    this.cartService.updateCart({ galleryPictures: [] }).subscribe();
     this.galleryOrders = [];
   }
 
@@ -35,8 +35,7 @@ export class CartComponent {
   }
 
   clearAll() {
-    this.deleteGalleryOrder();
-    this.deletePassportOrder();
+    this.cartService.clearCart().subscribe();
   }
 
   checkOut() {

@@ -118,7 +118,6 @@ export class GalleryUploadComponent {
           });
         });
         this.cartService.updateCart(cartData).subscribe((res) => {
-          console.log(res);
           this.router.navigate(['cart']);
         });
       },

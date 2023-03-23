@@ -26,6 +26,14 @@ export class CartService {
     });
   }
 
+  clearCart(): Observable<void> {
+    return this.http.delete<void>(this.baseUrl, {
+      headers: {
+        Authorization: `Bearer ${this.jwtToken}`,
+      },
+    });
+  }
+
   private get jwtToken() {
     return localStorage.getItem('userAccessToken');
   }
