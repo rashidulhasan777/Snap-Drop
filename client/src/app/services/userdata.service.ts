@@ -12,8 +12,16 @@ export class UserdataService {
 
   constructor(private http: HttpClient) {}
 
+  getUser(): Observable<User> {
+    return this.http.get<User>(this.baseUrl, {
+      headers: {
+        Authorization: `Bearer ${this.jwtToken}`,
+      },
+    });
+  }
+
   updateUserData(details: Details): Observable<User> {
-    console.log(details)
+    console.log(details);
     return this.http.put<User>(this.baseUrl, details, {
       headers: {
         Authorization: `Bearer ${this.jwtToken}`,

@@ -18,25 +18,20 @@
     <div>
       <mat-form-field class="email" appearance="outline">
         <mat-label>Email</mat-label>
-        <input matInput formControlName="email" />
-        <mat-error *ngIf="email?.errors?.['email']">Email is invalid</mat-error>
-        <mat-error *ngIf="email?.errors?.['required']"
-          >Email is required</mat-error
-        >
+        <input [disabled]="true" matInput #userEmail />
       </mat-form-field>
     </div>
 
     <div>
       <mat-form-field class="phone" appearance="outline">
         <mat-label>Phone</mat-label>
-        <mat-error *ngIf="email?.errors?.['email']">Email is invalid</mat-error>
         <span matPrefix>+880</span>
-        <input matInput formControlName="phone" />
+        <input matInput formControlName="contact_number" />
         <mat-error
-          *ngIf="phone?.errors?.['pattern'] || phone?.errors?.['minlength'] || phone?.errors?.['maxlength']"
+          *ngIf="contact_number?.errors?.['pattern'] || contact_number?.errors?.['minlength'] || contact_number?.errors?.['maxlength']"
           >Invalid Phone Number</mat-error
         >
-        <mat-error *ngIf="phone?.errors?.['required']"
+        <mat-error *ngIf="contact_number?.errors?.['required']"
           >Phone is required</mat-error
         >
       </mat-form-field>

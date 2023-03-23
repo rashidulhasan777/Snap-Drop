@@ -4,25 +4,26 @@ const SECRET_KEY = process.env.JWT_SECRET;
 
 const checkAuthentication = async (req, res) => {
   const authHeaders = req.headers['authorization'];
-  if (!authHeaders)
-    return res.status(401).send({ errorMessage: 'You are not authorized' });
+  if (!authHeaders) {
+    return;
+  }
   const token = authHeaders.split(' ')[1];
   try {
     const { _id } = jwt.verify(token, SECRET_KEY);
     const user = await User.findOne({ _id });
-    console.log('here');
-    if (!user)
-      return res.status(401).send({ errorMessage: 'You are not authorized' });
+    if (!user) {
+      return;
+    }
     req.currentUser = user;
-    return;
   } catch (error) {
-    res.status(401).send({ errorMessage: 'You are not authorized' });
+    console.log(error);
+    return;
   }
 };
 
 const authenticated = async (req, res, next) => {
   try {
-    await checkAuthentication(req, res);
+    await checkAuthentication(req, res, next);
     if (req.currentUser) next();
     else res.status(401).send({ errorMessage: 'Unauthorized Request' });
   } catch (error) {
@@ -34,7 +35,7 @@ const authenticated = async (req, res, next) => {
 const customer = async (req, res, next) => {
   try {
     await checkAuthentication(req, res);
-    if (req.currentUser.typeOfUser !== 'customer')
+    if (!req.currentUser || req.currentUser.typeOfUser !== 'customer')
       res.status(401).send({ errorMessage: 'Unauthorized Request' });
     else next();
   } catch (error) {
@@ -44,7 +45,8 @@ const customer = async (req, res, next) => {
 const lab = async (req, res, next) => {
   try {
     await checkAuthentication(req, res);
-    if (req.currentUser.typeOfUser !== 'lab')
+
+    if (!req.currentUser || req.currentUser.typeOfUser !== 'lab')
       res.status(401).send({ errorMessage: 'Unauthorized Request' });
     else next();
   } catch (error) {

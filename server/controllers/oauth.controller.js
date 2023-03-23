@@ -50,6 +50,7 @@ const oauthLogin = async (req, res, next) => {
       existingUser = await User.create({
         email,
         profilePic,
+        name,
       });
     }
     const access_token = jwt.sign({ _id: existingUser._id }, SECRET_KEY);
