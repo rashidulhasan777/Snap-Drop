@@ -56,6 +56,7 @@ router.delete('/cart', authMiddleware.customer, cartController.clearCart);
 router.get('/pathao/accessToken', pathaoController.pathaoAccessToken);
 router.post('/pathao/zones', pathaoController.pathaoZones);
 router.post('/pathao/areas', pathaoController.pathaoAreas);
+router.post('/pathao/price-calculation', pathaoController.patahaoPriceCalc);
 
 //Internal Route for lab
 router.post('/lab', labController.createLab);

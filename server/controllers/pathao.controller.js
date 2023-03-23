@@ -81,4 +81,11 @@ const pathaoAreas = async (req, res, next) => {
   }
 };
 
-module.exports = { pathaoAccessToken, pathaoZones, pathaoAreas };
+const patahaoPriceCalc = async () => {};
+
+module.exports = {
+  pathaoAccessToken,
+  pathaoZones,
+  pathaoAreas,
+  patahaoPriceCalc,
+};
