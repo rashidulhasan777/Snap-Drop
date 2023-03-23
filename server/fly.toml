@@ -1,0 +1,48 @@
+# fly.toml file generated for snapdropbd on 2023-03-23T15:47:12+06:00
+
+app = "snapdropbd"
+kill_signal = "SIGINT"
+kill_timeout = 5
+primary_region = "sin"
+processes = []
+
+[build]
+  builder = "heroku/buildpacks:20"
+
+[env]
+  PORT="3000"
+DB_URL='mongodb://127.0.0.1:27017/snapdrop_db'
+JWT_SECRET='plus est en vous'
+GOOGLE_CLIENT_ID='861084726957-9qcs9ivbphq1043ls2b2me5obfhk48ut.apps.googleusercontent.com'
+GOOGLE_CLIENT_SECRET='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'
+STORE_ID = "flyaw641be11fa19cc"
+STORE_PASSWORD = "flyaw641be11fa19cc@ssl"
+
+[experimental]
+  auto_rollback = true
+
+[[services]]
+  http_checks = []
+  internal_port = 3000
+  processes = ["app"]
+  protocol = "tcp"
+  script_checks = []
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    force_https = true
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  [[services.tcp_checks]]
+    grace_period = "1s"
+    interval = "15s"
+    restart_limit = 0
+    timeout = "2s"
