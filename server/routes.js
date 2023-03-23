@@ -19,26 +19,15 @@ router.get(
 router.put("/user", authMiddleware.authenticated, userController.updateUser);
 
 // router.get("/order", orderController.getAllOrders);
-router.get(
-  "/orderbyId/:id",
-  authMiddleware.authenticated,
-  orderController.getOrderById
+router.get("/orderbyId/:id", authMiddleware.authenticated, orderController.getOrderById
 );
 router.get(
   "/order/:status",
   // authMiddleware.lab,
   orderController.getOrdersbyStatus
 );
-router.get(
-  "/orderbyCustomer/",
-  authMiddleware.customer,
-  orderController.getOrderByCustomerId
-);
-router.get(
-  "/orderforLab/",
-  authMiddleware.lab,
-  orderController.getOrderByLabId
-);
+router.get("/orderbyCustomer/", authMiddleware.customer, orderController.getOrderByCustomerId);
+router.get("/orderforLab/", authMiddleware.lab, orderController.getOrderByLabId);
 router.post("/order", authMiddleware.customer, orderController.createOrder);
 router.put("/order/:id", authMiddleware.lab, orderController.changeOrderStatus);
 

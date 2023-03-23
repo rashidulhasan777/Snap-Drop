@@ -58,7 +58,7 @@
               <!-- Fruit Column -->
               <ng-container matColumnDef="button">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>  </th>
-                <td mat-cell *matCellDef="let row"> <button mat-raised-button color="primary">Request For Delivery</button> </td>
+                <td mat-cell *matCellDef="let row"> <button mat-raised-button color="primary" (click)="requestDelivery(row._id)">Request For Delivery</button> </td>
               </ng-container>
           
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

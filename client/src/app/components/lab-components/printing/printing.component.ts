@@ -70,6 +70,14 @@ export class PrintingComponent implements AfterViewInit, OnInit {
     this.dataSource.sort = this.sort;
   }
 
+  requestDelivery(id: string){
+    const body = { orderStatus : "readyToDeliver" }
+    const updatedBody = this.orderService.changeOrderStatus(id, body).subscribe((response) => {
+      console.log(response);
+      this.ngOnInit();
+    })
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

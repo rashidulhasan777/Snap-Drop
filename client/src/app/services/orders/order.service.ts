@@ -11,7 +11,11 @@ export class OrderService {
 
   constructor(private http: HttpClient) {}
 
-  getOrdersbyStatus(status: String): Observable<Order[]> {
+  getOrdersbyStatus(status: string): Observable<Order[]> {
     return this.http.get<Order[]>(this.labURL + '/' + status);
+  }
+
+  changeOrderStatus(id : string, body: {orderStatus:string}){
+    return this.http.put(this.labURL+'/'+id, body)
   }
 }
