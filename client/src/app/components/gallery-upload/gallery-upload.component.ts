@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CloudinaryService } from 'src/app/services/cloudinary/cloudinary.service';
 import { map, Observable, startWith, zip } from 'rxjs';
 import { Router } from '@angular/router';
+import { CartService } from 'src/app/services/cart/cart.service';
+import { Cart } from 'src/app/interfaces/cart.interface';
 
 @Component({
   selector: 'app-gallery-upload',
@@ -23,7 +25,8 @@ export class GalleryUploadComponent {
   constructor(
     private fb: FormBuilder,
     private cloudinary: CloudinaryService,
-    private router: Router
+    private router: Router,
+    private cartService: CartService
   ) {}
 
   ngOnInit() {
@@ -104,11 +107,21 @@ export class GalleryUploadComponent {
         });
       },
       complete: () => {
-        localStorage.setItem(
-          'userGalleryPictures',
-          JSON.stringify(this.pictureData.value)
-        );
-        this.router.navigate(['cart']);
+        const cartData: Cart = { galleryPictures: [] };
+        this.pictureData.value.forEach((el) => {
+          cartData.galleryPictures?.push({
+            photoSize: el.size,
+            orgFilename: el.imageName,
+            imageURL: el.remoteURL,
+            copies: el.copies,
+            approved: true,
+            typeOfImage: 'gallery',
+          });
+        });
+        this.cartService.updateCart(cartData).subscribe((res) => {
+          console.log(res);
+          this.router.navigate(['cart']);
+        });
       },
     });
   }

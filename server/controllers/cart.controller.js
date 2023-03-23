@@ -11,8 +11,8 @@ const getUserCart = async (req, res, next) => {
 };
 const updateUserCart = async (req, res, next) => {
   try {
-    const userCart = await Carts.findByIdAndUpdate(
-      req.currentUser._id,
+    const userCart = await Carts.findAndUpdate(
+      { userId: req.currentUser._id },
       req.body,
       { upsert: true, new: true, setDefaultsOnInsert: true }
     );

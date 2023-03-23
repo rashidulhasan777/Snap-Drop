@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ImageInterface } from 'src/app/interfaces/image.interface';
+import { CartService } from 'src/app/services/cart/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -6,25 +8,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent {
-  passportOrders: { filename: string; link: string }[] = [];
-  galleryOrders: { imageName: string; remoteURL: string }[] = [];
+  passportOrders: ImageInterface[] = [];
+  galleryOrders: ImageInterface[] = [];
+  constructor(private cartService: CartService) {}
 
   ngOnInit() {
-    console.log('here');
-    this.passportOrders = JSON.parse(
-      localStorage.getItem('userPassportPictures') || '[]'
-    );
-    this.galleryOrders = JSON.parse(
-      localStorage.getItem('userGalleryPictures') || '[]'
-    );
+    this.cartService.getCart().subscribe((res) => {
+      this.passportOrders = res.passportPictures || [];
+      this.galleryOrders = res.galleryPictures || [];
+    });
   }
 
   deletePassportOrder() {
-    localStorage.removeItem('userPassportPictures');
+    this.cartService.updateCart({ passportPictures: [] });
     this.passportOrders = [];
   }
   deleteGalleryOrder() {
-    localStorage.removeItem('userGalleryPictures');
+    this.cartService.updateCart({ galleryPictures: [] });
     this.galleryOrders = [];
   }
 
@@ -37,7 +37,5 @@ export class CartComponent {
     this.deletePassportOrder();
   }
 
-  checkOut(){
-    
-  }
+  checkOut() {}
 }

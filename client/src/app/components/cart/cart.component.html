@@ -3,7 +3,7 @@
   <div *ngIf="passportOrders.length">
     <div class="card">
       <div class="cardImageContainer">
-        <img [src]="passportOrders[0].link" class="cardImage" />
+        <img [src]="passportOrders[0].imageURL" class="cardImage" />
         <div class="imageCount">{{ "x" + passportOrders.length }}</div>
       </div>
       <div class="detailsContainer">
@@ -21,7 +21,7 @@
   <div *ngIf="galleryOrders.length" routerLink="/gallery_upload">
     <div class="card">
       <div class="cardImageContainer">
-        <img [src]="galleryOrders[0].remoteURL" class="cardImage" />
+        <img [src]="galleryOrders[0].imageURL" class="cardImage" />
         <div class="imageCount">{{ "x" + galleryOrders.length }}</div>
       </div>
       <div class="detailsContainer">
