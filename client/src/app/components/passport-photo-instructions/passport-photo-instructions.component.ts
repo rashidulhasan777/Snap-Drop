@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
   selector: 'app-passport-photo-instructions',
@@ -14,12 +15,21 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
   ],
 })
 export class PassportPhotoInstructionsComponent {
-  firstFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
-  });
-  secondFormGroup = this._formBuilder.group({
-    secondCtrl: ['', Validators.required],
-  });
+  firstFormGroup = this._formBuilder.group({});
+  secondFormGroup = this._formBuilder.group({});
+  thirdFormGroup = this._formBuilder.group({});
 
   constructor(private _formBuilder: FormBuilder) {}
+
+  bulbOptions: AnimationOptions = {
+    path: '../../../assets/121112-bulb.json',
+  };
+
+  attireOptions: AnimationOptions = {
+    path: '../../../assets/144444-formal-attire.json',
+  };
+
+  captureOptions: AnimationOptions = {
+    path: '../../../assets/133253-record-video-selfie-with-steps.json',
+  };
 }

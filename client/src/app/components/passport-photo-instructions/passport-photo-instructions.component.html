@@ -2,40 +2,50 @@
   <mat-stepper #stepper class="instructions">
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
-        <div>
+        <ng-lottie [options]="bulbOptions"></ng-lottie>
+        <h1>Lighting and Background</h1>
+        <p>
+          Put the lamps right in front of you so no shadows are crossing your
+          face. For the best results, search for any pale wall that even tone
+          with no sharp edges and make sure there are no objects on it.
+        </p>
+        <div class="btn-container-bottom">
           <button mat-button matStepperNext>Next</button>
         </div>
       </form>
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
-        <div>
+        <ng-lottie [options]="attireOptions"></ng-lottie>
+        <h1>Proper Outfit</h1>
+        <p>
+          We recommend wearing a more professional outfit, like something you
+          might wear at the office. Shirts, sweaters, and dresses are all great
+          options, but pay special attention to the collar. It is better to wear
+          something with a higher neckline so that it shows in the final cropped
+          version of the photo.
+        </p>
+        <div class="btn-container-bottom">
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
+    <mat-step [stepControl]="thirdFormGroup">
       <form [formGroup]="secondFormGroup">
-        <div>
+        <ng-lottie [options]="captureOptions"></ng-lottie>
+        <h1>Posing</h1>
+        <p>
+          Posing should be natural, presenting your everyday appearance. Keep a
+          neutral facial expression or a natural smile, and remember to have
+          your eyes open. Face the camera directly in front of you with your
+          full face in view.
+        </p>
+        <div class="btn-container-bottom">
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-button>Done</button>
         </div>
       </form>
-    </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup">
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">From Start</button>
-      </div>
     </mat-step>
   </mat-stepper>
 </div>

@@ -8,6 +8,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialComponentsModule } from './material-components/material-components.module';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
 
 //Components
 import { AppComponent } from './app.component';
@@ -34,6 +36,10 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { OrderDoneComponent } from './components/order-done/order-done.component';
 import { UserAddressComponent } from './components/user-address/user-address.component';
 import { PassportPhotoInstructionsComponent } from './components/passport-photo-instructions/passport-photo-instructions.component';
+
+export function playerFactory() {
+  return import('lottie-web');
+}
 
 @NgModule({
   declarations: [
@@ -67,7 +73,7 @@ import { PassportPhotoInstructionsComponent } from './components/passport-photo-
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialComponentsModule,
-
+    LottieModule.forRoot({ player: playerFactory }),
     FormsModule,
     ReactiveFormsModule,
   ],
