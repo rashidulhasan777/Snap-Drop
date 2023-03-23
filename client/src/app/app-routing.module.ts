@@ -14,6 +14,7 @@ import { ArchiveComponent } from './components/lab-components/archive/archive.co
 import { DialogApprovalComponent } from './components/lab-components/dialog-approval/dialog-approval.component';
 import { CartComponent } from './components/cart/cart.component';
 import { UserAddressComponent } from './components/user-address/user-address.component';
+import { PassportPhotoInstructionsComponent } from './components/passport-photo-instructions/passport-photo-instructions.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -29,6 +30,10 @@ const routes: Routes = [
   { path: 'archive', component: ArchiveComponent },
   { path: 'cart', component: CartComponent },
   { path: 'user_address', component: UserAddressComponent },
+  {
+    path: 'passport_photo_instructions',
+    component: PassportPhotoInstructionsComponent,
+  },
   { path: '', pathMatch: 'full', component: AppComponent },
 ];
 
