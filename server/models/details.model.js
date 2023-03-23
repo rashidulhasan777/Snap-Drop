@@ -1,4 +1,4 @@
-const mongoose = require('../db');
+const mongoose = require("../db");
 
 const citySchema = new mongoose.Schema({
   city_id: { type: Number, required: true },
