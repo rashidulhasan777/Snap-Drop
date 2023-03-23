@@ -1,10 +1,34 @@
 const studioData = require('../data/studio-list.json');
+const { Client } = require('@googlemaps/google-maps-services-js');
 
-const point = {
-  coordinates: {
-    lat: 24.41361,
-    lng: 90.33183,
-  },
+const axios = require('axios');
+
+const client = new Client({});
+
+const userLocationFinder = async (area, zone, city, country) => {
+  console.log(process.env.MAPS_API_KEY);
+  const args = {
+    params: {
+      key: process.env.MAPS_API_KEY,
+      address: `${area}, ${zone}, ${city}, ${country}`,
+    },
+  };
+  try {
+    const gcResponse = await client.geocode(args);
+    const userLocation = gcResponse.data.results[0].geometry.location;
+    return userLocation;
+
+    // return result.data.results[0].geometry.location
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const address = {
+  area: 'Manik Mia Aveneu',
+  zone: 'Farmgate',
+  city: 'Dhaka',
+  country: 'Bangladesh',
 };
 
 function findDistance(pointA, pointB) {
@@ -14,16 +38,24 @@ function findDistance(pointA, pointB) {
   );
 }
 
-function findClosestStudio(point) {
+async function findClosestStudio(address) {
+  const { area, zone, city, country } = address;
+  const coordinates = await userLocationFinder(area, zone, city, country);
+  const point = { coordinates };
+  console.log(point);
   const distances = studioData.map((studio) => {
     const distance = findDistance(point, studio);
     return { ...studio, distance };
   });
-
   const result = distances.reduce((closest, studio) =>
     studio.distance < closest.distance ? studio : closest
   );
   return result;
 }
 
-console.log(findClosestStudio(point));
+async function test() {
+  const result = await findClosestStudio(address);
+  console.log(result);
+}
+
+test();
