@@ -30,11 +30,6 @@ router.get(
   orderController.getOrderById
 );
 router.get(
-  '/order/:status',
-  authMiddleware.lab,
-  orderController.getOrdersbyStatus
-);
-router.get(
   '/orderbyCustomer/',
   authMiddleware.customer,
   orderController.getOrderByCustomerId
@@ -54,6 +49,11 @@ router.delete(
   '/order/unpaid',
   authMiddleware.customer,
   orderController.cleanUnpaidOrders
+);
+router.get(
+  '/order/:status',
+  authMiddleware.lab,
+  orderController.getOrdersbyStatus
 );
 //Keep these under /order/paid
 router.post('/order', authMiddleware.customer, orderController.createOrder);
