@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" class="example-toolbar">
+<mat-toolbar color="primary" class="">
   <button mat-icon-button (click)="isExpanded = !isExpanded">
     <mat-icon>menu</mat-icon>
   </button>
@@ -21,9 +21,17 @@
         </span>
         <!-- <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon> -->
       </mat-list-item>
+      <mat-list-item class="parent" routerLink="/retakeOrders">
+        <mat-icon mat-list-icon>assignment_return</mat-icon>
+        <span class="full-width" *ngIf="isExpanded || isShowing">
+          Pending Retake
+        </span>
+      </mat-list-item>
       <mat-list-item class="parent" routerLink="/orders">
         <mat-icon mat-list-icon>assignment</mat-icon>
-        <span class="full-width" *ngIf="isExpanded || isShowing"> Orders </span>
+        <span class="full-width" *ngIf="isExpanded || isShowing">
+          Current Orders
+        </span>
       </mat-list-item>
       <mat-list-item class="parent" routerLink="/printing">
         <mat-icon mat-list-icon>print</mat-icon>
@@ -38,7 +46,6 @@
         </span>
       </mat-list-item>
     </mat-nav-list>
-    <mat-nav-list> </mat-nav-list>
   </mat-sidenav>
 
   <div class="example-sidenav-content">
@@ -83,7 +90,13 @@
         <ng-container matColumnDef="button">
           <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
           <td mat-cell *matCellDef="let row">
-            <button mat-raised-button color="primary">View Details</button>
+            <button
+              [routerLink]="['/order', row._id]"
+              mat-raised-button
+              color="primary"
+            >
+              View Details
+            </button>
           </td>
         </ng-container>
 

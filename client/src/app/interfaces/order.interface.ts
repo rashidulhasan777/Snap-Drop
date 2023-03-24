@@ -3,6 +3,7 @@ import { ImageInterface } from './image.interface';
 import { Price } from './price.interface';
 
 export interface Order {
+  _id?: string;
   labId: string;
   customerId?: string;
   parcelId?: string;

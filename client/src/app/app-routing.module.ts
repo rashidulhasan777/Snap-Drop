@@ -16,6 +16,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { UserAddressComponent } from './components/user-address/user-address.component';
 import { OrderDoneComponent } from './components/order-done/order-done.component';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
+import { OrderDetailsComponent } from './components/lab-components/order-details/order-details.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'order_summary', component: OrderSummaryComponent },
   { path: 'order_done', component: OrderDoneComponent },
   { path: 'user_address', component: UserAddressComponent },
+  { path: 'order/:id', component: OrderDetailsComponent },
   { path: '', pathMatch: 'full', component: AppComponent },
 ];
 
