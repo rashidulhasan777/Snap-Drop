@@ -34,6 +34,22 @@ export class OrderService {
       },
     });
   }
+  setOrderPaid(): Observable<Order> {
+    return this.http.put<Order>(this.baseUrl + '/paid', '', {
+      headers: {
+        Authorization: `Bearer ${this.jwtToken}`,
+      },
+    });
+  }
+
+  cleanUnpaidOrders(): Observable<void> {
+    return this.http.delete<void>(this.baseUrl + '/unpaid', {
+      headers: {
+        Authorization: `Bearer ${this.jwtToken}`,
+      },
+    });
+  }
+
   private get jwtToken() {
     return localStorage.getItem('userAccessToken');
   }

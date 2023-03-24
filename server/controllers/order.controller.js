@@ -85,6 +85,34 @@ const getOrderByLabId = async (req, res) => {
     res.send(error);
   }
 };
+const setOrderPaid = async (req, res) => {
+  try {
+    const latestOrder = await Order.findOneAndUpdate(
+      {
+        paid: false,
+        customerId: req.currentUser._id,
+      },
+      { $set: { paid: true } },
+      { new: true }
+    );
+    res.status(201).send(latestOrder);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ errorMessage: 'Something went wrong' });
+  }
+};
+const cleanUnpaidOrders = async (req, res) => {
+  try {
+    await Order.deleteMany({
+      paid: false,
+      customerId: req.currentUser._id,
+    });
+    res.sendStatus(204);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ errorMessage: 'Something went wrong' });
+  }
+};
 
 module.exports = {
   getAllOrders,
@@ -94,4 +122,6 @@ module.exports = {
   getOrderByCustomerId,
   getOrderByLabId,
   getOrdersbyStatus,
+  setOrderPaid,
+  cleanUnpaidOrders,
 };

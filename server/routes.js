@@ -44,6 +44,18 @@ router.get(
   authMiddleware.lab,
   orderController.getOrderByLabId
 );
+//These two routes needs to be before /order/:id to match
+router.put(
+  '/order/paid',
+  authMiddleware.customer,
+  orderController.setOrderPaid
+);
+router.delete(
+  '/order/unpaid',
+  authMiddleware.customer,
+  orderController.cleanUnpaidOrders
+);
+//Keep these under /order/paid
 router.post('/order', authMiddleware.customer, orderController.createOrder);
 router.put('/order/:id', authMiddleware.lab, orderController.changeOrderStatus);
 

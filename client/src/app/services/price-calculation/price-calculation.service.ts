@@ -48,8 +48,8 @@ export class PriceCalculationService {
     let total = 0;
     for (let picture of imageList) {
       total +=
-        this.picturePrices.find((el) => el.size === picture.photoSize)
-          ?.unitPrice || 0 * picture.copies;
+        (this.picturePrices.find((el) => el.size === picture.photoSize)
+          ?.unitPrice || 0) * picture.copies;
     }
     return total;
   }

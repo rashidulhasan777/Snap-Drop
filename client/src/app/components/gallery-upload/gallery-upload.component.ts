@@ -20,7 +20,7 @@ export class GalleryUploadComponent {
     size: ['4R', Validators.required],
     copies: [1, Validators.required],
   });
-  formatOptions: string[] = ['4R', '6R', '8R', '100R'];
+  formatOptions: string[] = ['4R', '6R', '8R', '10R'];
   filteredFormatOptions?: Observable<string[]>;
 
   constructor(

@@ -23,5 +23,8 @@ export class OrderDoneComponent {
     private priceCalcultor: PriceCalculationService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.orderService.setOrderPaid().subscribe();
+    this.cartService.clearCart().subscribe();
+  }
 }

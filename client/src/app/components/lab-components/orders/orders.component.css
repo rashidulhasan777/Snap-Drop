@@ -10,7 +10,7 @@ th.mat-sort-header-sorted {
   height: 90vh;
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
-.example-toolbar{
+.example-toolbar {
   height: 10vh;
 }
 .example-sidenav-content {
@@ -22,7 +22,7 @@ th.mat-sort-header-sorted {
   /* justify-content: center; */
 }
 .example-sidenav {
-   user-select: none;
+  user-select: none;
 }
 .full-width {
   width: 100%;
@@ -43,4 +43,10 @@ th.mat-sort-header-sorted {
 }
 .submenu.expanded {
   transform: scaleY(1);
+}
+
+.parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

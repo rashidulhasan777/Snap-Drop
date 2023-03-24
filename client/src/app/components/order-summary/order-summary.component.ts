@@ -47,19 +47,21 @@ export class OrderSummaryComponent {
   initiatePayment() {
     this.cartService.getCart().subscribe({
       next: (res) => {
+        let pending = false;
+        if (res.passportPictures && res.passportPictures.length) pending = true;
         const order: Order = {
           labId: 'sss', //Needs to change
           totalPrice: this.priceCalculator.calculateAllPrices(res),
           passportPictures: res.passportPictures,
           galleryPictures: res.galleryPictures,
+          orderStatus: pending ? 'pending' : 'approved',
           instruction: this.instruction || '',
         };
-        this.orderService.createOrder(order).subscribe((res) => {
-          this.CompletedOrder = res;
-          this.router.navigate(['order_done']);
-          setTimeout(() => {
-            this.cartService.clearCart().subscribe();
-          }, 5000);
+        this.orderService.cleanUnpaidOrders().subscribe(() => {
+          this.orderService.createOrder(order).subscribe((res) => {
+            this.CompletedOrder = res;
+            this.router.navigate(['order_done']);
+          });
         });
       },
     });

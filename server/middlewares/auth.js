@@ -35,10 +35,12 @@ const authenticated = async (req, res, next) => {
 const customer = async (req, res, next) => {
   try {
     await checkAuthentication(req, res);
-    if (!req.currentUser || req.currentUser.typeOfUser !== 'customer')
+    if (!req.currentUser || req.currentUser.typeOfUser !== 'customer') {
+      console.log(req.currentUser);
       res.status(401).send({ errorMessage: 'Unauthorized Request' });
-    else next();
+    } else next();
   } catch (error) {
+    console.log(error);
     res.status(500).send({ errorMessage: 'Something went wrong' });
   }
 };
@@ -50,6 +52,7 @@ const lab = async (req, res, next) => {
       res.status(401).send({ errorMessage: 'Unauthorized Request' });
     else next();
   } catch (error) {
+    console.log(error);
     res.status(500).send({ errorMessage: 'Something went wrong' });
   }
 };
