@@ -1,2 +1,2 @@
-<app-user-navbar></app-user-navbar>
+<app-user-navbar *ngIf="role === 'customer'"></app-user-navbar>
 <router-outlet></router-outlet>

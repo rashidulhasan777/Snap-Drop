@@ -53,8 +53,18 @@ export class AuthenticationService {
     return true;
   }
 
+  userRole(): Observable<{ role: string }> {
+    return this.http.get<{ role: string }>(this.baseUrl + '/userType', {
+      headers: {
+        Authorization: `Bearer ${this.jwtToken}`,
+      },
+    });
+  }
+  private get jwtToken() {
+    return localStorage.getItem('userAccessToken');
+  }
   logout() {
     localStorage.clear();
-    this.router.navigate(['login']);
+    this.router.navigate(['login']).then(() => window.location.reload());
   }
 }

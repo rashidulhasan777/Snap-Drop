@@ -17,25 +17,72 @@ import { UserAddressComponent } from './components/user-address/user-address.com
 import { OrderDoneComponent } from './components/order-done/order-done.component';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { OrderDetailsComponent } from './components/lab-components/order-details/order-details.component';
+import { AuthGuardGuard } from './auth-guard.guard';
+import { RoleguardUserGuard } from './roleguard-user.guard';
+import { RoleguardLabGuard } from './roleguard-lab.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'oauth_google', component: GoogleLoginComponent },
   { path: 'oauth_fb', component: FacebookLoginComponent },
-  { path: 'user_dashboard', component: UserDashboardComponent },
-  { path: 'gallery_upload', component: GalleryUploadComponent },
-  { path: 'pendingApproval', component: PendingDashboardComponent },
-  { path: 'dialogApproval', component: DialogApprovalComponent },
-  { path: 'orders', component: OrdersComponent },
-  { path: 'printing', component: PrintingComponent },
-  { path: 'archive', component: ArchiveComponent },
-  { path: 'cart', component: CartComponent },
-  { path: 'order_summary', component: OrderSummaryComponent },
-  { path: 'order_done', component: OrderDoneComponent },
-  { path: 'user_address', component: UserAddressComponent },
+  {
+    path: 'user_dashboard',
+    component: UserDashboardComponent,
+    canActivate: [AuthGuardGuard, RoleguardUserGuard],
+  },
+  {
+    path: 'gallery_upload',
+    component: GalleryUploadComponent,
+    canActivate: [AuthGuardGuard, RoleguardUserGuard],
+  },
+  {
+    path: 'pendingApproval',
+    component: PendingDashboardComponent,
+    canActivate: [AuthGuardGuard, RoleguardLabGuard],
+  },
+  {
+    path: 'dialogApproval',
+    component: DialogApprovalComponent,
+    canActivate: [AuthGuardGuard, RoleguardLabGuard],
+  },
+  {
+    path: 'orders',
+    component: OrdersComponent,
+    canActivate: [AuthGuardGuard, RoleguardLabGuard],
+  },
+  {
+    path: 'printing',
+    component: PrintingComponent,
+    canActivate: [AuthGuardGuard, RoleguardLabGuard],
+  },
+  {
+    path: 'archive',
+    component: ArchiveComponent,
+    canActivate: [AuthGuardGuard, RoleguardLabGuard],
+  },
+  {
+    path: 'cart',
+    component: CartComponent,
+    canActivate: [AuthGuardGuard, RoleguardUserGuard],
+  },
+  {
+    path: 'order_summary',
+    component: OrderSummaryComponent,
+    canActivate: [AuthGuardGuard, RoleguardUserGuard],
+  },
+  {
+    path: 'order_done',
+    component: OrderDoneComponent,
+    canActivate: [AuthGuardGuard, RoleguardUserGuard],
+  },
+  {
+    path: 'user_address',
+    component: UserAddressComponent,
+    canActivate: [AuthGuardGuard, RoleguardUserGuard],
+  },
   { path: 'order/:id', component: OrderDetailsComponent },
-  { path: '', pathMatch: 'full', component: AppComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'login' },
 ];
 
 @NgModule({
