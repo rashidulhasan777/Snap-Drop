@@ -24,7 +24,6 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   const { email, password } = req.body;
-  console.log(req.body);
   try {
     const user = await User.findOne({ email });
     if (!user) {
@@ -63,4 +62,7 @@ const updateUser = async (req, res) => {
   }
 };
 
-module.exports = { register, login, getUserDetails, updateUser };
+const getUserRole = async (req, res, next) => {
+  res.status(200).send({ role: req.currentUser.typeOfUser });
+};
+module.exports = { register, login, getUserDetails, updateUser, getUserRole };

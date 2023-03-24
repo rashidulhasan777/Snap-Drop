@@ -17,6 +17,11 @@ router.get(
   authMiddleware.authenticated,
   userController.getUserDetails
 );
+router.get(
+  '/userType',
+  authMiddleware.authenticated,
+  userController.getUserRole
+);
 router.put('/user', authMiddleware.authenticated, userController.updateUser);
 
 //Oauth Routes
