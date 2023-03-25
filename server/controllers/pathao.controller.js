@@ -85,7 +85,7 @@ const createOrder = async (req, res, next) => {
   const { pathaoToken } = req.body;
   try {
     const store = await axios.post(
-      `${baseUrl}/aladdin/api/v1/stores`,
+      `${baseUrl}/aladdin/api/v1/orders`,
       req.body, 
       {
         headers: {
@@ -95,12 +95,12 @@ const createOrder = async (req, res, next) => {
         },
       }
     );
-    res.status(200).send(store);
+    res.status(200).send(store.data);
   } catch (err) {
     console.log(err);
     res
       .status(401)
-      .send({ errorMessage: `Cannot create store` });
+      .send({ errorMessage: `Cannot create order` });
   }
 };
 
