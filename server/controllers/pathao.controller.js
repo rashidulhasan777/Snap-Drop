@@ -44,7 +44,6 @@ const pathaoZones = async (req, res, next) => {
         },
       }
     );
-
     // console.log(zones.data.data.data);
     res.status(200).send({ zones: zones.data.data.data });
   } catch (err) {
@@ -80,5 +79,29 @@ const pathaoAreas = async (req, res, next) => {
       .send({ errorMessage: `Cannot get areas by zone_id ${zone_id}` });
   }
 };
+const createOrder = async (req, res, next) => {
+  const baseUrl = 'https://hermes-api.p-stageenv.xyz';
+  console.log(req.body.pathaoToken);
+  const { pathaoToken } = req.body;
+  try {
+    const store = await axios.post(
+      `${baseUrl}/aladdin/api/v1/orders`,
+      req.body, 
+      {
+        headers: {
+          authorization: `Bearer ${pathaoToken}`,
+          accept: 'application/json', 
+          'content-type': 'application/json',
+        },
+      }
+    );
+    res.status(200).send(store.data);
+  } catch (err) {
+    console.log(err);
+    res
+      .status(401)
+      .send({ errorMessage: `Cannot create order` });
+  }
+};
 
-module.exports = { pathaoAccessToken, pathaoZones, pathaoAreas };
+module.exports = { pathaoAccessToken, pathaoZones, pathaoAreas, createOrder };

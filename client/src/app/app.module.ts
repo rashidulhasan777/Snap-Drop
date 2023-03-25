@@ -37,6 +37,7 @@ import { OrderSummaryComponent } from './components/order-summary/order-summary.
 import { OrderDetailsComponent } from './components/lab-components/order-details/order-details.component';
 import { NavAndSidebarComponent } from './components/lab-components/nav-and-sidebar/nav-and-sidebar.component';
 import { RetakeComponent } from './components/retake/retake.component';
+import { RetakeDashboardComponent } from './components/lab-components/retake-dashboard/retake-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { RetakeComponent } from './components/retake/retake.component';
     OrderDetailsComponent,
     NavAndSidebarComponent,
     RetakeComponent,
+    RetakeDashboardComponent,
   ],
   imports: [
     BrowserModule,
