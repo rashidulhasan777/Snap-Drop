@@ -19,13 +19,6 @@ const userLocationFinder = async (area, zone, city, country) => {
   }
 };
 
-const address = {
-  area: 'Manik Mia Aveneu',
-  zone: 'Farmgate',
-  city: 'Dhaka',
-  country: 'Bangladesh',
-};
-
 function findDistance(pointA, pointB) {
   return Math.sqrt(
     Math.pow(pointA.coordinates.lat - pointB.coordinates.lat, 2) +
@@ -33,11 +26,10 @@ function findDistance(pointA, pointB) {
   );
 }
 
-async function findClosestStudio(address) {
-  const { area, zone, city, country } = address;
+async function findClosestStudio(area, zone, city, country) {
   const coordinates = await userLocationFinder(area, zone, city, country);
   const point = { coordinates };
-  console.log(point);
+  // console.log(point);
   const distances = studioData.map((studio) => {
     const distance = findDistance(point, studio);
     return { ...studio, distance };
@@ -47,12 +39,5 @@ async function findClosestStudio(address) {
   );
   return result;
 }
-
-async function test() {
-  const result = await findClosestStudio(address);
-  console.log(result);
-}
-
-test();
 
 module.exports = { findClosestStudio };

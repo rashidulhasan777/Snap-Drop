@@ -95,7 +95,9 @@ export class GalleryUploadComponent {
       allSubscriptions.push(
         this.cloudinary.cloudUpload(
           this.previews[i].data as File,
-          this.previews[i].filename
+          12,
+          2,
+          'passport'
         )
       );
     }

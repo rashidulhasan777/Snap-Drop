@@ -75,7 +75,6 @@ import { RetakeDashboardComponent } from './components/lab-components/retake-das
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialComponentsModule,
-
     FormsModule,
     ReactiveFormsModule,
   ],
