@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { findClosestStudio } = require('../utils/helpers/nearestLabFinder');
 
 const pathaoAccessToken = async (req, res, next) => {
   const baseUrl = 'https://hermes-api.p-stageenv.xyz';
@@ -81,4 +82,20 @@ const pathaoAreas = async (req, res, next) => {
   }
 };
 
-module.exports = { pathaoAccessToken, pathaoZones, pathaoAreas };
+const pathaoFindClosestStudio = async (req, res, next) => {
+  try {
+    const { area, zone, city, country } = req.body;
+    const nearestStudio = await findClosestStudio(area, zone, city, country);
+    res.status(200).send(nearestStudio);
+  } catch (err) {
+    console.log(err);
+    res.status(400).send({ errorMessage: 'Could not find nearest studio' });
+  }
+};
+
+module.exports = {
+  pathaoAccessToken,
+  pathaoZones,
+  pathaoAreas,
+  pathaoFindClosestStudio,
+};
