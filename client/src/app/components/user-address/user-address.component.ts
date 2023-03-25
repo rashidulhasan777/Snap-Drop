@@ -56,14 +56,6 @@ export class UserAddressComponent {
         this.hasPreviousInfo = false;
       }
     });
-    this.pathao.getPathaoAccessToken().subscribe({
-      next: (res) => {
-        localStorage.setItem(
-          'pathaoAccessToken',
-          JSON.stringify(res.pathaoToken)
-        );
-      },
-    });
 
     this.city?.valueChanges.subscribe((cityVal: any) => {
       this.pathao.getPathaoZone(cityVal.city_id).subscribe({

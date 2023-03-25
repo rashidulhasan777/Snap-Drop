@@ -3,6 +3,7 @@ import { OauthService } from './services/oauth/oauth.service';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AuthenticationService } from './services/authentication/authentication.service';
+import { PathaoService } from './services/pathao/pathao.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ export class AppComponent {
   constructor(
     private maticonService: MatIconRegistry,
     private domSanitizer: DomSanitizer,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private pathao: PathaoService
   ) {
     this.maticonService.addSvgIcon(
       'google',
@@ -28,5 +30,13 @@ export class AppComponent {
       )
     );
     this.authService.userRole().subscribe((res) => (this.role = res.role));
+    this.pathao.getPathaoAccessToken().subscribe({
+      next: (res) => {
+        localStorage.setItem(
+          'pathaoAccessToken',
+          JSON.stringify(res.pathaoToken)
+        );
+      },
+    });
   }
 }
