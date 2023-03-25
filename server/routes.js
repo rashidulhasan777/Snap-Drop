@@ -64,6 +64,7 @@ router.get(
 //Keep these under /order/paid
 router.post('/order', authMiddleware.customer, orderController.createOrder);
 router.put('/order/:id', authMiddleware.lab, orderController.changeOrderStatus);
+router.put('/orderUpdate/:id', authMiddleware.lab, orderController.updatePassport);
 
 //Cart Routes
 router.put('/cart', authMiddleware.customer, cartController.updateUserCart);
@@ -74,6 +75,7 @@ router.delete('/cart', authMiddleware.customer, cartController.clearCart);
 router.get('/pathao/accessToken', pathaoController.pathaoAccessToken);
 router.post('/pathao/zones', pathaoController.pathaoZones);
 router.post('/pathao/areas', pathaoController.pathaoAreas);
+router.post('/pathao/order', pathaoController.createOrder);
 
 //SSLcommerz Routes
 router.get('/payment/:order_id/:amount', SslCommerzController.initPayment);

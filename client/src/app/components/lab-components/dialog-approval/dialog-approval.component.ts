@@ -7,6 +7,7 @@ import {
 import { DialogDeclineInstructionComponent } from '../dialog-decline-instruction/dialog-decline-instruction.component';
 import { PendingDashboardComponent } from '../pending-dashboard/pending-dashboard.component';
 import { Router } from '@angular/router';
+import { OrderService } from 'src/app/services/orders/order.service';
 
 export interface DialogData {
   animal: string;
@@ -25,6 +26,7 @@ export class DialogApprovalComponent {
     public dialog: MatDialog,
     private router: Router,
     public dialogRef: MatDialogRef<PendingDashboardComponent>,
+    private orderService : OrderService,
     @Inject(MAT_DIALOG_DATA) public data: MatDialogRef<PendingDashboardComponent>
   ) {}
 

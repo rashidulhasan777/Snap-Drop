@@ -114,6 +114,21 @@ const cleanUnpaidOrders = async (req, res) => {
   }
 };
 
+const updatePassport = async (req, res) => {
+  const orderId = req.params.id;
+  const filter = { _id: orderId };
+  const update = { $set: { passportPictures: req.body } };
+  try {
+    const order = await Order.findOneAndUpdate(filter, update, {
+      new: true,
+    });
+    res.status(201).send(order);
+  } catch (error) {
+    res.status(500).send({ errorMessage: 'Something went wrong' });
+    console.log(error);
+  }
+};
+
 module.exports = {
   getAllOrders,
   createOrder,
@@ -124,4 +139,5 @@ module.exports = {
   getOrdersbyStatus,
   setOrderPaid,
   cleanUnpaidOrders,
+  updatePassport
 };
