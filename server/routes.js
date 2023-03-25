@@ -94,6 +94,7 @@ router.post('/payment-cancel', SslCommerzController.cancel);
 router.post('/payment-ipn', SslCommerzController.ipn);
 // router.get('/validate', SslCommerzController.validate);
 router.post('/pathao/closest-studio', pathaoController.pathaoFindClosestStudio);
+router.post('/pathao/price-calculation', pathaoController.patahaoPriceCalc);
 
 //Internal Route for lab
 router.post('/lab', labController.createLab);
