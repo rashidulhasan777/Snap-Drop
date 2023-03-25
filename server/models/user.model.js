@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
     type: detailsSchema,
   },
   labId: {
-    type: String,
+    type: Number,
   },
 });
 
