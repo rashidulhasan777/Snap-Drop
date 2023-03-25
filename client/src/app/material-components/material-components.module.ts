@@ -15,6 +15,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
 
 const MatComponents = [
@@ -33,6 +34,7 @@ const MatComponents = [
   MatListModule,
   MatDialogModule,
   MatSelectModule,
+  MatButtonToggleModule,
   MatStepperModule,
 ];
 
