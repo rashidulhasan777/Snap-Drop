@@ -68,6 +68,9 @@
           <mat-error *ngIf="address?.errors?.['required']"
             >Address is required</mat-error
           >
+          <mat-error *ngIf="address?.errors?.['minlength']"
+            >Too short. Address should be at least 10 character long</mat-error
+          >
         </mat-form-field>
       </div>
       <div>
