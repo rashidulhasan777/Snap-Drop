@@ -18,6 +18,7 @@ import { DialogApprovalComponent } from '../dialog-approval/dialog-approval.comp
 
 import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from './../../../interfaces/order.interface';
+import { PathaoService } from 'src/app/services/pathao/pathao.service';
 
 @Component({
   selector: 'app-printing',
@@ -38,13 +39,17 @@ export class PrintingComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public dialog: MatDialog, private orderService: OrderService) {}
+  constructor(
+    public dialog: MatDialog,
+    private orderService: OrderService,
+    private pathaoService: PathaoService
+  ) {}
 
   ngOnInit() {
     const orders = this.orderService
       .getOrdersbyStatus('printing')
       .subscribe((response) => {
-        console.log(response);
+        // console.log(response);
         this.orders = response;
         this.dataSource = new MatTableDataSource(this.orders);
       });
@@ -60,8 +65,14 @@ export class PrintingComponent implements AfterViewInit, OnInit {
     const updatedBody = this.orderService
       .changeOrderStatus(id, body)
       .subscribe((response) => {
-        console.log(response);
+        //console.log(response);
         this.ngOnInit();
+      });
+
+    const pathaoOrder = this.pathaoService
+      .createOrder(id)
+      .subscribe((response) => {
+        console.log(response);
       });
   }
 
