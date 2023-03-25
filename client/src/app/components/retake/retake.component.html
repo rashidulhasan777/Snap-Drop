@@ -1,1 +1,11 @@
-<p>retake works!</p>
+<div class="retakeImageContainer">
+  <div *ngFor="let image of passportPicturesToRetake">
+    <img [src]="image.imageURL" class="imageToRetake" />
+    <div class="professionalInstructions">
+      <b>Professional instructions:</b> {{ image.instructionsForRetake || " " }}
+    </div>
+    <button mat-stroked-button (click)="retake(image._id || '')">
+      <mat-icon>camera</mat-icon>Retake Picture
+    </button>
+  </div>
+</div>

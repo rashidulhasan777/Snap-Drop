@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-nav-and-sidebar',
@@ -10,6 +11,7 @@ export class NavAndSidebarComponent {
   @ViewChild('sidenav') sidenav!: MatSidenav;
   isExpanded = true;
   isShowing = false;
+  constructor(private authService: AuthenticationService) {}
   mouseenter() {
     if (!this.isExpanded) {
       this.isShowing = true;
@@ -20,5 +22,9 @@ export class NavAndSidebarComponent {
     if (!this.isExpanded) {
       this.isShowing = false;
     }
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

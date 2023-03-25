@@ -22,6 +22,7 @@ import { RoleguardUserGuard } from './roleguard-user.guard';
 import { RoleguardLabGuard } from './roleguard-lab.guard';
 import { RetakeComponent } from './components/retake/retake.component';
 import { RetakeDashboardComponent } from './components/lab-components/retake-dashboard/retake-dashboard.component';
+import { PassportPhotoInstructionsComponent } from './components/passport-photo-instructions/passport-photo-instructions.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -93,7 +94,16 @@ const routes: Routes = [
     component: RetakeComponent,
     canActivate: [AuthGuardGuard, RoleguardUserGuard],
   },
-  { path: 'order/:id', component: OrderDetailsComponent },
+  {
+    path: 'order/:id',
+    component: OrderDetailsComponent,
+    canActivate: [AuthGuardGuard, RoleguardLabGuard],
+  },
+  {
+    path: 'passport_photo_instructions',
+    component: PassportPhotoInstructionsComponent,
+    canActivate: [AuthGuardGuard, RoleguardUserGuard],
+  },
   { path: '', pathMatch: 'full', redirectTo: 'login' },
 ];
 

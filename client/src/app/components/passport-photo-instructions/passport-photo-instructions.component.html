@@ -1,0 +1,48 @@
+<div class="instructions-submit-container">
+  <mat-stepper #stepper class="instructions">
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-lottie [options]="bulbOptions"></ng-lottie>
+        <h1>Lighting and Background</h1>
+        <p>
+          Position the lamps directly in front of you to eliminate shadows on
+          your face. Find a pale, even-toned wall without any objects for
+          optimal results.
+        </p>
+        <div class="btn-container-bottom">
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-lottie [options]="attireOptions"></ng-lottie>
+        <h1>Proper Outfit</h1>
+        <p>
+          Opt for professional attire such as office-style shirts, sweaters, or
+          dresses. Choose garments with higher necklines to ensure they are
+          visible in the final cropped photo.
+        </p>
+        <div class="btn-container-bottom">
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-lottie [options]="captureOptions"></ng-lottie>
+        <h1>Posing</h1>
+        <p>
+          Pose naturally, reflecting your everyday appearance. Maintain a
+          neutral expression or natural smile, and keep your eyes open. Face the
+          camera directly with your full face visible.
+        </p>
+        <div class="btn-container-bottom">
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button>Done</button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-stepper>
+</div>

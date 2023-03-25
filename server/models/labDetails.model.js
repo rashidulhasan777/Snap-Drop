@@ -5,8 +5,20 @@ const labDetailsSchema = new mongoose.Schema({
   labName: {
     type: String,
   },
+  labId: {
+    type: Number,
+    required: true
+  },
   labDetails: {
     type: detailsSchema,
+    required: true,
+  },
+  lat: {
+    type: Number,
+    required: true,
+  },
+  long: {
+    type: Number,
     required: true,
   },
 });

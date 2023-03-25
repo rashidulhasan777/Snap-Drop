@@ -12,7 +12,8 @@ const priceSchema = new mongoose.Schema({
 const OrderSchema = new mongoose.Schema(
   {
     labId: {
-      type: String, //!depends on redx
+      type: Number,
+      required: true,
     },
     customerId: {
       type: String,

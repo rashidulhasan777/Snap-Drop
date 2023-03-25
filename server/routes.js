@@ -36,6 +36,11 @@ router.get(
   orderController.getOrderById
 );
 router.get(
+  '/order/latestOrder',
+  authMiddleware.customer,
+  orderController.getUserLastOrder
+);
+router.get(
   '/orderbyCustomer/',
   authMiddleware.customer,
   orderController.getOrderByCustomerId
@@ -79,7 +84,7 @@ router.delete('/cart', authMiddleware.customer, cartController.clearCart);
 router.get('/pathao/accessToken', pathaoController.pathaoAccessToken);
 router.post('/pathao/zones', pathaoController.pathaoZones);
 router.post('/pathao/areas', pathaoController.pathaoAreas);
-router.post('/pathao/order', pathaoController.createOrder);
+// router.post('/pathao/order', pathaoController.createOrder);
 
 //SSLcommerz Routes
 router.get('/payment/:order_id/:amount', SslCommerzController.initPayment);
@@ -88,6 +93,8 @@ router.post('/payment-failure', SslCommerzController.failure);
 router.post('/payment-cancel', SslCommerzController.cancel);
 router.post('/payment-ipn', SslCommerzController.ipn);
 // router.get('/validate', SslCommerzController.validate);
+router.post('/pathao/closest-studio', pathaoController.pathaoFindClosestStudio);
+router.post('/pathao/price-calculation', pathaoController.patahaoPriceCalc);
 
 //Internal Route for lab
 router.post('/lab', labController.createLab);

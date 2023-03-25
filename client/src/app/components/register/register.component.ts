@@ -26,7 +26,16 @@ export class RegisterComponent {
     private router: Router
   ) {}
   ngOnInit() {
-    if (this.authService.isLoggedIn()) this.router.navigate(['user_dashboard']);
+    if (this.authService.isLoggedIn()) {
+      this.authService.userRole().subscribe((res) => {
+        if (res.role === 'customer')
+          this.router
+            .navigate(['user_dashboard'])
+            .then(() => window.location.reload());
+        else if (res.role === 'lab') this.router.navigate(['pendingApproval']);
+        else this.authService.logout();
+      });
+    }
   }
 
   registerForm = this.formBuilder.group(
@@ -70,7 +79,15 @@ export class RegisterComponent {
           .subscribe({
             next: (response) => {
               localStorage.setItem('userAccessToken', response.access_token);
-              this.router.navigate(['user_dashboard']);
+              this.authService.userRole().subscribe((res) => {
+                if (res.role === 'customer')
+                  this.router
+                    .navigate(['user_dashboard'])
+                    .then(() => window.location.reload());
+                else if (res.role === 'lab')
+                  this.router.navigate(['pendingApproval']);
+                else this.authService.logout();
+              });
             },
             error: (response) => {
               this.errorMessage = response.error.errorMessage;

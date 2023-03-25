@@ -65,6 +65,21 @@ export class OrderService {
     });
   }
 
+  getCustomerOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(this.baseUrl + 'byCustomer', {
+      headers: {
+        Authorization: `Bearer ${this.jwtToken}`,
+      },
+    });
+  }
+  getCustomerLatestOrder(): Observable<Order> {
+    return this.http.get<Order>(this.baseUrl + '/latestOrder', {
+      headers: {
+        Authorization: `Bearer ${this.jwtToken}`,
+      },
+    });
+  }
+
   private get jwtToken() {
     return localStorage.getItem('userAccessToken');
   }

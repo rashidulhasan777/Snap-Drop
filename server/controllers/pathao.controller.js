@@ -1,6 +1,7 @@
 const axios = require('axios');
 const Order = require('./../models/order.model');
 const User = require('./../models/user.model');
+const { findClosestStudio } = require('../utils/helpers/nearestLabFinder');
 
 const pathaoAccessToken = async (req, res, next) => {
   const baseUrl = 'https://hermes-api.p-stageenv.xyz';
@@ -115,7 +116,7 @@ const createOrder = async (req, res, next) => {
       {
         headers: {
           authorization: `Bearer ${pathaoToken}`,
-          accept: 'application/json', 
+          accept: 'application/json',
           'content-type': 'application/json',
         },
       }
@@ -124,10 +125,61 @@ const createOrder = async (req, res, next) => {
     res.status(200).send(store.data);
   } catch (err) {
     console.log(err.response.data);
-    res
-      .status(401)
-      .send({ errorMessage: err });
+    res.status(401).send({ errorMessage: `Cannot create order` });
   }
 };
 
-module.exports = { pathaoAccessToken, pathaoZones, pathaoAreas, createOrder };
+const pathaoFindClosestStudio = async (req, res, next) => {
+  try {
+    const { area, zone, city, country } = req.body;
+    const nearestStudio = await findClosestStudio(area, zone, city, country);
+    res.status(200).send(nearestStudio);
+  } catch (err) {
+    console.log(err);
+    res.status(400).send({ errorMessage: 'Could not find nearest studio' });
+  }
+};
+
+const patahaoPriceCalc = async (req, res, next) => {
+  try {
+    // console.log(req.body);
+    const {
+      store_id,
+      item_type,
+      delivery_type,
+      item_weight,
+      recipient_city,
+      recipient_zone,
+      pathaoToken,
+    } = req.body;
+    const priceEstimateData = await axios.post(
+      'https://hermes-api.p-stageenv.xyz/aladdin/api/v1/merchant/price-plan',
+      {
+        store_id,
+        item_type,
+        delivery_type,
+        item_weight,
+        recipient_city,
+        recipient_zone,
+      },
+      {
+        headers: {
+          authorization: `Bearer ${pathaoToken}`,
+          accept: 'application/json',
+          'content-type': 'application/json',
+        },
+      }
+    );
+    res.status(201).send({ priceEstimateData: priceEstimateData.data.data });
+  } catch (err) {
+    console.log(err);
+    res.status(400).send({ errorMessage: "Can't get price estimate" });
+  }
+};
+module.exports = {
+  pathaoAccessToken,
+  pathaoZones,
+  pathaoAreas,
+  pathaoFindClosestStudio,
+  patahaoPriceCalc,
+};
