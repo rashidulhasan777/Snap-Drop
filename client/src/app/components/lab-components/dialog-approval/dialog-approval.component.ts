@@ -51,19 +51,23 @@ export class DialogApprovalComponent {
 
   onApprove() {
     if (this.nextImageText === 'Done') {
+      let status = 'pending';
       if (this.passportImages.some((el) => el.approved === false)) {
-        this.orderService
-          .updateOrder(this.data._id || '', this.passportImages)
-          .subscribe(() => {
-            this.orderService
-              .changeOrderStatus(this.data._id || '', {
-                orderStatus: 'retake_needed',
-              })
-              .subscribe((res) => {
-                window.location.reload();
-              });
-          });
+        status = 'retake_needed';
+      } else {
+        status = 'approved';
       }
+      this.orderService
+        .updateOrder(this.data._id || '', this.passportImages)
+        .subscribe(() => {
+          this.orderService
+            .changeOrderStatus(this.data._id || '', {
+              orderStatus: status,
+            })
+            .subscribe((res) => {
+              window.location.reload();
+            });
+        });
     } else if (this.currentFormIsValid) {
       this.passportImages[this.currentIndex] = {
         ...this.passportImages[this.currentIndex],

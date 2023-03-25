@@ -129,6 +129,20 @@ const updatePassport = async (req, res) => {
   }
 };
 
+const getUserLastOrder = async (req, res) => {
+  try {
+    const latestOrder = await Order.find({
+      customerId: req.currentUser._id,
+    })
+      .sort({ createdAt: -1 })
+      .limit(1);
+    res.status(200).send(latestOrder[0]);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ errorMessage: 'Something went wrong.' });
+  }
+};
+
 module.exports = {
   getAllOrders,
   createOrder,
@@ -139,5 +153,6 @@ module.exports = {
   getOrdersbyStatus,
   setOrderPaid,
   cleanUnpaidOrders,
-  updatePassport
+  updatePassport,
+  getUserLastOrder,
 };

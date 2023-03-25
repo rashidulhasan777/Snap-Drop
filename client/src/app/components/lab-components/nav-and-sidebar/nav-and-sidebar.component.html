@@ -3,8 +3,14 @@
     <mat-icon>menu</mat-icon>
   </button>
   <h1 class="example-app-name">Lab Dashboard</h1>
+  <div class="topbarContainer">
+    <button (click)="logout()" mat-raised-button>
+      <mat-icon>logout</mat-icon>
+      Logout
+    </button>
+  </div>
 </mat-toolbar>
-<mat-sidenav-container class="example-container" autosize>
+<mat-sidenav-container class="example-container" >
   <mat-sidenav
     #sidenav
     class="example-sidenav"

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { OrderService } from 'src/app/services/orders/order.service';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -6,6 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./user-dashboard.component.css'],
 })
 export class UserDashboardComponent {
+  constructor(private orderService: OrderService, private router: Router) {}
   // using mock data
   orders: any[] = [
     {
@@ -23,4 +26,13 @@ export class UserDashboardComponent {
       orderType: 'passport',
     },
   ];
+
+  ngOnInit() {
+    this.orderService.getCustomerLatestOrder().subscribe((res) => {
+      console.log(res);
+      if (res.orderStatus === 'retake_needed') {
+        this.router.navigate(['retake']);
+      }
+    });
+  }
 }

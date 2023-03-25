@@ -36,6 +36,11 @@ router.get(
   orderController.getOrderById
 );
 router.get(
+  '/order/latestOrder',
+  authMiddleware.customer,
+  orderController.getUserLastOrder
+);
+router.get(
   '/orderbyCustomer/',
   authMiddleware.customer,
   orderController.getOrderByCustomerId

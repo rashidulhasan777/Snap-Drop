@@ -87,7 +87,11 @@ const routes: Routes = [
     component: RetakeComponent,
     canActivate: [AuthGuardGuard, RoleguardUserGuard],
   },
-  { path: 'order/:id', component: OrderDetailsComponent },
+  {
+    path: 'order/:id',
+    component: OrderDetailsComponent,
+    canActivate: [AuthGuardGuard, RoleguardLabGuard],
+  },
   { path: '', pathMatch: 'full', redirectTo: 'login' },
 ];
 
