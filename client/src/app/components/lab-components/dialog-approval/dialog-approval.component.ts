@@ -4,14 +4,12 @@ import {
   MAT_DIALOG_DATA,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { DialogDeclineInstructionComponent } from '../dialog-decline-instruction/dialog-decline-instruction.component';
 import { PendingDashboardComponent } from '../pending-dashboard/pending-dashboard.component';
 import { Router } from '@angular/router';
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
+import { ImageInterface } from 'src/app/interfaces/image.interface';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { OrderService } from 'src/app/services/orders/order.service';
+import { Order } from 'src/app/interfaces/order.interface';
 
 @Component({
   selector: 'app-dialog-approval',
@@ -19,27 +17,80 @@ export interface DialogData {
   styleUrls: ['./dialog-approval.component.css'],
 })
 export class DialogApprovalComponent {
-  animal: string = '';
-  name: string = '';
+  passportImages: ImageInterface[] = [];
+  currentIndex = 0;
+  currentImage: ImageInterface;
+  imageStatuses = this.formBuiler.array<FormGroup>([]);
+  instructionError = false;
+  nextImageText = 'Next';
   constructor(
-    public dialog: MatDialog,
+    private formBuiler: FormBuilder,
     private router: Router,
+    private orderService: OrderService,
     public dialogRef: MatDialogRef<PendingDashboardComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: MatDialogRef<PendingDashboardComponent>
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public data: Order
+  ) {
+    this.passportImages = data.passportPictures || [];
+    this.currentImage = this.passportImages[0];
+    this.passportImages.forEach((el) => {
+      this.imageStatuses.push(
+        this.formBuiler.group({
+          approved: el.approved,
+          instruction: '',
+        })
+      );
+    });
+    if (this.passportImages.length === 1) this.nextImageText = 'Done';
+    this.imageStatuses.valueChanges.subscribe((val) => {
+      val.forEach((el, idx) => {
+        this.passportImages[idx].approved = el.approved;
+        this.passportImages[idx].instructionsForRetake = el.instruction;
+      });
+    });
+  }
 
   onApprove() {
-    this.router.navigate(['pendingApproval']);
+    if (this.nextImageText === 'Done') {
+      if (this.passportImages.some((el) => el.approved === false)) {
+        this.orderService
+          .updateOrder(this.data._id || '', this.passportImages)
+          .subscribe(() => {
+            this.orderService
+              .changeOrderStatus(this.data._id || '', {
+                orderStatus: 'retake_needed',
+              })
+              .subscribe((res) => {
+                window.location.reload();
+              });
+          });
+      }
+    } else if (this.currentFormIsValid) {
+      this.passportImages[this.currentIndex] = {
+        ...this.passportImages[this.currentIndex],
+        approved: this.currentApprovedFormControl?.value,
+        instructionsForRetake: this.currentInstructionsFormControl?.value,
+      };
+      this.currentIndex++;
+      this.currentImage = this.passportImages[this.currentIndex];
+      if (this.currentIndex + 1 === this.passportImages.length)
+        this.nextImageText = 'Done';
+    }
   }
 
   onNoClick(): void {
-    const dialogRef = this.dialog.open(DialogDeclineInstructionComponent, {
-      data: this.dialogRef,
-    });
+    this.dialogRef.close();
+  }
+  get currentApprovedFormControl() {
+    return this.imageStatuses.at(this.currentIndex).get('approved');
+  }
+  get currentInstructionsFormControl() {
+    return this.imageStatuses.at(this.currentIndex).get('instruction');
+  }
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      this.animal = result;
-    });
+  get currentFormIsValid() {
+    const approved = this.currentApprovedFormControl?.value;
+    const instruction = this.currentInstructionsFormControl?.value;
+    if (approved || instruction) return true;
+    else return false;
   }
 }

@@ -17,6 +17,7 @@ import {
 import { DialogApprovalComponent } from '../dialog-approval/dialog-approval.component';
 import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from './../../../interfaces/order.interface';
+import { ImageInterface } from 'src/app/interfaces/image.interface';
 
 @Component({
   selector: 'app-pending-dashboard',
@@ -25,7 +26,6 @@ import { Order } from './../../../interfaces/order.interface';
 })
 export class PendingDashboardComponent implements AfterViewInit, OnInit {
   orders: Order[] = [];
-  animal: string = '';
   name: string = '';
   opened: boolean = true;
   displayedColumns: string[] = [
@@ -41,14 +41,13 @@ export class PendingDashboardComponent implements AfterViewInit, OnInit {
 
   constructor(public dialog: MatDialog, private orderService: OrderService) {}
 
-  openDialog(): void {
+  openDialog(order: Order): void {
     const dialogRef = this.dialog.open(DialogApprovalComponent, {
-      data: { name: this.name, animal: this.animal },
+      data: order,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
-      this.animal = result;
     });
   }
 

@@ -1,8 +1,36 @@
-<h1 mat-dialog-title>Hi</h1>
-<div mat-dialog-content>
-  <p>Preview Image</p>
+<h1 mat-dialog-title>Images</h1>
+<div mat-dialog-content class="">
+  <div class="dialogContentContainer imagePreviwes">
+    <img [src]="currentImage.imageURL" />
+    <mat-button-toggle-group
+      class="approveDeclineToggle"
+      [formControl]="$any(currentApprovedFormControl)"
+    >
+      <mat-button-toggle class="approve" [value]="true"
+        >Approve</mat-button-toggle
+      >
+      <mat-button-toggle class="decline" [value]="false"
+        >Decline</mat-button-toggle
+      >
+    </mat-button-toggle-group>
+    <mat-form-field *ngIf="!currentApprovedFormControl?.value">
+      <mat-label>Instructions for the user</mat-label>
+      <mat-error *ngIf="instructionError">This field is required</mat-error>
+      <textarea
+        [formControl]="$any(currentInstructionsFormControl)"
+        matInput
+        placeholder="Leave instructions for user how he/she can take a better picture"
+      ></textarea>
+    </mat-form-field>
+  </div>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Decline</button>
-  <button mat-button [mat-dialog-close]="" cdkFocusInitial (click)="onApprove()">Approve</button>
+  <button mat-raised-button color="warn" (click)="onNoClick()">Close</button>
+  <button
+    [disabled]="!currentFormIsValid"
+    mat-stroked-button
+    (click)="onApprove()"
+  >
+    {{ nextImageText }}
+  </button>
 </div>

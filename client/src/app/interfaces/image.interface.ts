@@ -1,4 +1,5 @@
 export interface ImageInterface {
+  _id?: string;
   photoSize: string;
   orgFilename: string;
   apiFilename?: string;
@@ -6,4 +7,5 @@ export interface ImageInterface {
   imageURL: string;
   approved: boolean;
   typeOfImage: 'passport' | 'gallery';
+  instructionsForRetake?: string;
 }

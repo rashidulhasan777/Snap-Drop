@@ -41,7 +41,7 @@
         <ng-container matColumnDef="button">
           <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
           <td mat-cell *matCellDef="let row">
-            <button mat-raised-button color="primary" (click)="openDialog()">
+            <button mat-raised-button color="primary" (click)="openDialog(row)">
               See Full Image
             </button>
           </td>

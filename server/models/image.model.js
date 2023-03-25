@@ -26,6 +26,9 @@ const imageSchema = new mongoose.Schema({
     required: true,
     enum: ['passport', 'gallery'],
   },
+  instructionsForRetake: {
+    type: String,
+  },
 });
 
 module.exports = imageSchema;

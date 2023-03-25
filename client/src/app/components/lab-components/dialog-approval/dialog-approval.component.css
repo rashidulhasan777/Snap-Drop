@@ -1,0 +1,25 @@
+.imagePreviwes {
+  overflow: auto;
+}
+
+.imagePreviwes > img {
+  max-height: 40vh;
+}
+
+.dialogContentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.approveDeclineToggle {
+  max-width: fit-content;
+}
+
+.decline.mat-button-toggle-checked {
+  color: white;
+  background-color: #f44a3e;
+}
+.approve.mat-button-toggle-checked {
+  color: white;
+  background-color: #3abc3c;
+}

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Order } from 'src/app/interfaces/order.interface';
+import { ImageInterface } from 'src/app/interfaces/image.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +29,13 @@ export class OrderService {
 
   changeOrderStatus(id: string, body: { orderStatus: string }) {
     return this.http.put(this.baseUrl + '/' + id, body, {
+      headers: {
+        Authorization: `Bearer ${this.jwtToken}`,
+      },
+    });
+  }
+  updateOrder(id: string, body: ImageInterface[]): Observable<Order> {
+    return this.http.put<Order>(this.baseUrl + '/' + id, body, {
       headers: {
         Authorization: `Bearer ${this.jwtToken}`,
       },
