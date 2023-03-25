@@ -1,8 +1,9 @@
 const axios = require('axios');
 const { findClosestStudio } = require('../utils/helpers/nearestLabFinder');
 
+const baseUrl = process.env.PATHAO_BASE_URL;
+
 const pathaoAccessToken = async (req, res, next) => {
-  const baseUrl = 'https://hermes-api.p-stageenv.xyz';
   const issueBody = {
     client_id: '267',
     client_secret: 'wRcaibZkUdSNz2EI9ZyuXLlNrnAv0TdPUPXMnD39',
@@ -31,7 +32,6 @@ const pathaoAccessToken = async (req, res, next) => {
 };
 
 const pathaoZones = async (req, res, next) => {
-  const baseUrl = 'https://hermes-api.p-stageenv.xyz';
   // console.log(req.body);
   const { pathaoToken, city_id } = req.body;
   try {
@@ -56,7 +56,6 @@ const pathaoZones = async (req, res, next) => {
 };
 
 const pathaoAreas = async (req, res, next) => {
-  const baseUrl = 'https://hermes-api.p-stageenv.xyz';
   // console.log(req.body);
   const { pathaoToken, zone_id } = req.body;
   try {
@@ -81,7 +80,6 @@ const pathaoAreas = async (req, res, next) => {
   }
 };
 const createOrder = async (req, res, next) => {
-  const baseUrl = 'https://hermes-api.p-stageenv.xyz';
   console.log(req.body.pathaoToken);
   const { pathaoToken } = req.body;
   try {
@@ -127,7 +125,7 @@ const patahaoPriceCalc = async (req, res, next) => {
       pathaoToken,
     } = req.body;
     const priceEstimateData = await axios.post(
-      'https://hermes-api.p-stageenv.xyz/aladdin/api/v1/merchant/price-plan',
+      `${baseUrl}/aladdin/api/v1/merchant/price-plan`,
       {
         store_id,
         item_type,
