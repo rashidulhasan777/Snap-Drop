@@ -36,6 +36,7 @@ import { InstructionsDialogComponent } from './components/instructions-dialog/in
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { OrderDetailsComponent } from './components/lab-components/order-details/order-details.component';
 import { NavAndSidebarComponent } from './components/lab-components/nav-and-sidebar/nav-and-sidebar.component';
+import { RetakeComponent } from './components/retake/retake.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { NavAndSidebarComponent } from './components/lab-components/nav-and-side
     OrderSummaryComponent,
     OrderDetailsComponent,
     NavAndSidebarComponent,
+    RetakeComponent,
   ],
   imports: [
     BrowserModule,

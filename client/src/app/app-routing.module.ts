@@ -20,6 +20,7 @@ import { OrderDetailsComponent } from './components/lab-components/order-details
 import { AuthGuardGuard } from './auth-guard.guard';
 import { RoleguardUserGuard } from './roleguard-user.guard';
 import { RoleguardLabGuard } from './roleguard-lab.guard';
+import { RetakeComponent } from './components/retake/retake.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -79,6 +80,11 @@ const routes: Routes = [
   {
     path: 'user_address',
     component: UserAddressComponent,
+    canActivate: [AuthGuardGuard, RoleguardUserGuard],
+  },
+  {
+    path: 'retake',
+    component: RetakeComponent,
     canActivate: [AuthGuardGuard, RoleguardUserGuard],
   },
   { path: 'order/:id', component: OrderDetailsComponent },
