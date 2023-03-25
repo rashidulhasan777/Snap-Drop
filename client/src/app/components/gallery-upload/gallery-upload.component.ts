@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CloudinaryService } from 'src/app/services/cloudinary/cloudinary.service';
 import { map, Observable, startWith, zip } from 'rxjs';
 import { Router } from '@angular/router';
+import { CartService } from 'src/app/services/cart/cart.service';
+import { Cart } from 'src/app/interfaces/cart.interface';
+import { ImageInterface } from 'src/app/interfaces/image.interface';
 
 @Component({
   selector: 'app-gallery-upload',
@@ -17,32 +20,32 @@ export class GalleryUploadComponent {
     size: ['4R', Validators.required],
     copies: [1, Validators.required],
   });
-  formatOptions: string[] = ['4R', '6R', '8R', '100R'];
+  formatOptions: string[] = ['4R', '6R', '8R', '10R'];
   filteredFormatOptions?: Observable<string[]>;
 
   constructor(
     private fb: FormBuilder,
     private cloudinary: CloudinaryService,
-    private router: Router
+    private router: Router,
+    private cartService: CartService
   ) {}
 
   ngOnInit() {
-    const inCart: {
-      imageName: string;
-      copies: number;
-      size: string;
-      remoteURL: string;
-    }[] = JSON.parse(localStorage.getItem('userGalleryPictures') || '[]');
-    inCart.forEach((el) => {
-      this.previews.push({ filename: el.imageName, data: el.remoteURL });
-      this.pictureData.push(
-        this.fb.group({
-          imageName: [el.imageName],
-          copies: [el.copies, Validators.required],
-          size: [el.size, Validators.required],
-          remoteURL: [el.remoteURL],
-        })
-      );
+    let inCart: ImageInterface[] = [];
+    this.cartService.getCart().subscribe((res) => {
+      if (!res) return;
+      inCart = res.galleryPictures || [];
+      inCart.forEach((el) => {
+        this.previews.push({ filename: el.orgFilename, data: el.imageURL });
+        this.pictureData.push(
+          this.fb.group({
+            imageName: [el.orgFilename],
+            copies: [el.copies, Validators.required],
+            size: [el.photoSize, Validators.required],
+            remoteURL: [el.imageURL],
+          })
+        );
+      });
     });
     this.filteredFormatOptions = this.applyToAllForm.controls?.[
       'size'
@@ -104,11 +107,20 @@ export class GalleryUploadComponent {
         });
       },
       complete: () => {
-        localStorage.setItem(
-          'userGalleryPictures',
-          JSON.stringify(this.pictureData.value)
-        );
-        this.router.navigate(['cart']);
+        const cartData: Cart = { galleryPictures: [] };
+        this.pictureData.value.forEach((el) => {
+          cartData.galleryPictures?.push({
+            photoSize: el.size,
+            orgFilename: el.imageName,
+            imageURL: el.remoteURL,
+            copies: el.copies,
+            approved: true,
+            typeOfImage: 'gallery',
+          });
+        });
+        this.cartService.updateCart(cartData).subscribe((res) => {
+          this.router.navigate(['cart']);
+        });
       },
     });
   }

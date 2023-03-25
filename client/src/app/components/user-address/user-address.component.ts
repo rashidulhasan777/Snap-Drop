@@ -1,5 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Details } from 'src/app/interfaces/details.interface';
+import { User } from 'src/app/interfaces/user.interface';
 import { PathaoService } from 'src/app/services/pathao/pathao.service';
 import { UserdataService } from 'src/app/services/userdata.service';
 
@@ -9,7 +12,9 @@ import { UserdataService } from 'src/app/services/userdata.service';
   styleUrls: ['./user-address.component.css'],
 })
 export class UserAddressComponent {
-  @ViewChild('userEmail') emailInput!: ElementRef;
+  hasPreviousInfo: boolean = false;
+  User?: User;
+
   deliveryInfoForm = this.fb.group({
     name: ['', [Validators.required]],
     contact_number: [
@@ -22,32 +27,33 @@ export class UserAddressComponent {
       ],
     ],
     address: ['', [Validators.required]],
-    city: [{ city_id: 0, city_name: '' }, [Validators.required]],
-    zone: [{ zone_id: 0, zone_name: '' }, [Validators.required]],
-    area: [{ area_id: 0, area_name: '' }, [Validators.required]],
+    city: ['', [Validators.required]],
+    zone: ['', [Validators.required]],
+    area: ['', [Validators.required]],
   });
 
   cities: { city_id: number; city_name: string }[] = [
     { city_id: 1, city_name: 'Dhaka' },
     { city_id: 2, city_name: 'Chittagong' },
   ];
-
   zones: { zone_id: number; zone_name: string }[] = [];
   areas: { area_id: number; area_name: string }[] = [];
+
   constructor(
     private fb: FormBuilder,
     private pathao: PathaoService,
-    private userDataService: UserdataService
+    private userDataService: UserdataService,
+    private router: Router
   ) {}
+
   ngOnInit() {
     this.userDataService.getUser().subscribe((res) => {
-      const emailField = this.emailInput.nativeElement as HTMLInputElement;
-      emailField.value = res.email;
+      this.User = res;
       if (res.details) {
-        res.details.contact_number = res.details.contact_number.slice(5);
-        this.deliveryInfoForm.patchValue(res.details);
-      } else if (res.name) {
-        this.name?.setValue(res.name);
+        this.hasPreviousInfo = true;
+      } else {
+        this.name?.setValue(res.name || '');
+        this.hasPreviousInfo = false;
       }
     });
     this.pathao.getPathaoAccessToken().subscribe({
@@ -98,10 +104,17 @@ export class UserAddressComponent {
     if (this.deliveryInfoForm.valid) {
       const details = JSON.parse(JSON.stringify(this.deliveryInfoForm.value));
       details.contact_number = '+880' + details.contact_number;
-      this.userDataService
-        .updateUserData(details)
-        .subscribe((res) => console.log(res));
+      this.userDataService.updateUserData(details).subscribe((res) => {
+        this.router.navigate(['order_summary']);
+      });
       // localStorage.setItem('userDetails', JSON.stringify(details));
     }
+  }
+  changeAdress() {
+    this.hasPreviousInfo = false;
+  }
+
+  continueWithPrevious() {
+    this.router.navigate(['order_summary']);
   }
 }

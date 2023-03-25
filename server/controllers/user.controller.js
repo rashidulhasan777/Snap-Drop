@@ -14,8 +14,8 @@ const register = async (req, res) => {
     const user = { ...req.body, password: hash };
     const newUser = await User.create(user);
     const { _id } = newUser._id;
-    const accessToken = jwt.sign({ _id }, SECRET_KEY);
-    res.status(201).send({ accessToken });
+    const access_token = jwt.sign({ _id }, SECRET_KEY);
+    res.status(201).send({ access_token });
   } catch (error) {
     console.log(error);
     res.status(400).send({ errorMessage: 'Could not create user' });
@@ -28,12 +28,13 @@ const login = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) {
       res.status(401).send({ errorMessage: 'You are not yet registered' });
+      console.log(user);
       return;
     }
     const validatedPass = await bcrypt.compare(password, user.password);
     if (!validatedPass) throw new Error();
-    const accessToken = jwt.sign({ _id: user._id }, SECRET_KEY);
-    res.status(200).send({ accessToken });
+    const access_token = jwt.sign({ _id: user._id }, SECRET_KEY);
+    res.status(200).send({ access_token });
   } catch (error) {
     console.log(error);
     res.status(401).send({ errorMessage: 'Password is incorrect' });
@@ -61,4 +62,7 @@ const updateUser = async (req, res) => {
   }
 };
 
-module.exports = { register, login, getUserDetails, updateUser };
+const getUserRole = async (req, res, next) => {
+  res.status(200).send({ role: req.currentUser.typeOfUser });
+};
+module.exports = { register, login, getUserDetails, updateUser, getUserRole };

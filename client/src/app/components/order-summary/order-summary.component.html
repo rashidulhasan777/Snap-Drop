@@ -1,0 +1,53 @@
+<h2 class="title">Order Summary</h2>
+
+<div *ngIf="Cart && Cart.passportPictures && Cart.passportPictures.length">
+  <div class="priceContainer">
+    <div>x{{ Cart.passportPictures.length }} Passport pictures</div>
+    <div class="price">{{ price.passport }} Taka</div>
+  </div>
+</div>
+<div *ngIf="Cart && Cart.galleryPictures && Cart.galleryPictures.length">
+  <div class="priceContainer">
+    <div>x{{ Cart.galleryPictures.length }} Gallery pictures</div>
+    <div class="price">{{ price.gallery }} Taka</div>
+  </div>
+</div>
+<div class="priceContainer">
+  <div>Shipping</div>
+  <div class="price">{{ price.shipping }} Taka</div>
+</div>
+<mat-divider></mat-divider>
+<div class="priceContainer">
+  <div>Total</div>
+  <div class="price">{{ price.total }} Taka</div>
+</div>
+
+<h3 class="delivaryTitle">To be delivered to:</h3>
+<div class="userDetails">
+  <div class="userName">{{ User?.details?.name | titlecase }}</div>
+  <div><b>Mobile:</b> {{ User?.details?.contact_number }}</div>
+  <div><b>Email:</b> {{ User?.email }}</div>
+  <div>
+    <b>Address:</b> {{ User?.details?.address }},
+    {{ User?.details?.area?.area_name }}, {{ User?.details?.zone?.zone_name }},
+    {{ User?.details?.city?.city_name }}
+  </div>
+</div>
+<div class="instructionWrapper">
+  <mat-form-field class="instructionField" appearance="outline"
+    ><mat-label>Instructions (Optional)</mat-label
+    ><textarea
+      [(ngModel)]="instruction"
+      matInput
+      placeholder="Give specific instuctions"
+    ></textarea>
+  </mat-form-field>
+</div>
+
+<button mat-stroked-button class="payButton" (click)="initiatePayment()">
+  <div class="button_text">
+    <div>Pay</div>
+    <div class="forBorder"></div>
+    <div>{{ price.total }} Taka</div>
+  </div>
+</button>

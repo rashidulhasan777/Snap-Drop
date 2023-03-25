@@ -8,19 +8,19 @@ import { Component } from '@angular/core';
 export class UserDashboardComponent {
   // using mock data
   orders: any[] = [
-    // {
-    //   _id: '123456',
-    //   orderStatus: 'picked up for Delivery',
-    //   orderDate: new Date('March 17, 2023 03:24:00'),
-    //   pictures: [
-    //     {
-    //       photoSize: '',
-    //       copies: 4,
-    //       imageURL:
-    //         'https://imglarger.com/Images/before-after/ai-image-enlarger-1-after-2.jpg',
-    //     },
-    //   ],
-    //   orderType: 'passport',
-    // },
+    {
+      _id: '123456',
+      orderStatus: 'picked up for Delivery',
+      orderDate: new Date('March 17, 2023 03:24:00'),
+      pictures: [
+        {
+          photoSize: '',
+          copies: 4,
+          imageURL:
+            'https://imglarger.com/Images/before-after/ai-image-enlarger-1-after-2.jpg',
+        },
+      ],
+      orderType: 'passport',
+    },
   ];
 }

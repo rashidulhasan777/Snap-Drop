@@ -1,20 +1,9 @@
-import {
-  AfterViewInit,
-  Component,
-  OnInit,
-  ViewChild,
-  Inject,
-} from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSidenav } from '@angular/material/sidenav';
-import {
-  MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-} from '@angular/material/dialog';
-import { DialogApprovalComponent } from '../dialog-approval/dialog-approval.component';
+import { MatDialog } from '@angular/material/dialog';
 
 import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from './../../../interfaces/order.interface';

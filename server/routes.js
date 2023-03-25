@@ -1,4 +1,4 @@
-const router = require("express").Router();
+const router = require('express').Router();
 
 const authMiddleware = require('./middlewares/auth');
 const userController = require('./controllers/user.controller');
@@ -14,9 +14,14 @@ router.post('/login', userController.login);
 router.post('/register', userController.register);
 router.post('/oauthLogin', oauthController.oauthLogin);
 router.get(
-  "/user",
+  '/user',
   authMiddleware.authenticated,
   userController.getUserDetails
+);
+router.get(
+  '/userType',
+  authMiddleware.authenticated,
+  userController.getUserRole
 );
 router.put('/user', authMiddleware.authenticated, userController.updateUser);
 
@@ -31,18 +36,39 @@ router.get(
   orderController.getOrderById
 );
 router.get(
-  "/order/:status",
-  // authMiddleware.lab,
+  '/orderbyCustomer/',
+  authMiddleware.customer,
+  orderController.getOrderByCustomerId
+);
+router.get(
+  '/orderforLab/',
+  authMiddleware.lab,
+  orderController.getOrderByLabId
+);
+//These two routes needs to be before /order/:id to match
+router.put(
+  '/order/paid',
+  authMiddleware.customer,
+  orderController.setOrderPaid
+);
+router.delete(
+  '/order/unpaid',
+  authMiddleware.customer,
+  orderController.cleanUnpaidOrders
+);
+router.get(
+  '/order/:status',
+  authMiddleware.lab,
   orderController.getOrdersbyStatus
 );
-router.get("/orderbyCustomer/", authMiddleware.customer, orderController.getOrderByCustomerId);
-router.get("/orderforLab/", authMiddleware.lab, orderController.getOrderByLabId);
-router.post("/order", authMiddleware.customer, orderController.createOrder);
-router.put("/order/:id", authMiddleware.lab, orderController.changeOrderStatus);
+//Keep these under /order/paid
+router.post('/order', authMiddleware.customer, orderController.createOrder);
+router.put('/order/:id', authMiddleware.lab, orderController.changeOrderStatus);
 
 //Cart Routes
 router.put('/cart', authMiddleware.customer, cartController.updateUserCart);
 router.get('/cart', authMiddleware.customer, cartController.getUserCart);
+router.delete('/cart', authMiddleware.customer, cartController.clearCart);
 
 //Pathao Routes
 router.get('/pathao/accessToken', pathaoController.pathaoAccessToken);

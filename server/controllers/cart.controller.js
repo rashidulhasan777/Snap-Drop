@@ -2,7 +2,7 @@ const Carts = require('../models/cart.model');
 
 const getUserCart = async (req, res, next) => {
   try {
-    const userCart = await Carts.find({ userId: req.currentUser._id });
+    const userCart = await Carts.findOne({ userId: req.currentUser._id });
     res.status(200).send(userCart);
   } catch (error) {
     console.log(error);
@@ -11,8 +11,8 @@ const getUserCart = async (req, res, next) => {
 };
 const updateUserCart = async (req, res, next) => {
   try {
-    const userCart = await Carts.findByIdAndUpdate(
-      req.currentUser._id,
+    const userCart = await Carts.findOneAndUpdate(
+      { userId: req.currentUser._id },
       req.body,
       { upsert: true, new: true, setDefaultsOnInsert: true }
     );
@@ -23,7 +23,20 @@ const updateUserCart = async (req, res, next) => {
   }
 };
 
+const clearCart = async (req, res, next) => {
+  try {
+    await Carts.findOneAndDelete({
+      userId: req.currentUser._id,
+    });
+    res.sendStatus(204);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ errorMessage: 'Something went wrong' });
+  }
+};
+
 module.exports = {
   getUserCart,
   updateUserCart,
+  clearCart,
 };

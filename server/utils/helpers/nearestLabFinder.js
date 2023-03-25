@@ -1,15 +1,12 @@
 const studioData = require('../data/studio-list.json');
 const { Client } = require('@googlemaps/google-maps-services-js');
 
-const axios = require('axios');
-
 const client = new Client({});
 
 const userLocationFinder = async (area, zone, city, country) => {
   const args = {
     params: {
-      // key: process.env.MAPS_API_KEY, // replace the line below with this when integrating it with server
-      key: 'AIzaSyAhkieTsOpkBf6tw71b4Y2cUL4RTRasYGo',
+      key: process.env.MAPS_API_KEY,
       address: `${area}, ${zone}, ${city}, ${country}`,
     },
   };
@@ -17,8 +14,6 @@ const userLocationFinder = async (area, zone, city, country) => {
     const gcResponse = await client.geocode(args);
     const userLocation = gcResponse.data.results[0].geometry.location;
     return userLocation;
-
-    // return result.data.results[0].geometry.location
   } catch (err) {
     console.log(err);
   }
@@ -59,3 +54,5 @@ async function test() {
 }
 
 test();
+
+module.exports = { findClosestStudio };

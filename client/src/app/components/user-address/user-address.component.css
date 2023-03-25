@@ -17,3 +17,22 @@
   align-items: center;
 }
 
+.actionButtons {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  justify-content: center;
+  margin: 50px;
+}
+
+.userName {
+  font-size: xx-large;
+  font-weight: bold;
+}
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  padding: 20px;
+}

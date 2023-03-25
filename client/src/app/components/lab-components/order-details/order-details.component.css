@@ -1,3 +1,21 @@
+.detailsContainer {
+  max-width: 100%;
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.images {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.images > img {
+  max-width: 300px;
+}
+
 table {
   width: 100%;
 }

@@ -29,7 +29,7 @@ export class UserdataService {
     });
   }
 
-  get jwtToken() {
+  private get jwtToken() {
     return localStorage.getItem('userAccessToken');
   }
 }

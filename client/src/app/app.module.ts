@@ -34,6 +34,8 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { OrderDoneComponent } from './components/order-done/order-done.component';
 import { UserAddressComponent } from './components/user-address/user-address.component';
 import { InstructionsDialogComponent } from './components/instructions-dialog/instructions-dialog.component';
+import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
+import { OrderDetailsComponent } from './components/lab-components/order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,8 @@ import { InstructionsDialogComponent } from './components/instructions-dialog/in
     OrderDoneComponent,
     UserAddressComponent,
     InstructionsDialogComponent,
+    OrderSummaryComponent,
+    OrderDetailsComponent,
   ],
   imports: [
     BrowserModule,
