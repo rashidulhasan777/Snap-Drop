@@ -81,8 +81,42 @@ const pathaoAreas = async (req, res, next) => {
   }
 };
 
-const patahaoPriceCalc = async () => {};
-
+const patahaoPriceCalc = async (req, res, next) => {
+  try {
+    // console.log(req.body);
+    const {
+      store_id,
+      item_type,
+      delivery_type,
+      item_weight,
+      recipient_city,
+      recipient_zone,
+      pathaoToken,
+    } = req.body;
+    const priceEstimateData = await axios.post(
+      'https://hermes-api.p-stageenv.xyz/aladdin/api/v1/merchant/price-plan',
+      {
+        store_id,
+        item_type,
+        delivery_type,
+        item_weight,
+        recipient_city,
+        recipient_zone,
+      },
+      {
+        headers: {
+          authorization: `Bearer ${pathaoToken}`,
+          accept: 'application/json',
+          'content-type': 'application/json',
+        },
+      }
+    );
+    res.status(201).send({ priceEstimateData: priceEstimateData.data.data });
+  } catch (err) {
+    console.log(err);
+    res.status(400).send({ errorMessage: "Can't get price estimate" });
+  }
+};
 module.exports = {
   pathaoAccessToken,
   pathaoZones,
