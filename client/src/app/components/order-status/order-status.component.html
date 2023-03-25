@@ -5,8 +5,8 @@
 
   <div class = 'totalContainer'>
     <h1 class="header">Order Status</h1>
-  <mat-vertical-stepper [linear]="false" #stepper class = "content">
-    <mat-step [stepControl]="firstFormGroup">
+  <mat-vertical-stepper [selectedIndex]='2' [linear]="true" #stepper class = "content">
+    <mat-step  [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Pending</ng-template>
         <!-- <mat-form-field>
@@ -18,26 +18,36 @@
         </div> -->
       </form>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
+    <mat-step  [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
         <ng-template matStepLabel>Approved</ng-template>
-        <mat-form-field>
+        <p>Your photos have been approved by QA</p>
+        <!-- <mat-form-field>
           <input matInput placeholder="Address" formControlName="secondCtrl" required>
-        </mat-form-field>
-        <div>
+        </mat-form-field> -->
+        <!-- <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>
-        </div>
+        </div> -->
       </form>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      You are now done.
-      <div>
+      <ng-template matStepLabel>Printing</ng-template>
+      <p>Your photos are being printed</p>
+      <!-- <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
+      </div> -->
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Ready to Deliver</ng-template>
+      <p>Your photos are ready to deliver</p>
+      <!-- <div> 
+         -->
     </mat-step>
   </mat-vertical-stepper>
+  <div class = "goBack">
+    <button mat-raised-button color="primary" >Go back</button>
+  </div>
   </div>
   
