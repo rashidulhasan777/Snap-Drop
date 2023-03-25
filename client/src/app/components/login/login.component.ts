@@ -22,7 +22,16 @@ export class LoginComponent {
     private router: Router
   ) {}
   ngOnInit() {
-    if (this.authService.isLoggedIn()) this.router.navigate(['user_dashboard']);
+    if (this.authService.isLoggedIn()) {
+      this.authService.userRole().subscribe((res) => {
+        if (res.role === 'customer')
+          this.router
+            .navigate(['user_dashboard'])
+            .then(() => window.location.reload());
+        else if (res.role === 'lab') this.router.navigate(['pendingApproval']);
+        else this.authService.logout();
+      });
+    }
   }
 
   loginInfo = this.formBuilder.group({

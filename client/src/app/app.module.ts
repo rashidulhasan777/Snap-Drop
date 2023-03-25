@@ -27,7 +27,6 @@ import { OrdersComponent } from './components/lab-components/orders/orders.compo
 import { PrintingComponent } from './components/lab-components/printing/printing.component';
 import { ArchiveComponent } from './components/lab-components/archive/archive.component';
 import { DialogApprovalComponent } from './components/lab-components/dialog-approval/dialog-approval.component';
-import { AllImagesPreviewComponent } from './components/lab-components/all-images-preview/all-images-preview.component';
 import { DialogDeclineInstructionComponent } from './components/lab-components/dialog-decline-instruction/dialog-decline-instruction.component';
 import { CartComponent } from './components/cart/cart.component';
 import { PaymentComponent } from './components/payment/payment.component';
@@ -36,6 +35,7 @@ import { UserAddressComponent } from './components/user-address/user-address.com
 import { InstructionsDialogComponent } from './components/instructions-dialog/instructions-dialog.component';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { OrderDetailsComponent } from './components/lab-components/order-details/order-details.component';
+import { NavAndSidebarComponent } from './components/lab-components/nav-and-sidebar/nav-and-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +55,6 @@ import { OrderDetailsComponent } from './components/lab-components/order-details
     PrintingComponent,
     ArchiveComponent,
     DialogApprovalComponent,
-    AllImagesPreviewComponent,
     DialogDeclineInstructionComponent,
     CartComponent,
     PaymentComponent,
@@ -64,6 +63,7 @@ import { OrderDetailsComponent } from './components/lab-components/order-details
     InstructionsDialogComponent,
     OrderSummaryComponent,
     OrderDetailsComponent,
+    NavAndSidebarComponent,
   ],
   imports: [
     BrowserModule,

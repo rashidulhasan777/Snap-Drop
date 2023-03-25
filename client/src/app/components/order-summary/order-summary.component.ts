@@ -7,7 +7,7 @@ import { User } from 'src/app/interfaces/user.interface';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { OrderService } from 'src/app/services/orders/order.service';
 import { PriceCalculationService } from 'src/app/services/price-calculation/price-calculation.service';
-import { UserdataService } from 'src/app/services/userdata.service';
+import { UserdataService } from 'src/app/services/userdata/userdata.service';
 
 @Component({
   selector: 'app-order-summary',
