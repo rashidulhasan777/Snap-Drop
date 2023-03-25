@@ -8,6 +8,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialComponentsModule } from './material-components/material-components.module';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
 
 //Components
 import { AppComponent } from './app.component';
@@ -32,12 +34,16 @@ import { CartComponent } from './components/cart/cart.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { OrderDoneComponent } from './components/order-done/order-done.component';
 import { UserAddressComponent } from './components/user-address/user-address.component';
-import { InstructionsDialogComponent } from './components/instructions-dialog/instructions-dialog.component';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { OrderDetailsComponent } from './components/lab-components/order-details/order-details.component';
 import { NavAndSidebarComponent } from './components/lab-components/nav-and-sidebar/nav-and-sidebar.component';
 import { RetakeComponent } from './components/retake/retake.component';
 import { RetakeDashboardComponent } from './components/lab-components/retake-dashboard/retake-dashboard.component';
+import { PassportPhotoInstructionsComponent } from './components/passport-photo-instructions/passport-photo-instructions.component';
+
+export function playerFactory() {
+  return import('lottie-web');
+}
 
 @NgModule({
   declarations: [
@@ -62,12 +68,12 @@ import { RetakeDashboardComponent } from './components/lab-components/retake-das
     PaymentComponent,
     OrderDoneComponent,
     UserAddressComponent,
-    InstructionsDialogComponent,
     OrderSummaryComponent,
     OrderDetailsComponent,
     NavAndSidebarComponent,
     RetakeComponent,
     RetakeDashboardComponent,
+    PassportPhotoInstructionsComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +81,7 @@ import { RetakeDashboardComponent } from './components/lab-components/retake-das
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialComponentsModule,
+    LottieModule.forRoot({ player: playerFactory }),
     FormsModule,
     ReactiveFormsModule,
   ],
