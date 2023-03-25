@@ -71,7 +71,6 @@ import { OrderDetailsComponent } from './components/lab-components/order-details
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialComponentsModule,
-
     FormsModule,
     ReactiveFormsModule,
   ],
