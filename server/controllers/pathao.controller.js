@@ -103,7 +103,10 @@ const createOrder = async (req, res, next) => {
 
 const pathaoFindClosestStudio = async (req, res, next) => {
   try {
-    const { area, zone, city, country } = req.body;
+    const area = req.currentUser.details.area.area_name;
+    const zone = req.currentUser.details.zone.zone_name;
+    const city = req.currentUser.details.city.city_name;
+    const country = 'Bangladesh';
     const nearestStudio = await findClosestStudio(area, zone, city, country);
     res.status(200).send(nearestStudio);
   } catch (err) {
@@ -115,15 +118,12 @@ const pathaoFindClosestStudio = async (req, res, next) => {
 const patahaoPriceCalc = async (req, res, next) => {
   try {
     // console.log(req.body);
-    const {
-      store_id,
-      item_type,
-      delivery_type,
-      item_weight,
-      recipient_city,
-      recipient_zone,
-      pathaoToken,
-    } = req.body;
+    const { store_id, pathaoToken } = req.body;
+    const item_type = 'parcel';
+    const delivery_type = 48;
+    item_weight = 0.5;
+    recipient_city = req.currentUser.details.city.city_id;
+    recipient_zone = req.currentUser.details.zone.zone_id;
     const priceEstimateData = await axios.post(
       `${baseUrl}/aladdin/api/v1/merchant/price-plan`,
       {
@@ -144,14 +144,16 @@ const patahaoPriceCalc = async (req, res, next) => {
     );
     res.status(201).send({ priceEstimateData: priceEstimateData.data.data });
   } catch (err) {
-    console.log(err);
+    console.log(err.response);
     res.status(400).send({ errorMessage: "Can't get price estimate" });
   }
 };
+
 module.exports = {
   pathaoAccessToken,
   pathaoZones,
   pathaoAreas,
   pathaoFindClosestStudio,
   patahaoPriceCalc,
+  createOrder,
 };

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Lab } from 'src/app/interfaces/lab.interface';
 import { Details } from '../../interfaces/details.interface';
 import { User } from '../../interfaces/user.interface';
 
@@ -23,6 +24,14 @@ export class UserdataService {
   updateUserData(details: Details): Observable<User> {
     console.log(details);
     return this.http.put<User>(this.baseUrl, details, {
+      headers: {
+        Authorization: `Bearer ${this.jwtToken}`,
+      },
+    });
+  }
+
+  getClosestLab(): Observable<Lab> {
+    return this.http.get<Lab>('http://localhost:3000/pathao/closest-studio', {
       headers: {
         Authorization: `Bearer ${this.jwtToken}`,
       },

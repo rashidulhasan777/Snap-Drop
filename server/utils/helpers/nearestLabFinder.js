@@ -1,4 +1,4 @@
-const studioData = require('../data/studio-list.json');
+const Lab = require('../../models/labDetails.model');
 const { Client } = require('@googlemaps/google-maps-services-js');
 
 const client = new Client({});
@@ -27,17 +27,31 @@ function findDistance(pointA, pointB) {
 }
 
 async function findClosestStudio(area, zone, city, country) {
-  const coordinates = await userLocationFinder(area, zone, city, country);
-  const point = { coordinates };
-  // console.log(point);
-  const distances = studioData.map((studio) => {
-    const distance = findDistance(point, studio);
-    return { ...studio, distance };
-  });
-  const result = distances.reduce((closest, studio) =>
-    studio.distance < closest.distance ? studio : closest
-  );
-  return result;
+  try {
+    const allLabs = await Lab.find({});
+    const coordinates = await userLocationFinder(area, zone, city, country);
+    const point = { coordinates };
+    // console.log(point);
+    const labsCoords = allLabs.map((studio) => {
+      return { coordinates: { lng: studio.long, lat: studio.lat } };
+    });
+    const distances = labsCoords.map((studio) => {
+      const distance = findDistance(point, studio);
+      return { ...studio, distance };
+    });
+    // const result = distances.reduce((closest, studio) =>
+    //   studio.distance < closest.distance ? studio : closest
+    // );
+    const result = distances.reduce(
+      (idx, closest, studio, distances) =>
+        closest.distance < distances[idx].distance ? studio : idx,
+      0
+    );
+
+    return allLabs[result];
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 module.exports = { findClosestStudio };

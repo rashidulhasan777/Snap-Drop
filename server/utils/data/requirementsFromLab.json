@@ -1,0 +1,233 @@
+[
+  {
+    "country": "USA",
+    "mmWidth": 50,
+    "mmHeight": 50,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "India ",
+    "mmWidth": 50,
+    "mmHeight": 50,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Japan",
+    "mmWidth": 50,
+    "mmHeight": 50,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Finland ",
+    "mmWidth": 36,
+    "mmHeight": 47,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "France",
+    "mmWidth": 35,
+    "mmHeight": 45,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Canada",
+    "mmWidth": 35,
+    "mmHeight": 45,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "UK",
+    "mmWidth": 35,
+    "mmHeight": 45,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Malaysia",
+    "mmWidth": 35,
+    "mmHeight": 50,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Italy",
+    "mmWidth": 35,
+    "mmHeight": 40,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Germany",
+    "mmWidth": 35,
+    "mmHeight": 45,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Thailand",
+    "mmWidth": 35,
+    "mmHeight": 45,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "China",
+    "mmWidth": 35,
+    "mmHeight": 48,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "South Korea",
+    "mmWidth": 35,
+    "mmHeight": 45,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Pakistan",
+    "mmWidth": 35,
+    "mmHeight": 45,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Australia",
+    "mmWidth": 35,
+    "mmHeight": 45,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Singapore",
+    "mmWidth": 35,
+    "mmHeight": 45,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Indonesia",
+    "mmWidth": 40,
+    "mmHeight": 50,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Spain",
+    "mmWidth": 35,
+    "mmHeight": 45,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Saudi Arabia ",
+    "mmWidth": 40,
+    "mmHeight": 50,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Kuwait ",
+    "mmWidth": 40,
+    "mmHeight": 50,
+    "background": "Blue",
+    "bgColor": "0000FF"
+  },
+  {
+    "country": "Argentina",
+    "mmWidth": 35,
+    "mmHeight": 45,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Brazil",
+    "mmWidth": 35,
+    "mmHeight": 45,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "United Arab Emirates ",
+    "mmWidth": 40,
+    "mmHeight": 50,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Sri Lanka",
+    "mmWidth": 35,
+    "mmHeight": 45,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Qatar",
+    "mmWidth": 35,
+    "mmHeight": 45,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Poland",
+    "mmWidth": 35,
+    "mmHeight": 50,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Malta",
+    "mmWidth": 35,
+    "mmHeight": 40,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Bangladesh ",
+    "mmWidth": 40,
+    "mmHeight": 50,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Hong Kong ",
+    "mmWidth": 45,
+    "mmHeight": 55,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Switzerland ",
+    "mmWidth": 35,
+    "mmHeight": 45,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Vietnam",
+    "mmWidth": 40,
+    "mmHeight": 60,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Greece",
+    "mmWidth": 35,
+    "mmHeight": 45,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  },
+  {
+    "country": "Portugal",
+    "mmWidth": 35,
+    "mmHeight": 45,
+    "background": "White",
+    "bgColor": "FFFFFF"
+  }
+]
