@@ -13,32 +13,18 @@ import { MatDialog } from '@angular/material/dialog';
 export class OrderDetailsComponent {
   id: string = '';
   order?: Order;
-  @ViewChild('sidenav') sidenav!: MatSidenav;
-  isExpanded = true;
-  isShowing = false;
+
   constructor(
     private orderService: OrderService,
     private activatedRoute: ActivatedRoute
-    ) {
-      this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
-      this.orderService.getOrdersbyId(this.id).subscribe((res) => {
-        console.log(res);
-        this.order = res;
+  ) {
+    this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
+    this.orderService.getOrdersbyId(this.id).subscribe((res) => {
+      console.log(res);
+      this.order = res;
     });
   }
 
-  mouseenter() {
-    if (!this.isExpanded) {
-      this.isShowing = true;
-    }
-  }
-
-  mouseleave() {
-    if (!this.isExpanded) {
-      this.isShowing = false;
-    }
-  }
-
   ngOnInit() {}
-  downloadAllImages(){}
+  downloadAllImages() {}
 }

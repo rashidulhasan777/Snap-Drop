@@ -15,9 +15,6 @@ import { Order } from './../../../interfaces/order.interface';
 })
 export class OrdersComponent implements AfterViewInit, OnInit {
   orders: Order[] = [];
-  @ViewChild('sidenav') sidenav!: MatSidenav;
-  isExpanded = true;
-  isShowing = false;
   opened: boolean = true;
   displayedColumns: string[] = [
     'labId',
@@ -31,18 +28,6 @@ export class OrdersComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(public dialog: MatDialog, private orderService: OrderService) {}
-
-  mouseenter() {
-    if (!this.isExpanded) {
-      this.isShowing = true;
-    }
-  }
-
-  mouseleave() {
-    if (!this.isExpanded) {
-      this.isShowing = false;
-    }
-  }
 
   ngOnInit() {
     const orders = this.orderService

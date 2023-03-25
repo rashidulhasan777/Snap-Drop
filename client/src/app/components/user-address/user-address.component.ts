@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Details } from 'src/app/interfaces/details.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { PathaoService } from 'src/app/services/pathao/pathao.service';
-import { UserdataService } from 'src/app/services/userdata.service';
+import { UserdataService } from 'src/app/services/userdata/userdata.service';
 
 @Component({
   selector: 'app-user-address',

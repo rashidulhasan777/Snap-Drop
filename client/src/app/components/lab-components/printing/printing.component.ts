@@ -26,9 +26,6 @@ import { Order } from './../../../interfaces/order.interface';
 })
 export class PrintingComponent implements AfterViewInit, OnInit {
   orders: Order[] = [];
-  @ViewChild('sidenav') sidenav!: MatSidenav;
-  isExpanded = true;
-  isShowing = false;
   opened: boolean = true;
   displayedColumns: string[] = [
     'labId',
@@ -42,18 +39,6 @@ export class PrintingComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(public dialog: MatDialog, private orderService: OrderService) {}
-
-  mouseenter() {
-    if (!this.isExpanded) {
-      this.isShowing = true;
-    }
-  }
-
-  mouseleave() {
-    if (!this.isExpanded) {
-      this.isShowing = false;
-    }
-  }
 
   ngOnInit() {
     const orders = this.orderService
@@ -70,12 +55,14 @@ export class PrintingComponent implements AfterViewInit, OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  requestDelivery(id: string){
-    const body = { orderStatus : "readyToDeliver" }
-    const updatedBody = this.orderService.changeOrderStatus(id, body).subscribe((response) => {
-      console.log(response);
-      this.ngOnInit();
-    })
+  requestDelivery(id: string) {
+    const body = { orderStatus: 'readyToDeliver' };
+    const updatedBody = this.orderService
+      .changeOrderStatus(id, body)
+      .subscribe((response) => {
+        console.log(response);
+        this.ngOnInit();
+      });
   }
 
   applyFilter(event: Event) {

@@ -25,11 +25,8 @@ import { Order } from './../../../interfaces/order.interface';
 })
 export class PendingDashboardComponent implements AfterViewInit, OnInit {
   orders: Order[] = [];
-  @ViewChild('sidenav') sidenav!: MatSidenav;
-  isExpanded = true;
   animal: string = '';
   name: string = '';
-  isShowing = false;
   opened: boolean = true;
   displayedColumns: string[] = [
     'labId',
@@ -44,12 +41,6 @@ export class PendingDashboardComponent implements AfterViewInit, OnInit {
 
   constructor(public dialog: MatDialog, private orderService: OrderService) {}
 
-  mouseenter() {
-    if (!this.isExpanded) {
-      this.isShowing = true;
-    }
-  }
-
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogApprovalComponent, {
       data: { name: this.name, animal: this.animal },
@@ -59,12 +50,6 @@ export class PendingDashboardComponent implements AfterViewInit, OnInit {
       console.log('The dialog was closed');
       this.animal = result;
     });
-  }
-
-  mouseleave() {
-    if (!this.isExpanded) {
-      this.isShowing = false;
-    }
   }
 
   ngOnInit() {
