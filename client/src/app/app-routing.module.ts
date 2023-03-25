@@ -21,6 +21,7 @@ import { AuthGuardGuard } from './auth-guard.guard';
 import { RoleguardUserGuard } from './roleguard-user.guard';
 import { RoleguardLabGuard } from './roleguard-lab.guard';
 import { RetakeComponent } from './components/retake/retake.component';
+import { RetakeDashboardComponent } from './components/lab-components/retake-dashboard/retake-dashboard.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -40,6 +41,11 @@ const routes: Routes = [
   {
     path: 'pendingApproval',
     component: PendingDashboardComponent,
+    canActivate: [AuthGuardGuard, RoleguardLabGuard],
+  },
+  {
+    path: 'retakeNeeded',
+    component: RetakeDashboardComponent,
     canActivate: [AuthGuardGuard, RoleguardLabGuard],
   },
   {

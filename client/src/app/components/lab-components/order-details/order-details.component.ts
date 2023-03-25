@@ -4,6 +4,7 @@ import { Order } from 'src/app/interfaces/order.interface';
 import { OrderService } from 'src/app/services/orders/order.service';
 import { MatSidenav } from '@angular/material/sidenav';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-details',
@@ -16,7 +17,8 @@ export class OrderDetailsComponent {
 
   constructor(
     private orderService: OrderService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
     this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
     this.orderService.getOrdersbyId(this.id).subscribe((res) => {
@@ -26,5 +28,10 @@ export class OrderDetailsComponent {
   }
 
   ngOnInit() {}
-  downloadAllImages() {}
+  downloadAllImages() {
+    const body = { orderStatus : 'printing'};
+    const updatedBody = this.orderService.changeOrderStatus(this.id,body).subscribe((response) =>{
+      this.router.navigate(['orders']);
+    })
+  }
 }
