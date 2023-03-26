@@ -77,7 +77,7 @@ const getOrdersbyStatus = async (req, res) => {
 
 const getOrderByLabId = async (req, res) => {
   try {
-    const orders = await Order.find({ labId: req.currentUser._id });
+    const orders = await Order.find({ labId: req.currentUser.labId });
     res.status(201);
     res.send(orders);
   } catch (error) {
