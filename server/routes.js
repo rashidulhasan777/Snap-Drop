@@ -85,14 +85,6 @@ router.get('/pathao/accessToken', pathaoController.pathaoAccessToken);
 router.post('/pathao/zones', pathaoController.pathaoZones);
 router.post('/pathao/areas', pathaoController.pathaoAreas);
 router.post('/pathao/order', pathaoController.createOrder);
-
-//SSLcommerz Routes
-router.get('/payment/:order_id/:amount', SslCommerzController.initPayment);
-router.post('/payment-success', SslCommerzController.success);
-router.post('/payment-failure', SslCommerzController.failure);
-router.post('/payment-cancel', SslCommerzController.cancel);
-router.post('/payment-ipn', SslCommerzController.ipn);
-// router.get('/validate', SslCommerzController.validate);
 router.get(
   '/pathao/closest-studio',
   authMiddleware.customer,
@@ -103,6 +95,14 @@ router.post(
   authMiddleware.customer,
   pathaoController.patahaoPriceCalc
 );
+
+//SSLcommerz Routes
+router.get('/payment/:order_id/:amount', SslCommerzController.initPayment);
+router.post('/payment-success', SslCommerzController.success);
+router.post('/payment-failure', SslCommerzController.failure);
+router.post('/payment-cancel', SslCommerzController.cancel);
+router.post('/payment-ipn', SslCommerzController.ipn);
+// router.get('/validate', SslCommerzController.validate);
 
 //Internal Route for lab
 router.post('/lab', labController.createLab);
