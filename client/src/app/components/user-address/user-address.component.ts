@@ -16,6 +16,8 @@ import { UserdataService } from 'src/app/services/userdata/userdata.service';
 export class UserAddressComponent {
   hasPreviousInfo: boolean = false;
   User?: User;
+  isZoneDisabled: boolean = true;
+  isAreaDisabled: boolean = true;
 
   deliveryInfoForm = this.fb.group({
     name: ['', [Validators.required]],
@@ -53,6 +55,8 @@ export class UserAddressComponent {
   ) {}
 
   ngOnInit() {
+    this.disableArea(true);
+    this.disableZone(true);
     this.userDataService.getUser().subscribe((res) => {
       this.User = res;
       if (res.details) {
@@ -66,16 +70,6 @@ export class UserAddressComponent {
     this.filteredCities = this.city?.valueChanges.pipe(
       startWith(''),
       map((value) => this._filterCity(value || ''))
-    );
-
-    this.filteredZones = this.zone?.valueChanges.pipe(
-      startWith(''),
-      map((value) => this._filterZone(value || ''))
-    );
-
-    this.filteredAreas = this.area?.valueChanges.pipe(
-      startWith(''),
-      map((value) => this._filterArea(value || ''))
     );
   }
   get name() {
@@ -102,7 +96,11 @@ export class UserAddressComponent {
     this.pathao.getPathaoZone(cityObj.city_id).subscribe({
       next: (res: any) => {
         this.zones = res.zones;
-        console.log(this.zones);
+        this.disableZone(false);
+        this.filteredZones = this.zone?.valueChanges.pipe(
+          startWith(''),
+          map((value) => this._filterZone(value || ''))
+        );
       },
     });
   }
@@ -112,6 +110,11 @@ export class UserAddressComponent {
     this.pathao.getPathaoArea(zoneObj.zone_id).subscribe({
       next: (res: any) => {
         this.areas = res.areas;
+        this.disableArea(false);
+        this.filteredAreas = this.area?.valueChanges.pipe(
+          startWith(''),
+          map((value) => this._filterArea(value || ''))
+        );
       },
     });
   }
@@ -123,7 +126,6 @@ export class UserAddressComponent {
       this.userDataService.updateUserData(details).subscribe((res) => {
         this.router.navigate(['order_summary']);
       });
-      // localStorage.setItem('userDetails', JSON.stringify(details));
     }
   }
   changeAdress() {
@@ -153,5 +155,14 @@ export class UserAddressComponent {
     return this.areas.filter((area) =>
       area.area_name.toLowerCase().includes(filterValue)
     );
+  }
+
+  disableZone(val: boolean) {
+    if (val) this.deliveryInfoForm.controls['zone'].disable();
+    else this.deliveryInfoForm.controls['zone'].enable();
+  }
+  disableArea(val: boolean) {
+    if (val) this.deliveryInfoForm.controls['area'].disable();
+    else this.deliveryInfoForm.controls['area'].enable();
   }
 }

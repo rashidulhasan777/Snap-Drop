@@ -32,7 +32,6 @@ export class AppComponent {
     this.authService.userRole().subscribe((res) => (this.role = res.role));
     this.pathao.getPathaoAccessToken().subscribe({
       next: (res) => {
-        console.log('first');
         localStorage.setItem(
           'pathaoAccessToken',
           JSON.stringify(res.pathaoToken)
