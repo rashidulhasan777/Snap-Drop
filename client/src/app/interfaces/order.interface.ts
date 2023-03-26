@@ -10,6 +10,7 @@ export interface Order {
   parcelId?: string;
   orderStatus?: string;
   orderDelivaryDetails?: Details;
+  countryForPassport?: string;
   instruction?: string;
   passportPictures?: ImageInterface[];
   galleryPictures?: ImageInterface[];
