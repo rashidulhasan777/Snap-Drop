@@ -16,9 +16,10 @@ export class UserNavbarComponent {
   ) {}
   ngOnInit() {
     this.cart.getCart().subscribe((res) => {
-      this.cartItemsLen =
-        (res.galleryPictures?.length || 0) +
-        (res.passportPictures?.length || 0);
+      if (res)
+        this.cartItemsLen =
+          (res.galleryPictures?.length || 0) +
+          (res.passportPictures?.length || 0);
     });
   }
 

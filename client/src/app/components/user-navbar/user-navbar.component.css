@@ -30,9 +30,9 @@
 }
 
 .cartBadge {
-  position: fixed;
-  top: 1%;
-  right: 16%;
+  position: absolute;
+  top: 5%;
+  right: 1%;
   width: 20px;
   height: 20px;
   border-radius: 100%;
