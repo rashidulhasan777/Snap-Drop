@@ -7,6 +7,7 @@ import { AuthenticationService } from 'src/app/services/authentication/authentic
   styleUrls: ['./user-navbar.component.css'],
 })
 export class UserNavbarComponent {
+  cartItemsLen?: number = 7;
   constructor(private authService: AuthenticationService) {}
 
   logout() {
