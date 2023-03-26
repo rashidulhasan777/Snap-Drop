@@ -1,6 +1,6 @@
 <div class="user-navbar">
   <div class="cartContainer">
-    <div class="cartBadge">{{cartItemsLen}}</div>
+    <div *ngIf="cartItemsLen" class="cartBadge"><span class="badgeTxt">{{cartItemsLen}}</span></div>
     <button class="navbarIcons" mat-icon-button routerLink="/cart">
       <mat-icon class="buttonIconCart">shopping_cart</mat-icon>
     </button>

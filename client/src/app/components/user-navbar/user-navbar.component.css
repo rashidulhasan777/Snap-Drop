@@ -27,12 +27,23 @@
 .cartContainer {
   position: relative;
   max-width: 15%;
-  border-radius: 15%;
 }
 
 .cartBadge {
   position: fixed;
   top: 1%;
-  right: 17%;
-  
+  right: 16%;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  background-color: orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.badgeTxt {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
 }
