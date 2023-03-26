@@ -39,12 +39,23 @@ export class PriceCalculationService {
 
   constructor(private http: HttpClient) {}
 
-  calculateAllPrices(cart: Cart, store_id: number): Price {
+  calculateAllPrices(
+    cart: Cart,
+    store_id: number,
+    callback: (total: Price) => void
+  ): void {
     const passport = this.calculatePrice(cart.passportPictures || []);
     const gallery = this.calculatePrice(cart.galleryPictures || []);
-    // this.getDelivaryPrice(store_id).subscribe((res) => console.log(res));
+    this.getDelivaryPrice(store_id).subscribe((res) => {
+      const total = passport + gallery + res.priceEstimateData.price;
+      callback({
+        passport,
+        gallery,
+        shipping: res.priceEstimateData.price,
+        total,
+      });
+    });
     // const total = passport + gallery + shipping;
-    return { passport, gallery, shipping: 0, total: 0 };
   }
 
   private calculatePrice(imageList: ImageInterface[]): number {

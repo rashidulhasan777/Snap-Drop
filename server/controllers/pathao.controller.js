@@ -137,12 +137,13 @@ const pathaoFindClosestStudio = async (req, res, next) => {
 
 const patahaoPriceCalc = async (req, res, next) => {
   try {
-    const { store_id, pathaoToken } = req.body;
-    const item_type = 1;
-    const delivery_type = 48;
-    const item_weight = 0.5;
-    const recipient_city = req.currentUser.details.city.city_id;
-    const recipient_zone = req.currentUser.details.zone.zone_id;
+    let { store_id, pathaoToken } = req.body;
+    store_id = '' + store_id;
+    const item_type = '' + 1;
+    const delivery_type = '' + 48;
+    const item_weight = '' + 0.5;
+    const recipient_city = '' + req.currentUser.details.city.city_id;
+    const recipient_zone = '' + req.currentUser.details.zone.zone_id;
     const priceEstimateData = await axios.post(
       `${baseUrl}/aladdin/api/v1/merchant/price-plan`,
       {
@@ -163,7 +164,7 @@ const patahaoPriceCalc = async (req, res, next) => {
     );
     res.status(201).send({ priceEstimateData: priceEstimateData.data.data });
   } catch (err) {
-    console.log(err.response);
+    console.log(err);
     res.status(400).send({ errorMessage: "Can't get price estimate" });
   }
 };

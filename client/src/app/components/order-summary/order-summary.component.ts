@@ -37,7 +37,13 @@ export class OrderSummaryComponent {
     this.cartService.getCart().subscribe({
       next: (res) => {
         this.Cart = res;
-        // this.price = this.priceCalculator.calculateAllPrices(this.Cart);
+        this.priceCalculator.calculateAllPrices(
+          this.Cart,
+          95506,
+          (totalPrice: Price) => {
+            this.price = totalPrice;
+          }
+        );
       },
       error: () => {
         this.router.navigate(['cart']);
@@ -55,7 +61,7 @@ export class OrderSummaryComponent {
           order_id: 'ss',
           labId: 55865, //Needs to change
           // totalPrice: this.priceCalculator.calculateAllPrices(res, this.closestLab?.labId),
-          totalPrice: this.priceCalculator.calculateAllPrices(res, 55865),
+          totalPrice: this.price,
           passportPictures: res.passportPictures,
           galleryPictures: res.galleryPictures,
           orderStatus: pending ? 'pending' : 'approved',

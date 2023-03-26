@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Order } from 'src/app/interfaces/order.interface';
 import { CartService } from 'src/app/services/cart/cart.service';
@@ -12,7 +13,7 @@ import { PriceCalculationService } from 'src/app/services/price-calculation/pric
 export class OrderDoneComponent {
   userInstruction: string | null = '';
   CompletedOrder: Order = {
-    order_id:'hh',
+    order_id: 'hh',
     labId: 0,
     totalPrice: { passport: 0, gallery: 0, shipping: 0, total: 0 },
   };
@@ -21,11 +22,15 @@ export class OrderDoneComponent {
   constructor(
     private cartService: CartService,
     private orderService: OrderService,
-    private priceCalcultor: PriceCalculationService
+    private priceCalcultor: PriceCalculationService,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
-    this.orderService.setOrderPaid().subscribe();
-    this.cartService.clearCart().subscribe();
+    this.http
+      .get('http://localhost:3000/payment/Order_321/1200')
+      .subscribe((res) => console.log(res));
+    // this.orderService.setOrderPaid().subscribe();
+    // this.cartService.clearCart().subscribe();
   }
 }

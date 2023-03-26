@@ -2,6 +2,7 @@ const SSLCommerzPayment = require('sslcommerz-lts');
 const is_live = false;
 
 const initPayment = (req, res) => {
+  console.log('here');
   const amount = req.params.amount;
   const order_id = req.params.order_id;
 
@@ -40,12 +41,17 @@ const initPayment = (req, res) => {
     process.env.STORE_PASSWORD,
     is_live
   );
-  sslcz.init(data).then((apiResponse) => {
-    // Redirect the user to payment gateway
-    let GatewayPageURL = apiResponse.GatewayPageURL;
-    res.redirect(GatewayPageURL);
-    console.log('Redirecting to: init ', GatewayPageURL);
-  });
+  sslcz
+    .init(data)
+    .then((apiResponse) => {
+      // Redirect the user to payment gateway
+      let GatewayPageURL = apiResponse.GatewayPageURL;
+      res.status(200).send({ url: GatewayPageURL });
+      console.log('Redirecting to: init ', GatewayPageURL);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 const success = async (req, res) => {
@@ -58,7 +64,7 @@ const success = async (req, res) => {
   sslcz.validate(data).then((data) => {
     console.log(data);
 
-    //   return res.send(data);
+    return res.send(data);
 
     //process the response that got from sslcommerz
     // https://developer.sslcommerz.com/doc/v4/#order-validation-api
