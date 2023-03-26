@@ -9,6 +9,7 @@ const labController = require('./controllers/lab.controller');
 const pathaoController = require('./controllers/pathao.controller');
 const SslCommerzController = require('./controllers/sslcommerz.controller');
 const cloudinaryController = require('./controllers/cloudinary.controller');
+const { uploadToOrder } = require('./controllers/cutoutpro.controller');
 
 //User Routes
 router.post('/login', userController.login);
@@ -107,5 +108,7 @@ router.post('/payment-ipn', SslCommerzController.ipn);
 
 //Internal Route for lab
 router.post('/lab', labController.createLab);
+
+router.get('/cutout/:id', authMiddleware.lab, uploadToOrder);
 
 module.exports = router;

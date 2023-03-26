@@ -39,6 +39,7 @@ import { OrderDetailsComponent } from './components/lab-components/order-details
 import { NavAndSidebarComponent } from './components/lab-components/nav-and-sidebar/nav-and-sidebar.component';
 import { RetakeComponent } from './components/retake/retake.component';
 import { RetakeDashboardComponent } from './components/lab-components/retake-dashboard/retake-dashboard.component';
+import { OrderStatusComponent } from './components/order-status/order-status.component';
 import { PassportPhotoInstructionsComponent } from './components/passport-photo-instructions/passport-photo-instructions.component';
 
 export function playerFactory() {
@@ -73,6 +74,7 @@ export function playerFactory() {
     NavAndSidebarComponent,
     RetakeComponent,
     RetakeDashboardComponent,
+    OrderStatusComponent,
     PassportPhotoInstructionsComponent,
   ],
   imports: [

@@ -62,10 +62,10 @@ export class OrderSummaryComponent {
           instruction: this.instruction || '',
         };
         this.orderService.cleanUnpaidOrders().subscribe(() => {
-          // this.orderService.createOrder(order).subscribe((res) => {
-          //   this.CompletedOrder = res;
-          //   // this.router.navigate(['order_done']);
-          // });
+          this.orderService.createOrder(order).subscribe((res) => {
+            this.CompletedOrder = res;
+            this.router.navigate(['order_done']);
+          });
         });
       },
     });

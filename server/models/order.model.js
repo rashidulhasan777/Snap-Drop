@@ -49,6 +49,9 @@ const OrderSchema = new mongoose.Schema(
     passportPictures: {
       type: [imageSchema],
     },
+    countryForPassport: {
+      type: String,
+    },
     galleryPictures: {
       type: [imageSchema],
     },
