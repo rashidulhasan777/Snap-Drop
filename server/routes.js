@@ -8,6 +8,7 @@ const cartController = require('./controllers/cart.controller');
 const labController = require('./controllers/lab.controller');
 const pathaoController = require('./controllers/pathao.controller');
 const SslCommerzController = require('./controllers/sslcommerz.controller');
+const cloudinaryController = require('./controllers/cloudinary.controller');
 
 //User Routes
 router.post('/login', userController.login);
@@ -85,6 +86,16 @@ router.get('/pathao/accessToken', pathaoController.pathaoAccessToken);
 router.post('/pathao/zones', pathaoController.pathaoZones);
 router.post('/pathao/areas', pathaoController.pathaoAreas);
 router.post('/pathao/order', pathaoController.createOrder);
+router.get(
+  '/pathao/closest-studio',
+  authMiddleware.customer,
+  pathaoController.pathaoFindClosestStudio
+);
+router.post(
+  '/pathao/price-calculation',
+  authMiddleware.customer,
+  pathaoController.patahaoPriceCalc
+);
 
 //SSLcommerz Routes
 router.get('/payment/:order_id/:amount', SslCommerzController.initPayment);
@@ -93,8 +104,6 @@ router.post('/payment-failure', SslCommerzController.failure);
 router.post('/payment-cancel', SslCommerzController.cancel);
 router.post('/payment-ipn', SslCommerzController.ipn);
 // router.get('/validate', SslCommerzController.validate);
-router.post('/pathao/closest-studio', pathaoController.pathaoFindClosestStudio);
-router.post('/pathao/price-calculation', pathaoController.patahaoPriceCalc);
 
 //Internal Route for lab
 router.post('/lab', labController.createLab);

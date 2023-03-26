@@ -26,7 +26,7 @@ export class UserAddressComponent {
         Validators.minLength(10),
       ],
     ],
-    address: ['', [Validators.required]],
+    address: ['', [Validators.required, Validators.min(10)]],
     city: ['', [Validators.required]],
     zone: ['', [Validators.required]],
     area: ['', [Validators.required]],

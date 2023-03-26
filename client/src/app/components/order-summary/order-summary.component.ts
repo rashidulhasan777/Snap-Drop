@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cart } from 'src/app/interfaces/cart.interface';
+import { Lab } from 'src/app/interfaces/lab.interface';
 import { Order } from 'src/app/interfaces/order.interface';
 import { Price } from 'src/app/interfaces/price.interface';
 import { User } from 'src/app/interfaces/user.interface';
@@ -19,7 +20,7 @@ export class OrderSummaryComponent {
   Cart!: Cart;
   instruction: string = '';
   price: Price = { passport: 0, gallery: 0, shipping: 0, total: 0 };
-
+  closestLab?: Lab;
   CompletedOrder?: Order;
   constructor(
     private cartService: CartService,
@@ -36,12 +37,13 @@ export class OrderSummaryComponent {
     this.cartService.getCart().subscribe({
       next: (res) => {
         this.Cart = res;
-        this.price = this.priceCalculator.calculateAllPrices(this.Cart);
+        // this.price = this.priceCalculator.calculateAllPrices(this.Cart);
       },
       error: () => {
         this.router.navigate(['cart']);
       },
     });
+    this.userDataService.getClosestLab().subscribe((res) => console.log(res));
   }
 
   initiatePayment() {
@@ -51,17 +53,18 @@ export class OrderSummaryComponent {
         if (res.passportPictures && res.passportPictures.length) pending = true;
         const order: Order = {
           labId: 'sss', //Needs to change
-          totalPrice: this.priceCalculator.calculateAllPrices(res),
+          // totalPrice: this.priceCalculator.calculateAllPrices(res, this.closestLab?.labId),
+          totalPrice: this.priceCalculator.calculateAllPrices(res, 55865),
           passportPictures: res.passportPictures,
           galleryPictures: res.galleryPictures,
           orderStatus: pending ? 'pending' : 'approved',
           instruction: this.instruction || '',
         };
         this.orderService.cleanUnpaidOrders().subscribe(() => {
-          this.orderService.createOrder(order).subscribe((res) => {
-            this.CompletedOrder = res;
-            this.router.navigate(['order_done']);
-          });
+          // this.orderService.createOrder(order).subscribe((res) => {
+          //   this.CompletedOrder = res;
+          //   // this.router.navigate(['order_done']);
+          // });
         });
       },
     });
