@@ -1,7 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Details } from 'src/app/interfaces/details.interface';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+// import { Details } from 'src/app/interfaces/details.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { PathaoService } from 'src/app/services/pathao/pathao.service';
 import { UserdataService } from 'src/app/services/userdata/userdata.service';
@@ -14,6 +16,8 @@ import { UserdataService } from 'src/app/services/userdata/userdata.service';
 export class UserAddressComponent {
   hasPreviousInfo: boolean = false;
   User?: User;
+  isZoneDisabled: boolean = true;
+  isAreaDisabled: boolean = true;
 
   deliveryInfoForm = this.fb.group({
     name: ['', [Validators.required]],
@@ -39,6 +43,10 @@ export class UserAddressComponent {
   zones: { zone_id: number; zone_name: string }[] = [];
   areas: { area_id: number; area_name: string }[] = [];
 
+  filteredCities?: Observable<{ city_id: number; city_name: string }[]>;
+  filteredZones?: Observable<{ zone_id: number; zone_name: string }[]>;
+  filteredAreas?: Observable<{ area_id: number; area_name: string }[]>;
+
   constructor(
     private fb: FormBuilder,
     private pathao: PathaoService,
@@ -47,6 +55,8 @@ export class UserAddressComponent {
   ) {}
 
   ngOnInit() {
+    this.disableArea(true);
+    this.disableZone(true);
     this.userDataService.getUser().subscribe((res) => {
       this.User = res;
       if (res.details) {
@@ -57,21 +67,10 @@ export class UserAddressComponent {
       }
     });
 
-    this.city?.valueChanges.subscribe((cityVal: any) => {
-      this.pathao.getPathaoZone(cityVal.city_id).subscribe({
-        next: (res: any) => {
-          this.zones = res.zones;
-        },
-      });
-    });
-
-    this.zone?.valueChanges.subscribe((zoneVal: any) => {
-      this.pathao.getPathaoArea(zoneVal.zone_id).subscribe({
-        next: (res: any) => {
-          this.areas = res.areas;
-        },
-      });
-    });
+    this.filteredCities = this.city?.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filterCity(value || ''))
+    );
   }
   get name() {
     return this.deliveryInfoForm.get('name');
@@ -92,6 +91,34 @@ export class UserAddressComponent {
     return this.deliveryInfoForm.get('area');
   }
 
+  setZones(city: string) {
+    const cityObj = this.cities.find((ct) => ct.city_name === city)!;
+    this.pathao.getPathaoZone(cityObj.city_id).subscribe({
+      next: (res: any) => {
+        this.zones = res.zones;
+        this.disableZone(false);
+        this.filteredZones = this.zone?.valueChanges.pipe(
+          startWith(''),
+          map((value) => this._filterZone(value || ''))
+        );
+      },
+    });
+  }
+
+  setAreas(zone: string) {
+    const zoneObj = this.zones.find((zn) => zn.zone_name === zone)!;
+    this.pathao.getPathaoArea(zoneObj.zone_id).subscribe({
+      next: (res: any) => {
+        this.areas = res.areas;
+        this.disableArea(false);
+        this.filteredAreas = this.area?.valueChanges.pipe(
+          startWith(''),
+          map((value) => this._filterArea(value || ''))
+        );
+      },
+    });
+  }
+
   handleSubmit() {
     if (this.deliveryInfoForm.valid) {
       const details = JSON.parse(JSON.stringify(this.deliveryInfoForm.value));
@@ -99,7 +126,6 @@ export class UserAddressComponent {
       this.userDataService.updateUserData(details).subscribe((res) => {
         this.router.navigate(['order_summary']);
       });
-      // localStorage.setItem('userDetails', JSON.stringify(details));
     }
   }
   changeAdress() {
@@ -108,5 +134,35 @@ export class UserAddressComponent {
 
   continueWithPrevious() {
     this.router.navigate(['order_summary']);
+  }
+
+  private _filterCity(value: string): { city_id: number; city_name: string }[] {
+    const filterValue = value.toLowerCase();
+    return this.cities.filter((city) =>
+      city.city_name.toLowerCase().includes(filterValue)
+    );
+  }
+
+  private _filterZone(value: string): { zone_id: number; zone_name: string }[] {
+    const filterValue = value.toLowerCase();
+    return this.zones.filter((zone) =>
+      zone.zone_name.toLowerCase().includes(filterValue)
+    );
+  }
+
+  private _filterArea(value: string): { area_id: number; area_name: string }[] {
+    const filterValue = value.toLowerCase();
+    return this.areas.filter((area) =>
+      area.area_name.toLowerCase().includes(filterValue)
+    );
+  }
+
+  disableZone(val: boolean) {
+    if (val) this.deliveryInfoForm.controls['zone'].disable();
+    else this.deliveryInfoForm.controls['zone'].enable();
+  }
+  disableArea(val: boolean) {
+    if (val) this.deliveryInfoForm.controls['area'].disable();
+    else this.deliveryInfoForm.controls['area'].enable();
   }
 }
