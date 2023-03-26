@@ -5,7 +5,7 @@
 
   <div class = 'totalContainer'>
     <h1 class="header">Order Status</h1>
-  <mat-vertical-stepper [selectedIndex]='2' [linear]="true" #stepper class = "content">
+  <mat-vertical-stepper [selectedIndex]="status" [linear]="true" #stepper class = "content">
     <mat-step  [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Pending</ng-template>
@@ -18,7 +18,7 @@
         </div> -->
       </form>
     </mat-step>
-    <mat-step  [stepControl]="secondFormGroup">
+    <mat-step  [stepControl]="secondFormGroup" >
       <form [formGroup]="secondFormGroup">
         <ng-template matStepLabel>Approved</ng-template>
         <p>Your photos have been approved by QA</p>
@@ -31,7 +31,7 @@
         </div> -->
       </form>
     </mat-step>
-    <mat-step>
+    <mat-step >
       <ng-template matStepLabel>Printing</ng-template>
       <p>Your photos are being printed</p>
       <!-- <div>
@@ -39,7 +39,7 @@
         <button mat-button (click)="stepper.reset()">Reset</button>
       </div> -->
     </mat-step>
-    <mat-step>
+    <mat-step >
       <ng-template matStepLabel>Ready to Deliver</ng-template>
       <p>Your photos are ready to deliver</p>
       <!-- <div> 
