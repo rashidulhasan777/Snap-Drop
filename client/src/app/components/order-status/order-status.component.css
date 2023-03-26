@@ -5,6 +5,11 @@
   label {
     margin-right: 4px;
   }
+/* .mat-step-header {
+    pointer-events: none !important;
+} */
+
+
 .header{
     padding-top: 10vh;
     padding-bottom: 8vh;

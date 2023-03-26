@@ -5,7 +5,7 @@
 
   <div class = 'totalContainer'>
     <h1 class="header">Order Status</h1>
-  <mat-vertical-stepper [selectedIndex]="status" [linear]="true" #stepper class = "content">
+  <mat-vertical-stepper [linear]="true" #stepper class = "content">
     <mat-step  [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Pending</ng-template>
@@ -18,19 +18,19 @@
         </div> -->
       </form>
     </mat-step>
-    <mat-step  [stepControl]="firstFormGroup" *ngIf="retake_needed">
+    <!-- <mat-step  [stepControl]="firstFormGroup" *ngIf="retake_needed">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Retake Photo</ng-template>
-        <!-- <mat-form-field>
+        <mat-form-field>
           <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-        </mat-form-field> -->
+        </mat-form-field>
         <p>You need to retake your passport photos</p>
-        <!-- <div>
+        <div>
           <button mat-button matStepperNext>Next</button> 
-        </div> -->
+        </div>
       </form>
-    </mat-step>
-    <mat-step  [stepControl]="secondFormGroup" >
+    </mat-step> -->
+    <mat-step  [stepControl]="secondFormGroup" *ngIf="approved">
       <form [formGroup]="secondFormGroup">
         <ng-template matStepLabel>Approved</ng-template>
         <p>Your photos have been approved by QA</p>
@@ -43,19 +43,13 @@
         </div> -->
       </form>
     </mat-step>
-    <mat-step >
+    <mat-step *ngIf="printing">
       <ng-template matStepLabel>Printing</ng-template>
       <p>Your photos are being printed</p>
-      <!-- <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div> -->
     </mat-step>
-    <mat-step >
+    <mat-step *ngIf="readyToDeliver">
       <ng-template matStepLabel>Ready to Deliver</ng-template>
       <p>Your photos are ready to deliver</p>
-      <!-- <div> 
-         -->
     </mat-step>
   </mat-vertical-stepper>
   <div class = "goBack">
