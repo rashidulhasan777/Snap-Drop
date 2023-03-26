@@ -12,7 +12,8 @@ import { PriceCalculationService } from 'src/app/services/price-calculation/pric
 export class OrderDoneComponent {
   userInstruction: string | null = '';
   CompletedOrder: Order = {
-    labId: '',
+    order_id:'hh',
+    labId: 0,
     totalPrice: { passport: 0, gallery: 0, shipping: 0, total: 0 },
   };
   errorMessage = '';

@@ -52,7 +52,8 @@ export class OrderSummaryComponent {
         let pending = false;
         if (res.passportPictures && res.passportPictures.length) pending = true;
         const order: Order = {
-          labId: 'sss', //Needs to change
+          order_id: 'ss',
+          labId: 55865, //Needs to change
           // totalPrice: this.priceCalculator.calculateAllPrices(res, this.closestLab?.labId),
           totalPrice: this.priceCalculator.calculateAllPrices(res, 55865),
           passportPictures: res.passportPictures,
