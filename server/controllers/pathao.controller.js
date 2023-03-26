@@ -119,11 +119,11 @@ const patahaoPriceCalc = async (req, res, next) => {
   try {
     // console.log(req.body);
     const { store_id, pathaoToken } = req.body;
-    const item_type = 'parcel';
+    const item_type = 1;
     const delivery_type = 48;
-    item_weight = 0.5;
-    recipient_city = req.currentUser.details.city.city_id;
-    recipient_zone = req.currentUser.details.zone.zone_id;
+    const item_weight = 0.5;
+    const recipient_city = req.currentUser.details.city.city_id;
+    const recipient_zone = req.currentUser.details.zone.zone_id;
     const priceEstimateData = await axios.post(
       `${baseUrl}/aladdin/api/v1/merchant/price-plan`,
       {
