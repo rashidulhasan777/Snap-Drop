@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" class="">
+<mat-toolbar color="primary" class="topNav">
   <button mat-icon-button (click)="isExpanded = !isExpanded">
     <mat-icon>menu</mat-icon>
   </button>
@@ -20,6 +20,12 @@
     (mouseleave)="mouseleave()"
   >
     <mat-nav-list>
+      <mat-list-item class="parent" routerLink="/lab-dashboard">
+        <mat-icon mat-list-icon>dashboard</mat-icon>
+        <span class="full-width" *ngIf="isExpanded || isShowing">
+          Dashboard
+        </span>
+      </mat-list-item>
       <mat-list-item class="parent" routerLink="/pendingApproval">
         <mat-icon mat-list-icon>autorenew </mat-icon>
         <span class="full-width" *ngIf="isExpanded || isShowing">
@@ -53,5 +59,6 @@
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
-  <ng-content></ng-content>
+  <ng-content>
+  </ng-content>
 </mat-sidenav-container>

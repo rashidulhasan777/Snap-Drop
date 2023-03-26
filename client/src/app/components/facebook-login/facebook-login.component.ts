@@ -47,7 +47,7 @@ export class FacebookLoginComponent implements OnInit {
                           .navigate(['user_dashboard'])
                           .then(() => window.location.reload());
                       else if (res.role === 'lab')
-                        this.router.navigate(['pendingApproval']);
+                        this.router.navigate(['lab-dashboard']);
                       else this.authService.logout();
                     });
                   });

@@ -21,7 +21,7 @@ th.mat-sort-header-sorted {
   padding: 2vh;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 90vh;
   /* align-items: center; */
   /* justify-content: center; */
 }

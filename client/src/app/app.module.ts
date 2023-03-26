@@ -22,7 +22,6 @@ import { UserDashboardComponent } from './components/user-dashboard/user-dashboa
 import { UserNavbarComponent } from './components/user-navbar/user-navbar.component';
 import { GalleryUploadComponent } from './components/gallery-upload/gallery-upload.component';
 import { GalleryCardComponent } from './components/gallery-card/gallery-card.component';
-import { LabDashboardComponent } from './components/lab-dashboard/lab-dashboard.component';
 import { AddPassportPhotoComponent } from './components/add-passport-photo/add-passport-photo.component';
 import { PendingDashboardComponent } from './components/lab-components/pending-dashboard/pending-dashboard.component';
 import { OrdersComponent } from './components/lab-components/orders/orders.component';
@@ -41,6 +40,7 @@ import { RetakeComponent } from './components/retake/retake.component';
 import { RetakeDashboardComponent } from './components/lab-components/retake-dashboard/retake-dashboard.component';
 import { OrderStatusComponent } from './components/order-status/order-status.component';
 import { PassportPhotoInstructionsComponent } from './components/passport-photo-instructions/passport-photo-instructions.component';
+import { LabDashboardComponent } from './components/lab-components/lab-dashboard/lab-dashboard.component';
 
 export function playerFactory() {
   return import('lottie-web');
@@ -57,7 +57,6 @@ export function playerFactory() {
     UserNavbarComponent,
     GalleryUploadComponent,
     GalleryCardComponent,
-    LabDashboardComponent,
     AddPassportPhotoComponent,
     PendingDashboardComponent,
     OrdersComponent,
@@ -76,6 +75,7 @@ export function playerFactory() {
     RetakeDashboardComponent,
     OrderStatusComponent,
     PassportPhotoInstructionsComponent,
+    LabDashboardComponent,
   ],
   imports: [
     BrowserModule,

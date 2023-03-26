@@ -24,6 +24,7 @@ import { RetakeComponent } from './components/retake/retake.component';
 import { RetakeDashboardComponent } from './components/lab-components/retake-dashboard/retake-dashboard.component';
 import { PassportPhotoInstructionsComponent } from './components/passport-photo-instructions/passport-photo-instructions.component';
 import { OrderStatusComponent } from './components/order-status/order-status.component';
+import { LabDashboardComponent } from './components/lab-components/lab-dashboard/lab-dashboard.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -53,6 +54,11 @@ const routes: Routes = [
   {
     path: 'dialogApproval',
     component: DialogApprovalComponent,
+    canActivate: [AuthGuardGuard, RoleguardLabGuard],
+  },
+  {
+    path: 'lab-dashboard',
+    component: LabDashboardComponent,
     canActivate: [AuthGuardGuard, RoleguardLabGuard],
   },
   {

@@ -28,7 +28,7 @@ export class OrderStatusComponent implements OnInit{
     // }) 
     const userOrder = this.orderService.getCustomerLatestOrder().subscribe((response) =>{
       this.order = response;
-      console.log(this.order.orderStatus)
+      console.log('order Status:',this.order.orderStatus)
       // if(this.order.orderStatus == "retake_needed"){
       //   this.retake_needed=true;
       // };
@@ -63,7 +63,7 @@ export class OrderStatusComponent implements OnInit{
         // this.printing = true;
         // this.readyToDeliver = true;
       };
-      console.log(this.status)
+      // console.log(this.status)
     })
   }
   goBack(){

@@ -28,7 +28,7 @@ export class LoginComponent {
           this.router
             .navigate(['user_dashboard'])
             .then(() => window.location.reload());
-        else if (res.role === 'lab') this.router.navigate(['pendingApproval']);
+        else if (res.role === 'lab') this.router.navigate(['lab-dashboard']);
         else this.authService.logout();
       });
     }
@@ -62,7 +62,7 @@ export class LoginComponent {
                     .navigate(['user_dashboard'])
                     .then(() => window.location.reload());
                 else if (res.role === 'lab')
-                  this.router.navigate(['pendingApproval']);
+                  this.router.navigate(['lab-dashboard']);
                 else this.authService.logout();
               });
             },
