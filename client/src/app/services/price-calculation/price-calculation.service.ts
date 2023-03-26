@@ -74,7 +74,8 @@ export class PriceCalculationService {
     return localStorage.getItem('userAccessToken');
   }
 
-  private get pathaoToken() {
-    return localStorage.getItem('pathaoAccessToken');
+  get pathaoToken() {
+    return JSON.parse(localStorage.getItem('pathaoAccessToken') || "''")
+      .access_token;
   }
 }
