@@ -1,7 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Details } from 'src/app/interfaces/details.interface';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+// import { Details } from 'src/app/interfaces/details.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { PathaoService } from 'src/app/services/pathao/pathao.service';
 import { UserdataService } from 'src/app/services/userdata/userdata.service';
@@ -39,6 +41,10 @@ export class UserAddressComponent {
   zones: { zone_id: number; zone_name: string }[] = [];
   areas: { area_id: number; area_name: string }[] = [];
 
+  filteredCities?: Observable<{ city_id: number; city_name: string }[]>;
+  filteredZones?: Observable<{ city_id: number; city_name: string }[]>;
+  filteredAreas?: Observable<{ city_id: number; city_name: string }[]>;
+
   constructor(
     private fb: FormBuilder,
     private pathao: PathaoService,
@@ -56,6 +62,11 @@ export class UserAddressComponent {
         this.hasPreviousInfo = false;
       }
     });
+
+    this.filteredCities = this.city?.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filter(value || ''))
+    );
 
     this.city?.valueChanges.subscribe((cityVal: any) => {
       this.pathao.getPathaoZone(cityVal.city_id).subscribe({
@@ -108,5 +119,12 @@ export class UserAddressComponent {
 
   continueWithPrevious() {
     this.router.navigate(['order_summary']);
+  }
+
+  private _filter(value: string): { city_id: number; city_name: string }[] {
+    const filterValue = value.toLowerCase();
+    return this.cities.filter((city) =>
+      city.city_name.toLowerCase().includes(filterValue)
+    );
   }
 }

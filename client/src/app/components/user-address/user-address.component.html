@@ -76,11 +76,19 @@
       <div>
         <mat-form-field class="city" appearance="outline">
           <mat-label>City</mat-label>
-          <mat-select formControlName="city">
+          <input
+            type="text"
+            placeholder="Pick your city"
+            aria-label="cities"
+            matInput
+            formControlName="city"
+            [matAutocomplete]="auto"
+          />
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
             <mat-option *ngFor="let city of cities" [value]="city">
               {{ city.city_name }}
             </mat-option>
-          </mat-select>
+          </mat-autocomplete>
           <mat-error *ngIf="city?.errors?.['required']"
             >City is required</mat-error
           >
