@@ -22,7 +22,6 @@ const pathaoAccessToken = async (req, res, next) => {
         },
       }
     );
-    // console.log(pathaoToken.data);
     res.status(200);
     res.send({ pathaoToken: pathaoToken.data });
   } catch (err) {
@@ -32,7 +31,6 @@ const pathaoAccessToken = async (req, res, next) => {
 };
 
 const pathaoZones = async (req, res, next) => {
-  // console.log(req.body);
   const { pathaoToken, city_id } = req.body;
   try {
     const zones = await axios.get(
@@ -45,7 +43,6 @@ const pathaoZones = async (req, res, next) => {
         },
       }
     );
-    // console.log(zones.data.data.data);
     res.status(200).send({ zones: zones.data.data.data });
   } catch (err) {
     console.log(err);
@@ -56,7 +53,6 @@ const pathaoZones = async (req, res, next) => {
 };
 
 const pathaoAreas = async (req, res, next) => {
-  // console.log(req.body);
   const { pathaoToken, zone_id } = req.body;
   try {
     const areas = await axios.get(
@@ -69,8 +65,6 @@ const pathaoAreas = async (req, res, next) => {
         },
       }
     );
-
-    // console.log(areas.data.data.data);
     res.status(200).send({ areas: areas.data.data.data });
   } catch (err) {
     console.log(err);
@@ -117,7 +111,6 @@ const pathaoFindClosestStudio = async (req, res, next) => {
 
 const patahaoPriceCalc = async (req, res, next) => {
   try {
-    // console.log(req.body);
     const { store_id, pathaoToken } = req.body;
     const item_type = 1;
     const delivery_type = 48;
