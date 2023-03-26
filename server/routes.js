@@ -86,7 +86,7 @@ router.delete('/cart', authMiddleware.customer, cartController.clearCart);
 router.get('/pathao/accessToken', pathaoController.pathaoAccessToken);
 router.post('/pathao/zones', pathaoController.pathaoZones);
 router.post('/pathao/areas', pathaoController.pathaoAreas);
-router.post('/pathao/order', pathaoController.createOrder);
+// router.post('/pathao/order', pathaoController.createOrder);
 router.get(
   '/pathao/closest-studio',
   authMiddleware.customer,
