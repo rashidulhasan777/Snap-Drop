@@ -9,6 +9,34 @@ table {
   .filter{
     width: 40%;
   }
+  .top-infos{
+    display: flex;
+    margin-bottom: 5vh;
+  }
+  .chart{
+    padding-top: 5vh;
+    padding-left: 2vw;
+    width: 45vw;
+    /* height: 30vh; */
+  }
+  .stat-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 10vh;
+    padding-left: 10vw;
+    padding-bottom: 5vh;
+  }
+  /* 
+  .example-card {
+    position: relative;
+    width: 20vw;
+    margin: 0 auto;
+    background-color: #F1F4F6;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+  } */
+  
   
   .example-container {
     height: 90vh;
@@ -61,11 +89,7 @@ table {
     background: radial-gradient(circle at center, rgba(191, 145, 247, 0.63) 0%, rgba(178, 116, 248, 0.575) 50%, rgba(62, 82, 117, 0) 100%);
     animation: backgroundAnimation 20s ease-in-out infinite;
   }
-  .stat-container{
-    display: flex;
-    padding-top: 5vh;
-    padding-bottom: 5vh;
-  }
+  
   
   @keyframes backgroundAnimation {
     0% {
