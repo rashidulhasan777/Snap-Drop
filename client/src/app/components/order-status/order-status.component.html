@@ -18,6 +18,18 @@
         </div> -->
       </form>
     </mat-step>
+    <mat-step  [stepControl]="firstFormGroup" *ngIf="retake_needed">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Retake Photo</ng-template>
+        <!-- <mat-form-field>
+          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+        </mat-form-field> -->
+        <p>You need to retake your passport photos</p>
+        <!-- <div>
+          <button mat-button matStepperNext>Next</button> 
+        </div> -->
+      </form>
+    </mat-step>
     <mat-step  [stepControl]="secondFormGroup" >
       <form [formGroup]="secondFormGroup">
         <ng-template matStepLabel>Approved</ng-template>
@@ -47,7 +59,7 @@
     </mat-step>
   </mat-vertical-stepper>
   <div class = "goBack">
-    <button mat-raised-button color="primary" >Go back</button>
+    <button mat-raised-button color="primary" (click)="goBack()">Go back</button>
   </div>
   </div>
   

@@ -6,6 +6,10 @@ th.mat-sort-header-sorted {
   color: black;
 }
 
+.filter{
+  width: 40%;
+}
+
 .example-container {
   height: 90vh;
   border: 1px solid rgba(0, 0, 0, 0.5);

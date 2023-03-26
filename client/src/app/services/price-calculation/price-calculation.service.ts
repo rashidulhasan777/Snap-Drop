@@ -42,7 +42,7 @@ export class PriceCalculationService {
   calculateAllPrices(cart: Cart, store_id: number): Price {
     const passport = this.calculatePrice(cart.passportPictures || []);
     const gallery = this.calculatePrice(cart.galleryPictures || []);
-    this.getDelivaryPrice(store_id).subscribe((res) => console.log(res));
+    // this.getDelivaryPrice(store_id).subscribe((res) => console.log(res));
     // const total = passport + gallery + shipping;
     return { passport, gallery, shipping: 0, total: 0 };
   }
