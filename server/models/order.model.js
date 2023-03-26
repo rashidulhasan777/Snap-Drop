@@ -11,6 +11,10 @@ const priceSchema = new mongoose.Schema({
 
 const OrderSchema = new mongoose.Schema(
   {
+    order_id: {
+      type: String,
+      required: true,
+    },
     labId: {
       type: Number,
       required: true,

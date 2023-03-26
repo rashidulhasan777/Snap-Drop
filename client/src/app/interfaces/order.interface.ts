@@ -4,7 +4,8 @@ import { Price } from './price.interface';
 
 export interface Order {
   _id?: string;
-  labId: string;
+  order_id: string;
+  labId: number;
   customerId?: string;
   parcelId?: string;
   orderStatus?: string;
