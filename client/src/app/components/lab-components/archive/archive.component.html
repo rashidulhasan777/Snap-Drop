@@ -1,7 +1,7 @@
 <app-nav-and-sidebar>
   <div class="example-sidenav-content">
     <h2>Archived Orders</h2>
-    <mat-form-field>
+    <mat-form-field class="filter"> 
       <mat-label>Filter</mat-label>
       <input
         matInput
@@ -39,9 +39,9 @@
 
         <!-- Fruit Column -->
         <ng-container matColumnDef="button">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Paid</th>
           <td mat-cell *matCellDef="let row">
-            <button mat-raised-button color="primary">View Details</button>
+            {{ row.totalPrice.total}}
           </td>
         </ng-container>
 

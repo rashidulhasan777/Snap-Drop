@@ -35,7 +35,7 @@ const MatComponents = [
   MatDialogModule,
   MatSelectModule,
   MatButtonToggleModule,
-  MatStepperModule,
+  MatStepperModule
 ];
 
 @NgModule({

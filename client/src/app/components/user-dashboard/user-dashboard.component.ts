@@ -35,4 +35,7 @@ export class UserDashboardComponent {
       }
     });
   }
+  goTimeline(){
+    this.router.navigate(['order-status'])
+  }
 }

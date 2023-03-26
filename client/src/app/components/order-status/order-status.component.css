@@ -1,0 +1,25 @@
+.example-input-wrapper {
+    margin-bottom: 16px;
+  }
+  
+  label {
+    margin-right: 4px;
+  }
+/* .mat-step-header {
+    pointer-events: none !important;
+} */
+
+
+.header{
+    padding-top: 10vh;
+    padding-bottom: 8vh;
+}
+.totalContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5%;
+}
+.goBack{
+  padding-top: 5vh;
+}

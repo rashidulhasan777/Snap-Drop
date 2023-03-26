@@ -1,4 +1,6 @@
 const axios = require('axios');
+const Order = require('./../models/order.model');
+const User = require('./../models/user.model');
 const { findClosestStudio } = require('../utils/helpers/nearestLabFinder');
 
 const baseUrl = process.env.PATHAO_BASE_URL;
@@ -82,10 +84,33 @@ const pathaoAreas = async (req, res, next) => {
 const createOrder = async (req, res, next) => {
   console.log(req.body.pathaoToken);
   const { pathaoToken } = req.body;
+  const { id } = req.body;
   try {
+    const order = await Order.findById(id);
+    const labUser = await User.find({ labId : order.labId });
+    orderDetails = {
+    "store_id": 55865, //order.labId,
+    "merchant_order_id": "",
+    "sender_name": "Karim bhai", //labUser.details.contact_name,
+    "sender_phone": '01954875461', //labUser.details.contact_number,
+    "recipient_name": 'Rahim Bhai', //order.orderDelivaryDetails.contact_name,
+    "recipient_phone": '01954244156', //order.orderDelivaryDetails.contact_number,
+    "recipient_address": 'aobnfbnaofenofianeoi', //order.orderDelivaryDetails.address,
+    "recipient_city": order.orderDelivaryDetails.city.city_id,
+    "recipient_zone": order.orderDelivaryDetails.zone.zone_id,
+    "recipient_area": order.orderDelivaryDetails.area.area_id,
+    "delivery_type": 48,
+    "item_type": 2,
+    "special_instruction": "",
+    "item_quantity": 1,
+    "item_weight": 0.5,
+    "amount_to_collect": 0,
+    "item_description": ""
+    }
+
     const store = await axios.post(
       `${baseUrl}/aladdin/api/v1/orders`,
-      req.body,
+      orderDetails, 
       {
         headers: {
           authorization: `Bearer ${pathaoToken}`,
@@ -94,9 +119,10 @@ const createOrder = async (req, res, next) => {
         },
       }
     );
+    console.log(store.data)
     res.status(200).send(store.data);
   } catch (err) {
-    console.log(err);
+    console.log(err.response.data);
     res.status(401).send({ errorMessage: `Cannot create order` });
   }
 };
