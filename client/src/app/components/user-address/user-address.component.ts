@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -18,6 +18,9 @@ export class UserAddressComponent {
   User?: User;
   isZoneDisabled: boolean = true;
   isAreaDisabled: boolean = true;
+  cityPrev: { city_id: number; city_name: string } | string = '';
+  zonePrev: { zone_id: number; zone_name: string } | string = '';
+  areaPrev: { area_id: number; area_name: string } | string = '';
 
   deliveryInfoForm = this.fb.group({
     name: ['', [Validators.required]],
@@ -31,9 +34,10 @@ export class UserAddressComponent {
       ],
     ],
     address: ['', [Validators.required, Validators.min(10)]],
-    city: ['', [Validators.required]],
-    zone: ['', [Validators.required]],
-    area: ['', [Validators.required]],
+    // city: new FormControl<{ city_id: number; city_name: string } | string>(''),
+    city: [this.cityPrev, [Validators.required]],
+    zone: [this.zonePrev, [Validators.required]],
+    area: [this.areaPrev, [Validators.required]],
   });
 
   cities: { city_id: number; city_name: string }[] = [
@@ -69,7 +73,11 @@ export class UserAddressComponent {
 
     this.filteredCities = this.city?.valueChanges.pipe(
       startWith(''),
-      map((value) => this._filterCity(value || ''))
+      // map((value) => this._filterCity(value || ''))
+      map((city) => {
+        const name = typeof city === 'string' ? city : city?.city_name;
+        return name ? this._filterCity(name as string) : this.cities.slice();
+      })
     );
   }
   get name() {
@@ -91,35 +99,41 @@ export class UserAddressComponent {
     return this.deliveryInfoForm.get('area');
   }
 
-  setZones(city: string) {
-    const cityObj = this.cities.find((ct) => ct.city_name === city)!;
-    this.pathao.getPathaoZone(cityObj.city_id).subscribe({
+  setZones(city: { city_id: number; city_name: string }) {
+    this.pathao.getPathaoZone(city.city_id).subscribe({
       next: (res: any) => {
         this.zones = res.zones;
         this.disableZone(false);
         this.filteredZones = this.zone?.valueChanges.pipe(
           startWith(''),
-          map((value) => this._filterZone(value || ''))
+          // map((value) => this._filterZone(value || ''))
+          map((zone) => {
+            const name = typeof zone === 'string' ? zone : zone?.zone_name;
+            return name ? this._filterZone(name as string) : this.zones.slice();
+          })
         );
       },
     });
   }
 
-  setAreas(zone: string) {
-    const zoneObj = this.zones.find((zn) => zn.zone_name === zone)!;
-    this.pathao.getPathaoArea(zoneObj.zone_id).subscribe({
+  setAreas(zone: { zone_id: number; zone_name: string }) {
+    this.pathao.getPathaoArea(zone.zone_id).subscribe({
       next: (res: any) => {
         this.areas = res.areas;
         this.disableArea(false);
         this.filteredAreas = this.area?.valueChanges.pipe(
           startWith(''),
-          map((value) => this._filterArea(value || ''))
+          map((area) => {
+            const name = typeof area === 'string' ? area : area?.area_name;
+            return name ? this._filterArea(name as string) : this.areas.slice();
+          })
         );
       },
     });
   }
 
   handleSubmit() {
+    console.log(this.deliveryInfoForm.value);
     if (this.deliveryInfoForm.valid) {
       const details = JSON.parse(JSON.stringify(this.deliveryInfoForm.value));
       details.contact_number = '+880' + details.contact_number;
@@ -164,5 +178,14 @@ export class UserAddressComponent {
   disableArea(val: boolean) {
     if (val) this.deliveryInfoForm.controls['area'].disable();
     else this.deliveryInfoForm.controls['area'].enable();
+  }
+  displayFnCities(city: { city_id: number; city_name: string }) {
+    return city ? city.city_name : '';
+  }
+  displayFnZones(zone: { zone_id: number; zone_name: string }) {
+    return zone ? zone.zone_name : '';
+  }
+  displayFnAreas(area: { area_id: number; area_name: string }) {
+    return area ? area.area_name : '';
   }
 }

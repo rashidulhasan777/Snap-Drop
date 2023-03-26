@@ -85,13 +85,14 @@
             [matAutocomplete]="CityAuto"
           />
           <mat-autocomplete
+            [displayWith]="displayFnCities"
             autoActiveFirstOption
             #CityAuto="matAutocomplete"
             (optionSelected)="setZones($event.option.value)"
           >
             <mat-option
               *ngFor="let city of filteredCities | async"
-              [value]="city.city_name"
+              [value]="city"
             >
               {{ city.city_name }}
             </mat-option>
@@ -113,13 +114,14 @@
             [matAutocomplete]="ZoneAuto"
           />
           <mat-autocomplete
+            [displayWith]="displayFnZones"
             autoActiveFirstOption
             #ZoneAuto="matAutocomplete"
             (optionSelected)="setAreas($event.option.value)"
           >
             <mat-option
               *ngFor="let zone of filteredZones | async"
-              [value]="zone.zone_name"
+              [value]="zone"
             >
               {{ zone.zone_name }}
             </mat-option>
@@ -140,10 +142,14 @@
             formControlName="area"
             [matAutocomplete]="AreaAuto"
           />
-          <mat-autocomplete autoActiveFirstOption #AreaAuto="matAutocomplete">
+          <mat-autocomplete
+            [displayWith]="displayFnAreas"
+            autoActiveFirstOption
+            #AreaAuto="matAutocomplete"
+          >
             <mat-option
               *ngFor="let area of filteredAreas | async"
-              [value]="area.area_name"
+              [value]="area"
             >
               {{ area.area_name }}
             </mat-option>
