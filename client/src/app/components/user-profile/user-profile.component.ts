@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { User } from 'src/app/interfaces/user.interface';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { PathaoService } from 'src/app/services/pathao/pathao.service';
 import { UserdataService } from 'src/app/services/userdata/userdata.service';
 
@@ -53,7 +54,8 @@ export class UserProfileComponent {
     private fb: FormBuilder,
     private pathao: PathaoService,
     private userDataService: UserdataService,
-    private router: Router
+    private router: Router,
+    private authService: AuthenticationService
   ) {}
   ngOnInit() {
     this.disableArea(true);
@@ -175,5 +177,8 @@ export class UserProfileComponent {
   }
   displayFnAreas(area: { area_id: number; area_name: string }) {
     return area ? area.area_name : '';
+  }
+  logout() {
+    this.authService.logout();
   }
 }
