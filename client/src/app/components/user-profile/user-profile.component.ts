@@ -130,14 +130,15 @@ export class UserProfileComponent {
     });
   }
 
+  // need to update user details on submit
   handleSubmit() {
-    if (this.deliveryInfoForm.valid) {
-      const details = JSON.parse(JSON.stringify(this.deliveryInfoForm.value));
-      details.contact_number = '+880' + details.contact_number;
-      this.userDataService.updateUserData(details).subscribe((res) => {
-        this.router.navigate(['order_summary']);
-      });
-    }
+    //   if (this.deliveryInfoForm.valid) {
+    //     const details = JSON.parse(JSON.stringify(this.deliveryInfoForm.value));
+    //     details.contact_number = '+880' + details.contact_number;
+    //     this.userDataService.updateUserData(details).subscribe((res) => {
+    //       this.router.navigate(['order_summary']);
+    //     });
+    //   }
   }
 
   private _filterCity(value: string): { city_id: number; city_name: string }[] {
