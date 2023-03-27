@@ -29,14 +29,18 @@ export class AppComponent {
         'assets/facebook_icon.svg'
       )
     );
+    this.maticonService.addSvgIcon(
+      'reset_image',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/reset_image.svg')
+    );
     this.authService.userRole().subscribe((res) => (this.role = res.role));
-    this.pathao.getPathaoAccessToken().subscribe({
-      next: (res) => {
-        localStorage.setItem(
-          'pathaoAccessToken',
-          JSON.stringify(res.pathaoToken)
-        );
-      },
-    });
+    // this.pathao.getPathaoAccessToken().subscribe({
+    //   next: (res) => {
+    //     localStorage.setItem(
+    //       'pathaoAccessToken',
+    //       JSON.stringify(res.pathaoToken)
+    //     );
+    //   },
+    // });
   }
 }

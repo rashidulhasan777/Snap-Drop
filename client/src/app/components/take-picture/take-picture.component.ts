@@ -14,6 +14,7 @@ export class TakePictureComponent {
   trigger: Subject<void> = new Subject<void>();
   dataUrl = '';
   errorMsg = '';
+  delayed = false;
 
   cameraConfig: MediaTrackConstraints = {
     facingMode: 'user',
@@ -26,6 +27,7 @@ export class TakePictureComponent {
 
   ngOnInit() {
     this.windowWidth = window.innerWidth;
+    setTimeout(() => (this.delayed = !this.delayed), 800);
   }
 
   @HostListener('window:resize', ['$event'])
