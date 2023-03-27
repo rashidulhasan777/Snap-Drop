@@ -24,6 +24,7 @@ import { RetakeComponent } from './components/retake/retake.component';
 import { RetakeDashboardComponent } from './components/lab-components/retake-dashboard/retake-dashboard.component';
 import { PassportPhotoInstructionsComponent } from './components/passport-photo-instructions/passport-photo-instructions.component';
 import { OrderStatusComponent } from './components/order-status/order-status.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -108,6 +109,11 @@ const routes: Routes = [
   {
     path: 'passport_photo_instructions',
     component: PassportPhotoInstructionsComponent,
+    canActivate: [AuthGuardGuard, RoleguardUserGuard],
+  },
+  {
+    path: 'profile',
+    component: UserProfileComponent,
     canActivate: [AuthGuardGuard, RoleguardUserGuard],
   },
   { path: '', pathMatch: 'full', redirectTo: 'login' },
