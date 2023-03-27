@@ -1,5 +1,5 @@
 // Modules
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -41,6 +41,7 @@ import { RetakeComponent } from './components/retake/retake.component';
 import { RetakeDashboardComponent } from './components/lab-components/retake-dashboard/retake-dashboard.component';
 import { OrderStatusComponent } from './components/order-status/order-status.component';
 import { PassportPhotoInstructionsComponent } from './components/passport-photo-instructions/passport-photo-instructions.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 export function playerFactory() {
   return import('lottie-web');
@@ -86,6 +87,12 @@ export function playerFactory() {
     LottieModule.forRoot({ player: playerFactory }),
     FormsModule,
     ReactiveFormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
