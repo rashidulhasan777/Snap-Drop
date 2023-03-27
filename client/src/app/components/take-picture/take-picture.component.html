@@ -1,16 +1,17 @@
-<div #container class="webcamContainer">
+<div #container *ngIf="cameraOpen" class="webcamContainer">
   <webcam
     class="camera"
+    (initError)="handleInitError($event)"
     [width]="windowWidth"
     [trigger]="getTrigger()"
     [captureImageData]="true"
-    *ngIf="cameraOpen"
+    [allowCameraSwitch]="true"
     [videoOptions]="cameraConfig"
     (imageCapture)="saveImage($event)"
     [imageQuality]="1"
   ></webcam>
-  <img class="outline" src="assets/outline.svg">
+  <img class="outline" src="assets/outline.svg" />
 </div>
-
-<button (click)="capture()">Capture</button>
-<img *ngIf="Image" [src]="dataUrl" class="capturedImage" />
+<div *ngIf="errorMsg" class="errorMsg">{{ errorMsg }}</div>
+<button *ngIf="cameraOpen" (click)="capture()">Capture</button>
+<img *ngIf="!cameraOpen && !errorMsg" [src]="dataUrl" class="capturedImage" />

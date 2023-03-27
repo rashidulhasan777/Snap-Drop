@@ -29,7 +29,7 @@ import { TakePictureComponent } from './components/take-picture/take-picture.com
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'passport', component: TakePictureComponent },
+  { path: 'camera', component: TakePictureComponent },
   { path: 'oauth_google', component: GoogleLoginComponent },
   { path: 'oauth_fb', component: FacebookLoginComponent },
   {

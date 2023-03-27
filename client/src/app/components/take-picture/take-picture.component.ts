@@ -13,6 +13,7 @@ export class TakePictureComponent {
   Image: WebcamImage | null = null;
   trigger: Subject<void> = new Subject<void>();
   dataUrl = '';
+  errorMsg = '';
 
   cameraConfig: MediaTrackConstraints = {
     facingMode: 'user',
@@ -35,11 +36,12 @@ export class TakePictureComponent {
   saveImage(webcamImage: WebcamImage) {
     this.Image = webcamImage;
     this.dataUrl = this.Image.imageAsDataUrl;
-    const link = this.renderer.createElement('a');
-    link.setAttribute('href', this.Image.imageAsDataUrl);
-    link.setAttribute('download', `myface.jpg`);
-    link.click();
-    link.remove();
+    // const link = this.renderer.createElement('a');
+    // link.setAttribute('href', this.Image.imageAsDataUrl);
+    // link.setAttribute('download', `myface.jpg`);
+    // link.click();
+    // link.remove();
+    this.cameraOpen = false;
 
     // const buff = Buffer.from(this.Image.imageAsBase64, 'base64');
   }
@@ -51,13 +53,15 @@ export class TakePictureComponent {
   getTrigger() {
     return this.trigger.asObservable();
   }
-
-  targetStyle() {
-    let x = 100 + Math.random() * 100;
-    let y = 100 + Math.random() * 100;
-    return {
-      top: `${x}px`,
-      left: `${y}px`,
-    };
+  handleInitError(error: WebcamInitError): void {
+    if (
+      error.mediaStreamError &&
+      error.mediaStreamError.name === 'NotAllowedError'
+    ) {
+      console.warn('Camera access was not allowed by user!');
+      this.cameraOpen = false;
+      this.errorMsg = `You have denied camera access. We need camera access to take your picture.
+      Please re-allow camera permission and refresh the page to take the picture.`;
+    }
   }
 }

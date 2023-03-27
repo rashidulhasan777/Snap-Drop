@@ -1,5 +1,7 @@
 .capturedImage {
   max-width: 100%;
+  transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
 }
 
 .webcamContainer {
@@ -14,4 +16,15 @@
   max-height: 98%;
   /* left: 50%; */
   transform: translate(-50%, 0%);
+}
+
+.errorMsg {
+  width: 100%;
+  height: calc(100% - 10%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  padding: 30px;
+  text-align: center;
 }
