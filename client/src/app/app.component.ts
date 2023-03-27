@@ -30,13 +30,13 @@ export class AppComponent {
       )
     );
     this.authService.userRole().subscribe((res) => (this.role = res.role));
-    this.pathao.getPathaoAccessToken().subscribe({
-      next: (res) => {
-        localStorage.setItem(
-          'pathaoAccessToken',
-          JSON.stringify(res.pathaoToken)
-        );
-      },
-    });
+    // this.pathao.getPathaoAccessToken().subscribe({
+    //   next: (res) => {
+    //     localStorage.setItem(
+    //       'pathaoAccessToken',
+    //       JSON.stringify(res.pathaoToken)
+    //     );
+    //   },
+    // });
   }
 }

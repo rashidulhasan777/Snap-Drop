@@ -31,6 +31,7 @@ processes = []
 
   STORE_ID = "flyaw641be11fa19cc"
   STORE_PASSWORD = "flyaw641be11fa19cc@ssl"
+  FRONTEND = "http://localhost:4200"
 
 [experimental]
   auto_rollback = true

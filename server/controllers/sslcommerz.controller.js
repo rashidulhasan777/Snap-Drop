@@ -43,7 +43,8 @@ const initPayment = (req, res) => {
   sslcz.init(data).then((apiResponse) => {
     // Redirect the user to payment gateway
     let GatewayPageURL = apiResponse.GatewayPageURL;
-    res.redirect(GatewayPageURL);
+    // res.redirect(GatewayPageURL);
+    res.status(200).send({ url: GatewayPageURL });
     console.log("Redirecting to: init ", GatewayPageURL);
   });
 };
@@ -60,7 +61,9 @@ const success = async (req, res) => {
     );
     sslcz.validate(data).then((data) => {
       console.log("success1", data);
-      res.redirect("/payment");
+      // if (data.status === "VALIID")
+        res.redirect(301, `${process.env.FRONTEND}/order_done`);
+      // else res.redirect(`${process.env.FRONTEND}/payment_failed`);
     });
   } catch (error) {
     console.log(error);
@@ -68,7 +71,7 @@ const success = async (req, res) => {
   }
 };
 const failure = async (req, res) => {
-  console.log("Failed" ,req.body)
+  console.log("Failed", req.body);
   return res.status(400).send(req.body);
 };
 const cancel = async (req, res) => {

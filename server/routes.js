@@ -106,7 +106,7 @@ router.post(
 );
 
 //SSLcommerz Routes
-router.get('/payment/:order_id/:amount', SslCommerzController.initPayment);
+router.get('/payment/:order_id/:amount',authMiddleware.customer, SslCommerzController.initPayment);
 router.post('/payment-success', SslCommerzController.success);
 router.post('/payment-failure', SslCommerzController.failure);
 router.post('/payment-cancel', SslCommerzController.cancel);

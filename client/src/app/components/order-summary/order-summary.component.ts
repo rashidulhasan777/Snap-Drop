@@ -9,6 +9,7 @@ import { CartService } from 'src/app/services/cart/cart.service';
 import { OrderService } from 'src/app/services/orders/order.service';
 import { PriceCalculationService } from 'src/app/services/price-calculation/price-calculation.service';
 import { UserdataService } from 'src/app/services/userdata/userdata.service';
+import { PaymentService } from 'src/app/services/payment/payment.service';
 
 @Component({
   selector: 'app-order-summary',
@@ -27,6 +28,7 @@ export class OrderSummaryComponent {
     private userDataService: UserdataService,
     private priceCalculator: PriceCalculationService,
     private orderService: OrderService,
+    private paymentService: PaymentService,
     private router: Router
   ) {}
 
@@ -64,7 +66,15 @@ export class OrderSummaryComponent {
         this.orderService.cleanUnpaidOrders().subscribe(() => {
           this.orderService.createOrder(order).subscribe((res) => {
             this.CompletedOrder = res;
-            this.router.navigate(['order_done']);
+            this.paymentService
+              .initiatePayment(
+                this.CompletedOrder.order_id,
+                this.CompletedOrder.totalPrice.total
+              )
+              .subscribe((response: any) => {
+                window.location.href = response.url;
+              });
+            // this.router.navigate(['order_done']);
           });
         });
       },
