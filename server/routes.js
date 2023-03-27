@@ -53,6 +53,11 @@ router.get(
   authMiddleware.lab,
   orderController.getOrderByLabId
 );
+router.get(
+  '/orderOneWeek/',
+  authMiddleware.lab,
+  orderController.getOneWeekData
+);
 //These two routes needs to be before /order/:id to match
 router.put(
   '/order/paid',
@@ -69,6 +74,7 @@ router.get(
   authMiddleware.lab,
   orderController.getOrdersbyStatus
 );
+
 //Keep these under /order/paid
 router.post('/order', authMiddleware.customer, orderController.createOrder);
 router.put('/order/:id', authMiddleware.lab, orderController.changeOrderStatus);

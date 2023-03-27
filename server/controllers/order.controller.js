@@ -90,6 +90,18 @@ const getOrderByLabId = async (req, res) => {
     res.send(error);
   }
 };
+const getOneWeekData = async (req, res) => {
+  try {
+    const orders = await Order.find({labId: req.currentUser.labId , timestamp: {
+        $gte: new Date(new Date() - 7 * 60 * 60 * 24 * 1000)
+    } });
+    res.status(201);
+    res.send(orders);
+  } catch (error) {
+    res.status(500).send({ errorMessage: 'Something went wrong' });
+    res.send(error);
+  }
+};
 const setOrderPaid = async (req, res) => {
   try {
     const latestOrder = await Order.findOneAndUpdate(
@@ -160,4 +172,5 @@ module.exports = {
   cleanUnpaidOrders,
   updatePassport,
   getUserLastOrder,
+  getOneWeekData
 };
