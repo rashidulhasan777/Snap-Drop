@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { OrderService } from 'src/app/services/orders/order.service';
+import { MatDialog } from '@angular/material/dialog';
+import { OnboardingComponent } from '../onboarding/onboarding.component';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -8,7 +10,11 @@ import { OrderService } from 'src/app/services/orders/order.service';
   styleUrls: ['./user-dashboard.component.css'],
 })
 export class UserDashboardComponent {
-  constructor(private orderService: OrderService, private router: Router) {}
+  constructor(
+    private orderService: OrderService,
+    private router: Router,
+    public dialog: MatDialog
+  ) {}
   // using mock data
   orders: any[] = [
     {
@@ -28,14 +34,19 @@ export class UserDashboardComponent {
   ];
 
   ngOnInit() {
+    this.openDialog();
     this.orderService.getCustomerLatestOrder().subscribe((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.orderStatus === 'retake_needed') {
         this.router.navigate(['retake']);
       }
     });
   }
-  goTimeline(){
-    this.router.navigate(['order-status'])
+
+  goTimeline() {
+    this.router.navigate(['order-status']);
+  }
+  openDialog() {
+    const dialogRef = this.dialog.open(OnboardingComponent);
   }
 }

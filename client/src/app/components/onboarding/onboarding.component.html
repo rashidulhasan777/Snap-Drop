@@ -1,0 +1,92 @@
+<div class="onboarding-container" dialog-container>
+  <mat-dialog-content>
+    <mat-stepper #stepper class="onboarding-stepper">
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <img
+            class="onboarding-icon"
+            src="../../../assets/onboarding_icons/providePic.png"
+          />
+          <h1 class="onboarding-title">Provide Pictures</h1>
+          <p class="onboarding-instruction">
+            You can choose to either take passport photos or upload pictures
+            from your gallery.
+          </p>
+          <div class="btn-container-bottom">
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <img
+            class="onboarding-icon"
+            src="../../../assets/onboarding_icons/addToCart.png"
+          />
+          <h1 class="onboarding-title">Add to Cart</h1>
+          <p class="onboarding-instruction">
+            You can select the sizes of the photos and number of units to print.
+            Then add to the cart and checkout. Or you can clear all items from
+            your cart.
+          </p>
+          <div class="btn-container-bottom">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="thirdFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <img
+            class="onboarding-icon"
+            src="../../../assets/onboarding_icons/provideAddress.png"
+          />
+          <h1 class="onboarding-title">Provide Address</h1>
+          <p class="onboarding-instruction">
+            You can provide a delivery address or change your previous one. You
+            need to select the city, zone, and corresponding area.
+          </p>
+          <div class="btn-container-bottom">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="fourthFormGroup">
+        <form [formGroup]="fourthFormGroup">
+          <img
+            class="onboarding-icon"
+            src="../../../assets/onboarding_icons/payment.png"
+          />
+          <h1 class="onboarding-title">Confirm Payment</h1>
+          <p class="onboarding-instruction">
+            You can view the payment details for your order. You can either pay
+            online or after delivery. For online payment, you wil be redirected
+            to SSL Commerz page.
+          </p>
+          <div class="btn-container-bottom">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="fifthFormGroup">
+        <form [formGroup]="fifthFormGroup">
+          <img
+            class="onboarding-icon"
+            src="../../../assets/onboarding_icons/notification.png"
+          />
+          <h1 class="onboarding-title">Get Notified</h1>
+          <p class="onboarding-instruction">
+            You can choose to get notified in your phone as well as via email or
+            opt out of notifications.
+          </p>
+          <div class="btn-container-bottom">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button mat-dialog-close>Done</button>
+          </div>
+        </form>
+      </mat-step>
+    </mat-stepper>
+  </mat-dialog-content>
+</div>

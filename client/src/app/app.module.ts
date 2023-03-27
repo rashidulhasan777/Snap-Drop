@@ -43,6 +43,7 @@ import { RetakeDashboardComponent } from './components/lab-components/retake-das
 import { OrderStatusComponent } from './components/order-status/order-status.component';
 import { PassportPhotoInstructionsComponent } from './components/passport-photo-instructions/passport-photo-instructions.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { OnboardingComponent } from './components/onboarding/onboarding.component';
 
 export function playerFactory() {
   return import('lottie-web');
@@ -80,8 +81,12 @@ import { AddMorePassportPhotoComponent } from './components/add-more-passport-ph
     RetakeDashboardComponent,
     OrderStatusComponent,
     PassportPhotoInstructionsComponent,
+<<<<<<< HEAD
     TakePictureComponent,
     AddMorePassportPhotoComponent,
+=======
+    OnboardingComponent,
+>>>>>>> origin/onboarding
   ],
   imports: [
     BrowserModule,
