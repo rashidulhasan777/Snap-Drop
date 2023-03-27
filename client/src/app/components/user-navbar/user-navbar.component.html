@@ -1,15 +1,11 @@
 <div class="user-navbar">
-  <div class="cartContainer">
-    <div *ngIf="cartItemsLen" class="cartBadge"><span class="badgeTxt">{{cartItemsLen}}</span></div>
-    <button class="navbarIcons" mat-icon-button routerLink="/cart">
-      <mat-icon class="buttonIconCart">shopping_cart</mat-icon>
-    </button>
-  </div>
-  <button class="navbarIcons" mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon class="buttonIcon">account_circle</mat-icon>
+  <button class="navbarIcons" mat-icon-button routerLink="/user_dashboard">
+    <mat-icon class="buttonIcon">home</mat-icon>
   </button>
-  <mat-menu #menu="matMenu">
-    <button (click)="logout()" mat-menu-item>Logout</button>
-    <!-- <button mat-menu-item>Item 2</button> -->
-  </mat-menu>
+  <button class="navbarIcons bigIcon" mat-icon-button routerLink="/cart">
+    <mat-icon class="buttonIcon">shopping_cart</mat-icon>
+  </button>
+  <button class="navbarIcons" mat-icon-button routerLink="/profile">
+    <mat-icon class="buttonIcon">menu</mat-icon>
+  </button>
 </div>

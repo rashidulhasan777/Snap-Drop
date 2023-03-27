@@ -1,8 +1,10 @@
 .user-navbar {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  height: 70px;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 72px;
+  width: 100vw;
+  padding-top: 20%;
 }
 
 .navbarIcons {
@@ -13,15 +15,7 @@
 .buttonIcon {
   width: 100%;
   height: 100%;
-  font-size: 48px;
-}
-.buttonIconCart {
-  width: 100%;
-  height: 100%;
-  font-size: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-size: 40px;
 }
 
 .cartContainer {
