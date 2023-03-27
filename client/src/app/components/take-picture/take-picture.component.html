@@ -1,2 +1,13 @@
-<p>take-picture works!</p>
-<webcam [width]="windowWidth"></webcam>
+<webcam
+  class="camera"
+  [width]="windowWidth"
+  [trigger]="getTrigger()"
+  [captureImageData]="true"
+  *ngIf="cameraOpen"
+  [videoOptions]="cameraConfig"
+  (imageCapture)="saveImage($event)"
+  [imageQuality]="1"
+></webcam>
+
+<button (click)="capture()">Capture</button>
+<img *ngIf="Image" [src]="dataUrl" class="capturedImage" />
