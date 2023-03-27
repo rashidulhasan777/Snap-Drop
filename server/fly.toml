@@ -11,12 +11,26 @@ processes = []
 
 [env]
   PORT="3000"
-DB_URL='mongodb://127.0.0.1:27017/snapdrop_db'
-JWT_SECRET='plus est en vous'
-GOOGLE_CLIENT_ID='861084726957-9qcs9ivbphq1043ls2b2me5obfhk48ut.apps.googleusercontent.com'
-GOOGLE_CLIENT_SECRET='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'
-STORE_ID = "flyaw641be11fa19cc"
-STORE_PASSWORD = "flyaw641be11fa19cc@ssl"
+  DB_URL='mongodb+srv://Sajon:8nmtUkx6zBgTH4ub@thesisproject.uyrszo9.mongodb.net/snapdrop_db?retryWrites=true&w=majority'
+  JWT_SECRET='plus est en vous'
+
+  GOOGLE_CLIENT_ID='861084726957-9qcs9ivbphq1043ls2b2me5obfhk48ut.apps.googleusercontent.com'
+  GOOGLE_CLIENT_SECRET='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'
+
+  FB_CLIENT_ID='1869465020092669'
+  FB_CLIENT_SECRET='23fc0ee3cd008b03c5b086232aee42f8'
+
+  MAPS_API_KEY='AIzaSyAhkieTsOpkBf6tw71b4Y2cUL4RTRasYGo'
+  MAPS_API_SECRET='qwu5pDJXSlw13rG9OKqduNbVYns='
+
+  CLOUDINARY_API_KEY='889273888131551'
+  CLOUDINARY_NAME='djxuxbxet'
+  CLOUDINARY_API_SECRET='JLSh56UtMiSmUPr604ZRWVRwMeU'
+
+  PATHAO_BASE_URL = 'https://hermes-api.p-stageenv.xyz'
+
+  STORE_ID = "flyaw641be11fa19cc"
+  STORE_PASSWORD = "flyaw641be11fa19cc@ssl"
 
 [experimental]
   auto_rollback = true
