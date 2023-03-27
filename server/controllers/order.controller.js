@@ -1,4 +1,6 @@
 const Order = require('./../models/order.model');
+const transport = require('./../middlewares/nodemailer');
+const {getMailOptions} = require('./../utils/nodemail/mailOptions');
 
 const getAllOrders = async (req, res) => {
   try {
@@ -33,6 +35,9 @@ const changeOrderStatus = async (req, res) => {
     const order = await Order.findOneAndUpdate(filter, update, {
       new: true,
     });
+
+    // transport(getMailOptions("nafizfuad0230@gmail.com", "Hello")); 
+
     res.status(201).send(order);
   } catch (error) {
     res.status(500).send({ errorMessage: 'Something went wrong' });
@@ -77,7 +82,19 @@ const getOrdersbyStatus = async (req, res) => {
 
 const getOrderByLabId = async (req, res) => {
   try {
-    const orders = await Order.find({ labId: req.currentUser._id });
+    const orders = await Order.find({ labId: req.currentUser.labId });
+    res.status(201);
+    res.send(orders);
+  } catch (error) {
+    res.status(500).send({ errorMessage: 'Something went wrong' });
+    res.send(error);
+  }
+};
+const getOneWeekData = async (req, res) => {
+  try {
+    const orders = await Order.find({labId: req.currentUser.labId , timestamp: {
+        $gte: new Date(new Date() - 7 * 60 * 60 * 24 * 1000)
+    } });
     res.status(201);
     res.send(orders);
   } catch (error) {
@@ -155,4 +172,5 @@ module.exports = {
   cleanUnpaidOrders,
   updatePassport,
   getUserLastOrder,
+  getOneWeekData
 };

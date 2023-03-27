@@ -26,6 +26,13 @@ export class OrderService {
       },
     });
   }
+  getOrdersbyLabId(): Observable<Order[]> {
+    return this.http.get<Order[]>(this.baseUrl + 'forLab/', {
+      headers: {
+        Authorization: `Bearer ${this.jwtToken}`,
+      },
+    });
+  }
 
   changeOrderStatus(id: string, body: { orderStatus: string }) {
     return this.http.put(this.baseUrl + '/' + id, body, {

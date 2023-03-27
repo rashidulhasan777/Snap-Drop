@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialComponentsModule } from './material-components/material-components.module';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { LottieModule } from 'ngx-lottie';
+import { NgChartsModule, NgChartsConfiguration  } from 'ng2-charts';
 import player from 'lottie-web';
 import { WebcamModule } from 'ngx-webcam';
 
@@ -23,7 +24,6 @@ import { UserDashboardComponent } from './components/user-dashboard/user-dashboa
 import { UserNavbarComponent } from './components/user-navbar/user-navbar.component';
 import { GalleryUploadComponent } from './components/gallery-upload/gallery-upload.component';
 import { GalleryCardComponent } from './components/gallery-card/gallery-card.component';
-import { LabDashboardComponent } from './components/lab-dashboard/lab-dashboard.component';
 import { AddPassportPhotoComponent } from './components/add-passport-photo/add-passport-photo.component';
 import { PendingDashboardComponent } from './components/lab-components/pending-dashboard/pending-dashboard.component';
 import { OrdersComponent } from './components/lab-components/orders/orders.component';
@@ -45,6 +45,8 @@ import { PassportPhotoInstructionsComponent } from './components/passport-photo-
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { OnboardingComponent } from './components/onboarding/onboarding.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { LabDashboardComponent } from './components/lab-components/lab-dashboard/lab-dashboard.component';
+import { ChartComponent } from './components/lab-components/chart/chart.component';
 
 export function playerFactory() {
   return import('lottie-web');
@@ -63,7 +65,6 @@ import { AddMorePassportPhotoComponent } from './components/add-more-passport-ph
     UserNavbarComponent,
     GalleryUploadComponent,
     GalleryCardComponent,
-    LabDashboardComponent,
     AddPassportPhotoComponent,
     PendingDashboardComponent,
     OrdersComponent,
@@ -89,6 +90,8 @@ import { AddMorePassportPhotoComponent } from './components/add-more-passport-ph
     OnboardingComponent,
 
     UserProfileComponent,
+    LabDashboardComponent,
+    ChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,8 +109,10 @@ import { AddMorePassportPhotoComponent } from './components/add-more-passport-ph
       registrationStrategy: 'registerWhenStable:30000',
     }),
     WebcamModule,
+    NgChartsModule
   ],
   providers: [
+    { provide: NgChartsConfiguration, useValue: { generateColors: false }},
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
   ],

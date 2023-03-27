@@ -27,6 +27,7 @@ import { OrderStatusComponent } from './components/order-status/order-status.com
 import { TakePictureComponent } from './components/take-picture/take-picture.component';
 import { AddMorePassportPhotoComponent } from './components/add-more-passport-photo/add-more-passport-photo.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { LabDashboardComponent } from './components/lab-components/lab-dashboard/lab-dashboard.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -62,6 +63,11 @@ const routes: Routes = [
   {
     path: 'dialogApproval',
     component: DialogApprovalComponent,
+    canActivate: [AuthGuardGuard, RoleguardLabGuard],
+  },
+  {
+    path: 'lab-dashboard',
+    component: LabDashboardComponent,
     canActivate: [AuthGuardGuard, RoleguardLabGuard],
   },
   {

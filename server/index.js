@@ -1,7 +1,7 @@
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
 const express = require('express');
 
@@ -10,7 +10,7 @@ const app = express();
 const router = require('./routes');
 
 const corsConfig = {
-  origin: 'http://localhost:4200',
+  origin: ['http://localhost:4200'],
   credentials: true,
 };
 

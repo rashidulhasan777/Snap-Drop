@@ -1,46 +1,84 @@
-<!-- <div class="example-input-wrapper">
-    <label for="duration">Animation duration:</label>
-    <input id="duration" value="2000" type="number" min="0" step="100" #duration>
-  </div> -->
-
-  <div class = 'totalContainer'>
-    <h1 class="header">Order Status</h1>
-  <mat-vertical-stepper [linear]="true" #stepper class = "content">
-    <mat-step  [stepControl]="firstFormGroup">
+<div class="totalContainer">
+  <h1 class="header">Order Status</h1>
+  <div class="container">
+    <div class="timeline">
+      <div class="timeline-section">
+        <div class="timeline-header">
+          <div class="icon completed">
+            <mat-icon class="completed-icon">list_alt</mat-icon>
+          </div>
+          <b>Pending Approval</b>
+        </div>
+        <div class="timeline-content">
+          <div class="line-container">
+            <div class="line" [class.completed-line]="step > 0"></div>
+          </div>
+    
+          <div class="content">Your request is pending.</div>
+        </div>
+      </div>
+    
+      <div class="timeline-section">
+        <div class="timeline-header">
+          <div class="icon" [class.completed]="step > 0">
+            <mat-icon [class.completed-icon]="step > 0">check</mat-icon>
+          </div>
+          <b>Approved</b>
+        </div>
+        <div class="timeline-content">
+          <div class="line-container">
+            <div class="line" [class.completed-line]="step > 1"></div>
+          </div>
+    
+          <div class="content">Your request has been approved.</div>
+        </div>
+      </div>
+    
+      <div class="timeline-section">
+        <div class="timeline-header">
+          <div class="icon" [class.completed]="step > 1">
+            <mat-icon [class.completed-icon]="step > 1">print</mat-icon>
+          </div>
+          <b>Printing</b>
+        </div>
+        <div class="timeline-content">
+          <div class="line-container">
+            <div class="line" [class.completed-line]="step > 2"></div>
+          </div>
+    
+          <div class="content">Your photos are being printed</div>
+        </div>
+      </div>
+    
+      <div class="timeline-section">
+        <div class="timeline-header">
+          <div class="icon" [class.completed]="step > 2">
+            <mat-icon [class.completed-icon]="step > 2">motorcycle</mat-icon>
+          </div>
+          <b>Ready to deliver</b>
+        </div>
+        <div class="timeline-content">
+          <div class="line-container">
+          </div>
+          <div class="content">Your photos are ready to deliver.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <mat-vertical-stepper [linear]="true" #stepper class="content">
+    <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Pending</ng-template>
-        <!-- <mat-form-field>
-          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-        </mat-form-field> -->
-        <p>Our QA staff is currently verifying if your photo is accurate before proceeding</p>
-        <!-- <div>
-          <button mat-button matStepperNext>Next</button> 
-        </div> -->
+        <p>
+          Our QA staff is currently verifying if your photo is accurate before
+          proceeding
+        </p>
       </form>
     </mat-step>
-    <!-- <mat-step  [stepControl]="firstFormGroup" *ngIf="retake_needed">
-      <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Retake Photo</ng-template>
-        <mat-form-field>
-          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-        </mat-form-field>
-        <p>You need to retake your passport photos</p>
-        <div>
-          <button mat-button matStepperNext>Next</button> 
-        </div>
-      </form>
-    </mat-step> -->
-    <mat-step  [stepControl]="secondFormGroup" *ngIf="approved">
+    <mat-step [stepControl]="secondFormGroup" *ngIf="approved">
       <form [formGroup]="secondFormGroup">
         <ng-template matStepLabel>Approved</ng-template>
         <p>Your photos have been approved by QA</p>
-        <!-- <mat-form-field>
-          <input matInput placeholder="Address" formControlName="secondCtrl" required>
-        </mat-form-field> -->
-        <!-- <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div> -->
       </form>
     </mat-step>
     <mat-step *ngIf="printing">
@@ -51,9 +89,10 @@
       <ng-template matStepLabel>Ready to Deliver</ng-template>
       <p>Your photos are ready to deliver</p>
     </mat-step>
-  </mat-vertical-stepper>
-  <div class = "goBack">
-    <button mat-raised-button color="primary" (click)="goBack()">Go back</button>
+  </mat-vertical-stepper> -->
+  <div class="goBack">
+    <button mat-raised-button color="primary" (click)="goBack()">
+      Go back
+    </button>
   </div>
-  </div>
-  
+</div>

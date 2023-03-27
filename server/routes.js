@@ -9,6 +9,8 @@ const cartController = require('./controllers/cart.controller');
 const labController = require('./controllers/lab.controller');
 const pathaoController = require('./controllers/pathao.controller');
 const SslCommerzController = require('./controllers/sslcommerz.controller');
+const cloudinaryController = require('./controllers/cloudinary.controller');
+const sendMessageController = require('./controllers/sendMessageController');
 const { uploadToOrder } = require('./controllers/cutoutpro.controller');
 
 //User Routes
@@ -52,6 +54,11 @@ router.get(
   authMiddleware.lab,
   orderController.getOrderByLabId
 );
+router.get(
+  '/orderOneWeek/',
+  authMiddleware.lab,
+  orderController.getOneWeekData
+);
 //These two routes needs to be before /order/:id to match
 router.put(
   '/order/paid',
@@ -68,6 +75,7 @@ router.get(
   authMiddleware.lab,
   orderController.getOrdersbyStatus
 );
+
 //Keep these under /order/paid
 router.post('/order', authMiddleware.customer, orderController.createOrder);
 router.put('/order/:id', authMiddleware.lab, orderController.changeOrderStatus);
@@ -99,7 +107,7 @@ router.post(
 );
 
 //SSLcommerz Routes
-router.get('/payment/:order_id/:amount', SslCommerzController.initPayment);
+router.get('/payment/:order_id/:amount',authMiddleware.customer, SslCommerzController.initPayment);
 router.post('/payment-success', SslCommerzController.success);
 router.post('/payment-failure', SslCommerzController.failure);
 router.post('/payment-cancel', SslCommerzController.cancel);
@@ -114,5 +122,7 @@ router.get('/countries', (req, res) => {
   const countryNames = countries.map((el) => el.country);
   res.status(200).send(countryNames);
 });
+
+router.post('/sendMessage', sendMessageController)
 
 module.exports = router;

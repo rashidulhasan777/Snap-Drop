@@ -41,47 +41,50 @@ const initPayment = (req, res) => {
     process.env.STORE_PASSWORD,
     is_live
   );
-  sslcz
-    .init(data)
-    .then((apiResponse) => {
-      // Redirect the user to payment gateway
-      let GatewayPageURL = apiResponse.GatewayPageURL;
-      res.status(200).send({ url: GatewayPageURL });
-      console.log('Redirecting to: init ', GatewayPageURL);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
-const success = async (req, res) => {
-  const data = { val_id: req.body.val_id };
-  const sslcz = new SSLCommerzPayment(
-    process.env.STORE_ID,
-    process.env.STORE_PASSWORD,
-    is_live
-  );
-  sslcz.validate(data).then((data) => {
-    console.log(data);
-
-    return res.send(data);
-
-    //process the response that got from sslcommerz
-    // https://developer.sslcommerz.com/doc/v4/#order-validation-api
+  sslcz.init(data).then((apiResponse) => {
+    // Redirect the user to payment gateway
+    let GatewayPageURL = apiResponse.GatewayPageURL;
+    // res.redirect(GatewayPageURL);
+    res.status(200).send({ url: GatewayPageURL });
+    console.log('Redirecting to: init ', GatewayPageURL);
   });
 };
+//FAILED
+//VALID
+const success = async (req, res) => {
+  try {
+    // console.log(req.body);
+    const data = { val_id: req.body.val_id };
+    const sslcz = new SSLCommerzPayment(
+      process.env.STORE_ID,
+      process.env.STORE_PASSWORD,
+      is_live
+    );
+    sslcz.validate(data).then((data) => {
+      console.log('success1', data);
+      // if (data.status === "VALIID")
+      res.redirect(301, `${process.env.FRONTEND}/order_done`);
+      // else res.redirect(`${process.env.FRONTEND}/payment_failed`);
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
+};
 const failure = async (req, res) => {
+  console.log('Failed', req.body);
   return res.status(400).send(req.body);
 };
 const cancel = async (req, res) => {
   return res.status(200).send(req.body);
 };
 const ipn = async (req, res) => {
-  console.log('ipn', req.body);
-  // return validate(req.body)
-  return res.status(200).send(req.body);
+  try {
+    console.log('ipn', req.body);
+  } catch (error) {
+    console.log('ipn validation', error);
+  }
 };
-// https://snapdropbd.fly.dev
 const validate = (req, res) => {
   const data = {
     val_id: ADGAHHGDAKJ456454, //that you go from sslcommerz response
