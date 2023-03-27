@@ -1,13 +1,17 @@
 .onboarding-container {
   min-width: 80%;
   min-height: 80%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 ::ng-deep .mat-horizontal-stepper-header-container {
   display: none !important;
+}
+
+.onboarding-icon {
+  display: block;
+  width: 80%;
+  margin-top: 10%;
+  margin-bottom: 10%;
 }
 
 .onboarding-title {
@@ -16,4 +20,11 @@
 
 .onboarding-instruction {
   font-size: 0.9em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

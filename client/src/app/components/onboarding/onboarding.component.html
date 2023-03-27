@@ -3,6 +3,10 @@
     <mat-stepper #stepper class="onboarding-stepper">
       <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
+          <img
+            class="onboarding-icon"
+            src="../../../assets/onboarding icons/providePic.png"
+          />
           <h1 class="onboarding-title">Provide Pictures</h1>
           <p class="onboarding-instruction">
             You can choose to either take passport photos or upload pictures
@@ -15,6 +19,10 @@
       </mat-step>
       <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="secondFormGroup">
+          <img
+            class="onboarding-icon"
+            src="../../../assets/onboarding icons/addToCart.png"
+          />
           <h1 class="onboarding-title">Add to Cart</h1>
           <p class="onboarding-instruction">
             You can select the sizes of the photos and number of units to print.
@@ -29,6 +37,10 @@
       </mat-step>
       <mat-step [stepControl]="thirdFormGroup">
         <form [formGroup]="secondFormGroup">
+          <img
+            class="onboarding-icon"
+            src="../../../assets/onboarding icons/provideAddress.png"
+          />
           <h1 class="onboarding-title">Provide Address</h1>
           <p class="onboarding-instruction">
             You can provide a delivery address or change your previous one. You
@@ -42,6 +54,10 @@
       </mat-step>
       <mat-step [stepControl]="fourthFormGroup">
         <form [formGroup]="fourthFormGroup">
+          <img
+            class="onboarding-icon"
+            src="../../../assets/onboarding icons/payment.png"
+          />
           <h1 class="onboarding-title">Confirm Payment</h1>
           <p class="onboarding-instruction">
             You can view the payment details for your order. You can either pay
@@ -56,6 +72,10 @@
       </mat-step>
       <mat-step [stepControl]="fifthFormGroup">
         <form [formGroup]="fifthFormGroup">
+          <img
+            class="onboarding-icon"
+            src="../../../assets/onboarding icons/notification.png"
+          />
           <h1 class="onboarding-title">Get Notified</h1>
           <p class="onboarding-instruction">
             You can choose to get notified in your phone as well as via email or
@@ -63,7 +83,7 @@
           </p>
           <div class="btn-container-bottom">
             <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
+            <button mat-button mat-dialog-close>Done</button>
           </div>
         </form>
       </mat-step>
