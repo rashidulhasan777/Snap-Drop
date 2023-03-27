@@ -133,7 +133,6 @@ export class UserAddressComponent {
   }
 
   handleSubmit() {
-    console.log(this.deliveryInfoForm.value);
     if (this.deliveryInfoForm.valid) {
       const details = JSON.parse(JSON.stringify(this.deliveryInfoForm.value));
       details.contact_number = '+880' + details.contact_number;
