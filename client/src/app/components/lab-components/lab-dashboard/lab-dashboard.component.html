@@ -1,20 +1,7 @@
 <app-nav-and-sidebar>
   <div class="example-sidenav-content">
     <div class="top-infos">
-      <app-chart></app-chart>
-      <!-- <div class="chart">
-        <canvas
-          baseChart
-          class="chart"
-          [data]="barChartData"
-          [options]="barChartOptions"
-          [plugins]="barChartPlugins"
-          [type]="barChartType"
-          (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)"
-        >
-        </canvas>
-      </div> -->
+      <app-chart *ngIf="chartData.length" [chartData]="chartData"></app-chart>
       <div class="stat-container">
         <mat-card class="example-card example-background">
           <mat-card-header>

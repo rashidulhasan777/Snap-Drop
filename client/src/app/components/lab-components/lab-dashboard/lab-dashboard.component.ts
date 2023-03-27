@@ -21,7 +21,7 @@ import { Order } from './../../../interfaces/order.interface';
 })
 export class LabDashboardComponent implements AfterViewInit, OnInit{
   
-  chartData:number[] = [0, 0, 0, 9, 0, 0, 0];
+  chartData:number[] = [];
   // ---------------------------------------
   orders: Order[] = [];
   opened: boolean = true;
@@ -39,15 +39,22 @@ export class LabDashboardComponent implements AfterViewInit, OnInit{
   @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit() {
-    const orders = this.orderService
-      .getOrdersbyLabId()
-      .subscribe((response) => {
-        console.log(response);
-        this.orders = response;
-        if(new Date().getDate()-new Date(this.orders[0].createdAt || '').getDate() ==1) this.chartData[1]++;
-        console.log(new Date().getDate()-new Date(this.orders[0].createdAt || '').getDate())
-        this.dataSource = new MatTableDataSource(this.orders);
-      });
+      const orders = this.orderService
+        .getOrdersbyLabId()
+        .subscribe((response) => {
+          console.log(response);
+          this.orders = response;
+          this.dataSource = new MatTableDataSource(this.orders);
+  
+          const arr = [0, 0, 0, 0, 0, 0, 0];
+  
+          for (let i = 0; i < response.length; i++) {
+            const gap = new Date().getDate() - new Date(this.orders[i].createdAt || '').getDate();
+            if (gap < 6) arr[gap]++;
+          }
+  
+          this.chartData = [...arr];
+        });
   }
 
   ngAfterViewInit() {

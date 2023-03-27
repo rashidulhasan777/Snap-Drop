@@ -12,8 +12,7 @@ import { Order } from './../../../interfaces/order.interface';
 })
 export class ChartComponent implements OnInit{
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
-  @Input()chartData:number[] = [0, 0, 0, 0, 0, 0, 0];
-  // chartData2:number[] = [0, 0, 0, 0, 0, 0, 0];
+  @Input() chartData!:number[];
   orders: Order[] = [];
 
   constructor(private orderService: OrderService) {}
@@ -46,7 +45,7 @@ export class ChartComponent implements OnInit{
     labels: [ 'Today', 'Yesterday', '3 days ago', '4 days ago', '5 days ago', '6 days ago', '7 days ago' ],
     datasets: [
       { data : this.chartData, label: 'Daily Incoming Orders' },
-      // { data: [ 28, 48, 40, 19, 86, 27, 90 ], label: 'Series B' }
+      { data: [ 28, 48, 40, 19, 86, 27, 90 ], label: 'Series B' }
     ]
   };
 
@@ -59,29 +58,10 @@ export class ChartComponent implements OnInit{
     // console.log(event, active);
   }
 
-  public randomize(): void {
-    // Only Change 3 values
-    this.barChartData.datasets[0].data = [
-      Math.round(Math.random() * 100),
-      59,
-      80,
-      Math.round(Math.random() * 100),
-      56,
-      Math.round(Math.random() * 100),
-      40 ];
-
-    this.chart?.update();
-  }
   ngOnInit() {
-    const orders = this.orderService
-      .getOrdersbyLabId()
-      .subscribe((response) => {
-        this.orders = response;
-        if(new Date().getDate()-new Date(this.orders[0].createdAt || '').getDate() ==1) this.chartData[0]++;
-        if(new Date().getDate()-new Date(this.orders[0].createdAt || '').getDate() ==1) this.chartData[1]++;
-        if(new Date().getDate()-new Date(this.orders[0].createdAt || '').getDate() ==1) this.chartData[2]++;
-        if(new Date().getDate()-new Date(this.orders[0].createdAt || '').getDate() ==1) this.chartData[3]++;
-        console.log(new Date().getDate()-new Date(this.orders[0].createdAt || '').getDate())
-      })
+    this.barChartData.datasets = [
+      { data: this.chartData, label: 'Daily Incoming Orders' },
+      { data: [ 28, 6, 8, 19, 11, 27, 7 ], label: 'Series B' }
+    ];
   }
 }
