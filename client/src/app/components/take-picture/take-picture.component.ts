@@ -1,6 +1,10 @@
 import { Component, HostListener, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { Subject } from 'rxjs';
+import { Cart } from 'src/app/interfaces/cart.interface';
+import { CartService } from 'src/app/services/cart/cart.service';
+import { CloudinaryService } from 'src/app/services/cloudinary/cloudinary.service';
 
 @Component({
   selector: 'app-take-picture',
@@ -23,7 +27,12 @@ export class TakePictureComponent {
   };
 
   image: any[] = [];
-  constructor(private renderer: Renderer2) {}
+  constructor(
+    private renderer: Renderer2,
+    private cloudinary: CloudinaryService,
+    private cartService: CartService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.windowWidth = window.innerWidth;
@@ -65,5 +74,27 @@ export class TakePictureComponent {
       this.errorMsg = `You have denied camera access. We need camera access to take your picture.
       Please re-allow camera permission and refresh the page to take the picture.`;
     }
+  }
+  retakePhoto() {
+    this.cameraOpen = true;
+  }
+  addToPassportPhotos() {
+    if (this.Image)
+      this.cloudinary
+        .cloudUpload(this.Image?.imageAsDataUrl, 'passport', 10, 10, 'passport')
+        .subscribe((res: any) => {
+          const cartData: Cart = { passportPictures: [] };
+          cartData.passportPictures?.push({
+            photoSize: 'passport',
+            orgFilename: 'passport',
+            imageURL: res.secure_url,
+            copies: 1,
+            approved: false,
+            typeOfImage: 'passport',
+          });
+          this.cartService.updateCart(cartData).subscribe((res) => {
+            console.log(res);
+          });
+        });
   }
 }

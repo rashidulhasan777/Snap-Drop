@@ -1,4 +1,4 @@
-<div #container *ngIf="cameraOpen" class="webcamContainer">
+<div #container [ngClass]="{hide: !cameraOpen}" class="webcamContainer">
   <webcam
     class="camera"
     [width]="windowWidth"
@@ -43,9 +43,9 @@
 </div>
 <div *ngIf="errorMsg" class="errorMsg">{{ errorMsg }}</div>
 <img *ngIf="!cameraOpen && !errorMsg" [src]="dataUrl" class="capturedImage" />
-<div class="captureButton">
+<div *ngIf="delayed" class="captureButton">
   <button
-    *ngIf="!cameraOpen || !delayed; else retakeOrProceed"
+    *ngIf="cameraOpen; else retakeOrProceed"
     class="button"
     (click)="capture()"
     mat-icon-button
@@ -53,11 +53,11 @@
     <mat-icon>camera</mat-icon>
   </button>
   <ng-template #retakeOrProceed>
-    <button mat-icon-button class="button">
-      <mat-icon svgIcon="reset_image"></mat-icon>
+    <button mat-icon-button class="button" (click)="retakePhoto()">
+      <mat-icon>cached</mat-icon>
     </button>
-    <button mat-icon-button class="button">
-      <mat-icon></mat-icon>
+    <button mat-icon-button class="button" (click)="addToPassportPhotos()">
+      <mat-icon>chevron_right</mat-icon>
     </button>
   </ng-template>
 </div>

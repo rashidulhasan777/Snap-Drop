@@ -30,7 +30,7 @@ export class OrderDoneComponent {
     this.http
       .get('http://localhost:3000/payment/Order_321/1200')
       .subscribe((res) => console.log(res));
-    // this.orderService.setOrderPaid().subscribe();
-    // this.cartService.clearCart().subscribe();
+    this.orderService.setOrderPaid().subscribe();
+    this.cartService.clearCart().subscribe();
   }
 }
