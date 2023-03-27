@@ -78,6 +78,7 @@ export class OrderSummaryComponent {
                 this.CompletedOrder.totalPrice.total
               )
               .subscribe((response: any) => {
+                console.log(response);
                 window.location.href = response.url;
               });
             // this.router.navigate(['order_done']);
