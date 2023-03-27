@@ -1,4 +1,6 @@
 const Order = require('./../models/order.model');
+const transport = require('./../middlewares/nodemailer');
+const {getMailOptions} = require('./../utils/nodemail/mailOptions');
 
 const getAllOrders = async (req, res) => {
   try {
@@ -33,6 +35,9 @@ const changeOrderStatus = async (req, res) => {
     const order = await Order.findOneAndUpdate(filter, update, {
       new: true,
     });
+
+    // transport(getMailOptions("nafizfuad0230@gmail.com", "Hello")); 
+
     res.status(201).send(order);
   } catch (error) {
     res.status(500).send({ errorMessage: 'Something went wrong' });
