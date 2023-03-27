@@ -24,10 +24,13 @@ import { RetakeComponent } from './components/retake/retake.component';
 import { RetakeDashboardComponent } from './components/lab-components/retake-dashboard/retake-dashboard.component';
 import { PassportPhotoInstructionsComponent } from './components/passport-photo-instructions/passport-photo-instructions.component';
 import { OrderStatusComponent } from './components/order-status/order-status.component';
+import { TakePictureComponent } from './components/take-picture/take-picture.component';
+import { AddMorePassportPhotoComponent } from './components/add-more-passport-photo/add-more-passport-photo.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'camera', component: TakePictureComponent },
   { path: 'oauth_google', component: GoogleLoginComponent },
   { path: 'oauth_fb', component: FacebookLoginComponent },
   {
@@ -38,6 +41,11 @@ const routes: Routes = [
   {
     path: 'gallery_upload',
     component: GalleryUploadComponent,
+    canActivate: [AuthGuardGuard, RoleguardUserGuard],
+  },
+  {
+    path: 'passport_upload',
+    component: AddMorePassportPhotoComponent,
     canActivate: [AuthGuardGuard, RoleguardUserGuard],
   },
   {

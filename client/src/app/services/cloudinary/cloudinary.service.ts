@@ -8,7 +8,7 @@ export class CloudinaryService {
   rootUrl = 'https://api.cloudinary.com/v1_1/djxuxbxet/image/upload';
   constructor(private http: HttpClient) {}
   cloudUpload(
-    file: File,
+    file: File | string,
     filename: string,
     order_Id: number,
     lab_Id: number,

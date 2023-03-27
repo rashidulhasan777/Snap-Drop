@@ -94,7 +94,7 @@ export class GalleryUploadComponent {
     for (let i = 0; i < this.previews.length; ++i) {
       allSubscriptions.push(
         this.cloudinary.cloudUpload(
-          this.previews[i].data as File,
+          this.previews[i].data,
           this.previews[i].filename,
           10,
           5,

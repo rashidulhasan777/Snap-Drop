@@ -1,6 +1,6 @@
 <h2 class="heading">Your Cart</h2>
 <div *ngIf="hasOrder; else noOrders" class="cartContainer">
-  <div *ngIf="passportOrders.length">
+  <div *ngIf="passportOrders.length" routerLink="/passport_upload">
     <div class="card">
       <div class="cardImageContainer">
         <img [src]="passportOrders[0].imageURL" class="cardImage" />

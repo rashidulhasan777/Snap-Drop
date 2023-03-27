@@ -34,6 +34,7 @@
 <div class="gallery-cards-container">
   <app-gallery-card
     *ngFor="let preview of previews; let i = index"
+    [formatOptions]="formatOptions"
     [preview]="preview.data"
     [imageForm]="pictureData.at(i)"
     (deleteImage)="removeImage(i)"
