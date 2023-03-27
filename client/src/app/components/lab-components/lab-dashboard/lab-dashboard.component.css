@@ -13,12 +13,7 @@ table {
     display: flex;
     margin-bottom: 5vh;
   }
-  .chart{
-    padding-top: 5vh;
-    padding-left: 2vw;
-    width: 45vw;
-    /* height: 30vh; */
-  }
+  
   .stat-container{
     display: flex;
     flex-direction: column;

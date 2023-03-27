@@ -42,6 +42,7 @@ import { RetakeDashboardComponent } from './components/lab-components/retake-das
 import { OrderStatusComponent } from './components/order-status/order-status.component';
 import { PassportPhotoInstructionsComponent } from './components/passport-photo-instructions/passport-photo-instructions.component';
 import { LabDashboardComponent } from './components/lab-components/lab-dashboard/lab-dashboard.component';
+import { ChartComponent } from './components/lab-components/chart/chart.component';
 
 export function playerFactory() {
   return import('lottie-web');
@@ -77,6 +78,7 @@ export function playerFactory() {
     OrderStatusComponent,
     PassportPhotoInstructionsComponent,
     LabDashboardComponent,
+    ChartComponent,
   ],
   imports: [
     BrowserModule,
