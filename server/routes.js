@@ -8,7 +8,6 @@ const cartController = require('./controllers/cart.controller');
 const labController = require('./controllers/lab.controller');
 const pathaoController = require('./controllers/pathao.controller');
 const SslCommerzController = require('./controllers/sslcommerz.controller');
-const cloudinaryController = require('./controllers/cloudinary.controller');
 const { uploadToOrder } = require('./controllers/cutoutpro.controller');
 
 //User Routes
