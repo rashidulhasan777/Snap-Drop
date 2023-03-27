@@ -82,18 +82,20 @@ export class TakePictureComponent {
     if (this.Image)
       this.cloudinary
         .cloudUpload(this.Image?.imageAsDataUrl, 'passport', 10, 10, 'passport')
-        .subscribe((res: any) => {
-          const cartData: Cart = { passportPictures: [] };
-          cartData.passportPictures?.push({
-            photoSize: 'passport',
-            orgFilename: 'passport',
-            imageURL: res.secure_url,
-            copies: 1,
-            approved: false,
-            typeOfImage: 'passport',
-          });
-          this.cartService.updateCart(cartData).subscribe((res) => {
-            console.log(res);
+        .subscribe((resCloudinary: any) => {
+          this.cartService.getCart().subscribe((res) => {
+            const cartData: Cart = res || {passportPictures: []};
+            cartData.passportPictures?.push({
+              photoSize: 'passport',
+              orgFilename: 'passport',
+              imageURL: resCloudinary.secure_url,
+              copies: 1,
+              approved: false,
+              typeOfImage: 'passport',
+            });
+            this.cartService.updateCart(cartData).subscribe((res) => {
+              this.router.navigate(['passport_upload']);
+            });
           });
         });
   }

@@ -15,7 +15,7 @@ export class CartComponent {
 
   ngOnInit() {
     this.cartService.getCart().subscribe((res) => {
-      console.log(res);
+      if (!res) return;
       this.passportOrders = res.passportPictures || [];
       this.galleryOrders = res.galleryPictures || [];
     });

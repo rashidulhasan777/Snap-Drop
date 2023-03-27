@@ -1,0 +1,27 @@
+.passportImage {
+  max-width: 200px;
+}
+.imageCard {
+  border: 1px solid black;
+  position: relative;
+}
+.photosContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.crossButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: white;
+}
+.bottom {
+  width: calc(100% - 40px);
+  display: flex;
+  position: fixed;
+  bottom: 2%;
+  justify-content: space-between;
+  margin: 20px;
+}

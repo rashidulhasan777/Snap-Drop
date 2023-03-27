@@ -47,6 +47,7 @@ export function playerFactory() {
   return import('lottie-web');
 }
 import { TakePictureComponent } from './components/take-picture/take-picture.component';
+import { AddMorePassportPhotoComponent } from './components/add-more-passport-photo/add-more-passport-photo.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { TakePictureComponent } from './components/take-picture/take-picture.com
     OrderStatusComponent,
     PassportPhotoInstructionsComponent,
     TakePictureComponent,
+    AddMorePassportPhotoComponent,
   ],
   imports: [
     BrowserModule,

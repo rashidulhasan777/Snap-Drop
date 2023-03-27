@@ -1,5 +1,6 @@
 const router = require('express').Router();
 
+const countries = require('./utils/data/requirementsFromLab.json');
 const authMiddleware = require('./middlewares/auth');
 const userController = require('./controllers/user.controller');
 const orderController = require('./controllers/order.controller');
@@ -110,5 +111,9 @@ router.post('/payment-ipn', SslCommerzController.ipn);
 router.post('/lab', labController.createLab);
 
 router.get('/cutout/:id', authMiddleware.lab, uploadToOrder);
+router.get('/countries', (req, res) => {
+  const countryNames = countries.map((el) => el.country);
+  res.status(200).send(countryNames);
+});
 
 module.exports = router;

@@ -38,6 +38,9 @@ export class UserdataService {
     });
   }
 
+  getCountries(): Observable<string[]> {
+    return this.http.get<string[]>('http://localhost:3000/countries');
+  }
   private get jwtToken() {
     return localStorage.getItem('userAccessToken');
   }
