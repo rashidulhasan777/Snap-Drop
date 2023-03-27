@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { baseBackendURL } from 'src/config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PathaoService {
-  baseUrl = 'http://localhost:3000';
+  baseUrl = baseBackendURL;
 
   constructor(private http: HttpClient) {}
 

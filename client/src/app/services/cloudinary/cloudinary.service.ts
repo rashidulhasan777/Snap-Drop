@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { baseBackendURL } from 'src/config';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,7 @@ export class CloudinaryService {
     return this.http.post(this.rootUrl, formData);
   }
   getCloudDownloadURL(order_id: number, lab_id: number) {
-    return this.http.post('http://localhost:3000/download_photos', {
+    return this.http.post(`${baseBackendURL}/download_photos`, {
       order_id,
       lab_id,
     });

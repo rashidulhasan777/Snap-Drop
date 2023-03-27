@@ -3,12 +3,13 @@ import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
+import { baseBackendURL } from 'src/config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
-  baseUrl = 'http://localhost:3000';
+  baseUrl = `${baseBackendURL}`;
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
 

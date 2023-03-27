@@ -4,12 +4,13 @@ import { Observable } from 'rxjs';
 import { Cart } from 'src/app/interfaces/cart.interface';
 import { ImageInterface } from 'src/app/interfaces/image.interface';
 import { Price } from 'src/app/interfaces/price.interface';
+import { baseBackendURL } from 'src/config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PriceCalculationService {
-  baseUrl = 'http://localhost:3000';
+  baseUrl = baseBackendURL;
   private picturePrices = [
     {
       size: '4R',

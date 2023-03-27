@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Lab } from 'src/app/interfaces/lab.interface';
+import { baseBackendURL } from 'src/config';
 import { Details } from '../../interfaces/details.interface';
 import { User } from '../../interfaces/user.interface';
 
@@ -9,7 +10,7 @@ import { User } from '../../interfaces/user.interface';
   providedIn: 'root',
 })
 export class UserdataService {
-  private baseUrl = 'http://localhost:3000/user';
+  private baseUrl = `${baseBackendURL}/user`;
 
   constructor(private http: HttpClient) {}
 
@@ -31,7 +32,7 @@ export class UserdataService {
   }
 
   getClosestLab(): Observable<Lab> {
-    return this.http.get<Lab>('http://localhost:3000/pathao/closest-studio', {
+    return this.http.get<Lab>(`${baseBackendURL}/pathao/closest-studio`, {
       headers: {
         Authorization: `Bearer ${this.jwtToken}`,
       },
@@ -39,7 +40,7 @@ export class UserdataService {
   }
 
   getCountries(): Observable<string[]> {
-    return this.http.get<string[]>('http://localhost:3000/countries');
+    return this.http.get<string[]>(`${baseBackendURL}/countries`);
   }
   private get jwtToken() {
     return localStorage.getItem('userAccessToken');
