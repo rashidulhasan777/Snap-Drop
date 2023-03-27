@@ -1,16 +1,29 @@
-.user-info-form {
+.top-view {
+  width: 100%;
+  height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-profile-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-/* doesn't work for height */
-.user-profile-form {
+.user-profile-form div mat-form-field {
+  width: 100%;
+}
+
+.user-profile-form div {
+  width: 90%;
+}
+
+.delivery-info-form {
   margin-top: 5%;
   padding-top: 5%;
-  height: 20vh;
-  overflow-y: auto;
 }
 
 .button-container {

@@ -26,6 +26,7 @@ import { PassportPhotoInstructionsComponent } from './components/passport-photo-
 import { OrderStatusComponent } from './components/order-status/order-status.component';
 import { TakePictureComponent } from './components/take-picture/take-picture.component';
 import { AddMorePassportPhotoComponent } from './components/add-more-passport-photo/add-more-passport-photo.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -116,6 +117,11 @@ const routes: Routes = [
   {
     path: 'passport_photo_instructions',
     component: PassportPhotoInstructionsComponent,
+    canActivate: [AuthGuardGuard, RoleguardUserGuard],
+  },
+  {
+    path: 'profile',
+    component: UserProfileComponent,
     canActivate: [AuthGuardGuard, RoleguardUserGuard],
   },
   { path: '', pathMatch: 'full', redirectTo: 'login' },
