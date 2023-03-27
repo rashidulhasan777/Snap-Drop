@@ -44,13 +44,12 @@ export class RegisterComponent {
         '',
         {
           validators: [Validators.email, Validators.required],
-          updateOn: 'blur',
         },
       ],
       password: ['', [Validators.required, Validators.minLength(8)]],
       rePassword: [''],
     },
-    { validators: this.passwordValidatorFn(), updateOn: 'blur' }
+    { validators: this.passwordValidatorFn() }
   );
   googleOauth() {
     this.oauthService.googleOauthInit();
@@ -113,7 +112,7 @@ export class RegisterComponent {
   get passwordError() {
     if (this.registerForm.controls.password.touched) {
       if (this.registerForm.controls.password.hasError('minlength'))
-        return 'Password needs to be at least 8 characters long';
+        return 'It needs to be at least 8 characters long';
       if (this.registerForm.controls.password.hasError('required')) {
         return 'Password is required';
       }
