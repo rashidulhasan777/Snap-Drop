@@ -1,3 +1,8 @@
+h1{
+  text-align: center;
+  margin: 12vh 0;
+}
+
 .user-info-form {
   display: flex;
   flex-direction: column;
@@ -21,14 +26,21 @@
 }
 
 .actionButtons {
-  display: flex;
+  gap: 2vh;
+  padding-bottom: 8vh;
+  bottom: 2%;
+  padding-right: 20px;
   width: 100%;
   gap: 20px;
-  justify-content: center;
+  justify-content: space-between;
   margin: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  position: fixed;
 }
 
-.userName {
+/* .userName {
   font-size: xx-large;
   font-weight: bold;
 }
@@ -38,4 +50,32 @@
   gap: 10px;
   width: 100%;
   padding: 20px;
+} */
+
+/* ----------CSS for cards---------- */
+
+.upcoming-card-container {
+  padding: 5%;
+  margin-bottom: 5%;
+  padding-top: 0;
+}
+
+.upcoming-card {
+  border: 1px solid rgb(224, 224, 224);
+  background-color: #fac36b;
+  padding: 10px;
+}
+
+.upcoming-card-title {
+  font-size: 1.5em;
+  margin-bottom: 5%;
+}
+
+.upcoming-card-details {
+  font-size: 1em;
+}
+
+.upcoming-card-title{
+  font-size: xx-large;
+  font-weight: bold;
 }

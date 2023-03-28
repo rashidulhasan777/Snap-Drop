@@ -1,16 +1,19 @@
+
 .upcoming-card-container {
   padding: 5%;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
+  padding-top: 0;
 }
 
 .upcoming-card {
-  border: 1px solid gray;
+  border: 1px solid rgb(224, 224, 224);
   background-color: #fac36b;
+  padding: 10px;
 }
 
 .upcoming-card-title {
   font-size: 1.5em;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
 }
 
 .upcoming-card-details {
@@ -33,33 +36,91 @@
   margin-bottom: 10%;
 }
 
-.options-container {
+.button-option {
+  border: 1px solid #673ab7;
   display: flex;
-  flex-direction: column;
-  padding: 5%;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.button-option .icon {
+  flex: 0.4;
+  max-width: 45px;
+  background: #673ab7;
+  padding: 10px;
+  margin-right: 10px;
+  color: white;
+  font-size: 32px;
 }
 
-.options-button {
-  width: 100%;
-  margin-bottom: 10%;
+.button-option .button-text {
+  font-size: 20px;
+  color: #673ab7;
 }
 
-.button-option{
- border: 1px solid #673AB7;
- display: flex;
- align-items: center;
- margin-bottom: 10px;
+.header {
+  color: #474747;
+  margin: 12vh 0;
+  text-align: center;
 }
-.button-option .icon{
- flex: 0.2;
- max-width: 45px;
- background: #673AB7;
- padding: 10px;
- margin-right: 10px;
- color: white;
+.confetti {
+  height: 24px;
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
+  transform: translate3d(0, 0, 0);
 }
 
-.button-option .button-text{
- font-size: 20px;
- color: #673ab7;
+@keyframes shake {
+  10% {
+    transform: translate3d(-1px, 1px, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(0px, 0, 0);
+  }
+}
+.color-name {
+  color: #673ab7;
+}
+.upcoming-card {
+  position: relative;
+}
+
+.upcoming-card .absolute {
+  position: absolute;
+}
+
+.left-svg {
+  width: 100px;
+  transform: translate(0px, 0px);
+  animation: rotation 32s infinite linear;
+}
+
+.right-svg {
+  width: 70px;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  overflow: hidden;
+  animation: rotation 25s infinite linear;
+}
+.small-svg {
+  width: 40px;
+  bottom: 0;
+}
+.big-svg {
+  right: 0;
+  bottom: 80px;
+  width: 110px;
+  animation: rotation 25s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+  0% {
+  }
 }
