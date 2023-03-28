@@ -126,7 +126,7 @@ router.post('/payment-ipn', SslCommerzController.ipn);
 //Internal Route for lab
 router.post('/lab', labController.createLab);
 
-router.get('/cutout/:id', authMiddleware.lab, uploadToOrder);
+router.get('/dowloadOrder/:id', authMiddleware.lab, uploadToOrder);
 router.get('/countries', (req, res) => {
   const countryNames = countries.map((el) => el.country);
   res.status(200).send(countryNames);

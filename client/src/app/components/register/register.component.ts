@@ -49,7 +49,7 @@ export class RegisterComponent {
       password: ['', [Validators.required, Validators.minLength(8)]],
       rePassword: [''],
     },
-    { validators: this.passwordValidatorFn() }
+    { validators: this.passwordValidatorFn(), updateOn: 'blur' }
   );
   googleOauth() {
     this.oauthService.googleOauthInit();
