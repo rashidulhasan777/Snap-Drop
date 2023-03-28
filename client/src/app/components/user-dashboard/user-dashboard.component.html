@@ -13,14 +13,17 @@
 
     <mat-card-header>
       <mat-card-title class="upcoming-card-title"
-        >Upcoming Orders</mat-card-title
+        >Upcoming Order</mat-card-title
       >
     </mat-card-header>
     <mat-card-content>
-      <p class="upcoming-card-details">
-        Upcoming {{ orders[0].orderType }} order
+      <p class="upcoming-card-detailsImage">
+        {{ order?.passportPictures?.length}} Passport sized images
       </p>
-      <p class="upcoming-card-details">{{ orders[0].orderStatus }}</p>
+      <p class="upcoming-card-detailsImage">
+        {{ order?.galleryPictures?.length}} Gallery images
+      </p>
+      <p class="upcoming-card-details"> <span class="statusOrder">Order status :</span>  {{ order?.orderStatus }}</p>
       <mat-divider></mat-divider>
     </mat-card-content>
     <mat-card-actions class="upcoming-card-actions">

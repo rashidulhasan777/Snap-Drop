@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { OnboardingComponent } from '../onboarding/onboarding.component';
 import { UserdataService } from 'src/app/services/userdata/userdata.service';
 import { User } from 'src/app/interfaces/user.interface';
+import { Order } from 'src/app/interfaces/order.interface';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -12,6 +13,7 @@ import { User } from 'src/app/interfaces/user.interface';
   styleUrls: ['./user-dashboard.component.css'],
 })
 export class UserDashboardComponent {
+  order?: Order;
   User?: User;
   constructor(
     private orderService: OrderService,
@@ -40,10 +42,11 @@ export class UserDashboardComponent {
   ngOnInit() {
     this.userData.getUser().subscribe((res) => (this.User = res));
     this.orderService.getCustomerLatestOrder().subscribe((res) => {
-      // console.log(res);
+      console.log(res);
       if (res.orderStatus === 'retake_needed') {
         this.router.navigate(['retake']);
       }
+      this.order = res;
       // this.openDialog();
     });
   }

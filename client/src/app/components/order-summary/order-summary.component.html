@@ -1,10 +1,9 @@
 <h1>Order Summary</h1>
-
 <div class="upcoming-card-container">
   <mat-card class="upcoming-card">
     <mat-card-header>
       <mat-card-title class="upcoming-card-title"
-        >{{ User?.details?.name | titlecase }}</mat-card-title
+      >{{ User?.details?.name | titlecase }}</mat-card-title
       >
     </mat-card-header>
     <mat-card-content>
@@ -20,6 +19,8 @@
     </mat-card-content>
   </mat-card>
 </div>
+
+<!-- ! Dont touch this html file for now -->
 
 <div *ngIf="Cart && Cart.passportPictures && Cart.passportPictures.length">
   <div class="priceContainer">
@@ -63,12 +64,13 @@
       placeholder="Give specific instuctions"
     ></textarea>
   </mat-form-field>
+  <button mat-raised-button (click)="initiatePayment()">Pay | {{ price.total }} BDT.</button>
 </div>
 
-<button mat-stroked-button class="payButton" (click)="initiatePayment()">
+<!-- <button mat-stroked-button class="payButton" (click)="initiatePayment()">
   <div class="button_text">
     <div>Pay</div>
     <div class="forBorder"></div>
     <div>{{ price.total }} Taka</div>
   </div>
-</button>
+</button> -->

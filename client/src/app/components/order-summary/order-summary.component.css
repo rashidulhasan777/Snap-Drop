@@ -1,8 +1,17 @@
 h1 {
   text-align: center;
   margin: 12vh 0;
+  animation: entry 1500ms ease-in-out 200ms 1 forwards;
 }
 
+@keyframes entry {
+  0% {
+    margin: 12vh 0;
+  }
+  100% {
+    margin: 3vh 0;
+  }
+}
 .priceContainer {
   display: flex;
   width: 100%;
@@ -39,8 +48,10 @@ h1 {
 }
 
 .payButton {
-  width: calc(100% - 20px);
-  margin: 10px;
+  /* background-color: #fac36b; */
+  width: calc(100% - 400px);
+  /* width: 100vw; */
+  /* margin: 10px; */
 }
 
 .forBorder {
@@ -53,6 +64,8 @@ h1 {
 
 .instructionWrapper {
   display: flex;
+  align-items: center;
+  flex-direction: column;
   justify-content: center;
   width: 100%;
 }
@@ -80,7 +93,7 @@ h1 {
   font-size: 1em;
 }
 
-.upcoming-card-title{
+.upcoming-card-title {
   font-size: xx-large;
   font-weight: bold;
 }
