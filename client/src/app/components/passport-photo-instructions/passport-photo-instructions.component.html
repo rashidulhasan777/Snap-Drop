@@ -9,8 +9,10 @@
           your face. Find a pale, even-toned wall without any objects for
           optimal results.
         </p>
-        <div class="btn-container-bottom">
-          <button mat-button matStepperNext>Next</button>
+        <div class="init-btn-container-bottom">
+          <button class="btn-primary" mat-fab color="primary" matStepperNext>
+            <mat-icon>chevron_right</mat-icon>
+          </button>
         </div>
       </form>
     </mat-step>
@@ -24,8 +26,17 @@
           visible in the final cropped photo.
         </p>
         <div class="btn-container-bottom">
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button
+            class="btn-primary"
+            mat-fab
+            color="primary"
+            matStepperPrevious
+          >
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          <button class="btn-primary" mat-fab color="primary" matStepperNext>
+            <mat-icon>chevron_right</mat-icon>
+          </button>
         </div>
       </form>
     </mat-step>
@@ -39,8 +50,22 @@
           camera directly with your full face visible.
         </p>
         <div class="btn-container-bottom">
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button routerLink="/camera">Done</button>
+          <button
+            class="btn-primary"
+            mat-fab
+            color="primary"
+            matStepperPrevious
+          >
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          <button
+            class="btn-primary"
+            mat-fab
+            color="primary"
+            routerLink="/camera"
+          >
+            <mat-icon>chevron_right</mat-icon>
+          </button>
         </div>
       </form>
     </mat-step>
