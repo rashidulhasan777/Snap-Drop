@@ -10,7 +10,7 @@ const googleAccessCode = async (req, res, next) => {
   url.searchParams.append('client_secret', process.env.GOOGLE_CLIENT_SECRET);
   url.searchParams.append('code', code);
   url.searchParams.append('grant_type', 'authorization_code');
-  url.searchParams.append('redirect_uri', `${process.env.BASE}/oauth_google`);
+  url.searchParams.append('redirect_uri', `${process.env.BASE_FRONTEND_URL}/oauth_google`);
   try {
     const access_token = await axios.post(url.toString(), {});
     res.status(200);
