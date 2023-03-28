@@ -18,6 +18,7 @@ export class IdbServiceService {
   constructor() {}
 
   addAPassportPhoto(photo: ImageInterface): Promise<void> {
+    console.log(photo);
     return update('passportPhotos', (val) => (val ? [...val, photo] : [photo]));
   }
 
@@ -71,16 +72,16 @@ export class IdbServiceService {
   async updatePassportPhotosWithCountry() {
     const country = await this.getCountry();
     return update('passportPhotos', (val) => {
-      val.map((el: ImageInterface, idx: number) => {
-        el.orgFilename = `passport_${country}_x${el.copies}_${idx}.jpg`;
+      return val.map((el: ImageInterface, idx: number) => {
+        el.orgFilename = `passport_${country}_x${el.copies}_${idx}`;
         return el;
       });
     });
   }
   async updateGalleryPhotosName() {
-    return update('passportPhotos', (val) => {
-      val.map((el: ImageInterface) => {
-        el.orgFilename = `gallery_${el.photoSize}_x${el.copies}_${el.orgFilename}.jpg`;
+    return update('galleryPhotos', (val) => {
+      return val.map((el: ImageInterface, idx: number) => {
+        el.orgFilename = `gallery_${el.photoSize}_x${el.copies}_${idx}`;
         return el;
       });
     });

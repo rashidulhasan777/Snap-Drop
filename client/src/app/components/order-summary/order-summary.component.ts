@@ -11,7 +11,8 @@ import { UserdataService } from 'src/app/services/userdata/userdata.service';
 import { PaymentService } from 'src/app/services/payment/payment.service';
 import { IdbServiceService } from 'src/app/services/idbService/idb-service.service';
 import { CloudinaryService } from 'src/app/services/cloudinary/cloudinary.service';
-import { Observable, zip } from 'rxjs';
+import { firstValueFrom, Observable, zip } from 'rxjs';
+import { ImageInterface } from 'src/app/interfaces/image.interface';
 
 @Component({
   selector: 'app-order-summary',
@@ -19,14 +20,17 @@ import { Observable, zip } from 'rxjs';
   styleUrls: ['./order-summary.component.css'],
 })
 export class OrderSummaryComponent {
+  Cart: Cart = { galleryPictures: [], passportPictures: [] };
   User?: User;
-  Cart: Cart = { passportPictures: [], galleryPictures: [] };
   instruction: string = '';
   price: Price = { passport: 0, gallery: 0, shipping: 0, total: 0 };
   closestLab?: Lab;
   CompletedOrder?: Order;
   totalUploaded = 0;
+  order_id = '';
 
+  passportPictures: ImageInterface[] = [];
+  galleryPictures: ImageInterface[] = [];
   constructor(
     private userDataService: UserdataService,
     private priceCalculator: PriceCalculationService,
@@ -44,10 +48,16 @@ export class OrderSummaryComponent {
 
     this.userDataService.getClosestLab().subscribe(async (res) => {
       console.log(res);
+      this.closestLab = res;
       try {
         await this.setCart();
+        this.Cart.galleryPictures = this.galleryPictures;
+        this.Cart.passportPictures = this.passportPictures;
         this.priceCalculator.calculateAllPrices(
-          this.Cart,
+          {
+            passportPictures: this.passportPictures,
+            galleryPictures: this.galleryPictures,
+          },
           this.closestLab?.labId || 95506,
           (totalPrice: Price) => {
             this.price = totalPrice;
@@ -63,8 +73,8 @@ export class OrderSummaryComponent {
   async setCart() {
     try {
       const allData = await this.idbService.getAllForCart();
-      this.Cart.galleryPictures = allData.galleryPictures;
-      this.Cart.passportPictures = allData.passportPictures;
+      this.galleryPictures = allData.galleryPictures;
+      this.passportPictures = allData.passportPictures;
     } catch (error) {
       console.log(error);
     }
@@ -77,18 +87,18 @@ export class OrderSummaryComponent {
       await this.setCart();
       const passportSubsciption: Observable<any>[] = [];
       const gallerySubsciption: Observable<any>[] = [];
-      this.Cart.passportPictures?.forEach((el) => {
+      this.passportPictures.forEach((el) => {
         passportSubsciption.push(
           this.cloudinary.cloudUpload(
             el.imageURL,
             el.orgFilename,
             order_id,
             labId,
-            'passport'
+            'passport_raw'
           )
         );
       });
-      this.Cart.galleryPictures?.forEach((el) => {
+      this.galleryPictures.forEach((el) => {
         gallerySubsciption.push(
           this.cloudinary.cloudUpload(
             el.imageURL,
@@ -101,54 +111,75 @@ export class OrderSummaryComponent {
       });
       const zippedPassport = zip(...passportSubsciption);
       const zippedGallery = zip(...gallerySubsciption);
-      zippedPassport.subscribe((res) => {
-        res.forEach((el) => {});
+      const passportValues = await firstValueFrom(zippedPassport);
+      const galleryValuees = await firstValueFrom(zippedGallery);
+      console.log(passportValues, galleryValuees);
+      passportValues.forEach((el, idx) => {
+        this.passportPictures[idx].imageURL = el.secure_url;
       });
+      galleryValuees.forEach((el, idx) => {
+        this.galleryPictures[idx].imageURL = el.secure_url;
+      });
+      // zippedPassport.subscribe((res) => {
+      //   console.log(res);
+      //   res.forEach((el: any, idx: number) => {
+      //   });
+      // });
+      // zippedGallery.subscribe((res) => {
+      //   console.log(res);
+      //   res.forEach((el: any, idx: number) => {
+      //     this.galleryPictures[idx].imageURL = el.secure_url;
+      //   });
+      // });
     } catch (err) {
       console.log(err);
     }
   }
 
-  initiatePayment() {
+  async initiatePayment() {
     this.orderService
       .generateOrderId(this.closestLab?.labId || 95506)
       .subscribe({
         next: async (res) => {
+          this.order_id = res.orderId;
           try {
+            console.log(this.closestLab?.labId);
             await this.uploadAllPicture(
               res.orderId,
               this.closestLab?.labId || 95506
             );
-            let pending = false;
-            if (this.Cart.passportPictures && this.Cart.passportPictures.length)
-              pending = true;
-            const order: Order = {
-              order_id: res.orderId,
-              labId: this.closestLab?.labId || 95506,
-              totalPrice: this.price,
-              passportPictures: this.Cart.passportPictures,
-              galleryPictures: this.Cart.galleryPictures,
-              orderStatus: pending ? 'pending' : 'approved',
-              instruction: this.instruction || '',
-            };
-            this.orderService.cleanUnpaidOrders().subscribe(() => {
-              this.orderService.createOrder(order).subscribe((res) => {
-                this.CompletedOrder = res;
-                this.paymentService
-                  .initiatePayment(
-                    this.CompletedOrder.order_id,
-                    this.CompletedOrder.totalPrice.total
-                  )
-                  .subscribe((response: any) => {
-                    console.log(response);
-                    window.location.href = response.url;
-                  });
-              });
-            });
+            this.createOrder();
           } catch (err) {
             console.log(err);
           }
         },
       });
+  }
+
+  createOrder() {
+    let pending = false;
+    if (this.passportPictures.length) pending = true;
+    const order: Order = {
+      order_id: this.order_id,
+      labId: this.closestLab?.labId || 95506,
+      totalPrice: this.price,
+      passportPictures: this.passportPictures,
+      galleryPictures: this.galleryPictures,
+      orderStatus: pending ? 'pending' : 'approved',
+      instruction: this.instruction || '',
+    };
+    this.orderService.cleanUnpaidOrders().subscribe(() => {
+      this.orderService.createOrder(order).subscribe((res) => {
+        this.CompletedOrder = res;
+        this.paymentService
+          .initiatePayment(
+            this.CompletedOrder.order_id,
+            this.CompletedOrder.totalPrice.total
+          )
+          .subscribe((response: any) => {
+            if (response.url) window.location.href = response.url;
+          });
+      });
+    });
   }
 }

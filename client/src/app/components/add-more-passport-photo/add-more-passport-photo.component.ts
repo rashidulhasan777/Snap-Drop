@@ -90,7 +90,6 @@ export class AddMorePassportPhotoComponent implements OnInit {
         await this.idbService.setPassportCopies(
           this.countryAndCopiesInfo.value.copies || 1
         );
-        await this.idbService.updatePassportPhotosWithCountry();
         this.router.navigate(['cart']);
       }
     } catch (err) {

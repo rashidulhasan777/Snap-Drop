@@ -6,16 +6,16 @@ import { baseBackendURL } from 'src/config';
   providedIn: 'root',
 })
 export class CloudinaryService {
-  rootUrl = 'https://api.cloudinary.com/v1_1/djxuxbxet/image/upload';
+  rootUrl = 'https://api.cloudinary.com/v1_1/dk3znnsme/image/upload';
   constructor(private http: HttpClient) {}
   cloudUpload(
     file: File | string,
     filename: string,
     order_Id: string,
     lab_Id: number,
-    photoType: 'passport' | 'gallery'
+    photoType: string
   ) {
-    const public_id = `order${order_Id}_lab${lab_Id}/${photoType}/order${order_Id}_lab${lab_Id}_${filename}_${Date.now()}`;
+    const public_id = `${order_Id}_lab${lab_Id}/${photoType}/${filename}`;
     const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', 'SnapDrop');

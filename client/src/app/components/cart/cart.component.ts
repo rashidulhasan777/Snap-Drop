@@ -17,6 +17,7 @@ export class CartComponent {
   async ngOnInit() {
     try {
       const all = await this.idbService.getAllForCart();
+      console.log(all);
       this.passportOrders = all.passportPictures || [];
       this.galleryOrders = all.galleryPictures || [];
       console.log(this.passportOrders);

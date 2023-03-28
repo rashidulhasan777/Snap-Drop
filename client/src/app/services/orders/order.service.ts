@@ -51,6 +51,7 @@ export class OrderService {
   }
 
   createOrder(order: Order): Observable<Order> {
+    console.log(order);
     return this.http.post<Order>(this.baseUrl, order, {
       headers: {
         Authorization: `Bearer ${this.jwtToken}`,
