@@ -19,8 +19,9 @@ h1{
 .passportImage {
   max-width: 45vw;
 }
+
 .imageCard {
-  /* border: 1px solid black; */
+  border: 1px solid black;
   position: relative;
 }
 .photosContainer {
