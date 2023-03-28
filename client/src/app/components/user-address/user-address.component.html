@@ -1,24 +1,33 @@
 <div class="user-info-form">
-  <h1>Delivery Information</h1>
+  <h1>
+    Delivery Information
+    <img
+      class="header-icon"
+      src="../../../assets/Header icons/marker.png"
+      alt=""
+    />
+  </h1>
   <ng-container *ngIf="hasPreviousInfo; else insertDelivaryInfo">
     <h3>Your current delivery information:</h3>
 
     <div class="upcoming-card-container">
       <mat-card class="upcoming-card">
         <mat-card-header>
-          <mat-card-title class="upcoming-card-title"
-            >{{ User?.details?.name | titlecase }}</mat-card-title
-          >
+          <mat-card-title class="upcoming-card-title">{{
+            User?.details?.name | titlecase
+          }}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <p class="upcoming-card-details">
             <b>Mobile:</b> {{ User?.details?.contact_number }}
           </p>
-          <p class="upcoming-card-details"><b>Email:</b>  {{ User?.email }}</p>
-          <p class="upcoming-card-details"><b>Address:</b> {{ User?.details?.address }},
+          <p class="upcoming-card-details"><b>Email:</b> {{ User?.email }}</p>
+          <p class="upcoming-card-details">
+            <b>Address:</b> {{ User?.details?.address }},
             {{ User?.details?.area?.area_name }},
             {{ User?.details?.zone?.zone_name }},
-            {{ User?.details?.city?.city_name }}</p>
+            {{ User?.details?.city?.city_name }}
+          </p>
           <mat-divider></mat-divider>
         </mat-card-content>
       </mat-card>
@@ -39,12 +48,8 @@
       <button mat-fab color="primary" (click)="changeAdress()">
         <mat-icon>edit</mat-icon>
       </button>
-      <button
-        mat-fab
-        color="primary"
-        (click)="continueWithPrevious()"
-      >
-      <mat-icon>chevron_right</mat-icon>
+      <button mat-fab color="primary" (click)="continueWithPrevious()">
+        <mat-icon>chevron_right</mat-icon>
       </button>
     </div>
   </ng-container>

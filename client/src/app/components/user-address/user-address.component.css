@@ -1,6 +1,15 @@
-h1{
+h1 {
   text-align: center;
-  margin: 12vh 0;
+  margin-top: 12vh;
+  margin-bottom: 8vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-icon {
+  width: 8%;
+  margin-left: 3%;
 }
 
 .user-info-form {
@@ -75,7 +84,7 @@ h1{
   font-size: 1em;
 }
 
-.upcoming-card-title{
+.upcoming-card-title {
   font-size: xx-large;
   font-weight: bold;
 }
