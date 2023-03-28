@@ -74,7 +74,7 @@ export class AddMorePassportPhotoComponent implements OnInit {
       localStorage.setItem(
         'countryAndCopiesForPassport',
         JSON.stringify(this.countryAndCopiesInfo.value)
-      );
+      );  
       this.cartService
         .updateCart({ passportPictures: this.passportPhotos })
         .subscribe((res) => {
