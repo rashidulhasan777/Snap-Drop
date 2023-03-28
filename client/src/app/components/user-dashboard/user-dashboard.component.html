@@ -1,3 +1,5 @@
+<h1>Welome, </h1>
+
 <div class="upcoming-card-container">
   <mat-card class="upcoming-card">
     <mat-card-header>
@@ -21,20 +23,29 @@
 </div>
 
 <div class="options-container">
-  <div class="passport-button-container">
+  <!-- <div class="passport-button-container">
     <a
       class="options-button"
       mat-stroked-button
       routerLink="/passport_photo_instructions"
     >
       <mat-icon>camera</mat-icon>
-      <span>Take a passport photo</span>
     </a>
+    <span>Take a passport photo</span>
   </div>
   <div class="gallery-button-container">
     <a class="options-button" mat-stroked-button routerLink="/gallery_upload">
       <mat-icon>cloud_upload</mat-icon>
       <span>Upload pictures</span>
     </a>
+  </div> -->
+
+  <div class="button-option" routerLink="/passport_photo_instructions">
+    <span class="icon"> <mat-icon>camera</mat-icon> </span>
+    <span class="button-text">Take a passport photo</span>
+  </div>
+  <div class="button-option" routerLink="/gallery_upload">
+    <span class="icon"> <mat-icon>photo_library</mat-icon> </span>
+    <span class="button-text">Upload Pictures</span>
   </div>
 </div>

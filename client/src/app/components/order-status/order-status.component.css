@@ -7,10 +7,6 @@
   }
 
 
-.header{
-    padding-top: 5vh;
-    padding-bottom: 5vh;
-}
 .totalContainer{
     display: flex;
     flex-direction: column;
@@ -25,6 +21,7 @@
 
 h1 {
   text-align: center;
+  margin: 12vh 0;
 }
 
 .timeline-header {

@@ -32,3 +32,34 @@
   width: 100%;
   margin-bottom: 10%;
 }
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  padding: 5%;
+}
+
+.options-button {
+  width: 100%;
+  margin-bottom: 10%;
+}
+
+.button-option{
+ border: 1px solid #673AB7;
+ display: flex;
+ align-items: center;
+ margin-bottom: 10px;
+}
+.button-option .icon{
+ flex: 0.2;
+ max-width: 45px;
+ background: #673AB7;
+ padding: 10px;
+ margin-right: 10px;
+ color: white;
+}
+
+.button-option .button-text{
+ font-size: 20px;
+ color: #673ab7;
+}
