@@ -1,6 +1,6 @@
 <div *ngIf="User" class="user-info-form">
   <h1 class="greeting">
-    Hello, {{ User.name }}
+    Hello, <span class="name"> {{ User.name }} </span>
     <img class="header-icon" src="../../../assets/icons/wave.png" />
   </h1>
   <form
@@ -129,5 +129,7 @@
       </button>
     </div> -->
   </form>
-  <button mat-flat-button (click)="logout()">Logout</button>
+  <div class="logout-btn-container">
+    <button class="logout-btn" color="warn" mat-flat-button (click)="logout()">Logout</button>
+  </div>
 </div>
