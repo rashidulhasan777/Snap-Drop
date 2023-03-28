@@ -38,28 +38,19 @@
   </div>
   <div class="actionButtons">
     <button
-      mat-stroked-button
-      color="primary"
-      class="buttonSize"
-      routerLink="/user_dashboard"
-    >
-      <mat-icon>home</mat-icon>Home
-    </button>
-    <button
-      mat-stroked-button
+      mat-fab
       color="primary"
       class="buttonSize"
       (click)="clearAll()"
     >
-      <mat-icon>delete</mat-icon>Clear all items
-    </button>
+      <mat-icon>delete</mat-icon></button>
     <button
       (click)="checkOut()"
-      mat-raised-button
+      mat-fab
       color="primary"
       class="buttonSize"
     >
-      Checkout
+      <mat-icon>chevron_right</mat-icon>
     </button>
   </div>
 </div>

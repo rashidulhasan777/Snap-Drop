@@ -1,5 +1,7 @@
 .heading {
-  margin: 12vh 0;
+  margin-top: 12vh;
+  margin-bottom: 10vh;
+  /* margin: 12vh 0; */
   text-align: center;
 }
 .cardImage {
@@ -63,26 +65,30 @@
 }
 
 .actionButtons {
-  position: absolute;
+  margin-bottom: 10vh;
+  position: fixed;
   display: flex;
+  flex-direction: column;
+  align-items: end;
   gap: 1rem;
   width: 100%;
   padding: 10px;
   bottom: 2%;
 }
 
-.buttonSize {
+/* .buttonSize {
   width: 50%;
-}
+} */
 
 a {
   text-decoration: none;
 }
 
-.cartContainer {
-  position: relative;
-  height: calc(100dvh - 125px);
-}
+/* .cartContainer {
+  position: relative; */
+  /* height: calc(100dvh - 125px); */
+  /* height: 72vh;
+} */
 
 :host {
   max-height: 90vh;
