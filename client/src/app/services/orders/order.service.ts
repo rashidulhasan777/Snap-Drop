@@ -88,6 +88,18 @@ export class OrderService {
     });
   }
 
+  generateOrderId(labId: number): Observable<{ orderId: string }> {
+    return this.http.post<{ orderId: string }>(
+      baseBackendURL + '/generateOrderId',
+      { labId },
+      {
+        headers: {
+          Authorization: `Bearer ${this.jwtToken}`,
+        },
+      }
+    );
+  }
+
   private get jwtToken() {
     return localStorage.getItem('userAccessToken');
   }

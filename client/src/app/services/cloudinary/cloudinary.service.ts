@@ -11,9 +11,9 @@ export class CloudinaryService {
   cloudUpload(
     file: File | string,
     filename: string,
-    order_Id: number,
+    order_Id: string,
     lab_Id: number,
-    photoType: string
+    photoType: 'passport' | 'gallery'
   ) {
     const public_id = `order${order_Id}_lab${lab_Id}/${photoType}/order${order_Id}_lab${lab_Id}_${filename}_${Date.now()}`;
     const formData = new FormData();
