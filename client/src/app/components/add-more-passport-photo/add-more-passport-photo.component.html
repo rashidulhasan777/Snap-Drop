@@ -1,5 +1,6 @@
-<form [formGroup]="countryAndCopiesInfo">
-  <mat-form-field appearance="outline">
+<h1>Preview Images</h1>
+<form class="form" [formGroup]="countryAndCopiesInfo">
+  <mat-form-field class="countries" appearance="outline">
     <mat-label>Countries</mat-label>
     <input
       type="text"
@@ -17,7 +18,7 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-  <mat-form-field appearance="outline">
+  <mat-form-field class="copies" appearance="outline">
     <mat-label>Copies</mat-label>
     <input
       matInput

@@ -21,7 +21,8 @@
 
 h1 {
   text-align: center;
-  margin: 12vh 0;
+  margin-top: 12vh;
+  margin-bottom: 8vh;
 }
 
 .timeline-header {

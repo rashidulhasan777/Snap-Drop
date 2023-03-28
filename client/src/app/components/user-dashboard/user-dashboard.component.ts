@@ -44,7 +44,7 @@ export class UserDashboardComponent {
       if (res.orderStatus === 'retake_needed') {
         this.router.navigate(['retake']);
       }
-      this.openDialog();
+      // this.openDialog();
     });
   }
 
