@@ -19,12 +19,9 @@ h1 {
   align-items: center;
 }
 
-/* doesn't work for height */
 .user-profile-form {
   margin-top: 5%;
   padding-top: 5%;
-  height: 20vh;
-  overflow-y: auto;
 }
 
 .button-container {
@@ -87,4 +84,30 @@ h1 {
 .upcoming-card-title {
   font-size: xx-large;
   font-weight: bold;
+}
+
+.delivery-info-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  margin-bottom: 8vh;
+  overflow-y: auto;
+}
+
+.delivery-info-form div mat-form-field {
+  width: 100%;
+}
+
+.delivery-info-form div {
+  padding: 0 5%;
+  width: 100%;
+}
+
+.address-title {
+  text-align: center;
+  margin-top: 8%;
+  margin-bottom: 5%;
 }
