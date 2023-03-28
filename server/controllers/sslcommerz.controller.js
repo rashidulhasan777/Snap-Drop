@@ -63,8 +63,8 @@ const success = async (req, res) => {
     sslcz.validate(data).then((data) => {
       console.log('success1', data);
       // if (data.status === "VALIID")
-      res.redirect(301, `${process.env.FRONTEND}/order_done`);
-      // else res.redirect(`${process.env.FRONTEND}/payment_failed`);
+      res.redirect(301, `${process.env.BASE_FRONTEND_URL}/order_done`);
+      // else res.redirect(`${process.env.BASE_FRONTEND_URL}/payment_failed`);
     });
   } catch (error) {
     console.log(error);
