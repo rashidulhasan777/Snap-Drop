@@ -71,7 +71,11 @@ const getOrderByCustomerId = async (req, res) => {
 const getOrdersbyStatus = async (req, res) => {
   const orderStatus = req.params.status;
   try {
-    const orders = await Order.find({ orderStatus, paid: true });
+    const orders = await Order.find({
+      labId: req.currentUser.labId,
+      orderStatus,
+      paid: true,
+    });
     res.status(201);
     res.send(orders);
   } catch (error) {

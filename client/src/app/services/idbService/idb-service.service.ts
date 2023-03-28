@@ -72,6 +72,7 @@ export class IdbServiceService {
   async updatePassportPhotosWithCountry() {
     const country = await this.getCountry();
     return update('passportPhotos', (val) => {
+      if (!val) return [];
       return val.map((el: ImageInterface, idx: number) => {
         el.orgFilename = `passport_${country}_x${el.copies}_${idx}`;
         return el;
@@ -80,6 +81,7 @@ export class IdbServiceService {
   }
   async updateGalleryPhotosName() {
     return update('galleryPhotos', (val) => {
+      if (!val) return [];
       return val.map((el: ImageInterface, idx: number) => {
         el.orgFilename = `gallery_${el.photoSize}_x${el.copies}_${idx}`;
         return el;

@@ -32,7 +32,7 @@ const login = async (req, res) => {
       return;
     }
     const validatedPass = await bcrypt.compare(password, user.password);
-    if (!validatedPass) throw new Error();
+    if (!validatedPass) throw new Error('Password is incorrect');
     const access_token = jwt.sign({ _id: user._id }, SECRET_KEY);
     res.status(200).send({ access_token });
   } catch (error) {
