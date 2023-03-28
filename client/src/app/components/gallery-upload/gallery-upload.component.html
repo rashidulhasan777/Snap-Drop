@@ -1,4 +1,4 @@
-<h3>Upload Photos</h3>
+<h1>Upload Photos</h1>
 
 <form
   *ngIf="pictureData.length"
@@ -31,7 +31,7 @@
   </mat-form-field>
   <button type="submit" mat-stroked-button>Apply</button>
 </form>
-<div class="gallery-cards-container">
+<div *ngIf="previews.length" class="gallery-cards-container">
   <app-gallery-card
     *ngFor="let preview of previews; let i = index"
     [formatOptions]="formatOptions"
@@ -50,7 +50,7 @@
   style="display: none"
 />
 <div class="gallery-controls" [ngClass]="{ bottom: previews.length }">
-  <button mat-fab color="primary" (click)="fileUpload.click()">
+  <button mat-fab color="primary" (click)="fileUpload.click()" [ngClass]="{ plus: !previews.length }">
     <mat-icon>add</mat-icon>
   </button>
   <button
@@ -59,6 +59,6 @@
     color="primary"
     (click)="handleSubmit()"
   >
-    <mat-icon>shopping_cart</mat-icon>
+    <mat-icon>chevron_right</mat-icon>
   </button>
 </div>

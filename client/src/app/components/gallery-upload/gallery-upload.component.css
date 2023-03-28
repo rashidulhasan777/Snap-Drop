@@ -1,5 +1,6 @@
-h3 {
+h1 {
   text-align: center;
+  margin: 12vh 0;
 }
 
 .gallery-cards-container {
@@ -21,11 +22,21 @@ h3 {
   justify-content: center;
 }
 
+.plus {
+  margin-top: 20vh;
+}
+
 .bottom {
+  gap: 2vh;
   bottom: 0%;
+  margin-bottom: 10vh;
   padding: 10px 0px;
-  background-color: white;
-  border-top: black 1px solid;
+  padding-right: 5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  /* background-color: white; */
+  /* border-top: black 1px solid; */
   justify-content: space-around;
 }
 
@@ -41,4 +52,5 @@ h3 {
 }
 .inputField {
   width: 35%;
+  margin-left: 2vw;
 }
