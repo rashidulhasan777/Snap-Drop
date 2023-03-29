@@ -148,6 +148,7 @@ export class OrderSummaryComponent {
               res.orderId,
               this.closestLab?.labId || 95506
             );
+            console.log('here after uploading');
             this.createOrder();
           } catch (err) {
             console.log(err);
