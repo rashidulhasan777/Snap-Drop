@@ -9,9 +9,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialComponentsModule } from './material-components/material-components.module';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { LottieModule } from 'ngx-lottie';
-import { NgChartsModule, NgChartsConfiguration  } from 'ng2-charts';
+import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
 import player from 'lottie-web';
 import { WebcamModule } from 'ngx-webcam';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 //Components
 import { AppComponent } from './app.component';
@@ -48,13 +49,15 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { LabDashboardComponent } from './components/lab-components/lab-dashboard/lab-dashboard.component';
 import { ChartComponent } from './components/lab-components/chart/chart.component';
 
-export function playerFactory() {
-  return import('lottie-web');
-}
 import { TakePictureComponent } from './components/take-picture/take-picture.component';
 import { AddMorePassportPhotoComponent } from './components/add-more-passport-photo/add-more-passport-photo.component';
 import { WarningDialogueComponent } from './components/warning-dialogue/warning-dialogue.component';
+import { baseBackendURL } from 'src/config';
 
+const config: SocketIoConfig = { url: baseBackendURL, options: {} };
+export function playerFactory() {
+  return import('lottie-web');
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -111,10 +114,11 @@ import { WarningDialogueComponent } from './components/warning-dialogue/warning-
       registrationStrategy: 'registerWhenStable:30000',
     }),
     WebcamModule,
-    NgChartsModule
+    NgChartsModule,
+    SocketIoModule.forRoot(config),
   ],
   providers: [
-    { provide: NgChartsConfiguration, useValue: { generateColors: false }},
+    { provide: NgChartsConfiguration, useValue: { generateColors: false } },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
   ],
