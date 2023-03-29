@@ -28,6 +28,7 @@ export class OrderSummaryComponent {
   CompletedOrder?: Order;
   totalUploaded = 0;
   order_id = '';
+  countryForPassport = 'Bangladesh';
 
   passportPictures: ImageInterface[] = [];
   galleryPictures: ImageInterface[] = [];
@@ -45,6 +46,8 @@ export class OrderSummaryComponent {
     this.userDataService.getUser().subscribe((res) => {
       this.User = res;
     });
+    this.countryForPassport =
+      (await this.idbService.getCountry()) || 'Bangladesh';
 
     this.userDataService.getClosestLab().subscribe(async (res) => {
       console.log(res);
@@ -114,15 +117,18 @@ export class OrderSummaryComponent {
       // const passportValues = await firstValueFrom(zippedPassport);
       // const galleryValuees = await firstValueFrom(zippedGallery);
       // console.log(passportValues, galleryValuees);
-
+      console.log(this.passportPictures);
+      console.log(this.galleryPictures);
       zippedPassport.subscribe((res) => {
         res.forEach((el: any, idx: number) => {
           this.passportPictures[idx].imageURL = el.secure_url;
         });
+        console.log(this.passportPictures);
         zippedGallery.subscribe((res) => {
           res.forEach((el: any, idx: number) => {
             this.galleryPictures[idx].imageURL = el.secure_url;
           });
+          console.log(this.galleryPictures);
           this.createOrder();
         });
       });
@@ -157,6 +163,7 @@ export class OrderSummaryComponent {
       order_id: this.order_id,
       labId: this.closestLab?.labId || 95506,
       totalPrice: this.price,
+      countryForPassport: this.countryForPassport,
       passportPictures: this.passportPictures,
       galleryPictures: this.galleryPictures,
       orderStatus: pending ? 'pending' : 'approved',
@@ -171,6 +178,7 @@ export class OrderSummaryComponent {
             this.CompletedOrder.totalPrice.total
           )
           .subscribe((response: any) => {
+            console.log(response.url);
             if (response.url) window.location.href = response.url;
           });
       });

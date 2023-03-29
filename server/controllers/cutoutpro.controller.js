@@ -4,7 +4,9 @@ const Orders = require('../models/order.model');
 const countryBasedSizes = require('../utils/data/requirementsFromLab.json');
 
 const cutoutProCropImage = async (imageUrl, country) => {
-  const countryInfo = countryBasedSizes.find((el) => el.country === country);
+  const countryInfo = countryBasedSizes.find(
+    (el) => el.country.toLowerCase() === country.toLowerCase()
+  );
   try {
     const axiosImageData = await axios.get(imageUrl, {
       responseType: 'arraybuffer',
@@ -26,12 +28,13 @@ const cutoutProCropImage = async (imageUrl, country) => {
       dataForCutOutPro,
       {
         headers: {
-          APIKEY: 'f03b3b0afab342b2b482ada0e24dc6c7',
+          APIKEY: process.env.CUTOUT_PRO,
           'Content-Type': 'application/json',
         },
       }
     );
     const idPhotoImage = axiosCutOutData.data.data.idPhotoImage;
+    console.log(idPhotoImage)
     return idPhotoImage;
     // cloudinaryUpload(idPhotoImage);
 
@@ -62,11 +65,11 @@ const uploadToOrder = async (req, res, next) => {
         order.countryForPassport
       );
       const cloudinaryData = await cloudinary.uploader.upload(url, {
-        public_id: `${order.order_id}_${order.labId}/passport_cutout/${image.orgFilename}`,
+        public_id: `${order.order_id}_lab${order.labId}/passport_cutout/${image.orgFilename}`,
       });
     }
     const zipUrl = cloudinary.utils.download_zip_url({
-      prefixes: `${order.order_id}_${order.labId}/`,
+      prefixes: `${order.order_id}_lab${order.labId}/`,
     });
     res.status(200).send({ zipUrl });
   } catch (error) {

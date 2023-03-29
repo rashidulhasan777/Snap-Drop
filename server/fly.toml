@@ -33,6 +33,8 @@ processes = []
   
   VAPID_PUBLIC_KEY ="BGWbwwGSeOp32TFIezGDGCejWllTBcMpn3ASg6wbBp9Uxx14GPdiA9YKoHyg2gGMrcKeAlRtAnpj15OJXZu2S6w"
   VAPID_PRIVATE_KEY = "ydjR-UjvsdeCX7_pN1F0D-aQ8Aocbek5kLY-qMd49Mc"
+  
+  CUTOUT_PRO = 'a844d560ceaf44a5baa7edb1fe9c1019'
 
 [experimental]
   auto_rollback = true

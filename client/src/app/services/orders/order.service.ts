@@ -101,6 +101,17 @@ export class OrderService {
     );
   }
 
+  cutoutAndDownload(order_id: string): Observable<{ zipUrl: string }> {
+    return this.http.get<{ zipUrl: string }>(
+      baseBackendURL + '/dowloadOrder/' + order_id,
+      {
+        headers: {
+          Authorization: `Bearer ${this.jwtToken}`,
+        },
+      }
+    );
+  }
+
   private get jwtToken() {
     return localStorage.getItem('userAccessToken');
   }
