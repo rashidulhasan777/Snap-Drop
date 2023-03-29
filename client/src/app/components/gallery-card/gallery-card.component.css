@@ -12,6 +12,7 @@
 }
 
 .card-form {
+  padding-top: 2.5vh;
   max-width: 200px;
   display: flex;
   flex-direction: column;

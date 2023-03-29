@@ -2,9 +2,15 @@ h1 {
   text-align: center;
   margin-top: 12vh;
   margin-bottom: 8vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  animation: entry 1500ms ease-in-out 200ms 1 forwards;
+}
+@keyframes entry {
+  0% {
+    margin: 12vh 0;
+  }
+  100% {
+    margin: 3vh 0;
+  }
 }
 
 .name {

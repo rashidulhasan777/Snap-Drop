@@ -31,7 +31,7 @@ h1 {
 }
 
 .imageCard {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   position: relative;
 }
 .photosContainer {
@@ -57,4 +57,8 @@ h1 {
   bottom: 2%;
   justify-content: space-between;
   margin: 20px;
+}
+
+.bottom ::ng-deep .bottom-button{
+  background-color: var(--primary);
 }

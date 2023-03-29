@@ -1,6 +1,6 @@
 <h1 class="header">Upload Photos</h1>
-
-<form
+<div class="data-container">
+  <form
   *ngIf="pictureData.length"
   [formGroup]="applyToAllForm"
   class="card-form"
@@ -42,6 +42,8 @@
     (deleteImage)="removeImage(i)"
   ></app-gallery-card>
 </div>
+</div>
+
 
 <input
   #fileUpload
@@ -52,13 +54,7 @@
   style="display: none"
 />
 <div class="gallery-controls" [ngClass]="{ bottom: previews.length }">
-  <button
-    class="bottom-button"
-    mat-fab
-    color="primary"
-    (click)="fileUpload.click()"
-    [ngClass]="{ plus: !previews.length }"
-  >
+  <button class="bottom-button" mat-fab color="primary" (click)="fileUpload.click()" [ngClass]="{ plus: !previews.length }">
     <mat-icon>add</mat-icon>
   </button>
   <button

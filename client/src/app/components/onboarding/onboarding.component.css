@@ -36,9 +36,17 @@ form {
   width: 100%;
 }
 
+.init-btn-container-bottom ::ng-deep .first-next{
+  background-color: var(--primary);
+}
+
 .btn-container-bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+}
+
+.btn-container-bottom ::ng-deep .first-next{
+  background-color: var(--primary);
 }

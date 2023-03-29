@@ -23,12 +23,19 @@ mat-stepper {
   width: 100%;
 }
 
+.init-btn-container-bottom ::ng-deep .btn-primary{
+  background-color: var(--primary);
+}
+
 .btn-container-bottom {
   /* position: absolute; */
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+}
+.btn-container-bottom ::ng-deep .btn-primary{
+  background-color: var(--primary);
 }
 
 h1 {
