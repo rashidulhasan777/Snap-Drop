@@ -23,6 +23,7 @@ const sendNotification = async (userId, message) => {
   try {
     const sub = await seeIfSubscribes(userId);
     if (!sub) return;
+    console.log(sub);
     const notificationPayload = {
       notification: {
         title: message,
