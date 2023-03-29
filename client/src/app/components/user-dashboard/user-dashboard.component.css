@@ -1,4 +1,14 @@
-
+.whole-body{
+  /* border: red solid 20px; */
+  height: calc(100vh - 84px);
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  color: var(--primary);
+  margin: 8vh 0;
+  text-align: center;
+}
 .upcoming-card-container {
   padding: 5%;
   margin-bottom: 5%;
@@ -78,11 +88,6 @@
   /* color: #673ab7; */
 }
 
-.header {
-  color: var(--primary);
-  margin: 12vh 0;
-  text-align: center;
-}
 .delivery-title{
   color: var(--primary);
 }
