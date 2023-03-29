@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Order } from 'src/app/interfaces/order.interface';
 import { CartService } from 'src/app/services/cart/cart.service';
+import { IdbServiceService } from 'src/app/services/idbService/idb-service.service';
 import { OrderService } from 'src/app/services/orders/order.service';
 import { PriceCalculationService } from 'src/app/services/price-calculation/price-calculation.service';
 
@@ -11,24 +12,13 @@ import { PriceCalculationService } from 'src/app/services/price-calculation/pric
   styleUrls: ['./order-done.component.css'],
 })
 export class OrderDoneComponent {
-  userInstruction: string | null = '';
-  CompletedOrder: Order = {
-    order_id: 'hh',
-    labId: 0,
-    totalPrice: { passport: 0, gallery: 0, shipping: 0, total: 0 },
-  };
-  errorMessage = '';
-  nothingInCart = false;
   constructor(
-    private cartService: CartService,
     private orderService: OrderService,
-    private priceCalcultor: PriceCalculationService,
-    private http: HttpClient
+    private idbService: IdbServiceService
   ) {}
 
   ngOnInit() {
-
     this.orderService.setOrderPaid().subscribe();
-    this.cartService.clearCart().subscribe();
+    this.idbService.clearAll();
   }
 }

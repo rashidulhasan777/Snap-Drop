@@ -2,7 +2,7 @@ const Order = require('./../models/order.model');
 const transport = require('./../middlewares/nodemailer');
 const { getMailOptions } = require('./../utils/nodemail/mailOptions');
 const User = require('../models/user.model');
-const { sendNotification } = require('web-push');
+const { sendNotification } = require('../utils/helpers/sendNotifications');
 
 const getAllOrders = async (req, res) => {
   try {
