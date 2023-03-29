@@ -36,6 +36,7 @@
       <mat-form-field class="address" appearance="outline">
         <mat-label>Address</mat-label>
         <input matInput formControlName="address" />
+        <mat-hint>*Address should be at least 10 character</mat-hint>
         <mat-error *ngIf="address?.errors?.['required']"
           >Address is required</mat-error
         >
