@@ -1,5 +1,8 @@
 <div class="totalContainer">
-  <h1 class="header">Order Status</h1>
+  <h1 class="header">
+    Order Status
+    <img class="header-icon" src="../../../assets/Header icons/hourglass.png" />
+  </h1>
   <div class="container">
     <div class="timeline">
       <div class="timeline-section">
@@ -13,11 +16,11 @@
           <div class="line-container">
             <div class="line" [class.completed-line]="step > 0"></div>
           </div>
-    
+
           <div class="content">Your request is pending.</div>
         </div>
       </div>
-    
+
       <div class="timeline-section">
         <div class="timeline-header">
           <div class="icon" [class.completed]="step > 0">
@@ -29,11 +32,11 @@
           <div class="line-container">
             <div class="line" [class.completed-line]="step > 1"></div>
           </div>
-    
+
           <div class="content">Your request has been approved.</div>
         </div>
       </div>
-    
+
       <div class="timeline-section">
         <div class="timeline-header">
           <div class="icon" [class.completed]="step > 1">
@@ -45,11 +48,11 @@
           <div class="line-container">
             <div class="line" [class.completed-line]="step > 2"></div>
           </div>
-    
+
           <div class="content">Your photos are being printed</div>
         </div>
       </div>
-    
+
       <div class="timeline-section">
         <div class="timeline-header">
           <div class="icon" [class.completed]="step > 2">
@@ -58,8 +61,7 @@
           <b>Ready to deliver</b>
         </div>
         <div class="timeline-content">
-          <div class="line-container">
-          </div>
+          <div class="line-container"></div>
           <div class="content">Your photos are ready to deliver.</div>
         </div>
       </div>
@@ -90,9 +92,11 @@
       <p>Your photos are ready to deliver</p>
     </mat-step>
   </mat-vertical-stepper> -->
-  <div class="goBack">
+
+  <!-- ! Go back is functional. Hidden for bottom navbar-->
+  <!-- <div class="goBack">
     <button mat-raised-button color="primary" (click)="goBack()">
       Go back
     </button>
-  </div>
+  </div> -->
 </div>

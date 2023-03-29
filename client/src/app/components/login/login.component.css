@@ -7,8 +7,8 @@
   gap: 2rem;
 }
 .pageHeader {
-  width: 100%;
   text-align: center;
+  margin: 12vh 0;
 }
 .oauthButtons {
   display: flex;

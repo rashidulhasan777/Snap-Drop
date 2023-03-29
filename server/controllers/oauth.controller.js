@@ -16,7 +16,7 @@ const googleAccessCode = async (req, res, next) => {
     res.status(200);
     res.send({ access_token: access_token.data.access_token });
   } catch (error) {
-    console.log(error);
+    console.log(error.response);
     res.status(500);
     res.send({ errorMessage: 'Something went wrong' });
   }

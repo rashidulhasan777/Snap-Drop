@@ -1,4 +1,25 @@
-<h2 class="title">Order Summary</h2>
+<h1>Order Summary</h1>
+
+<div class="upcoming-card-container">
+  <mat-card class="upcoming-card">
+    <mat-card-header>
+      <mat-card-title class="upcoming-card-title"
+        >{{ User?.details?.name | titlecase }}</mat-card-title
+      >
+    </mat-card-header>
+    <mat-card-content>
+      <p class="upcoming-card-details">
+        <b>Mobile:</b> {{ User?.details?.contact_number }}
+      </p>
+      <p class="upcoming-card-details"><b>Email:</b>  {{ User?.email }}</p>
+      <p class="upcoming-card-details"><b>Address:</b> {{ User?.details?.address }},
+        {{ User?.details?.area?.area_name }},
+        {{ User?.details?.zone?.zone_name }},
+        {{ User?.details?.city?.city_name }}</p>
+      <mat-divider></mat-divider>
+    </mat-card-content>
+  </mat-card>
+</div>
 
 <div *ngIf="Cart && Cart.passportPictures && Cart.passportPictures.length">
   <div class="priceContainer">
@@ -22,7 +43,7 @@
   <div class="price">{{ price.total }} Taka</div>
 </div>
 
-<h3 class="delivaryTitle">To be delivered to:</h3>
+<!-- <h3 class="delivaryTitle">To be delivered to:</h3>
 <div class="userDetails">
   <div class="userName">{{ User?.details?.name | titlecase }}</div>
   <div><b>Mobile:</b> {{ User?.details?.contact_number }}</div>
@@ -32,7 +53,7 @@
     {{ User?.details?.area?.area_name }}, {{ User?.details?.zone?.zone_name }},
     {{ User?.details?.city?.city_name }}
   </div>
-</div>
+</div> -->
 <div class="instructionWrapper">
   <mat-form-field class="instructionField" appearance="outline"
     ><mat-label>Instructions (Optional)</mat-label

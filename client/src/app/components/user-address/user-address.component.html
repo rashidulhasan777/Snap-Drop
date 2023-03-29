@@ -1,8 +1,39 @@
 <div class="user-info-form">
-  <h1>Delivery Information</h1>
+  <h1>
+    Delivery Information
+    <img
+      class="header-icon"
+      src="../../../assets/Header icons/marker.png"
+      alt=""
+    />
+  </h1>
   <ng-container *ngIf="hasPreviousInfo; else insertDelivaryInfo">
-    <div>Your current delivary information:</div>
-    <div class="userDetails">
+    <h3>Your current delivery information:</h3>
+
+    <div class="upcoming-card-container">
+      <mat-card class="upcoming-card">
+        <mat-card-header>
+          <mat-card-title class="upcoming-card-title">{{
+            User?.details?.name | titlecase
+          }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="upcoming-card-details">
+            <b>Mobile:</b> {{ User?.details?.contact_number }}
+          </p>
+          <p class="upcoming-card-details"><b>Email:</b> {{ User?.email }}</p>
+          <p class="upcoming-card-details">
+            <b>Address:</b> {{ User?.details?.address }},
+            {{ User?.details?.area?.area_name }},
+            {{ User?.details?.zone?.zone_name }},
+            {{ User?.details?.city?.city_name }}
+          </p>
+          <mat-divider></mat-divider>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- <div class="userDetails">
       <div class="userName">{{ User?.details?.name | titlecase }}</div>
       <div><b>Mobile:</b> {{ User?.details?.contact_number }}</div>
       <div><b>Email:</b> {{ User?.email }}</div>
@@ -12,17 +43,13 @@
         {{ User?.details?.zone?.zone_name }},
         {{ User?.details?.city?.city_name }}
       </div>
-    </div>
+    </div> -->
     <div class="actionButtons">
-      <button mat-stroked-button color="primary" (click)="changeAdress()">
-        Change address
+      <button mat-fab color="primary" (click)="changeAdress()">
+        <mat-icon>edit</mat-icon>
       </button>
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="continueWithPrevious()"
-      >
-        Continue
+      <button mat-fab color="primary" (click)="continueWithPrevious()">
+        <mat-icon>chevron_right</mat-icon>
       </button>
     </div>
   </ng-container>
@@ -61,103 +88,113 @@
           >
         </mat-form-field>
       </div>
-      <div>
-        <mat-form-field class="address" appearance="outline">
-          <mat-label>Address</mat-label>
-          <input matInput formControlName="address" />
-          <mat-error *ngIf="address?.errors?.['required']"
-            >Address is required</mat-error
-          >
-          <mat-error *ngIf="address?.errors?.['minlength']"
-            >Too short. Address should be at least 10 character long</mat-error
-          >
-        </mat-form-field>
-      </div>
-      <div>
-        <mat-form-field class="city" appearance="outline">
-          <mat-label>City</mat-label>
-          <input
-            type="text"
-            placeholder="Pick your city"
-            aria-label="cities"
-            matInput
-            formControlName="city"
-            [matAutocomplete]="CityAuto"
-          />
-          <mat-autocomplete
-            [displayWith]="displayFnCities"
-            autoActiveFirstOption
-            #CityAuto="matAutocomplete"
-            (optionSelected)="setZones($event.option.value)"
-          >
-            <mat-option
-              *ngFor="let city of filteredCities | async"
-              [value]="city"
+      <div class="address-container">
+        <h3 class="address-title">DELIVERY DETAILS</h3>
+        <div>
+          <p>Which city are you in?</p>
+          <mat-form-field class="city" appearance="outline">
+            <mat-label>City</mat-label>
+            <input
+              type="text"
+              placeholder="Pick your city"
+              aria-label="cities"
+              matInput
+              formControlName="city"
+              [matAutocomplete]="CityAuto"
+            />
+            <mat-autocomplete
+              [displayWith]="displayFnCities"
+              autoActiveFirstOption
+              #CityAuto="matAutocomplete"
+              (optionSelected)="setZones($event.option.value)"
             >
-              {{ city.city_name }}
-            </mat-option>
-          </mat-autocomplete>
-          <mat-error *ngIf="city?.errors?.['required']"
-            >City is required</mat-error
-          >
-        </mat-form-field>
-      </div>
-      <div>
-        <mat-form-field class="zone" appearance="outline">
-          <mat-label>Zone</mat-label>
-          <input
-            type="text"
-            placeholder="Pick your zone"
-            aria-label="zones"
-            matInput
-            formControlName="zone"
-            [matAutocomplete]="ZoneAuto"
-          />
-          <mat-autocomplete
-            [displayWith]="displayFnZones"
-            autoActiveFirstOption
-            #ZoneAuto="matAutocomplete"
-            (optionSelected)="setAreas($event.option.value)"
-          >
-            <mat-option
-              *ngFor="let zone of filteredZones | async"
-              [value]="zone"
+              <mat-option
+                *ngFor="let city of filteredCities | async"
+                [value]="city"
+              >
+                {{ city.city_name }}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="city?.errors?.['required']"
+              >City is required</mat-error
             >
-              {{ zone.zone_name }}
-            </mat-option>
-          </mat-autocomplete>
-          <mat-error *ngIf="zone?.errors?.['required']"
-            >Zone is required</mat-error
-          >
-        </mat-form-field>
-      </div>
-      <div>
-        <mat-form-field class="area" appearance="outline">
-          <mat-label>Area</mat-label>
-          <input
-            type="text"
-            placeholder="Pick your area"
-            aria-label="areas"
-            matInput
-            formControlName="area"
-            [matAutocomplete]="AreaAuto"
-          />
-          <mat-autocomplete
-            [displayWith]="displayFnAreas"
-            autoActiveFirstOption
-            #AreaAuto="matAutocomplete"
-          >
-            <mat-option
-              *ngFor="let area of filteredAreas | async"
-              [value]="area"
+          </mat-form-field>
+        </div>
+        <div>
+          <p>What is your zone?</p>
+          <mat-form-field class="zone" appearance="outline">
+            <mat-label>Zone</mat-label>
+            <input
+              type="text"
+              placeholder="Pick your zone"
+              aria-label="zones"
+              matInput
+              formControlName="zone"
+              [matAutocomplete]="ZoneAuto"
+            />
+            <mat-autocomplete
+              [displayWith]="displayFnZones"
+              autoActiveFirstOption
+              #ZoneAuto="matAutocomplete"
+              (optionSelected)="setAreas($event.option.value)"
             >
-              {{ area.area_name }}
-            </mat-option>
-          </mat-autocomplete>
-          <mat-error *ngIf="area ?.errors?.['required']"
-            >Area is required</mat-error
-          >
-        </mat-form-field>
+              <mat-option
+                *ngFor="let zone of filteredZones | async"
+                [value]="zone"
+              >
+                {{ zone.zone_name }}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="zone?.errors?.['required']"
+              >Zone is required</mat-error
+            >
+          </mat-form-field>
+        </div>
+        <div>
+          <p>Which area do you reside in?</p>
+          <mat-form-field class="area" appearance="outline">
+            <mat-label>Area</mat-label>
+            <input
+              type="text"
+              placeholder="Pick your area"
+              aria-label="areas"
+              matInput
+              formControlName="area"
+              [matAutocomplete]="AreaAuto"
+            />
+            <mat-autocomplete
+              [displayWith]="displayFnAreas"
+              autoActiveFirstOption
+              #AreaAuto="matAutocomplete"
+            >
+              <mat-option
+                *ngFor="let area of filteredAreas | async"
+                [value]="area"
+              >
+                {{ area.area_name }}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="area ?.errors?.['required']"
+              >Area is required</mat-error
+            >
+          </mat-form-field>
+        </div>
+        <div>
+          <p>Write down your complete address.</p>
+          <mat-form-field class="address" appearance="outline">
+            <mat-label>Address</mat-label>
+            <input matInput formControlName="address" />
+
+            <mat-error *ngIf="address?.errors?.['required']"
+              >Address is required</mat-error
+            >
+            <mat-error *ngIf="address?.errors?.['minlength']"
+              >Too short. Address should be at least 10 character
+              long</mat-error
+            >
+          </mat-form-field>
+          <p>*Address should be at least 10 character</p>
+        </div>
       </div>
       <div class="button-container">
         <button mat-flat-button color="primary" (click)="handleSubmit()">

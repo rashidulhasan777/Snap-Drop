@@ -1,4 +1,11 @@
-<div #container [ngClass]="{hide: !cameraOpen}" class="webcamContainer">
+<h1>
+  Take Your Photo
+  <img
+    class="header-icon"
+    src="../../../assets/Header icons/photo-camera.png"
+  />
+</h1>
+<div #container [ngClass]="{ hide: !cameraOpen }" class="webcamContainer">
   <webcam
     class="camera"
     [width]="windowWidth"

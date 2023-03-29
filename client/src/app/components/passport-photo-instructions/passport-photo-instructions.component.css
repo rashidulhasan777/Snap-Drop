@@ -8,18 +8,25 @@
 }
 mat-stepper {
   padding: 5% 2%;
-  height: 90vh;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-content: center;
 }
 
-.btn-container-bottom {
+.init-btn-container-bottom {
   position: absolute;
-  bottom: 5vh;
+  bottom: 10vh;
   display: flex;
   justify-content: flex-end;
+  width: 85%;
+}
+.btn-container-bottom {
+  position: absolute;
+  bottom: 10vh;
+  display: flex;
+  justify-content: space-between;
   width: 85%;
 }
 

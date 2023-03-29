@@ -1,23 +1,18 @@
 .example-input-wrapper {
-    margin-bottom: 16px;
-  }
-  
-  label {
-    margin-right: 4px;
-  }
-
-
-.header{
-    padding-top: 5vh;
-    padding-bottom: 5vh;
+  margin-bottom: 16px;
 }
-.totalContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2%;
+
+label {
+  margin-right: 4px;
 }
-.goBack{
+
+.totalContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2%;
+}
+.goBack {
   padding-top: 5vh;
 }
 
@@ -25,6 +20,16 @@
 
 h1 {
   text-align: center;
+  margin-top: 12vh;
+  margin-bottom: 8vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-icon {
+  width: 6%;
+  margin-left: 3%;
 }
 
 .timeline-header {
@@ -34,8 +39,8 @@ h1 {
 
 .icon {
   background-color: #bbb;
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -48,7 +53,7 @@ h1 {
 }
 
 .line-container {
-  width: 30px;
+  width: 35px;
   display: flex;
   justify-content: center;
   margin-top: 5px;
@@ -63,9 +68,8 @@ h1 {
   border-radius: 10px;
 }
 
-
 .completed {
-  background-color: blueviolet;
+  background-color: #8a2be2;
 }
 
 .completed-icon {
@@ -73,5 +77,41 @@ h1 {
 }
 
 .completed-line {
-  background-color: blueviolet;
+  background: linear-gradient(
+    0deg,
+    rgba(138, 43, 226, 1) 86%,
+    rgba(227, 176, 244, 1) 93%,
+    rgba(138, 43, 226, 1) 100%
+  );
+  background-size: 100% 200%;
+  animation: gradient 3s ease infinite;
+}
+
+.current-step {
+  box-shadow: 0 0 0 0 rgba(138, 43, 226, 1);
+  transform: scale(1);
+  animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(138, 43, 226, 0.8);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(138, 43, 226, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(138, 43, 226, 0);
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 200%;
+  }
+  100% {
+    background-position: 100% 0%;
+  }
 }

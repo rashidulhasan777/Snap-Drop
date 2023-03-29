@@ -1,7 +1,8 @@
 <div *ngIf="User" class="user-info-form">
-  <div class="top-view">
-    <h1 class="greeting">Hello, {{ User.name }}</h1>
-  </div>
+  <h1 class="greeting">
+    Hello, <span class="name"> {{ User.name }} </span>
+    <img class="header-icon" src="../../../assets/icons/wave.png" />
+  </h1>
   <form
     [formGroup]="deliveryInfoForm"
     (submit)="handleSubmit()"
@@ -128,5 +129,7 @@
       </button>
     </div> -->
   </form>
-  <button mat-flat-button (click)="logout()">Logout</button>
+  <div class="logout-btn-container">
+    <button class="logout-btn" color="warn" mat-flat-button (click)="logout()">Logout</button>
+  </div>
 </div>

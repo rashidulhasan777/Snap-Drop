@@ -1,10 +1,10 @@
 .user-navbar {
+  background-color: white;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  height: 72px;
+  align-items: center;
+  /* height: 8vh; */
   width: 100vw;
-  padding-top: 20%;
 }
 
 .navbarIcons {
