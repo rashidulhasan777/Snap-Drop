@@ -1,7 +1,13 @@
+.whole-body{
+  /* border: red solid 20px; */
+  height: var(--body-height);
+  display: flex;
+  flex-direction: column;
+}
 .heading {
   color: var(--primary);
-  margin-top: 12vh;
-  margin-bottom: 10vh;
+  margin-top: 8vh;
+  margin-bottom: 8vh;
   /* margin: 12vh 0; */
   text-align: center;
 }

@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-  --primary: #282C35
+  --primary: #282C35;
+  --body-height: calc(100vh - 64px);
 }
 
 *,

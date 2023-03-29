@@ -1,3 +1,9 @@
+.whole-body{
+  /* border: red solid 20px; */
+  height: var(--body-height);
+  display: flex;
+  flex-direction: column;
+}
 .header{
   color: var(--primary);
   text-align: center;
@@ -10,7 +16,7 @@
     margin: 12vh 0;
   }
   100% {
-    margin: 3vh 0;
+    margin: 2vh 0;
   }
 }
 .priceContainer {
