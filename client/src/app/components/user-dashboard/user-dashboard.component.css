@@ -1,6 +1,6 @@
 .whole-body{
-  /* border: red solid 20px; */
-  height: calc(100vh - 84px);
+  /* border: red solid 1px; */
+  height: var(--body-height);
   display: flex;
   flex-direction: column;
 }

@@ -1,63 +1,66 @@
-<h1 class="heading">
-  Your Cart
-  <!-- <img class="header-icon" src="../../../assets/Header icons/trolley.png" /> -->
-</h1>
-<div *ngIf="hasOrder; else noOrders" >
-  <div *ngIf="passportOrders.length" routerLink="/passport_upload" class="cardContainer">
-    <div class="card">
-      <div class="cardImageContainer">
-        <img [src]="passportOrders[0].imageURL" class="cardImage" />
-        <div class="imageCount">{{ 'x' + passportOrders.length }}</div>
-      </div>
-      <div class="detailsContainer">
-        <div class="detailsText">
-          <p>Passport Images</p>
-          <p><span>Price: </span> {{passportOrders.length*15}} Taka</p>
+<div class="whole-body">
+  <h1 class="heading">
+    Your Cart
+    <!-- <img class="header-icon" src="../../../assets/Header icons/trolley.png" /> -->
+  </h1>
+  <div *ngIf="hasOrder; else noOrders" >
+    <div *ngIf="passportOrders.length" routerLink="/passport_upload" class="cardContainer">
+      <div class="card">
+        <div class="cardImageContainer">
+          <img [src]="passportOrders[0].imageURL" class="cardImage" />
+          <div class="imageCount">{{ 'x' + passportOrders.length }}</div>
         </div>
-        <button
-          (click)="deletePassportOrder()"
-          class="deleteButton"
-          mat-icon-button
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
+        <div class="detailsContainer">
+          <div class="detailsText">
+            <p>Passport Images</p>
+            <p><span>Price: </span> {{passportOrders.length*15}} Taka</p>
+          </div>
+          <button
+            (click)="deletePassportOrder()"
+            class="deleteButton"
+            mat-icon-button
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-  <div *ngIf="galleryOrders.length" routerLink="/gallery_upload" class="cardContainer">
-    <div class="card">
-      <div class="cardImageContainer">
-        <img [src]="galleryOrders[0].imageURL" class="cardImage" />
-        <div class="imageCount">{{ 'x' + galleryOrders.length }}</div>
-      </div>
-      <div class="detailsContainer">
-        <div class="detailsText">
-          <p>Gallery Images</p> 
-          <p><span>Price: </span> {{galleryOrders.length*15}} Taka</p>
+    <div *ngIf="galleryOrders.length" routerLink="/gallery_upload" class="cardContainer">
+      <div class="card">
+        <div class="cardImageContainer">
+          <img [src]="galleryOrders[0].imageURL" class="cardImage" />
+          <div class="imageCount">{{ 'x' + galleryOrders.length }}</div>
         </div>
-        <button
-          (click)="deleteGalleryOrder()"
-          class="deleteButton"
-          mat-icon-button
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
+        <div class="detailsContainer">
+          <div class="detailsText">
+            <p>Gallery Images</p> 
+            <p><span>Price: </span> {{galleryOrders.length*15}} Taka</p>
+          </div>
+          <button
+            (click)="deleteGalleryOrder()"
+            class="deleteButton"
+            mat-icon-button
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </div>
     </div>
+    <div class="actionButtons">
+      <button mat-fab color="primary" class="buttonSize" (click)="clearAll()">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button (click)="checkOut()" mat-fab color="primary" class="buttonSize">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
   </div>
-  <div class="actionButtons">
-    <button mat-fab color="primary" class="buttonSize" (click)="clearAll()">
-      <mat-icon>delete</mat-icon>
-    </button>
-    <button (click)="checkOut()" mat-fab color="primary" class="buttonSize">
-      <mat-icon>chevron_right</mat-icon>
-    </button>
-  </div>
+  
+  <ng-template #noOrders>
+    <div class="noOrders">
+      You have no orders yet!
+      <div><a routerLink="/user_dashboard">Go home</a></div>
+    </div>
+  </ng-template>
+  
 </div>
-
-<ng-template #noOrders>
-  <div class="noOrders">
-    You have no orders yet!
-    <div><a routerLink="/user_dashboard">Go home</a></div>
-  </div>
-</ng-template>

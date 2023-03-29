@@ -1,72 +1,78 @@
-<div>
-<h1 class="header">Upload Photos</h1>
-<div class="data-container">
-  <form
-  *ngIf="pictureData.length"
-  [formGroup]="applyToAllForm"
-  class="card-form"
-  (submit)="applyToAll()"
->
-  <mat-form-field class="inputField" appearance="outline">
-    <mat-label>Format</mat-label>
-    <input
-      class="size-input"
-      type="text"
-      placeholder="Pick one"
-      matInput
-      formControlName="size"
-      [matAutocomplete]="auto"
-    />
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option
-        *ngFor="let option of filteredFormatOptions | async"
-        [value]="option"
+<div class="whole-body">
+  <div>
+    <h1 class="header">Upload Photos</h1>
+    <div class="data-container">
+      <form
+        *ngIf="pictureData.length"
+        [formGroup]="applyToAllForm"
+        class="card-form"
+        (submit)="applyToAll()"
       >
-        {{ option }}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-  <mat-form-field class="inputField" appearance="outline">
-    <mat-label>Copies</mat-label>
-    <input matInput type="number" formControlName="copies" />
-  </mat-form-field>
-  <button type="submit" mat-stroked-button class="apply-button">
-    <span class="apply-text">Apply</span>
-  </button>
-</form>
-<div *ngIf="previews.length" class="gallery-cards-container">
-  <app-gallery-card
-    *ngFor="let preview of previews; let i = index"
-    [formatOptions]="formatOptions"
-    [preview]="preview.data"
-    [imageForm]="pictureData.at(i)"
-    (deleteImage)="removeImage(i)"
-  ></app-gallery-card>
-</div>
-</div>
+        <mat-form-field class="inputField" appearance="outline">
+          <mat-label>Format</mat-label>
+          <input
+            class="size-input"
+            type="text"
+            placeholder="Pick one"
+            matInput
+            formControlName="size"
+            [matAutocomplete]="auto"
+          />
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option
+              *ngFor="let option of filteredFormatOptions | async"
+              [value]="option"
+            >
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field class="inputField" appearance="outline">
+          <mat-label>Copies</mat-label>
+          <input matInput type="number" formControlName="copies" />
+        </mat-form-field>
+        <button type="submit" mat-stroked-button class="apply-button">
+          <span class="apply-text">Apply</span>
+        </button>
+      </form>
+      <div *ngIf="previews.length" class="gallery-cards-container">
+        <app-gallery-card
+          *ngFor="let preview of previews; let i = index"
+          [formatOptions]="formatOptions"
+          [preview]="preview.data"
+          [imageForm]="pictureData.at(i)"
+          (deleteImage)="removeImage(i)"
+        ></app-gallery-card>
+      </div>
+    </div>
 
-
-<input
-  #fileUpload
-  type="file"
-  accept="image/*"
-  (change)="showPreview($event)"
-  multiple
-  style="display: none"
-/>
-<div class="gallery-controls" [ngClass]="{ bottom: previews.length }">
-  <button class="bottom-button" mat-fab color="primary" (click)="fileUpload.click()" [ngClass]="{ plus: !previews.length }">
-    <mat-icon>add</mat-icon>
-  </button>
-  <button
-    class="bottom-button"
-    *ngIf="previews.length"
-    mat-fab
-    color="primary"
-    (click)="handleSubmit()"
-  >
-    <mat-icon>chevron_right</mat-icon>
-  </button>
+    <input
+      #fileUpload
+      type="file"
+      accept="image/*"
+      (change)="showPreview($event)"
+      multiple
+      style="display: none"
+    />
+    <div class="gallery-controls" [ngClass]="{ bottom: previews.length }">
+      <button
+        class="bottom-button"
+        mat-fab
+        color="primary"
+        (click)="fileUpload.click()"
+        [ngClass]="{ plus: !previews.length }"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+      <button
+        class="bottom-button"
+        *ngIf="previews.length"
+        mat-fab
+        color="primary"
+        (click)="handleSubmit()"
+      >
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+  </div>
 </div>
-</div>
-
