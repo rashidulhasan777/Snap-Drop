@@ -1,4 +1,4 @@
-<h1>Order Summary</h1>
+<h1 class="header">Order Summary</h1>
 <div class="upcoming-card-container">
   <mat-card class="upcoming-card">
     <mat-card-header>
@@ -25,23 +25,23 @@
 <div *ngIf="Cart && Cart.passportPictures && Cart.passportPictures.length">
   <div class="priceContainer">
     <div>x{{ Cart.passportPictures.length }} Passport pictures</div>
-    <div class="price">{{ price.passport }} Taka</div>
+    <div class="price"><b>{{ price.passport }} Taka</b> </div>
   </div>
 </div>
 <div *ngIf="Cart && Cart.galleryPictures && Cart.galleryPictures.length">
   <div class="priceContainer">
     <div>x{{ Cart.galleryPictures.length }} Gallery pictures</div>
-    <div class="price">{{ price.gallery }} Taka</div>
+    <div class="price"><b>{{ price.gallery }} Taka</b> </div>
   </div>
 </div>
 <div class="priceContainer">
   <div>Shipping</div>
-  <div class="price">{{ price.shipping }} Taka</div>
+  <div class="price"><b>{{ price.shipping }} Taka</b> </div>
 </div>
 <mat-divider></mat-divider>
 <div class="priceContainer">
   <div>Total</div>
-  <div class="price">{{ price.total }} Taka</div>
+  <div class="price"><b>{{ price.total }} Taka</b> </div>
 </div>
 
 <!-- <h3 class="delivaryTitle">To be delivered to:</h3>
@@ -64,7 +64,7 @@
       placeholder="Give specific instuctions"
     ></textarea>
   </mat-form-field>
-  <button mat-raised-button (click)="initiatePayment()">Pay | {{ price.total }} BDT.</button>
+  <button class="pay-button" mat-raised-button (click)="initiatePayment()"><span class="pay-button-text">Pay | {{ price.total }} BDT.</span> </button>
 </div>
 
 <!-- <button mat-stroked-button class="payButton" (click)="initiatePayment()">

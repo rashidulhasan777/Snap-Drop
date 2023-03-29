@@ -1,6 +1,7 @@
-h1{
+.header{
   text-align: center;
   margin: 12vh 0;
+  color: var(--primary)
 }
 
 .user-info-form {
@@ -39,6 +40,9 @@ h1{
   align-items: end;
   position: fixed;
 }
+.actionButtons ::ng-deep .bottom-button {
+  background-color: var(--primary);
+}
 
 /* .userName {
   font-size: xx-large;
@@ -62,7 +66,8 @@ h1{
 
 .upcoming-card {
   border: 1px solid rgb(224, 224, 224);
-  background-color: #fac36b;
+  border-radius: 25px;
+  background-color: #ffffff;
   padding: 10px;
 }
 
@@ -78,4 +83,43 @@ h1{
 .upcoming-card-title{
   font-size: xx-large;
   font-weight: bold;
+}
+
+/* ----Animation-SVG------ */
+
+.left-svg {
+  width: 100px;
+  transform: translate(0px, 0px);
+  animation: rotation 32s infinite linear;
+}
+
+.right-svg {
+  width: 70px;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  overflow: hidden;
+  animation: rotation 25s infinite linear;
+}
+.small-svg {
+  width: 40px;
+  bottom: 5px;
+  animation: rotation 25s infinite linear;
+}
+.big-svg {
+  right: 5px;
+  bottom: 90px;
+  width: 110px;
+  animation: rotation 25s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+  0% {
+  }
 }

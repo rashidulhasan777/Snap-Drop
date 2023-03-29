@@ -1,10 +1,16 @@
 <div class="user-info-form">
-  <h1>Delivery Information</h1>
+  <h1 class="header">Delivery Information</h1>
   <ng-container *ngIf="hasPreviousInfo; else insertDelivaryInfo">
-    <h3>Your current delivery information:</h3>
+    <h3 class="delivery-title">Your current delivery information:</h3>
 
     <div class="upcoming-card-container">
       <mat-card class="upcoming-card">
+        <!-- <img class="absolute left-svg" src="./assets/left.svg" alt="" /> -->
+    <!-- <img class="absolute mid-svg" src="./assets/middle.svg" alt="" /> -->
+
+        <!-- <img class="absolute right-svg" src="./assets/middle.svg" alt="" />
+        <img class="absolute small-svg" src="./assets/middle.svg" alt="" />
+        <img class="absolute big-svg" src="./assets/middle.svg" alt="" /> -->
         <mat-card-header>
           <mat-card-title class="upcoming-card-title"
             >{{ User?.details?.name | titlecase }}</mat-card-title
@@ -36,11 +42,12 @@
       </div>
     </div> -->
     <div class="actionButtons">
-      <button mat-fab color="primary" (click)="changeAdress()">
+      <button class="bottom-button" mat-fab color="primary" (click)="changeAdress()">
         <mat-icon>edit</mat-icon>
       </button>
       <button
         mat-fab
+        class="bottom-button"
         color="primary"
         (click)="continueWithPrevious()"
       >

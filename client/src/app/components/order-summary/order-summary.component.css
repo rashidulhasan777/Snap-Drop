@@ -1,4 +1,5 @@
-h1 {
+.header{
+  color: var(--primary);
   text-align: center;
   margin: 12vh 0;
   animation: entry 1500ms ease-in-out 200ms 1 forwards;
@@ -69,6 +70,13 @@ h1 {
   justify-content: center;
   width: 100%;
 }
+.pay-button-text{
+  color: #ffffff;
+}
+
+.instructionWrapper ::ng-deep .pay-button {
+  background-color: var(--primary);
+}
 
 /* --------------------Card Design-------------------- */
 
@@ -80,7 +88,8 @@ h1 {
 
 .upcoming-card {
   border: 1px solid rgb(224, 224, 224);
-  background-color: #fac36b;
+  border-radius: 25px;
+  background-color: #ffffff;
   padding: 10px;
 }
 
