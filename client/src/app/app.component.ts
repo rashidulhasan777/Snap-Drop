@@ -4,6 +4,9 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AuthenticationService } from './services/authentication/authentication.service';
 import { PathaoService } from './services/pathao/pathao.service';
+import { SwPush } from '@angular/service-worker';
+import { Socket } from 'ngx-socket-io';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +20,9 @@ export class AppComponent {
     private maticonService: MatIconRegistry,
     private domSanitizer: DomSanitizer,
     private authService: AuthenticationService,
-    private pathao: PathaoService
+    private pathao: PathaoService,
+    readonly swPush: SwPush,
+    private router: Router
   ) {
     this.maticonService.addSvgIcon(
       'google',
@@ -43,5 +48,12 @@ export class AppComponent {
           );
         },
       });
+  }
+
+  ngOnInit() {
+    this.swPush.notificationClicks.subscribe(({ action, notification }) => {
+      // TODO: Do something in response to notification click.
+      this.router.navigate(['login']);
+    });
   }
 }

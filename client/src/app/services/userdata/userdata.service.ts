@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Lab } from 'src/app/interfaces/lab.interface';
-import { baseBackendURL } from 'src/config';
+import { baseBackendURL, VAPID_PUBLIC_KEY } from 'src/config';
 import { Details } from '../../interfaces/details.interface';
 import { User } from '../../interfaces/user.interface';
+import { SwPush } from '@angular/service-worker';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ import { User } from '../../interfaces/user.interface';
 export class UserdataService {
   private baseUrl = `${baseBackendURL}/user`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private swPush: SwPush) {}
 
   getUser(): Observable<User> {
     return this.http.get<User>(this.baseUrl, {
@@ -37,6 +38,31 @@ export class UserdataService {
         Authorization: `Bearer ${this.jwtToken}`,
       },
     });
+  }
+  saveNotificationSub(data: any) {
+    let userId = '';
+    this.getUser().subscribe((res) => {
+      userId = res._id || '';
+      this.http
+        .post<{ msg: string }>(
+          baseBackendURL + '/subscribeToNotification',
+          { userId, subscriptionObject: data },
+          {
+            headers: {
+              Authorization: `Bearer ${this.jwtToken}`,
+            },
+          }
+        )
+        .subscribe();
+    });
+  }
+
+  requestNotificationPermission() {
+    this.swPush
+      .requestSubscription({ serverPublicKey: VAPID_PUBLIC_KEY })
+      .then((res) => {
+        this.saveNotificationSub(res);
+      });
   }
 
   getCountries(): Observable<string[]> {

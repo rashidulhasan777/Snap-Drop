@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { OnboardingComponent } from '../onboarding/onboarding.component';
 import { UserdataService } from 'src/app/services/userdata/userdata.service';
 import { User } from 'src/app/interfaces/user.interface';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -17,8 +18,11 @@ export class UserDashboardComponent {
     private orderService: OrderService,
     private userData: UserdataService,
     private router: Router,
-    public dialog: MatDialog
-  ) {}
+    public dialog: MatDialog,
+    private socket: Socket
+  ) {
+    userData.requestNotificationPermission()
+  }
   // using mock data
   orders: any[] = [
     {
@@ -38,7 +42,11 @@ export class UserDashboardComponent {
   ];
 
   ngOnInit() {
-    this.userData.getUser().subscribe((res) => (this.User = res));
+    this.userData.getUser().subscribe((res) => {
+      this.User = res;
+      this.socket.emit('gimmeNotification', { userId: res._id });
+      this.socket.on
+    });
     this.orderService.getCustomerLatestOrder().subscribe((res) => {
       // console.log(res);
       if (res.orderStatus === 'retake_needed') {
