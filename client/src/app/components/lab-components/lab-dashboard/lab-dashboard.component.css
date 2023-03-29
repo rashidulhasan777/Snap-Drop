@@ -9,10 +9,6 @@ th.mat-sort-header-sorted {
 .filter {
   width: 40%;
 }
-.top-infos {
-  display: flex;
-  margin-bottom: 5vh;
-}
 
 .stat-container {
   display: flex;
@@ -42,7 +38,7 @@ th.mat-sort-header-sorted {
 .example-sidenav-content {
   padding: 2vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
   height: 90vh;
   /* align-items: center; */
   /* justify-content: center; */
@@ -157,11 +153,30 @@ mat-card-content {
     margin-left: 0;
   } */
 
+app-chart {
+  display: block;
+  width: 80% !important;
+  padding: 0;
+}
+
 app-line-chart {
   display: block;
   width: 100%;
 }
 
 app-pie-chart {
+  width: 50% !important;
+  padding: 5%;
+}
+
+.title-header {
   padding-left: 5%;
+}
+
+.charts {
+  width: 40vw;
+}
+
+.table-container {
+  width: 60vw;
 }

@@ -6,7 +6,7 @@ import { BaseChartDirective } from 'ng2-charts';
 @Component({
   selector: 'app-pie-chart',
   templateUrl: './pie-chart.component.html',
-  styleUrls: ['./pie-chart.component.scss'],
+  styleUrls: ['./pie-chart.component.css'],
 })
 export class PieChartComponent {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
