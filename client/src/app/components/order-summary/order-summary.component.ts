@@ -111,26 +111,21 @@ export class OrderSummaryComponent {
       });
       const zippedPassport = zip(...passportSubsciption);
       const zippedGallery = zip(...gallerySubsciption);
-      const passportValues = await firstValueFrom(zippedPassport);
-      const galleryValuees = await firstValueFrom(zippedGallery);
-      console.log(passportValues, galleryValuees);
-      passportValues.forEach((el, idx) => {
-        this.passportPictures[idx].imageURL = el.secure_url;
+      // const passportValues = await firstValueFrom(zippedPassport);
+      // const galleryValuees = await firstValueFrom(zippedGallery);
+      // console.log(passportValues, galleryValuees);
+
+      zippedPassport.subscribe((res) => {
+        res.forEach((el: any, idx: number) => {
+          this.passportPictures[idx].imageURL = el.secure_url;
+        });
+        zippedGallery.subscribe((res) => {
+          res.forEach((el: any, idx: number) => {
+            this.galleryPictures[idx].imageURL = el.secure_url;
+          });
+          this.createOrder();
+        });
       });
-      galleryValuees.forEach((el, idx) => {
-        this.galleryPictures[idx].imageURL = el.secure_url;
-      });
-      // zippedPassport.subscribe((res) => {
-      //   console.log(res);
-      //   res.forEach((el: any, idx: number) => {
-      //   });
-      // });
-      // zippedGallery.subscribe((res) => {
-      //   console.log(res);
-      //   res.forEach((el: any, idx: number) => {
-      //     this.galleryPictures[idx].imageURL = el.secure_url;
-      //   });
-      // });
     } catch (err) {
       console.log(err);
     }
@@ -148,8 +143,6 @@ export class OrderSummaryComponent {
               res.orderId,
               this.closestLab?.labId || 95506
             );
-            console.log('here after uploading');
-            this.createOrder();
           } catch (err) {
             console.log(err);
           }
