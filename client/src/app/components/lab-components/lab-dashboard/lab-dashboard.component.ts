@@ -17,11 +17,15 @@ import { Order } from './../../../interfaces/order.interface';
 @Component({
   selector: 'app-lab-dashboard',
   templateUrl: './lab-dashboard.component.html',
-  styleUrls: ['./lab-dashboard.component.css']
+  styleUrls: ['./lab-dashboard.component.css'],
 })
-export class LabDashboardComponent implements AfterViewInit, OnInit{
-  
-  chartData:number[] = [];
+export class LabDashboardComponent implements AfterViewInit, OnInit {
+  chartData: number[] = [];
+  sentForDelivery: number[] = [];
+  maxBar: number = 0;
+
+  monthlyOrdersData: number[] = [];
+  monthlyDeliveredData: number[] = [];
   // ---------------------------------------
   orders: Order[] = [];
   opened: boolean = true;
@@ -39,22 +43,54 @@ export class LabDashboardComponent implements AfterViewInit, OnInit{
   @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit() {
-      const orders = this.orderService
-        .getOrdersbyLabId()
-        .subscribe((response) => {
-          console.log(response);
-          this.orders = response;
-          this.dataSource = new MatTableDataSource(this.orders);
-  
-          const arr = [0, 0, 0, 0, 0, 0, 0];
-  
-          for (let i = 0; i < response.length; i++) {
-            const gap = new Date().getDate() - new Date(this.orders[i].createdAt || '').getDate();
-            if (gap < 6) arr[gap]++;
+    const orders = this.orderService
+      .getOrdersbyLabId()
+      .subscribe((response) => {
+        console.log(response);
+        this.orders = response;
+        this.dataSource = new MatTableDataSource(this.orders);
+
+        const arr = [0, 0, 0, 0, 0, 0, 0];
+        const arr2 = [0, 0, 0, 0, 0, 0, 0];
+
+        const monthArr = [];
+        const monthArr2 = [];
+
+        for (let i = 0; i < 30; ++i) monthArr.push(0);
+        for (let i = 0; i < 30; ++i) monthArr2.push(0);
+
+        for (let i = 0; i < response.length; i++) {
+          const gap =
+            new Date().getDate() -
+            new Date(this.orders[i].createdAt || '').getDate();
+          if (gap < 6) {
+            arr[gap]++;
+            if (this.orders[i].orderStatus === 'readyToDeliver') {
+              arr2[gap]++;
+            }
           }
-  
-          this.chartData = [...arr];
-        });
+
+          const monthGap =
+            new Date().getDate() -
+            new Date(this.orders[i].updatedAt || '').getDate();
+          if (monthGap < 31) {
+            monthArr[monthGap]++;
+            if (this.orders[i].orderStatus === 'readyToDeliver') {
+              monthArr2[monthGap]++;
+            }
+          }
+        }
+
+        this.chartData = [...arr];
+        this.sentForDelivery = [...arr2];
+
+        this.maxBar = Math.max(...this.chartData) + 2;
+
+        // console.log(this.maxBar); //works
+
+        this.monthlyOrdersData = [...monthArr].reverse();
+        this.monthlyDeliveredData = [...monthArr2].reverse();
+      });
   }
 
   ngAfterViewInit() {
