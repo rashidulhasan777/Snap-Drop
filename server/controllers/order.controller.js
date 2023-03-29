@@ -185,7 +185,7 @@ const generateOrderId = async (req, res) => {
     const orderCountForLab = await Order.find({
       labId: req.body.labId,
     }).count();
-    const orderId = `Order_${orderCountForLab}`;
+    const orderId = `${req.body.labId}_${orderCountForLab}`;
     res.status(200).send({ orderId });
   } catch (error) {
     console.log(error);

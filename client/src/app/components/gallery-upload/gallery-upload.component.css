@@ -1,7 +1,7 @@
 .header {
   text-align: center;
-  margin: 12vh 0;
-  color: var(--primary);
+  margin: 8vh 0;
+  color: var(--primary)
 }
 .apply-button{
   height: 5vh;
@@ -38,9 +38,14 @@
 }
 
 .data-container{
-  margin-left: 1.3vw;
+  /* border: red solid 1px; */
+  overflow-x: hidden;
+  width: 100vw;
+  /* margin-left: 1.3vw; */
   display: flex;
   flex-direction: column;
+  /* justify-content: center;
+  align-items: center; */
   /* align-items: center; */
 }
 
@@ -62,7 +67,7 @@
   display: flex;
   gap: 1rem;
   align-items: center;
-  width: 95vw;
+  width: 97vw;
   /* width: clamp(400px, 100vw, 800px); */
 }
 
