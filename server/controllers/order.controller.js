@@ -1,6 +1,8 @@
 const Order = require('./../models/order.model');
 const transport = require('./../middlewares/nodemailer');
 const { getMailOptions } = require('./../utils/nodemail/mailOptions');
+const User = require('../models/user.model');
+const { sendNotification } = require('web-push');
 
 const getAllOrders = async (req, res) => {
   try {
@@ -18,6 +20,8 @@ const createOrder = async (req, res) => {
       customerId: req.currentUser._id,
       orderDelivaryDetails: req.currentUser.details,
     });
+    const labUser = await User.findOne({ labId: result.labId });
+    sendNotification(labUser._id, 'New order arrived');
     res.status(201);
     res.send(result);
     return result;
@@ -35,7 +39,16 @@ const changeOrderStatus = async (req, res) => {
     const order = await Order.findOneAndUpdate(filter, update, {
       new: true,
     });
-
+    if (req.body.orderStatus === 'approved') {
+      sendNotification(order.customerId, 'Your photos has been approved');
+    } else if (req.body.orderStatus === 'retake_needed') {
+      sendNotification(order.customerId, 'Your photos need to be retaken');
+    } else if (req.body.orderStatus === 'readyToDeliver') {
+      sendNotification(
+        order.customerId,
+        'Your photos has been picked up for delivery'
+      );
+    }
     // transport(getMailOptions("nafizfuad0230@gmail.com", "Hello"));
 
     res.status(201).send(order);

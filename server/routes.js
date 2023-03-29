@@ -12,6 +12,7 @@ const SslCommerzController = require('./controllers/sslcommerz.controller');
 const cloudinaryController = require('./controllers/cloudinary.controller');
 const sendMessageController = require('./controllers/sendMessageController');
 const { uploadToOrder } = require('./controllers/cutoutpro.controller');
+const { setASubscriber } = require('./controllers/notifications.controller');
 
 //User Routes
 router.post('/login', userController.login);
@@ -131,6 +132,12 @@ router.get('/countries', (req, res) => {
   const countryNames = countries.map((el) => el.country);
   res.status(200).send(countryNames);
 });
+
+router.post(
+  '/subscribeToNotification',
+  authMiddleware.authenticated,
+  setASubscriber
+);
 
 router.post('/sendMessage', sendMessageController);
 
