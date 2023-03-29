@@ -51,9 +51,11 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.swPush.notificationClicks.subscribe(({ action, notification }) => {
-      // TODO: Do something in response to notification click.
-      this.router.navigate(['login']);
-    });
+    this.swPush.notificationClicks.subscribe(
+      ({ action, notification }: { action: any; notification: any }) => {
+        // TODO: Do something in response to notification click.
+        this.router.navigate(['login']);
+      }
+    );
   }
 }

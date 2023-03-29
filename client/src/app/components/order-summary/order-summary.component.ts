@@ -171,6 +171,7 @@ export class OrderSummaryComponent {
     };
     this.orderService.cleanUnpaidOrders().subscribe(() => {
       this.orderService.createOrder(order).subscribe((res) => {
+        console.log(res);
         this.CompletedOrder = res;
         this.paymentService
           .initiatePayment(
