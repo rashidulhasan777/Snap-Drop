@@ -48,15 +48,10 @@ const cutoutProCropImage = async (imageUrl, country) => {
 
 const uploadToOrder = async (req, res, next) => {
   const { id } = req.params;
-  // cloudinary.config({
-  //   cloud_name: process.env.CLOUDINARY_NAME,
-  //   api_key: process.env.CLOUDINARY_API_KEY,
-  //   api_secret: process.env.CLOUDINARY_API_SECRET,
-  // });
   cloudinary.config({
-    cloud_name: 'dk3znnsme',
-    api_key: '433351898261752',
-    api_secret: '6MXd35sgwOIe6ukf_ly_lzy0gE0',
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
   });
 
   try {
@@ -67,10 +62,13 @@ const uploadToOrder = async (req, res, next) => {
         order.countryForPassport
       );
       const cloudinaryData = await cloudinary.uploader.upload(url, {
-        public_id: `${order.order_id}/passport_cutout/${image.orgFilename}`,
+        public_id: `${order.order_id}_${order.labId}/passport_cutout/${image.orgFilename}`,
       });
     }
-    res.sendStatus(200);
+    const zipUrl = cloudinary.utils.download_zip_url({
+      prefixes: `${order.order_id}_${order.labId}/`,
+    });
+    res.status(200).send({ zipUrl });
   } catch (error) {
     console.log(error);
     res.status(500).send({ errorMessage: 'Something went wrong' });

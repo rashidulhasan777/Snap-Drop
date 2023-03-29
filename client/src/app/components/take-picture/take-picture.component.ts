@@ -1,10 +1,9 @@
-import { Component, HostListener, Renderer2 } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
-import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
+import { WebcamImage, WebcamInitError } from 'ngx-webcam';
 import { Subject } from 'rxjs';
-import { Cart } from 'src/app/interfaces/cart.interface';
-import { CartService } from 'src/app/services/cart/cart.service';
-import { CloudinaryService } from 'src/app/services/cloudinary/cloudinary.service';
+import { ImageInterface } from 'src/app/interfaces/image.interface';
+import { IdbServiceService } from 'src/app/services/idbService/idb-service.service';
 
 @Component({
   selector: 'app-take-picture',
@@ -27,12 +26,7 @@ export class TakePictureComponent {
   };
 
   image: any[] = [];
-  constructor(
-    private renderer: Renderer2,
-    private cloudinary: CloudinaryService,
-    private cartService: CartService,
-    private router: Router
-  ) {}
+  constructor(private idbService: IdbServiceService, private router: Router) {}
 
   ngOnInit() {
     this.windowWidth = window.innerWidth;
@@ -78,25 +72,23 @@ export class TakePictureComponent {
   retakePhoto() {
     this.cameraOpen = true;
   }
-  addToPassportPhotos() {
-    if (this.Image)
-      this.cloudinary
-        .cloudUpload(this.Image?.imageAsDataUrl, 'passport', 10, 10, 'passport')
-        .subscribe((resCloudinary: any) => {
-          this.cartService.getCart().subscribe((res) => {
-            const cartData: Cart = res || {passportPictures: []};
-            cartData.passportPictures?.push({
-              photoSize: 'passport',
-              orgFilename: 'passport',
-              imageURL: resCloudinary.secure_url,
-              copies: 1,
-              approved: false,
-              typeOfImage: 'passport',
-            });
-            this.cartService.updateCart(cartData).subscribe((res) => {
-              this.router.navigate(['passport_upload']);
-            });
-          });
-        });
+  async addToPassportPhotos() {
+    if (this.Image) {
+      const image: ImageInterface = {
+        photoSize: 'passport',
+        orgFilename: `passport.jpg`,
+        imageURL: this.Image.imageAsDataUrl,
+        copies: 1,
+        approved: false,
+        typeOfImage: 'passport',
+      };
+      try {
+        await this.idbService.addAPassportPhoto(image);
+        this.router.navigate(['passport_upload']);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
+  
 }

@@ -53,6 +53,7 @@ export function playerFactory() {
 }
 import { TakePictureComponent } from './components/take-picture/take-picture.component';
 import { AddMorePassportPhotoComponent } from './components/add-more-passport-photo/add-more-passport-photo.component';
+import { WarningDialogueComponent } from './components/warning-dialogue/warning-dialogue.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { AddMorePassportPhotoComponent } from './components/add-more-passport-ph
     UserProfileComponent,
     LabDashboardComponent,
     ChartComponent,
+    WarningDialogueComponent,
   ],
   imports: [
     BrowserModule,

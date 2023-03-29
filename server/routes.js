@@ -75,6 +75,11 @@ router.get(
   authMiddleware.lab,
   orderController.getOrdersbyStatus
 );
+router.post(
+  '/generateOrderId',
+  authMiddleware.customer,
+  orderController.generateOrderId
+);
 
 //Keep these under /order/paid
 router.post('/order', authMiddleware.customer, orderController.createOrder);
@@ -107,7 +112,11 @@ router.post(
 );
 
 //SSLcommerz Routes
-router.get('/payment/:order_id/:amount',authMiddleware.customer, SslCommerzController.initPayment);
+router.get(
+  '/payment/:order_id/:amount',
+  authMiddleware.customer,
+  SslCommerzController.initPayment
+);
 router.post('/payment-success', SslCommerzController.success);
 router.post('/payment-failure', SslCommerzController.failure);
 router.post('/payment-cancel', SslCommerzController.cancel);
@@ -117,12 +126,12 @@ router.post('/payment-ipn', SslCommerzController.ipn);
 //Internal Route for lab
 router.post('/lab', labController.createLab);
 
-router.get('/cutout/:id', authMiddleware.lab, uploadToOrder);
+router.get('/dowloadOrder/:id', authMiddleware.lab, uploadToOrder);
 router.get('/countries', (req, res) => {
   const countryNames = countries.map((el) => el.country);
   res.status(200).send(countryNames);
 });
 
-router.post('/sendMessage', sendMessageController)
+router.post('/sendMessage', sendMessageController);
 
 module.exports = router;

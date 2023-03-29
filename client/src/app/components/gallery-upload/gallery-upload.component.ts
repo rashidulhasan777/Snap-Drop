@@ -1,11 +1,18 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CloudinaryService } from 'src/app/services/cloudinary/cloudinary.service';
-import { map, Observable, startWith, zip } from 'rxjs';
+import {
+  AbstractControl,
+  AsyncValidatorFn,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
+import { map, Observable, startWith, of } from 'rxjs';
 import { Router } from '@angular/router';
-import { CartService } from 'src/app/services/cart/cart.service';
-import { Cart } from 'src/app/interfaces/cart.interface';
 import { ImageInterface } from 'src/app/interfaces/image.interface';
+import { IdbServiceService } from 'src/app/services/idbService/idb-service.service';
+import { MatDialog } from '@angular/material/dialog';
+import { WarningDialogueComponent } from '../warning-dialogue/warning-dialogue.component';
 
 @Component({
   selector: 'app-gallery-upload',
@@ -13,40 +20,45 @@ import { ImageInterface } from 'src/app/interfaces/image.interface';
   styleUrls: ['./gallery-upload.component.css'],
 })
 export class GalleryUploadComponent {
-  previews: { filename: string; data: File | string }[] = [];
+  formatOptions: string[] = ['4R', '6R', '8R', '10R'];
+  formatOptionsObservable = of(['']);
+  previews: { filename: string; data: string }[] = [];
   pictureData = this.fb.array<FormGroup>([]);
 
   applyToAllForm = this.fb.group({
-    size: ['4R', Validators.required],
-    copies: [1, Validators.required],
+    size: ['4R', Validators.required, [this.choseWithinOptions()]],
+    copies: [1, [Validators.required, Validators.min(1)]],
   });
-  formatOptions: string[] = ['4R', '6R', '8R', '10R'];
+
   filteredFormatOptions?: Observable<string[]>;
 
   constructor(
     private fb: FormBuilder,
-    private cloudinary: CloudinaryService,
     private router: Router,
-    private cartService: CartService
+    private idbService: IdbServiceService,
+    private warning: MatDialog
   ) {}
 
-  ngOnInit() {
-    let inCart: ImageInterface[] = [];
-    this.cartService.getCart().subscribe((res) => {
-      if (!res) return;
-      inCart = res.galleryPictures || [];
+  async ngOnInit() {
+    this.formatOptionsObservable = of(this.formatOptions);
+    try {
+      const inCart = (await this.idbService.getGalleryPhotos()) || [];
       inCart.forEach((el) => {
         this.previews.push({ filename: el.orgFilename, data: el.imageURL });
         this.pictureData.push(
           this.fb.group({
-            imageName: [el.orgFilename],
-            copies: [el.copies, Validators.required],
-            size: [el.photoSize, Validators.required],
-            remoteURL: [el.imageURL],
+            copies: [el.copies, [Validators.required, Validators.min(1)]],
+            size: [
+              el.photoSize,
+              [Validators.required],
+              [this.choseWithinOptions()],
+            ],
           })
         );
       });
-    });
+    } catch (error) {
+      console.log(error);
+    }
     this.filteredFormatOptions = this.applyToAllForm.controls?.[
       'size'
     ].valueChanges.pipe(
@@ -54,6 +66,7 @@ export class GalleryUploadComponent {
       map((value) => this._filter(value || ''))
     );
   }
+
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
@@ -62,11 +75,31 @@ export class GalleryUploadComponent {
     );
   }
 
+  choseWithinOptions(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      return this.formatOptionsObservable.pipe(
+        map((val) => (val.includes(control.value) ? null : { wrongData: true }))
+      );
+    };
+  }
+
+  warningDialog() {
+    this.warning.open(WarningDialogueComponent, {
+      width: '250px',
+      enterAnimationDuration: '200ms',
+      exitAnimationDuration: '200ms',
+    });
+  }
+
   showPreview(event: Event) {
     const selectedFiles = (event.target as HTMLInputElement).files;
     // returns a file list
     if (selectedFiles && selectedFiles[0]) {
-      const numberOfFiles = selectedFiles.length;
+      let numberOfFiles = selectedFiles.length;
+      if (numberOfFiles + this.previews.length > 20) {
+        this.warningDialog();
+        numberOfFiles = 20 - this.previews.length;
+      }
       for (let i = 0; i < numberOfFiles; ++i) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
@@ -77,10 +110,8 @@ export class GalleryUploadComponent {
           this.previews.push({ filename: selectedFiles[i].name, data });
           this.pictureData.push(
             this.fb.group({
-              imageName: [selectedFiles[i].name],
-              size: ['4R', Validators.required],
-              copies: [1, Validators.required],
-              remoteURL: [''],
+              size: ['4R', [Validators.required], [this.choseWithinOptions()]],
+              copies: [1, [Validators.required, Validators.min(1)]],
             })
           );
         };
@@ -89,56 +120,45 @@ export class GalleryUploadComponent {
     }
   }
 
-  handleSubmit() {
-    const allSubscriptions: Observable<any>[] = [];
-    for (let i = 0; i < this.previews.length; ++i) {
-      allSubscriptions.push(
-        this.cloudinary.cloudUpload(
-          this.previews[i].data,
-          this.previews[i].filename,
-          10,
-          5,
-          'gallery'
-        )
-      );
+  async handleSubmit() {
+    if (!this.pictureData.valid) return;
+    try {
+      await this.idbService.removeAllGalleryPhotos();
+      this.previews.forEach(async (el, idx) => {
+        const { size, copies } = this.pictureData.at(idx).value;
+        const thisPic: ImageInterface = {
+          photoSize: size || '4R',
+          orgFilename: el.filename,
+          imageURL: el.data,
+          copies,
+          approved: true,
+          typeOfImage: 'gallery',
+        };
+        try {
+          await this.idbService.addAGalleryPhoto(thisPic);
+        } catch (error) {
+          console.log(error);
+        }
+      });
+      this.router.navigate(['cart']);
+    } catch (error) {
+      console.log(error);
     }
-    const zipped = zip(...allSubscriptions);
-    zipped.subscribe({
-      next: (val) => {
-        val.forEach((el: any, idx) => {
-          this.pictureData.at(idx).patchValue({ remoteURL: el.secure_url });
-        });
-      },
-      complete: () => {
-        const cartData: Cart = { galleryPictures: [] };
-        this.pictureData.value.forEach((el) => {
-          cartData.galleryPictures?.push({
-            photoSize: el.size,
-            orgFilename: el.imageName,
-            imageURL: el.remoteURL,
-            copies: el.copies,
-            approved: true,
-            typeOfImage: 'gallery',
-          });
-        });
-        this.cartService.updateCart(cartData).subscribe((res) => {
-          this.router.navigate(['cart']);
-        });
-      },
-    });
   }
 
-  removeImage(index: number) {
-    this.previews = this.previews.filter(
-      (el) => el.filename !== this.pictureData.at(index).value.imageName
-    );
-    this.pictureData.removeAt(index);
-    if (!this.pictureData.length)
-      localStorage.removeItem('userGalleryPictures');
+  async removeImage(index: number) {
+    try {
+      await this.idbService.removeOneGalleryPhoto(index);
+      this.previews.splice(index, 1);
+      this.pictureData.removeAt(index);
+    } catch (error) {
+      console.log(error);
+    }
   }
   applyToAll() {
-    for (let i = 0; i < this.pictureData.length; i++) {
-      this.pictureData.at(i).patchValue(this.applyToAllForm.value);
-    }
+    if (this.applyToAllForm.valid)
+      for (let i = 0; i < this.pictureData.length; i++) {
+        this.pictureData.at(i).patchValue(this.applyToAllForm.value);
+      }
   }
 }
