@@ -29,6 +29,7 @@ router.get(
   userController.getUserRole
 );
 router.put('/user', authMiddleware.authenticated, userController.updateUser);
+router.put('/newUserFalse', authMiddleware.customer, userController.setNewUser);
 
 //Oauth Routes
 router.post('/googleAccessCode', oauthController.googleAccessCode);

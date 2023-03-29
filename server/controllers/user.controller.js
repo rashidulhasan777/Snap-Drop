@@ -62,7 +62,24 @@ const updateUser = async (req, res) => {
   }
 };
 
+const setNewUser = async (req, res, next) => {
+  try {
+    req.currentUser.newUser = false;
+    await req.currentUser.save();
+    res.sendStatus(201);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const getUserRole = async (req, res, next) => {
   res.status(200).send({ role: req.currentUser.typeOfUser });
 };
-module.exports = { register, login, getUserDetails, updateUser, getUserRole };
+module.exports = {
+  register,
+  login,
+  getUserDetails,
+  updateUser,
+  getUserRole,
+  setNewUser,
+};

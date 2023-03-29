@@ -65,5 +65,8 @@ export class UserDashboardComponent {
   }
   openDialog() {
     const dialogRef = this.dialog.open(OnboardingComponent);
+    dialogRef.afterClosed().subscribe((res) => {
+      this.userData.setUserNotNew().subscribe();
+    });
   }
 }

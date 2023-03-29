@@ -65,6 +65,13 @@ export class UserdataService {
       });
   }
 
+  setUserNotNew(): Observable<void> {
+    return this.http.put<void>(baseBackendURL + '/newUserFalse', '', {
+      headers: {
+        Authorization: `Bearer ${this.jwtToken}`,
+      },
+    });
+  }
   getCountries(): Observable<string[]> {
     return this.http.get<string[]>(`${baseBackendURL}/countries`);
   }
