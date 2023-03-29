@@ -52,7 +52,7 @@ export class UserDashboardComponent {
     });
     this.orderService.getCustomerLatestOrder().subscribe((res) => {
       console.log(res);
-      if (res.orderStatus === 'retake_needed') {
+      if (res && res.orderStatus === 'retake_needed') {
         this.router.navigate(['retake']);
       }
       this.order = res;

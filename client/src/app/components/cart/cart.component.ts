@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ImageInterface } from 'src/app/interfaces/image.interface';
+import { Price } from 'src/app/interfaces/price.interface';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { IdbServiceService } from 'src/app/services/idbService/idb-service.service';
 
@@ -9,10 +10,11 @@ import { IdbServiceService } from 'src/app/services/idbService/idb-service.servi
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
 })
-
 export class CartComponent {
   passportOrders: ImageInterface[] = [];
   galleryOrders: ImageInterface[] = [];
+  price?: Price;
+
   constructor(private idbService: IdbServiceService, private router: Router) {}
 
   async ngOnInit() {
