@@ -1,6 +1,6 @@
 .gallery-card {
   max-height: fit-content;
-  width: clamp(400px, 30%, 600px);
+  width: 95%;
   margin: 10px;
   position: relative;
 }
