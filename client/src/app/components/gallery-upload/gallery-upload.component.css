@@ -1,9 +1,11 @@
+
 .header{
   text-align: center;
   margin: 12vh 0;
   color: var(--primary)
 }
 .apply-button{
+  height: 5vh;
   background-color: var(--primary);
 }
 .apply-text{
@@ -55,7 +57,8 @@
   display: flex;
   gap: 1rem;
   align-items: center;
-  width: clamp(400px, 100vw, 800px);
+  width: 95vw;
+  /* width: clamp(400px, 100vw, 800px); */
 }
 
 .size-input {
@@ -64,4 +67,8 @@
 .inputField {
   width: 35%;
   margin-left: 2vw;
+}
+
+.card-form ::ng-deep .inputField{
+  height: 6vh;
 }

@@ -33,7 +33,7 @@ export class UserDashboardComponent {
         this.router.navigate(['retake']);
       }
       this.order = res;
-      this.openDialog();
+      // this.openDialog();
     });
   }
 

@@ -89,7 +89,6 @@
   font-weight: bold;
 }
 
-<<<<<<< HEAD
 /* ----Animation-SVG------ */
 
 .left-svg {
@@ -128,7 +127,7 @@
   0% {
   }
 }
-=======
+
 .delivery-info-form {
   display: flex;
   flex-direction: column;
@@ -154,4 +153,3 @@
   margin-top: 8%;
   margin-bottom: 5%;
 }
->>>>>>> 25fd9237b2f1dd47d82fb4badc903ab82b2cdbb4
