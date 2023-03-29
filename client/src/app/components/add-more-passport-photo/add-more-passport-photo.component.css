@@ -1,6 +1,25 @@
-.passportImage {
-  max-width: 200px;
+h1{
+  text-align: center;
+  margin: 12vh 0;
 }
+.form{
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  /* margin-left: 2vw; */
+  /* padding-left: 2vw; */
+}
+.countries{
+  width: 45vw;
+}
+.copies{
+  margin-left: 2vw;
+  width: 45vw;
+}
+.passportImage {
+  max-width: 45vw;
+}
+
 .imageCard {
   border: 1px solid black;
   position: relative;
@@ -18,8 +37,12 @@
   color: white;
 }
 .bottom {
+  gap: 2vh;
+  padding-bottom: 8vh;
   width: calc(100% - 40px);
   display: flex;
+  flex-direction: column;
+  align-items: end;
   position: fixed;
   bottom: 2%;
   justify-content: space-between;

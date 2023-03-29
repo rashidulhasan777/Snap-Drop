@@ -1,5 +1,13 @@
-h3 {
+.header{
   text-align: center;
+  margin: 12vh 0;
+  color: var(--primary)
+}
+.apply-button{
+  background-color: var(--primary);
+}
+.apply-text{
+  color: #ffffff;
 }
 
 .gallery-cards-container {
@@ -21,11 +29,25 @@ h3 {
   justify-content: center;
 }
 
+.gallery-controls ::ng-deep .bottom-button {
+  background-color: var(--primary);
+}
+
+.plus {
+  margin-top: 20vh;
+}
+
 .bottom {
+  gap: 2vh;
   bottom: 0%;
+  margin-bottom: 10vh;
   padding: 10px 0px;
-  background-color: white;
-  border-top: black 1px solid;
+  padding-right: 5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  /* background-color: white; */
+  /* border-top: black 1px solid; */
   justify-content: space-around;
 }
 
@@ -41,4 +63,5 @@ h3 {
 }
 .inputField {
   width: 35%;
+  margin-left: 2vw;
 }

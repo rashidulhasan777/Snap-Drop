@@ -1,5 +1,5 @@
 app-user-navbar {
-  position: absolute;
+  position: fixed;
   bottom: 0%;
   border-top: 1px solid black;
 }

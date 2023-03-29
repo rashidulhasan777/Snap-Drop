@@ -1,20 +1,37 @@
+
 .upcoming-card-container {
   padding: 5%;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
+  padding-top: 0;
 }
 
 .upcoming-card {
-  border: 1px solid gray;
-  background-color: #fac36b;
+  box-shadow: 2px;
+  border-radius: 25px;
+  border: 1px solid rgb(224, 224, 224);
+  background-color: #ffffff;
+  padding: 10px;
 }
 
 .upcoming-card-title {
+  color: var(--primary);
+  font-weight: bolder;
   font-size: 1.5em;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
 }
 
 .upcoming-card-details {
+  text-align: center;
   font-size: 1em;
+}
+
+.upcoming-card-detailsImage{
+  color: var(--primary);
+  font-size: 1.25rem;
+}
+.statusOrder{
+  color: #673ab7;
+  font-weight: bold;
 }
 
 .upcoming-card-actions {
@@ -31,4 +48,104 @@
 .options-button {
   width: 100%;
   margin-bottom: 10%;
+}
+
+.button-option {
+  background-color: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.button-option .icon {
+  /* border-radius: 10px; */
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  flex: 0.4;
+  max-width: 45px;
+  background: var(--primary);
+  padding: 10px;
+  margin-right: 10px;
+  color: white;
+  font-size: 32px;
+}
+
+.button-option .button-text {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 450;
+  /* color: #673ab7; */
+}
+
+.header {
+  color: var(--primary);
+  margin: 12vh 0;
+  text-align: center;
+}
+.delivery-title{
+  color: var(--primary);
+}
+.confetti {
+  height: 24px;
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes shake {
+  10% {
+    transform: translate3d(-1px, 1px, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(0px, 0, 0);
+  }
+}
+.color-name {
+  color: #673ab7;
+}
+.upcoming-card {
+  position: relative;
+}
+
+.upcoming-card .absolute {
+  position: absolute;
+}
+
+.left-svg {
+  width: 100px;
+  transform: translate(0px, 0px);
+  animation: rotation 32s infinite linear;
+}
+
+.right-svg {
+  width: 70px;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  overflow: hidden;
+  animation: rotation 25s infinite linear;
+}
+.small-svg {
+  width: 40px;
+  bottom: 5px;
+  animation: rotation 25s infinite linear;
+}
+.big-svg {
+  right: 5px;
+  bottom: 90px;
+  width: 110px;
+  animation: rotation 25s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+  0% {
+  }
 }

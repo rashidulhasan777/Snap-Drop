@@ -1,8 +1,36 @@
 <div class="user-info-form">
-  <h1>Delivery Information</h1>
+  <h1 class="header">Delivery Information</h1>
   <ng-container *ngIf="hasPreviousInfo; else insertDelivaryInfo">
-    <div>Your current delivary information:</div>
-    <div class="userDetails">
+    <h3 class="delivery-title">Your current delivery information:</h3>
+
+    <div class="upcoming-card-container">
+      <mat-card class="upcoming-card">
+        <!-- <img class="absolute left-svg" src="./assets/left.svg" alt="" /> -->
+    <!-- <img class="absolute mid-svg" src="./assets/middle.svg" alt="" /> -->
+
+        <!-- <img class="absolute right-svg" src="./assets/middle.svg" alt="" />
+        <img class="absolute small-svg" src="./assets/middle.svg" alt="" />
+        <img class="absolute big-svg" src="./assets/middle.svg" alt="" /> -->
+        <mat-card-header>
+          <mat-card-title class="upcoming-card-title"
+            >{{ User?.details?.name | titlecase }}</mat-card-title
+          >
+        </mat-card-header>
+        <mat-card-content>
+          <p class="upcoming-card-details">
+            <b>Mobile:</b> {{ User?.details?.contact_number }}
+          </p>
+          <p class="upcoming-card-details"><b>Email:</b>  {{ User?.email }}</p>
+          <p class="upcoming-card-details"><b>Address:</b> {{ User?.details?.address }},
+            {{ User?.details?.area?.area_name }},
+            {{ User?.details?.zone?.zone_name }},
+            {{ User?.details?.city?.city_name }}</p>
+          <mat-divider></mat-divider>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- <div class="userDetails">
       <div class="userName">{{ User?.details?.name | titlecase }}</div>
       <div><b>Mobile:</b> {{ User?.details?.contact_number }}</div>
       <div><b>Email:</b> {{ User?.email }}</div>
@@ -12,17 +40,18 @@
         {{ User?.details?.zone?.zone_name }},
         {{ User?.details?.city?.city_name }}
       </div>
-    </div>
+    </div> -->
     <div class="actionButtons">
-      <button mat-stroked-button color="primary" (click)="changeAdress()">
-        Change address
+      <button class="bottom-button" mat-fab color="primary" (click)="changeAdress()">
+        <mat-icon>edit</mat-icon>
       </button>
       <button
-        mat-raised-button
+        mat-fab
+        class="bottom-button"
         color="primary"
         (click)="continueWithPrevious()"
       >
-        Continue
+      <mat-icon>chevron_right</mat-icon>
       </button>
     </div>
   </ng-container>

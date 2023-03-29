@@ -1,28 +1,50 @@
-<h2 class="title">Order Summary</h2>
+<h1 class="header">Order Summary</h1>
+<div class="upcoming-card-container">
+  <mat-card class="upcoming-card">
+    <mat-card-header>
+      <mat-card-title class="upcoming-card-title"
+      >{{ User?.details?.name | titlecase }}</mat-card-title
+      >
+    </mat-card-header>
+    <mat-card-content>
+      <p class="upcoming-card-details">
+        <b>Mobile:</b> {{ User?.details?.contact_number }}
+      </p>
+      <p class="upcoming-card-details"><b>Email:</b>  {{ User?.email }}</p>
+      <p class="upcoming-card-details"><b>Address:</b> {{ User?.details?.address }},
+        {{ User?.details?.area?.area_name }},
+        {{ User?.details?.zone?.zone_name }},
+        {{ User?.details?.city?.city_name }}</p>
+      <mat-divider></mat-divider>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- ! Dont touch this html file for now -->
 
 <div *ngIf="Cart && Cart.passportPictures && Cart.passportPictures.length">
   <div class="priceContainer">
     <div>x{{ Cart.passportPictures.length }} Passport pictures</div>
-    <div class="price">{{ price.passport }} Taka</div>
+    <div class="price"><b>{{ price.passport }} Taka</b> </div>
   </div>
 </div>
 <div *ngIf="Cart && Cart.galleryPictures && Cart.galleryPictures.length">
   <div class="priceContainer">
     <div>x{{ Cart.galleryPictures.length }} Gallery pictures</div>
-    <div class="price">{{ price.gallery }} Taka</div>
+    <div class="price"><b>{{ price.gallery }} Taka</b> </div>
   </div>
 </div>
 <div class="priceContainer">
   <div>Shipping</div>
-  <div class="price">{{ price.shipping }} Taka</div>
+  <div class="price"><b>{{ price.shipping }} Taka</b> </div>
 </div>
 <mat-divider></mat-divider>
 <div class="priceContainer">
   <div>Total</div>
-  <div class="price">{{ price.total }} Taka</div>
+  <div class="price"><b>{{ price.total }} Taka</b> </div>
 </div>
 
-<h3 class="delivaryTitle">To be delivered to:</h3>
+<!-- <h3 class="delivaryTitle">To be delivered to:</h3>
 <div class="userDetails">
   <div class="userName">{{ User?.details?.name | titlecase }}</div>
   <div><b>Mobile:</b> {{ User?.details?.contact_number }}</div>
@@ -32,7 +54,7 @@
     {{ User?.details?.area?.area_name }}, {{ User?.details?.zone?.zone_name }},
     {{ User?.details?.city?.city_name }}
   </div>
-</div>
+</div> -->
 <div class="instructionWrapper">
   <mat-form-field class="instructionField" appearance="outline"
     ><mat-label>Instructions (Optional)</mat-label
@@ -42,12 +64,13 @@
       placeholder="Give specific instuctions"
     ></textarea>
   </mat-form-field>
+  <button class="pay-button" mat-raised-button (click)="initiatePayment()"><span class="pay-button-text">Pay | {{ price.total }} BDT.</span> </button>
 </div>
 
-<button mat-stroked-button class="payButton" (click)="initiatePayment()">
+<!-- <button mat-stroked-button class="payButton" (click)="initiatePayment()">
   <div class="button_text">
     <div>Pay</div>
     <div class="forBorder"></div>
     <div>{{ price.total }} Taka</div>
   </div>
-</button>
+</button> -->

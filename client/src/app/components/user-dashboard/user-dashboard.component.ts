@@ -6,6 +6,7 @@ import { OnboardingComponent } from '../onboarding/onboarding.component';
 import { UserdataService } from 'src/app/services/userdata/userdata.service';
 import { User } from 'src/app/interfaces/user.interface';
 import { Socket } from 'ngx-socket-io';
+import { Order } from 'src/app/interfaces/order.interface';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -13,6 +14,7 @@ import { Socket } from 'ngx-socket-io';
   styleUrls: ['./user-dashboard.component.css'],
 })
 export class UserDashboardComponent {
+  order?: Order;
   User?: User;
   constructor(
     private orderService: OrderService,
@@ -21,7 +23,7 @@ export class UserDashboardComponent {
     public dialog: MatDialog,
     private socket: Socket
   ) {
-    userData.requestNotificationPermission()
+    userData.requestNotificationPermission();
   }
   // using mock data
   orders: any[] = [
@@ -45,14 +47,15 @@ export class UserDashboardComponent {
     this.userData.getUser().subscribe((res) => {
       this.User = res;
       this.socket.emit('gimmeNotification', { userId: res._id });
-      this.socket.on
+      this.socket.on;
     });
     this.orderService.getCustomerLatestOrder().subscribe((res) => {
-      // console.log(res);
+      console.log(res);
       if (res.orderStatus === 'retake_needed') {
         this.router.navigate(['retake']);
       }
-      this.openDialog();
+      this.order = res;
+      // this.openDialog();
     });
   }
 

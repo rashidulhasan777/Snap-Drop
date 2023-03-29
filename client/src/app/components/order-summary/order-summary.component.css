@@ -1,3 +1,18 @@
+.header{
+  color: var(--primary);
+  text-align: center;
+  margin: 12vh 0;
+  animation: entry 1500ms ease-in-out 200ms 1 forwards;
+}
+
+@keyframes entry {
+  0% {
+    margin: 12vh 0;
+  }
+  100% {
+    margin: 3vh 0;
+  }
+}
 .priceContainer {
   display: flex;
   width: 100%;
@@ -9,11 +24,6 @@
 .price {
   padding-left: 10px;
   border-left: 1px solid black;
-}
-.title {
-  width: 100%;
-  text-align: center;
-  margin-bottom: 50px;
 }
 
 .delivaryTitle {
@@ -39,18 +49,60 @@
 }
 
 .payButton {
-  width: calc(100% - 20px);
-  margin: 10px;
+  /* background-color: #fac36b; */
+  width: calc(100% - 400px);
+  /* width: 100vw; */
+  /* margin: 10px; */
 }
 
 .forBorder {
   border: 1px solid black;
 }
+
 .instructionField {
   width: calc(100% - 20px);
 }
+
 .instructionWrapper {
   display: flex;
+  align-items: center;
+  flex-direction: column;
   justify-content: center;
   width: 100%;
+}
+.pay-button-text{
+  color: #ffffff;
+}
+
+.instructionWrapper ::ng-deep .pay-button {
+  background-color: var(--primary);
+}
+
+/* --------------------Card Design-------------------- */
+
+.upcoming-card-container {
+  padding: 5%;
+  margin-bottom: 5%;
+  padding-top: 0;
+}
+
+.upcoming-card {
+  border: 1px solid rgb(224, 224, 224);
+  border-radius: 25px;
+  background-color: #ffffff;
+  padding: 10px;
+}
+
+.upcoming-card-title {
+  font-size: 1.5em;
+  margin-bottom: 5%;
+}
+
+.upcoming-card-details {
+  font-size: 1em;
+}
+
+.upcoming-card-title {
+  font-size: xx-large;
+  font-weight: bold;
 }

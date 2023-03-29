@@ -9,6 +9,7 @@ import { IdbServiceService } from 'src/app/services/idbService/idb-service.servi
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
 })
+
 export class CartComponent {
   passportOrders: ImageInterface[] = [];
   galleryOrders: ImageInterface[] = [];

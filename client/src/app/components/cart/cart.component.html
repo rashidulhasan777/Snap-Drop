@@ -1,4 +1,4 @@
-<h2 class="heading">Your Cart</h2>
+<h1 class="heading">Your Cart</h1>
 <div *ngIf="hasOrder; else noOrders" class="cartContainer">
   <div *ngIf="passportOrders.length" routerLink="/passport_upload">
     <div class="card">
@@ -7,7 +7,10 @@
         <div class="imageCount">{{ "x" + passportOrders.length }}</div>
       </div>
       <div class="detailsContainer">
-        <div class="detailsText">Passport Images</div>
+        <div class="detailsText">
+          <p>Passport Images</p>
+          <p><span>Price: </span> {{passportOrders.length*15}} Taka</p>
+        </div>
         <button
           (click)="deletePassportOrder()"
           class="deleteButton"
@@ -25,7 +28,10 @@
         <div class="imageCount">{{ "x" + galleryOrders.length }}</div>
       </div>
       <div class="detailsContainer">
-        <div class="detailsText">Gallery Images</div>
+        <div class="detailsText">
+          <p>Gallery Images</p> 
+          <p><span>Price: </span> {{galleryOrders.length*15}} Taka</p>
+        </div>
         <button
           (click)="deleteGalleryOrder()"
           class="deleteButton"
@@ -38,28 +44,19 @@
   </div>
   <div class="actionButtons">
     <button
-      mat-stroked-button
-      color="primary"
-      class="buttonSize"
-      routerLink="/user_dashboard"
-    >
-      <mat-icon>home</mat-icon>Home
-    </button>
-    <button
-      mat-stroked-button
+      mat-fab
       color="primary"
       class="buttonSize"
       (click)="clearAll()"
     >
-      <mat-icon>delete</mat-icon>Clear all items
-    </button>
+      <mat-icon>delete</mat-icon></button>
     <button
       (click)="checkOut()"
-      mat-raised-button
+      mat-fab
       color="primary"
       class="buttonSize"
     >
-      Checkout
+      <mat-icon>chevron_right</mat-icon>
     </button>
   </div>
 </div>

@@ -1,15 +1,29 @@
+<h1 class="header">
+  Welcome, <span class="color-name"> {{ User && User.name }} </span
+  ><img class="confetti" src="/assets/icons/wave.png" alt="image" />
+</h1>
 <div class="upcoming-card-container">
   <mat-card class="upcoming-card">
+    <img class="absolute left-svg" src="./assets/left.svg" alt="" />
+    <!-- <img class="absolute mid-svg" src="./assets/middle.svg" alt="" /> -->
+
+      <img class="absolute right-svg" src="./assets/middle.svg" alt="" />
+      <img class="absolute small-svg" src="./assets/middle.svg" alt="" />
+      <img class="absolute big-svg" src="./assets/middle.svg" alt="" />
+
     <mat-card-header>
       <mat-card-title class="upcoming-card-title"
-        >Upcoming Orders</mat-card-title
+        >Upcoming Order</mat-card-title
       >
     </mat-card-header>
     <mat-card-content>
-      <p class="upcoming-card-details">
-        Upcoming {{ orders[0].orderType }} order
+      <p class="upcoming-card-detailsImage">
+        <b>{{ order?.passportPictures?.length}}</b> Passport sized images
       </p>
-      <p class="upcoming-card-details">{{ orders[0].orderStatus }}</p>
+      <p class="upcoming-card-detailsImage">
+        <b>{{ order?.galleryPictures?.length}}</b> Gallery images
+      </p>
+      <p class="upcoming-card-details"> <span class="statusOrder">Order status :</span>  {{ order?.orderStatus }}</p>
       <mat-divider></mat-divider>
     </mat-card-content>
     <mat-card-actions class="upcoming-card-actions">
@@ -21,20 +35,29 @@
 </div>
 
 <div class="options-container">
-  <div class="passport-button-container">
+  <!-- <div class="passport-button-container">
     <a
       class="options-button"
       mat-stroked-button
       routerLink="/passport_photo_instructions"
     >
       <mat-icon>camera</mat-icon>
-      <span>Take a passport photo</span>
     </a>
+    <span>Take a passport photo</span>
   </div>
   <div class="gallery-button-container">
     <a class="options-button" mat-stroked-button routerLink="/gallery_upload">
       <mat-icon>cloud_upload</mat-icon>
       <span>Upload pictures</span>
     </a>
+  </div> -->
+
+  <div class="button-option" routerLink="/passport_photo_instructions">
+    <span class="icon"> <mat-icon>camera</mat-icon> </span>
+    <span class="button-text">Take a passport photo</span>
+  </div>
+  <div class="button-option" routerLink="/gallery_upload">
+    <span class="icon"> <mat-icon>photo_library</mat-icon> </span>
+    <span class="button-text">Upload Pictures</span>
   </div>
 </div>
