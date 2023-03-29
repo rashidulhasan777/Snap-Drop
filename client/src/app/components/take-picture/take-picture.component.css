@@ -1,7 +1,7 @@
 h1 {
   text-align: center;
-  margin-top: 12vh;
-  margin-bottom: 8vh;
+  margin-top: 4vh;
+  margin-bottom: 2vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,6 +11,7 @@ h1 {
   width: 8%;
   margin-left: 3%;
 }
+
 .capturedImage {
   max-width: 100%;
   transform: scaleX(-1);

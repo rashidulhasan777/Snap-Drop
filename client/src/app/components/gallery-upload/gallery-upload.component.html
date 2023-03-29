@@ -1,6 +1,6 @@
 <h1 class="header">Upload Photos</h1>
-
-<form
+<div class="data-container">
+  <form
   *ngIf="pictureData.length"
   [formGroup]="applyToAllForm"
   class="card-form"
@@ -40,6 +40,8 @@
     (deleteImage)="removeImage(i)"
   ></app-gallery-card>
 </div>
+</div>
+
 
 <input
   #fileUpload

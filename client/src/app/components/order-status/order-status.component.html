@@ -7,7 +7,7 @@
     <div class="timeline">
       <div class="timeline-section">
         <div class="timeline-header">
-          <div class="icon completed">
+          <div class="icon completed" [class.current-step]="step === 0">
             <mat-icon class="completed-icon">list_alt</mat-icon>
           </div>
           <b>Pending Approval</b>
@@ -23,7 +23,7 @@
 
       <div class="timeline-section">
         <div class="timeline-header">
-          <div class="icon" [class.completed]="step > 0">
+          <div class="icon" [class.completed]="step > 0" [class.current-step]="step === 1">
             <mat-icon [class.completed-icon]="step > 0">check</mat-icon>
           </div>
           <b>Approved</b>
@@ -39,7 +39,7 @@
 
       <div class="timeline-section">
         <div class="timeline-header">
-          <div class="icon" [class.completed]="step > 1">
+          <div class="icon" [class.completed]="step > 1" [class.current-step]="step === 2">
             <mat-icon [class.completed-icon]="step > 1">print</mat-icon>
           </div>
           <b>Printing</b>
@@ -55,7 +55,7 @@
 
       <div class="timeline-section">
         <div class="timeline-header">
-          <div class="icon" [class.completed]="step > 2">
+          <div class="icon" [class.completed]="step > 2" [class.current-step]="step === 3">
             <mat-icon [class.completed-icon]="step > 2">motorcycle</mat-icon>
           </div>
           <b>Ready to deliver</b>

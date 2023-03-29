@@ -2,8 +2,8 @@
   Your Cart
   <!-- <img class="header-icon" src="../../../assets/Header icons/trolley.png" /> -->
 </h1>
-<div *ngIf="hasOrder; else noOrders" class="cartContainer">
-  <div *ngIf="passportOrders.length" routerLink="/passport_upload">
+<div *ngIf="hasOrder; else noOrders" >
+  <div *ngIf="passportOrders.length" routerLink="/passport_upload" class="cardContainer">
     <div class="card">
       <div class="cardImageContainer">
         <img [src]="passportOrders[0].imageURL" class="cardImage" />
@@ -24,7 +24,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="galleryOrders.length" routerLink="/gallery_upload">
+  <div *ngIf="galleryOrders.length" routerLink="/gallery_upload" class="cardContainer">
     <div class="card">
       <div class="cardImageContainer">
         <img [src]="galleryOrders[0].imageURL" class="cardImage" />
