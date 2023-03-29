@@ -21,8 +21,8 @@ export class TakePictureComponent {
 
   cameraConfig: MediaTrackConstraints = {
     facingMode: 'user',
-    width: { ideal: 2048 },
-    height: { ideal: 2048 },
+    width: { ideal: 10000 },
+    height: { ideal: 10000 },
   };
 
   image: any[] = [];
@@ -90,5 +90,4 @@ export class TakePictureComponent {
       }
     }
   }
-  
 }
