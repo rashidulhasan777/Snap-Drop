@@ -48,6 +48,7 @@ export class UserDashboardComponent {
       this.User = res;
       this.socket.emit('gimmeNotification', { userId: res._id });
       this.socket.on;
+      if (this.User.newUser) this.openDialog();
     });
     this.orderService.getCustomerLatestOrder().subscribe((res) => {
       console.log(res);

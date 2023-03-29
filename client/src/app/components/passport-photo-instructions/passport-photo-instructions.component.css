@@ -8,22 +8,44 @@
 }
 mat-stepper {
   padding: 5% 2%;
-  height: 90vh;
+  /* height: 80vh; */
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.init-btn-container-bottom {
+  justify-self: flex-end;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }
 
 .btn-container-bottom {
-  position: absolute;
-  bottom: 5vh;
+  /* position: absolute; */
   display: flex;
-  justify-content: flex-end;
-  width: 85%;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 h1 {
   margin-top: 10%;
   text-align: center;
+}
+
+form {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.instruction-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }

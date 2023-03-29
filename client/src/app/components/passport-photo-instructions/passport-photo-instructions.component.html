@@ -1,31 +1,46 @@
 <div class="instructions-submit-container">
   <mat-stepper #stepper class="instructions">
-    <mat-step [stepControl]="firstFormGroup">
+    <mat-step [stepControl]="firstFormGroup" class="mat-step">
       <form [formGroup]="firstFormGroup">
-        <ng-lottie [options]="bulbOptions"></ng-lottie>
-        <h1>Lighting and Background</h1>
-        <p>
-          Position the lamps directly in front of you to eliminate shadows on
-          your face. Find a pale, even-toned wall without any objects for
-          optimal results.
-        </p>
-        <div class="btn-container-bottom">
-          <button mat-button matStepperNext>Next</button>
+        <div class="instruction-info">
+          <ng-lottie [options]="bulbOptions"></ng-lottie>
+          <h1>Lighting and Background</h1>
+          <p>
+            Position the lamps directly in front of you to eliminate shadows on
+            your face. Find a pale, even-toned wall without any objects for
+            optimal results.
+          </p>
+        </div>
+        <div class="init-btn-container-bottom">
+          <button class="btn-primary" mat-fab color="primary" matStepperNext>
+            <mat-icon>chevron_right</mat-icon>
+          </button>
         </div>
       </form>
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
-        <ng-lottie [options]="attireOptions"></ng-lottie>
-        <h1>Proper Outfit</h1>
-        <p>
-          Opt for professional attire such as office-style shirts, sweaters, or
-          dresses. Choose garments with higher necklines to ensure they are
-          visible in the final cropped photo.
-        </p>
+        <div class="instruction-info">
+          <ng-lottie [options]="attireOptions"></ng-lottie>
+          <h1>Proper Outfit</h1>
+          <p>
+            Opt for professional attire such as office-style shirts, sweaters, or
+            dresses. Choose garments with higher necklines to ensure they are
+            visible in the final cropped photo.
+          </p>
+        </div>
         <div class="btn-container-bottom">
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button
+            class="btn-primary"
+            mat-fab
+            color="primary"
+            matStepperPrevious
+          >
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          <button class="btn-primary" mat-fab color="primary" matStepperNext>
+            <mat-icon>chevron_right</mat-icon>
+          </button>
         </div>
       </form>
     </mat-step>
@@ -39,8 +54,22 @@
           camera directly with your full face visible.
         </p>
         <div class="btn-container-bottom">
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button routerLink="/camera">Done</button>
+          <button
+            class="btn-primary"
+            mat-fab
+            color="primary"
+            matStepperPrevious
+          >
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          <button
+            class="btn-primary"
+            mat-fab
+            color="primary"
+            routerLink="/camera"
+          >
+            <mat-icon>chevron_right</mat-icon>
+          </button>
         </div>
       </form>
     </mat-step>

@@ -53,6 +53,8 @@ import { TakePictureComponent } from './components/take-picture/take-picture.com
 import { AddMorePassportPhotoComponent } from './components/add-more-passport-photo/add-more-passport-photo.component';
 import { WarningDialogueComponent } from './components/warning-dialogue/warning-dialogue.component';
 import { baseBackendURL } from 'src/config';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { LoadingInterceptor } from './interceptors/loading/loading.interceptor';
 
 const config: SocketIoConfig = { url: baseBackendURL, options: {} };
 export function playerFactory() {
@@ -97,6 +99,7 @@ export function playerFactory() {
     LabDashboardComponent,
     ChartComponent,
     WarningDialogueComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -118,6 +121,11 @@ export function playerFactory() {
     SocketIoModule.forRoot(config),
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true,
+    },
     { provide: NgChartsConfiguration, useValue: { generateColors: false } },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,

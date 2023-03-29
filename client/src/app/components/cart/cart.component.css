@@ -1,14 +1,17 @@
 .heading {
-  color: var(--primary);
-  margin-top: 12vh;
-  margin-bottom: 10vh;
-  /* margin: 12vh 0; */
   text-align: center;
+  margin-top: 12vh;
+  margin-bottom: 8vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.gallery-controls ::ng-deep .bottom-button {
-  background-color: var(--primary);
+.header-icon {
+  width: 8%;
+  margin-left: 3%;
 }
+
 .cardImage {
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;

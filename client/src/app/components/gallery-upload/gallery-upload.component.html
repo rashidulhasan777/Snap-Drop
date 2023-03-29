@@ -1,4 +1,10 @@
-<h1 class="header">Upload Photos</h1>
+<h1>
+  Upload Photos
+  <img
+    class="header-icon"
+    src="../../../assets/Header icons/upload-image.png"
+  />
+</h1>
 
 <form
   *ngIf="pictureData.length"
@@ -29,7 +35,9 @@
     <mat-label>Copies</mat-label>
     <input matInput type="number" formControlName="copies" />
   </mat-form-field>
-  <button type="submit" mat-stroked-button class="apply-button"> <span class="apply-text">Apply</span> </button>
+  <button type="submit" mat-stroked-button class="apply-button">
+    <span class="apply-text">Apply</span>
+  </button>
 </form>
 <div *ngIf="previews.length" class="gallery-cards-container">
   <app-gallery-card
@@ -50,7 +58,12 @@
   style="display: none"
 />
 <div class="gallery-controls" [ngClass]="{ bottom: previews.length }">
-  <button class="bottom-button" mat-fab color="primary" (click)="fileUpload.click()" [ngClass]="{ plus: !previews.length }">
+  <button
+    mat-fab
+    color="primary"
+    (click)="fileUpload.click()"
+    [ngClass]="{ plus: !previews.length }"
+  >
     <mat-icon>add</mat-icon>
   </button>
   <button
