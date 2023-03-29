@@ -14,6 +14,7 @@
 }
 
 .upcoming-card-title {
+  color: var(--primary);
   font-weight: bolder;
   font-size: 1.5em;
   margin-bottom: 5%;
@@ -25,7 +26,8 @@
 }
 
 .upcoming-card-detailsImage{
-  font-size: 1.2rem;
+  color: var(--primary);
+  font-size: 1.25rem;
 }
 .statusOrder{
   color: #673ab7;
@@ -49,8 +51,8 @@
 }
 
 .button-option {
-  background-color: #282C35;
-  border: 1px solid #673ab7;
+  background-color: var(--primary);
+  border: 1px solid var(--primary);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -62,7 +64,7 @@
   border-top-left-radius: 10px;
   flex: 0.4;
   max-width: 45px;
-  background: #282C35;
+  background: var(--primary);
   padding: 10px;
   margin-right: 10px;
   color: white;
@@ -72,11 +74,12 @@
 .button-option .button-text {
   color: #ffffff;
   font-size: 20px;
+  font-weight: 450;
   /* color: #673ab7; */
 }
 
 .header {
-  color: #282C35;
+  color: var(--primary);
   margin: 12vh 0;
   text-align: center;
 }
@@ -116,18 +119,19 @@
 .right-svg {
   width: 70px;
   position: absolute;
-  right: 0px;
-  bottom: 0px;
+  right: 5px;
+  bottom: 5px;
   overflow: hidden;
   animation: rotation 25s infinite linear;
 }
 .small-svg {
   width: 40px;
-  bottom: 0;
+  bottom: 5px;
+  animation: rotation 25s infinite linear;
 }
 .big-svg {
-  right: 0;
-  bottom: 80px;
+  right: 5px;
+  bottom: 90px;
   width: 110px;
   animation: rotation 25s infinite linear;
 }

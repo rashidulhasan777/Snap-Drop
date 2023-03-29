@@ -7,7 +7,10 @@
         <div class="imageCount">{{ "x" + passportOrders.length }}</div>
       </div>
       <div class="detailsContainer">
-        <div class="detailsText">Passport Images</div>
+        <div class="detailsText">
+          <p>Passport Images</p> 
+          <p>Price</p>
+        </div>
         <button
           (click)="deletePassportOrder()"
           class="deleteButton"
@@ -25,7 +28,10 @@
         <div class="imageCount">{{ "x" + galleryOrders.length }}</div>
       </div>
       <div class="detailsContainer">
-        <div class="detailsText">Gallery Images</div>
+        <div class="detailsText">
+          <p>Gallery Images</p> 
+          <p>Price</p>
+        </div>
         <button
           (click)="deleteGalleryOrder()"
           class="deleteButton"
