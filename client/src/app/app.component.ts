@@ -39,15 +39,15 @@ export class AppComponent {
       this.domSanitizer.bypassSecurityTrustResourceUrl('assets/reset_image.svg')
     );
     this.authService.userRole().subscribe((res) => (this.role = res.role));
-    // if (!localStorage.getItem('pathaoAccessToken'))
-    //   this.pathao.getPathaoAccessToken().subscribe({
-    //     next: (res) => {
-    //       localStorage.setItem(
-    //         'pathaoAccessToken',
-    //         JSON.stringify(res.pathaoToken)
-    //       );
-    //     },
-    //   });
+    if (!localStorage.getItem('pathaoAccessToken'))
+      this.pathao.getPathaoAccessToken().subscribe({
+        next: (res) => {
+          localStorage.setItem(
+            'pathaoAccessToken',
+            JSON.stringify(res.pathaoToken)
+          );
+        },
+      });
   }
 
   ngOnInit() {
