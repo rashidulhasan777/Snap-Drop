@@ -21,7 +21,7 @@
 }
 
 .upcoming-card-details {
-  text-align: center;
+  /* text-align: center; */
   font-size: 1em;
 }
 
@@ -30,7 +30,7 @@
   font-size: 1.25rem;
 }
 .statusOrder{
-  color: #673ab7;
+  color: var(--primary);
   font-weight: bold;
 }
 

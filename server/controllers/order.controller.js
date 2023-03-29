@@ -1,6 +1,6 @@
 const Order = require('./../models/order.model');
 const transport = require('./../middlewares/nodemailer');
-const {getMailOptions} = require('./../utils/nodemail/mailOptions');
+const { getMailOptions } = require('./../utils/nodemail/mailOptions');
 
 const getAllOrders = async (req, res) => {
   try {
@@ -36,7 +36,7 @@ const changeOrderStatus = async (req, res) => {
       new: true,
     });
 
-    // transport(getMailOptions("nafizfuad0230@gmail.com", "Hello")); 
+    // transport(getMailOptions("nafizfuad0230@gmail.com", "Hello"));
 
     res.status(201).send(order);
   } catch (error) {
@@ -71,7 +71,11 @@ const getOrderByCustomerId = async (req, res) => {
 const getOrdersbyStatus = async (req, res) => {
   const orderStatus = req.params.status;
   try {
-    const orders = await Order.find({ orderStatus, paid: true });
+    const orders = await Order.find({
+      labId: req.currentUser.labId,
+      orderStatus,
+      paid: true,
+    });
     res.status(201);
     res.send(orders);
   } catch (error) {
@@ -92,9 +96,12 @@ const getOrderByLabId = async (req, res) => {
 };
 const getOneWeekData = async (req, res) => {
   try {
-    const orders = await Order.find({labId: req.currentUser.labId , timestamp: {
-        $gte: new Date(new Date() - 7 * 60 * 60 * 24 * 1000)
-    } });
+    const orders = await Order.find({
+      labId: req.currentUser.labId,
+      timestamp: {
+        $gte: new Date(new Date() - 7 * 60 * 60 * 24 * 1000),
+      },
+    });
     res.status(201);
     res.send(orders);
   } catch (error) {
@@ -160,6 +167,19 @@ const getUserLastOrder = async (req, res) => {
   }
 };
 
+const generateOrderId = async (req, res) => {
+  try {
+    const orderCountForLab = await Order.find({
+      labId: req.body.labId,
+    }).count();
+    const orderId = `Order_${orderCountForLab}`;
+    res.status(200).send({ orderId });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ errorMessage: 'Something went wrong' });
+  }
+};
+
 module.exports = {
   getAllOrders,
   createOrder,
@@ -172,5 +192,6 @@ module.exports = {
   cleanUnpaidOrders,
   updatePassport,
   getUserLastOrder,
-  getOneWeekData
+  getOneWeekData,
+  generateOrderId,
 };

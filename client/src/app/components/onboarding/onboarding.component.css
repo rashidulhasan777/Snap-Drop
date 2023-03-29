@@ -28,3 +28,17 @@ form {
   justify-content: center;
   align-items: center;
 }
+
+.init-btn-container-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.btn-container-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}

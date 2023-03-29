@@ -1,4 +1,7 @@
-<h1>Preview Images</h1>
+<h1>
+  Preview Images
+  <img class="header-icon" src="../../../assets/Header icons/picture.png" />
+</h1>
 <form class="form" [formGroup]="countryAndCopiesInfo">
   <mat-form-field class="countries" appearance="outline">
     <mat-label>Countries</mat-label>
@@ -38,7 +41,7 @@
   </div>
 </div>
 <div class="bottom">
-  <button routerLink="/camera" mat-fab color="primary">
+  <button (click)="checkLimit()" mat-fab color="primary">
     <mat-icon>add</mat-icon>
   </button>
   <button (click)="proceed()" mat-fab color="primary">

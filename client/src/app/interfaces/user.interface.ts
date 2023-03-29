@@ -8,4 +8,5 @@ export interface User {
   profilePic?: string;
   details?: Details;
   labId?: string;
+  newUser?: boolean;
 }

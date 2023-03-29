@@ -87,7 +87,7 @@ export class PriceCalculationService {
   }
 
   get pathaoToken() {
-    return JSON.parse(localStorage.getItem('pathaoAccessToken') || "''")
+    return JSON.parse(localStorage.getItem('pathaoAccessToken') || '""')
       .access_token;
   }
 }

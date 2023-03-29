@@ -51,6 +51,7 @@ export class OrderService {
   }
 
   createOrder(order: Order): Observable<Order> {
+    console.log(order);
     return this.http.post<Order>(this.baseUrl, order, {
       headers: {
         Authorization: `Bearer ${this.jwtToken}`,
@@ -86,6 +87,18 @@ export class OrderService {
         Authorization: `Bearer ${this.jwtToken}`,
       },
     });
+  }
+
+  generateOrderId(labId: number): Observable<{ orderId: string }> {
+    return this.http.post<{ orderId: string }>(
+      baseBackendURL + '/generateOrderId',
+      { labId },
+      {
+        headers: {
+          Authorization: `Bearer ${this.jwtToken}`,
+        },
+      }
+    );
   }
 
   private get jwtToken() {

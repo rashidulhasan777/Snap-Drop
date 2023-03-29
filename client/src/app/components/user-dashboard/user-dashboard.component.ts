@@ -23,14 +23,17 @@ export class UserDashboardComponent {
   ) {}
 
   ngOnInit() {
-    this.userData.getUser().subscribe((res) => (this.User = res));
+    this.userData.getUser().subscribe((res) => {
+      this.User = res;
+      if (this.User.newUser) this.openDialog();
+    });
     this.orderService.getCustomerLatestOrder().subscribe((res) => {
       console.log(res);
       if (res.orderStatus === 'retake_needed') {
         this.router.navigate(['retake']);
       }
       this.order = res;
-      // this.openDialog();
+      this.openDialog();
     });
   }
 

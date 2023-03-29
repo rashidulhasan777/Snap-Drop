@@ -11,12 +11,16 @@
   align-items: center;
 }
 
-/* doesn't work for height */
 .user-profile-form {
   margin-top: 5%;
   padding-top: 5%;
-  height: 20vh;
-  overflow-y: auto;
+}
+
+.prefix {
+  padding-left: 33%;
+}
+.num {
+  padding-left: 5%;
 }
 
 .button-container {
@@ -80,11 +84,12 @@
   font-size: 1em;
 }
 
-.upcoming-card-title{
+.upcoming-card-title {
   font-size: xx-large;
   font-weight: bold;
 }
 
+<<<<<<< HEAD
 /* ----Animation-SVG------ */
 
 .left-svg {
@@ -123,3 +128,30 @@
   0% {
   }
 }
+=======
+.delivery-info-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  margin-bottom: 8vh;
+  overflow-y: auto;
+}
+
+.delivery-info-form div mat-form-field {
+  width: 100%;
+}
+
+.delivery-info-form div {
+  padding: 0 5%;
+  width: 100%;
+}
+
+.address-title {
+  text-align: center;
+  margin-top: 8%;
+  margin-bottom: 5%;
+}
+>>>>>>> 25fd9237b2f1dd47d82fb4badc903ab82b2cdbb4

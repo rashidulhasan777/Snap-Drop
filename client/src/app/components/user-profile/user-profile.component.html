@@ -1,14 +1,16 @@
 <div *ngIf="User" class="user-info-form">
-  <div class="top-view">
-    <h1 class="greeting">Hello, {{ User.name }}</h1>
-  </div>
+  <h1 class="greeting">
+    Hello, <span class="name"> {{ User.name }} </span>
+    <img class="header-icon" src="../../../assets/icons/wave.png" />
+  </h1>
   <form
     [formGroup]="deliveryInfoForm"
     (submit)="handleSubmit()"
     class="user-profile-form"
   >
+    <h2>Edit Your Profile</h2>
     <div>
-      <mat-form-field class="name" appearance="outline">
+      <mat-form-field class="name-field" appearance="outline">
         <mat-label>Name</mat-label>
         <input matInput formControlName="name" [value]="User.name" />
         <mat-error *ngIf="name?.errors?.['required']"
@@ -17,10 +19,10 @@
       </mat-form-field>
     </div>
     <div>
-      <mat-form-field class="phone" appearance="outline">
+      <mat-form-field class="phone" appearance="outline" floatLabel="always">
         <mat-label>Phone</mat-label>
-        <span matPrefix>+880</span>
-        <input matInput formControlName="contact_number" />
+        <span class="prefix" matPrefix>+880&nbsp;</span>
+        <input class="num" matInput formControlName="contact_number" />
         <mat-error
           *ngIf="contact_number?.errors?.['pattern'] || contact_number?.errors?.['minlength'] || contact_number?.errors?.['maxlength']"
           >Invalid Phone Number</mat-error
@@ -34,6 +36,7 @@
       <mat-form-field class="address" appearance="outline">
         <mat-label>Address</mat-label>
         <input matInput formControlName="address" />
+        <mat-hint>*Address should be at least 10 character</mat-hint>
         <mat-error *ngIf="address?.errors?.['required']"
           >Address is required</mat-error
         >
@@ -122,11 +125,20 @@
         >
       </mat-form-field>
     </div>
-    <!-- <div class="button-container">
-      <button mat-flat-button color="primary" (click)="handleSubmit()">
+    <div class="submit-btn-container">
+      <button
+        class="submit-btn"
+        mat-flat-button
+        color="primary"
+        (click)="handleSubmit()"
+      >
         Submit
       </button>
-    </div> -->
+    </div>
   </form>
-  <button mat-flat-button (click)="logout()">Logout</button>
+  <div class="logout-btn-container">
+    <button class="logout-btn" color="warn" mat-flat-button (click)="logout()">
+      Logout
+    </button>
+  </div>
 </div>

@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialComponentsModule } from './material-components/material-components.module';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { LottieModule } from 'ngx-lottie';
-import { NgChartsModule, NgChartsConfiguration  } from 'ng2-charts';
+import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
 import player from 'lottie-web';
 import { WebcamModule } from 'ngx-webcam';
 
@@ -53,6 +53,9 @@ export function playerFactory() {
 }
 import { TakePictureComponent } from './components/take-picture/take-picture.component';
 import { AddMorePassportPhotoComponent } from './components/add-more-passport-photo/add-more-passport-photo.component';
+import { WarningDialogueComponent } from './components/warning-dialogue/warning-dialogue.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { LoadingInterceptor } from './interceptors/loading/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -92,6 +95,8 @@ import { AddMorePassportPhotoComponent } from './components/add-more-passport-ph
     UserProfileComponent,
     LabDashboardComponent,
     ChartComponent,
+    WarningDialogueComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -109,10 +114,15 @@ import { AddMorePassportPhotoComponent } from './components/add-more-passport-ph
       registrationStrategy: 'registerWhenStable:30000',
     }),
     WebcamModule,
-    NgChartsModule
+    NgChartsModule,
   ],
   providers: [
-    { provide: NgChartsConfiguration, useValue: { generateColors: false }},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true,
+    },
+    { provide: NgChartsConfiguration, useValue: { generateColors: false } },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
   ],
