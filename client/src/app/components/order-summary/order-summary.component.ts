@@ -41,6 +41,7 @@ export class OrderSummaryComponent {
         this.Cart = res;
         this.priceCalculator.calculateAllPrices(
           this.Cart,
+          //price
           95506,
           (totalPrice: Price) => {
             this.price = totalPrice;
