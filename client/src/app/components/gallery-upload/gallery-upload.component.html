@@ -1,10 +1,4 @@
-<h1>
-  Upload Photos
-  <img
-    class="header-icon"
-    src="../../../assets/Header icons/upload-image.png"
-  />
-</h1>
+<h1 class="header">Upload Photos</h1>
 
 <form
   *ngIf="pictureData.length"
@@ -59,6 +53,7 @@
 />
 <div class="gallery-controls" [ngClass]="{ bottom: previews.length }">
   <button
+    class="bottom-button"
     mat-fab
     color="primary"
     (click)="fileUpload.click()"

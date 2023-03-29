@@ -1,17 +1,14 @@
-.header{
+.header {
   text-align: center;
-  margin-top: 12vh;
-  margin-bottom: 8vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: 12vh 0;
+  color: var(--primary);
 }
-
-.header-icon {
-  width: 8%;
-  margin-left: 3%;
+.apply-button {
+  background-color: var(--primary);
 }
-
+.apply-text {
+  color: #ffffff;
+}
 .gallery-cards-container {
   width: 100%;
   display: flex;

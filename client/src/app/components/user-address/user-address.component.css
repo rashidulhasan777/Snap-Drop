@@ -1,15 +1,7 @@
-h1 {
+.header {
   text-align: center;
-  margin-top: 12vh;
-  margin-bottom: 8vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.header-icon {
-  width: 8%;
-  margin-left: 3%;
+  margin: 12vh 0;
+  color: var(--primary);
 }
 
 .user-info-form {
@@ -19,16 +11,12 @@ h1 {
   align-items: center;
 }
 
+/* doesn't work for height */
 .user-profile-form {
   margin-top: 5%;
   padding-top: 5%;
-}
-
-.prefix {
-  padding-left: 33%;
-}
-.num {
-  padding-left: 5%;
+  height: 20vh;
+  overflow-y: auto;
 }
 
 .button-container {
@@ -97,28 +85,41 @@ h1 {
   font-weight: bold;
 }
 
-.delivery-info-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  margin-bottom: 8vh;
-  overflow-y: auto;
+/* ----Animation-SVG------ */
+
+.left-svg {
+  width: 100px;
+  transform: translate(0px, 0px);
+  animation: rotation 32s infinite linear;
 }
 
-.delivery-info-form div mat-form-field {
-  width: 100%;
+.right-svg {
+  width: 70px;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  overflow: hidden;
+  animation: rotation 25s infinite linear;
+}
+.small-svg {
+  width: 40px;
+  bottom: 5px;
+  animation: rotation 25s infinite linear;
+}
+.big-svg {
+  right: 5px;
+  bottom: 90px;
+  width: 110px;
+  animation: rotation 25s infinite linear;
 }
 
-.delivery-info-form div {
-  padding: 0 5%;
-  width: 100%;
-}
-
-.address-title {
-  text-align: center;
-  margin-top: 8%;
-  margin-bottom: 5%;
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+  0% {
+  }
 }
