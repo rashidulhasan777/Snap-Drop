@@ -9,7 +9,7 @@
       <div class="detailsContainer">
         <div class="detailsText">
           <p>Passport Images</p>
-          <p>Price</p>
+          <p><span>Price: </span> {{passportOrders.length*15}} Taka</p>
         </div>
         <button
           (click)="deletePassportOrder()"
@@ -30,7 +30,7 @@
       <div class="detailsContainer">
         <div class="detailsText">
           <p>Gallery Images</p> 
-          <p>Price</p>
+          <p><span>Price: </span> {{galleryOrders.length*15}} Taka</p>
         </div>
         <button
           (click)="deleteGalleryOrder()"

@@ -8,6 +8,7 @@ import { CartService } from 'src/app/services/cart/cart.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
 })
+
 export class CartComponent {
   passportOrders: ImageInterface[] = [];
   galleryOrders: ImageInterface[] = [];
@@ -15,6 +16,7 @@ export class CartComponent {
 
   ngOnInit() {
     this.cartService.getCart().subscribe((res) => {
+      console.log(res);
       if (!res) return;
       this.passportOrders = res.passportPictures || [];
       this.galleryOrders = res.galleryPictures || [];
