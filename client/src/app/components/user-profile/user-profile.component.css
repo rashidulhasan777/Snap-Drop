@@ -22,6 +22,8 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 5%;
+  padding-top: 5%;
 }
 
 .user-profile-form div mat-form-field {
@@ -32,16 +34,22 @@ h1 {
   width: 90%;
 }
 
-.delivery-info-form {
-  margin-top: 5%;
-  padding-top: 5%;
+.prefix {
+  padding-left: 33%;
+}
+.num {
+  padding-left: 5%;
 }
 
-.button-container {
+.submit-btn-container {
   margin-top: 5%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.submit-btn {
+  min-width: 100%;
 }
 
 .logout-btn-container {
@@ -52,7 +60,7 @@ h1 {
 }
 
 .logout-btn {
-  width: 100%;
+  min-width: 100%;
 }
 
 .actionButtons {

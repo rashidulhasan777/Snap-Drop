@@ -75,10 +75,10 @@
         </mat-form-field>
       </div>
       <div>
-        <mat-form-field class="phone" appearance="outline">
+        <mat-form-field class="phone" appearance="outline" floatLabel="always">
           <mat-label>Phone</mat-label>
-          <span matPrefix>+880</span>
-          <input matInput formControlName="contact_number" />
+          <span class="prefix" matPrefix>+880&nbsp;</span>
+          <input class="num" matInput formControlName="contact_number" />
           <mat-error
             *ngIf="contact_number?.errors?.['pattern'] || contact_number?.errors?.['minlength'] || contact_number?.errors?.['maxlength']"
             >Invalid Phone Number</mat-error
@@ -184,6 +184,7 @@
           <mat-form-field class="address" appearance="outline">
             <mat-label>Address</mat-label>
             <input matInput formControlName="address" />
+            <mat-hint>*Address should be at least 10 character</mat-hint>
 
             <mat-error *ngIf="address?.errors?.['required']"
               >Address is required</mat-error
@@ -193,7 +194,6 @@
               long</mat-error
             >
           </mat-form-field>
-          <p>*Address should be at least 10 character</p>
         </div>
       </div>
       <div class="button-container">
