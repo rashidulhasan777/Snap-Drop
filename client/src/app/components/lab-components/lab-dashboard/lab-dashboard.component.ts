@@ -5,7 +5,7 @@ import {
   ViewChild,
   Inject,
 } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 // import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
@@ -13,6 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
 // import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from './../../../interfaces/order.interface';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-lab-dashboard',
@@ -31,9 +32,12 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
   opened: boolean = true;
   displayedColumns: string[] = [
     'order_id',
+    'createDate',
+    'dispatchDate',
     'orderStatus',
     'gallery',
     'passport',
+    'button',
   ];
   dataSource: MatTableDataSource<Order> = new MatTableDataSource(this.orders);
 
@@ -47,8 +51,18 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
       .getOrdersbyLabId()
       .subscribe((response) => {
         // console.log(response[0].labId);
-        this.orders = response;
+        this.orders = response.map((el) => {
+          const created = moment(el.createdAt).format('MMM DD');
+          const updated = moment(el.updatedAt).format('MMM DD');
+          // console.log(created);
+          el['createdAt'] = created;
+          el['updatedAt'] = updated;
+          console.log(el);
+          return el;
+        });
         this.dataSource = new MatTableDataSource(this.orders);
+        this.paginator.length = this.orders.length;
+        this.dataSource.paginator = this.paginator;
 
         const arr = [0, 0, 0, 0, 0, 0, 0];
         const arr2 = [0, 0, 0, 0, 0, 0, 0];
@@ -144,5 +158,9 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
 
   getPhotosByType(type: string) {
     console.log(this.orders);
+  }
+
+  handlePageEvent(e: PageEvent) {
+    this.dataSource.paginator = this.paginator;
   }
 }

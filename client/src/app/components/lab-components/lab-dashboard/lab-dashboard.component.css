@@ -174,7 +174,9 @@ app-pie-chart {
 }
 
 .charts {
-  width: 40vw;
+  width: 50vw;
+  height: 87vh;
+  overflow-y: auto;
 }
 
 .table-container {
@@ -186,12 +188,17 @@ app-pie-chart {
 }
 
 .pie-container {
+  margin-top: 5%;
   display: flex;
   align-items: center;
 }
 
 .filter-input {
   width: 100%;
+}
+
+.table-filter-inp {
+  border: 1px solid lightgray;
 }
 
 /* .mdc-data-table__cell, .mdc-data-table__header-cell {

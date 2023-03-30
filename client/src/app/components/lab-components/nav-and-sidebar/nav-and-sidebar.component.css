@@ -6,3 +6,9 @@
 .topNav {
   height: 64px;
 }
+
+.labDeets {
+  border-left: 2px solid white;
+  padding-left: 5%;
+  margin-left: 5%;
+}

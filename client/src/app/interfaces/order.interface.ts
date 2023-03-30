@@ -16,6 +16,6 @@ export interface Order {
   galleryPictures?: ImageInterface[];
   totalPrice: Price;
   paid?: boolean;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
 }

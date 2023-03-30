@@ -18,6 +18,7 @@ import { DialogApprovalComponent } from '../dialog-approval/dialog-approval.comp
 
 import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from './../../../interfaces/order.interface';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-archive',
@@ -28,7 +29,9 @@ export class ArchiveComponent implements AfterViewInit, OnInit {
   orders: Order[] = [];
   opened: boolean = true;
   displayedColumns: string[] = [
-    'labId',
+    'orderId',
+    'createDate',
+    'dispatchDate',
     'orderStatus',
     'instruction',
     'button',
@@ -45,7 +48,15 @@ export class ArchiveComponent implements AfterViewInit, OnInit {
       .getOrdersbyStatus('readyToDeliver')
       .subscribe((response) => {
         console.log(response);
-        this.orders = response;
+        this.orders = response.map((el) => {
+          const created = moment(el.createdAt).format('MMM DD');
+          const updated = moment(el.updatedAt).format('MMM DD');
+          // console.log(created);
+          el['createdAt'] = created;
+          el['updatedAt'] = updated;
+          console.log(el);
+          return el;
+        });
         this.dataSource = new MatTableDataSource(this.orders);
       });
   }

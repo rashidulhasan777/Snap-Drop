@@ -101,6 +101,18 @@ export class OrderService {
     );
   }
 
+  getLabName(labId: number): Observable<{ labName: string }>{
+    return this.http.post<{ labName: string }>(
+      baseBackendURL + '/getLabName',
+      { labId },
+      {
+        headers: {
+          Authorization: `Bearer ${this.jwtToken}`,
+        },
+      }
+    );
+  }
+
   private get jwtToken() {
     return localStorage.getItem('userAccessToken');
   }

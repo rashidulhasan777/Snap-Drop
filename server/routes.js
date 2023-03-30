@@ -141,4 +141,6 @@ router.post(
 
 router.post('/sendMessage', sendMessageController);
 
+router.post('/getLabName', labController.getLabName);
+
 module.exports = router;
