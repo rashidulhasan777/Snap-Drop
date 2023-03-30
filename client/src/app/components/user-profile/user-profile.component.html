@@ -1,7 +1,7 @@
 <div class="whole-body">
   <div *ngIf="User" class="user-info-form">
     <h1 class="greeting">
-      Hello, <span class="name"> {{ User.name }} </span>
+      Hello, <span class="name"> {{ User && firstName }} </span>
       <img class="header-icon" src="../../../assets/icons/wave.png" />
     </h1>
     <form
@@ -9,7 +9,7 @@
       (submit)="handleSubmit()"
       class="user-profile-form"
     >
-      <h2>Edit Your Profile</h2>
+      <h2 class="editH2">Edit Your Profile</h2>
       <div>
         <mat-form-field class="name-field" appearance="outline">
           <mat-label>Name</mat-label>

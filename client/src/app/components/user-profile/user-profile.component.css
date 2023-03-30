@@ -6,9 +6,13 @@
 }
 
 h1 {
+  color: var(--text);
   text-align: center;
   margin-top: 12vh;
   animation: entry 1500ms ease-in-out 200ms 1 forwards;
+}
+.editH2{
+  color: var(--text);
 }
 
 @keyframes entry {
@@ -22,7 +26,7 @@ h1 {
 
 .name {
   margin-left: 2%;
-  color: #673ab7;
+  color: var(--accent);
 }
 
 .header-icon {
@@ -66,7 +70,8 @@ h1 {
 }
 
 .submit-btn-container ::ng-deep .submit-btn{
-  background-color: var(--primary);
+  border-radius: var(--border-radius);
+  background-color: var(--accent);
 }
 
 .logout-btn-container {

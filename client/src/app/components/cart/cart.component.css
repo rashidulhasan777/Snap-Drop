@@ -96,8 +96,10 @@
 }
 
 .actionButtons {
+  position: absolute;
   gap: 2vh;
-  bottom: 0%;
+  bottom: 0;
+  right: 0;
   margin-bottom: 10vh;
   padding: 10px 0px;
   padding-right: 5vw;

@@ -6,6 +6,7 @@
 }
 
 h1 {
+  color: var(--text);
   text-align: center;
   margin-top: 10vh;
   margin-bottom: 8vh;
@@ -34,14 +35,17 @@ h1 {
   width: 45vw;
 }
 .passportImage {
+  border-radius: 5px;
   max-width: 45vw;
 }
 
 .imageCard {
+  border-radius: var(--border-radius);
   /* border: 1px solid black; */
   position: relative;
 }
 .photosContainer {
+  border-radius: var(--border-radius);
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -67,5 +71,5 @@ h1 {
 }
 
 .bottom ::ng-deep .bottom-button{
-  background-color: var(--primary);
+  background-color: var(--accent);
 }
