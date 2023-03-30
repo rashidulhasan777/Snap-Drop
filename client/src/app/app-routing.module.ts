@@ -28,6 +28,7 @@ import { TakePictureComponent } from './components/take-picture/take-picture.com
 import { AddMorePassportPhotoComponent } from './components/add-more-passport-photo/add-more-passport-photo.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { LabDashboardComponent } from './components/lab-components/lab-dashboard/lab-dashboard.component';
+import { SplashscreenComponent } from './components/splashscreen/splashscreen.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -130,6 +131,11 @@ const routes: Routes = [
     component: UserProfileComponent,
     canActivate: [AuthGuardGuard, RoleguardUserGuard],
   },
+  {
+    path: 'splashScreen',
+    component: SplashscreenComponent,
+  },
+
   { path: '', pathMatch: 'full', redirectTo: 'login' },
 ];
 
