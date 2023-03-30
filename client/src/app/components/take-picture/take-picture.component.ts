@@ -69,6 +69,7 @@ export class TakePictureComponent {
           image: this.videoElem.nativeElement,
         });
       },
+      facingMode: 'user',
       width: 10000,
       height: 10000,
     });
@@ -96,6 +97,12 @@ export class TakePictureComponent {
       // console.log(results.image);
       // console.log('x', results.detections[0].boundingBox.xCenter * 430);
       // console.log('y', results.detections[0].boundingBox.yCenter * 245);
+      if (Math.abs(eyeangle) > 25) {
+        this.instructionMsg = "Please don't tilt your head";
+        return;
+      } else {
+        this.instructionMsg = '';
+      }
       this.canvasCtx.clearRect(
         0,
         0,
@@ -117,6 +124,12 @@ export class TakePictureComponent {
         this.canvasCtx.restore();
         await this.camera.stop();
         this.cameraOpen = false;
+        this.canvasCtx.clearRect(
+          0,
+          0,
+          this.canvasElem.nativeElement.width,
+          this.canvasElem.nativeElement.height
+        );
         return;
       }
       this.canvasCtx.save();
@@ -145,6 +158,7 @@ export class TakePictureComponent {
   }
 
   async retakePhoto() {
+    this.canvasCtx?.restore();
     await this.camera.start();
     this.cameraOpen = true;
   }
