@@ -25,7 +25,7 @@ export class TakePictureComponent {
   canvasCtx!: CanvasRenderingContext2D | null;
   cameraOpen = true;
 
-  flipped = true;
+  flipped = false;
 
   dataUrl = '';
   errorMsg = '';
@@ -36,6 +36,13 @@ export class TakePictureComponent {
   firstTime = true;
   instructionMsg = '';
   currentImage: any;
+  tiltCount = 0;
+  countdownStart = 0;
+
+  valid = false;
+  autoCapture = true;
+
+  hasMultipleCamera = false;
 
   constructor(
     private idbService: IdbServiceService,
@@ -43,7 +50,16 @@ export class TakePictureComponent {
     private renderer: Renderer2
   ) {}
 
-  async ngOnInit() {}
+  async ngOnInit() {
+    if ('mediaDevices' in navigator) {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      let total = 0;
+      devices.forEach((el) => {
+        if (el.kind === 'videoinput') total++;
+      });
+      if (total) this.hasMultipleCamera = true;
+    }
+  }
 
   async ngAfterViewInit() {
     setTimeout(() => (this.delayed = !this.delayed), 800);
@@ -58,7 +74,7 @@ export class TakePictureComponent {
     this._faceDetector.setOptions({
       selfieMode: true,
       model: 'short',
-      minDetectionConfidence: 0.7,
+      minDetectionConfidence: 0.8,
     });
     this._faceDetector.onResults((results: FaceDetector.Results) => {
       this.onResult(results);
@@ -76,19 +92,24 @@ export class TakePictureComponent {
     await this.camera.start();
   }
   async onResult(results: FaceDetector.Results) {
+    if (this.firstTime) {
+      this.firstTime = false;
+      this.canvasElem.nativeElement.width = results.image.width;
+      this.canvasElem.nativeElement.height = results.image.height;
+    }
     if (results.detections.length < 1) {
-      if (this.firstTime) {
-        this.firstTime = false;
-        this.canvasElem.nativeElement.width = results.image.width;
-        this.canvasElem.nativeElement.height = results.image.height;
-      }
       this.instructionMsg = 'Please make sure you are on frame';
+      this.countdownStart = 0;
+      this.valid = false;
       return;
     }
     if (results.detections.length > 1) {
       this.instructionMsg = 'Please make sure only one person is visible';
+      this.countdownStart = 0;
+      this.valid = false;
       return;
     }
+    this.instructionMsg = '';
     if (this.canvasCtx) {
       const eye1 = results.detections[0].landmarks[0];
       const eye2 = results.detections[0].landmarks[1];
@@ -97,25 +118,49 @@ export class TakePictureComponent {
       // console.log(results.image);
       // console.log('x', results.detections[0].boundingBox.xCenter * 430);
       // console.log('y', results.detections[0].boundingBox.yCenter * 245);
-      if (Math.abs(eyeangle) > 25) {
-        this.instructionMsg = "Please don't tilt your head";
-        return;
+      const { xCenter, yCenter, height, width } =
+        results.detections[0].boundingBox;
+      if (
+        xCenter - width / 2 > 0.367 &&
+        xCenter + width / 2 < 0.61 &&
+        yCenter + height / 2 < 0.64 &&
+        yCenter - height / 2 > 0.11
+      ) {
+        if (Math.abs(eyeangle) > 24) {
+          if (this.tiltCount < 30) {
+            this.tiltCount++;
+            return;
+          }
+          this.countdownStart = 0;
+          this.valid = false;
+          this.instructionMsg = "Please don't tilt your head too much";
+          return;
+        } else {
+          this.tiltCount = 0;
+          this.instructionMsg = '';
+        }
+        this.valid = true;
+        if (this.autoCapture) {
+          this.instructionMsg =
+            'Please stay still and look at the camera and we will take the picture for you.';
+          if (!this.countdownStart) this.countdownStart = Date.now();
+          if (this.countdownStart + 3000 < Date.now()) {
+            this.capture();
+            this.countdownStart = 0;
+          }
+        }
       } else {
-        this.instructionMsg = '';
+        this.countdownStart = 0;
+        this.valid = false;
       }
-      this.canvasCtx.clearRect(
-        0,
-        0,
-        this.canvasElem.nativeElement.width,
-        this.canvasElem.nativeElement.height
-      );
+      this.clearCanvas();
       if (this.takePicture) {
         this.takePicture = false;
         this.canvasCtx.save();
-        this.canvasCtx.scale(-1, 1);
+        this.canvasCtx.scale(this.flipped ? -1 : 1, 1);
         this.canvasCtx.drawImage(
           results.image,
-          this.canvasElem.nativeElement.width * -1,
+          this.flipped ? this.canvasElem.nativeElement.width * -1 : 0,
           0,
           this.canvasElem.nativeElement.width,
           this.canvasElem.nativeElement.height
@@ -124,12 +169,7 @@ export class TakePictureComponent {
         this.canvasCtx.restore();
         await this.camera.stop();
         this.cameraOpen = false;
-        this.canvasCtx.clearRect(
-          0,
-          0,
-          this.canvasElem.nativeElement.width,
-          this.canvasElem.nativeElement.height
-        );
+        this.clearCanvas();
         return;
       }
       this.canvasCtx.save();
@@ -145,7 +185,7 @@ export class TakePictureComponent {
     }
   }
 
-  saveImage() {
+  savePhoto() {
     const link = this.renderer.createElement('a');
     link.setAttribute('href', this.dataUrl);
     link.setAttribute('download', `Image.jpg`);
@@ -168,7 +208,7 @@ export class TakePictureComponent {
         photoSize: 'passport',
         orgFilename: `passport.jpg`,
         imageURL: this.dataUrl,
-        copies: 1,
+        copies: 4,
         approved: false,
         typeOfImage: 'passport',
       };
@@ -179,6 +219,32 @@ export class TakePictureComponent {
         console.log(err);
       }
     }
+  }
+
+  clearCanvas() {
+    if (this.canvasCtx) {
+      this.canvasCtx.clearRect(
+        0,
+        0,
+        this.canvasElem.nativeElement.width,
+        this.canvasElem.nativeElement.height
+      );
+    }
+  }
+  switchCamera() {
+    this.camera.stop();
+    this.camera = new Camera_Utils.Camera(this.videoElem.nativeElement, {
+      onFrame: async () => {
+        await this._faceDetector.send({
+          image: this.videoElem.nativeElement,
+        });
+      },
+      facingMode: 'environment',
+      width: 10000,
+      height: 10000,
+    });
+    this.firstTime = true;
+    this.camera.start();
   }
 
   ngOnDestroy() {
