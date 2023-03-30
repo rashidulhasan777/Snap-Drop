@@ -1,8 +1,18 @@
 .header {
   text-align: center;
-  margin: 8vh 0;
+  margin-top: 10vh;
+  margin-bottom: 8vh;
   color: var(--primary)
 }
+
+.whole-body{
+  /* border: red solid 1px; */
+  height: var(--body-height);
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
 .apply-button{
   height: 5vh;
   background-color: var(--primary);
@@ -11,8 +21,10 @@
   color: #ffffff;
 }
 .gallery-cards-container {
-  width: 100%;
+  /* border: red solid 2px; */
+  width: 97vw;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -26,6 +38,12 @@
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+
+app-gallery-card {
+  max-width: 100%;
+  display: flex;
   justify-content: center;
 }
 
@@ -44,8 +62,9 @@
   /* margin-left: 1.3vw; */
   display: flex;
   flex-direction: column;
-  /* justify-content: center;
-  align-items: center; */
+  justify-content: center;
+  /* justify-content: center; */
+  align-items: center;
   /* align-items: center; */
 }
 
@@ -67,7 +86,9 @@
   display: flex;
   gap: 1rem;
   align-items: center;
+  margin-bottom: 2.5vh;
   width: 97vw;
+  height: 10vh;
   /* width: clamp(400px, 100vw, 800px); */
 }
 

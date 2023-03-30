@@ -15,7 +15,8 @@ label {
 }
 h1 {
   text-align: center;
-  margin: 8vh 0;
+  margin-top: 10vh;
+  margin-bottom: 8vh;
   display: flex;
   align-items: center;
   justify-content: center;

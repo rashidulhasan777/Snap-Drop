@@ -6,7 +6,8 @@
 }
 .header {
   color: var(--primary);
-  margin: 8vh 0;
+  margin-bottom: 8vh;
+  margin-top: 10vh;
   text-align: center;
 }
 .upcoming-card-container {
