@@ -12,3 +12,8 @@
   padding-left: 5%;
   margin-left: 5%;
 }
+
+:host ::ng-deep .mdc-list-item__content {
+  display: flex;
+  align-items: center;
+}

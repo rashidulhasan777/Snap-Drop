@@ -52,10 +52,24 @@
         </ng-container>
 
         <!-- Fruit Column -->
-        <ng-container matColumnDef="button">
+        <ng-container matColumnDef="paid">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Paid</th>
           <td mat-cell *matCellDef="let row">
             {{ row.totalPrice.total }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="button">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+          <td mat-cell *matCellDef="let row">
+            <button
+              mat-raised-button
+              *ngIf="row.orderStatus === 'readyToDeliver'"
+              color="primary"
+              (click)="handOver(row._id)"
+            >
+              Handed Over
+            </button>
           </td>
         </ng-container>
 

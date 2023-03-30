@@ -57,7 +57,7 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
           // console.log(created);
           el['createdAt'] = created;
           el['updatedAt'] = updated;
-          console.log(el);
+          // console.log(el);
           return el;
         });
         this.dataSource = new MatTableDataSource(this.orders);
