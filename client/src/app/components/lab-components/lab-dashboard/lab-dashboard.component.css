@@ -193,3 +193,21 @@ app-pie-chart {
 .filter-input {
   width: 100%;
 }
+
+/* .mdc-data-table__cell, .mdc-data-table__header-cell {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+mat-header-cell {
+  display: flex;
+  justify-content: flex-end;
+} */
+
+/*  {
+  text-align: center !important;
+}
+
+.mat-sort-header-container {
+  justify-content: center !important;
+} */

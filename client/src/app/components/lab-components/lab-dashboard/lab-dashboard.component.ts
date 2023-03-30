@@ -6,7 +6,7 @@ import {
   Inject,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 // import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 // import { BaseChartDirective } from 'ng2-charts';
@@ -30,10 +30,10 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
   orders: Order[] = [];
   opened: boolean = true;
   displayedColumns: string[] = [
-    'labId',
+    'order_id',
     'orderStatus',
-    'instruction',
-    'button',
+    'gallery',
+    'passport',
   ];
   dataSource: MatTableDataSource<Order> = new MatTableDataSource(this.orders);
 
@@ -46,7 +46,7 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
     const orders = this.orderService
       .getOrdersbyLabId()
       .subscribe((response) => {
-        console.log(response[0].labId);
+        // console.log(response[0].labId);
         this.orders = response;
         this.dataSource = new MatTableDataSource(this.orders);
 
@@ -91,8 +91,6 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
         this.monthlyOrdersData = [...monthArr].reverse();
         this.monthlyDeliveredData = [...monthArr2].reverse();
       });
-      
-    
   }
 
   ngAfterViewInit() {
@@ -107,6 +105,41 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  sortData(sort: Sort) {
+    const data = this.orders.slice();
+    if (!sort.active || sort.direction === '') {
+      this.orders = data;
+      return;
+    }
+    this.orders = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'order_id':
+          return this.compare(a.order_id, b.order_id, isAsc);
+        case 'orderStatus':
+          return this.compare(a.orderStatus!, b.orderStatus!, isAsc);
+        case 'gallery':
+          return this.compare(
+            a.galleryPictures!.length,
+            b.galleryPictures!.length,
+            isAsc
+          );
+        case 'passport':
+          return this.compare(
+            a.passportPictures!.length,
+            b.passportPictures!.length,
+            isAsc
+          );
+        default:
+          return 0;
+      }
+    });
+    this.dataSource = new MatTableDataSource(this.orders);
+  }
+  compare(a: number | string, b: number | string, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
   getPhotosByType(type: string) {
