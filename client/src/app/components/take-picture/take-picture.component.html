@@ -1,23 +1,13 @@
 <div class="whole-body">
-  <h1>
-    Take Your Photo
-    <!-- <img
-      class="header-icon"
-      src="../../../assets/Header icons/photo-camera.png"
-    /> -->
-  </h1>
+  <h1>Take Your Photo</h1>
   <div #container [ngClass]="{ hide: !cameraOpen }" class="webcamContainer">
-    <webcam
-      class="camera"
-      [width]="windowWidth"
-      (initError)="handleInitError($event)"
-      [trigger]="getTrigger()"
-      [captureImageData]="true"
-      [allowCameraSwitch]="true"
-      [videoOptions]="cameraConfig"
-      (imageCapture)="saveImage($event)"
-      [imageQuality]="1"
-    ></webcam>
+    <video #webcamFeed autoplay muted class="videoElement"></video>
+    <canvas
+      #canvasImage
+      width="1280px"
+      height="720px"
+      class="canvasElement"
+    ></canvas>
     <svg
       *ngIf="delayed"
       version="1.2"
@@ -50,7 +40,7 @@
     </svg>
   </div>
   <div *ngIf="errorMsg" class="errorMsg">{{ errorMsg }}</div>
-  <img *ngIf="!cameraOpen && !errorMsg" [src]="dataUrl" class="capturedImage" />
+  <img [ngClass]="{ hide: cameraOpen }" [src]="dataUrl" class="capturedImage" />
   <div *ngIf="delayed" class="captureButton">
     <button
       *ngIf="cameraOpen; else retakeOrProceed"
@@ -73,5 +63,4 @@
       </button>
     </ng-template>
   </div>
-  
 </div>

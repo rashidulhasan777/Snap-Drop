@@ -119,18 +119,31 @@ export class OrderSummaryComponent {
       // console.log(passportValues, galleryValuees);
       console.log(this.passportPictures);
       console.log(this.galleryPictures);
-      zippedPassport.subscribe((res) => {
+
+      const initialZip = this.passportPictures.length
+        ? zippedPassport
+        : zippedGallery;
+      const initialArr = this.passportPictures.length
+        ? this.passportPictures
+        : this.galleryPictures;
+
+      initialZip.subscribe((res) => {
         res.forEach((el: any, idx: number) => {
-          this.passportPictures[idx].imageURL = el.secure_url;
+          initialArr[idx].imageURL = el.secure_url;
         });
         console.log(this.passportPictures);
-        zippedGallery.subscribe((res) => {
-          res.forEach((el: any, idx: number) => {
-            this.galleryPictures[idx].imageURL = el.secure_url;
+
+        if (initialZip === zippedPassport) {
+          zippedGallery.subscribe((res) => {
+            res.forEach((el: any, idx: number) => {
+              this.galleryPictures[idx].imageURL = el.secure_url;
+            });
+            console.log(this.galleryPictures);
+            this.createOrder();
           });
-          console.log(this.galleryPictures);
+        } else {
           this.createOrder();
-        });
+        }
       });
     } catch (err) {
       console.log(err);

@@ -1,9 +1,16 @@
-import { Component, HostListener } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  ViewChild,
+  Renderer2,
+} from '@angular/core';
 import { Router } from '@angular/router';
-import { WebcamImage, WebcamInitError } from 'ngx-webcam';
-import { Subject } from 'rxjs';
 import { ImageInterface } from 'src/app/interfaces/image.interface';
 import { IdbServiceService } from 'src/app/services/idbService/idb-service.service';
+import * as FaceDetector from '@mediapipe/face_detection';
+import * as Camera_Utils from '@mediapipe/camera_utils';
+import * as Drawing_Utils from '@mediapipe/drawing_utils';
 
 @Component({
   selector: 'app-take-picture',
@@ -11,73 +18,117 @@ import { IdbServiceService } from 'src/app/services/idbService/idb-service.servi
   styleUrls: ['./take-picture.component.css'],
 })
 export class TakePictureComponent {
+  @ViewChild('webcamFeed')
+  videoElem!: ElementRef<HTMLVideoElement>;
+  @ViewChild('canvasImage')
+  canvasElem!: ElementRef<HTMLCanvasElement>;
+  canvasCtx!: CanvasRenderingContext2D | null;
   cameraOpen = true;
-  windowWidth: number = 0;
-  Image: WebcamImage | null = null;
-  trigger: Subject<void> = new Subject<void>();
+
   dataUrl = '';
   errorMsg = '';
   delayed = false;
+  _faceDetector!: FaceDetector.FaceDetection;
+  camera!: Camera_Utils.Camera;
+  takePicture = false;
 
-  cameraConfig: MediaTrackConstraints = {
-    facingMode: 'user',
-    width: { ideal: 10000 },
-    height: { ideal: 10000 },
-  };
+  constructor(
+    private idbService: IdbServiceService,
+    private router: Router,
+    private renderer: Renderer2
+  ) {}
 
-  image: any[] = [];
-  constructor(private idbService: IdbServiceService, private router: Router) {}
+  async ngOnInit() {}
 
-  ngOnInit() {
-    this.windowWidth = window.innerWidth;
+  async ngAfterViewInit() {
     setTimeout(() => (this.delayed = !this.delayed), 800);
-  }
+    if (this.canvasElem.nativeElement.getContext('2d'))
+      this.canvasCtx = this.canvasElem.nativeElement.getContext('2d');
+    this._faceDetector = new FaceDetector.FaceDetection({
+      locateFile: (file) => {
+        return `https://cdn.jsdelivr.net/npm/@mediapipe/face_detection@0.4/${file}`;
+      },
+    });
 
+    this._faceDetector.setOptions({
+      selfieMode: true,
+      model: 'short',
+      minDetectionConfidence: 0.7,
+    });
+    this._faceDetector.onResults((results: FaceDetector.Results) => {
+      this.onResult(results);
+    });
+    this.camera = new Camera_Utils.Camera(this.videoElem.nativeElement, {
+      onFrame: async () => {
+        await this._faceDetector.send({
+          image: this.videoElem.nativeElement,
+        });
+      },
+      width: 10000,
+      height: 10000,
+    });
+    await this.camera.start();
+  }
+  onResult(results: FaceDetector.Results) {
+    if (this.canvasCtx) {
+      // console.log(results.image);
+      // console.log('x', results.detections[0].boundingBox.xCenter * 430);
+      // console.log('y', results.detections[0].boundingBox.yCenter * 245);
+      this.canvasCtx.clearRect(
+        0,
+        0,
+        this.canvasElem.nativeElement.width,
+        this.canvasElem.nativeElement.height
+      );
+      if (this.takePicture) {
+        this.canvasCtx.save();
+        this.canvasCtx.drawImage(
+          results.image,
+          0,
+          0,
+          this.canvasElem.nativeElement.width,
+          this.canvasElem.nativeElement.height
+        );
+      }
+      this.canvasCtx.save();
+
+      if (results.detections.length > 0) {
+        Drawing_Utils.drawRectangle(
+          this.canvasCtx,
+          results.detections[0].boundingBox,
+          { color: 'blue', lineWidth: 4, fillColor: '#00000000' }
+        );
+      }
+      this.canvasCtx.restore();
+    }
+  }
   @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
-    this.windowWidth = window.innerWidth;
+  saveImage(dataUrl: string) {
+    const link = this.renderer.createElement('a');
+    link.setAttribute('href', dataUrl);
+    link.setAttribute('download', `myface.jpg`);
+    link.click();
+    link.remove();
   }
 
-  saveImage(webcamImage: WebcamImage) {
-    this.Image = webcamImage;
-    this.dataUrl = this.Image.imageAsDataUrl;
+  async capture() {
+    // this.dataUrl = this.canvasElem.nativeElement.toDataURL('image/jpg');
     // const link = this.renderer.createElement('a');
-    // link.setAttribute('href', this.Image.imageAsDataUrl);
+    // link.setAttribute('href', this.dataUrl);
     // link.setAttribute('download', `myface.jpg`);
     // link.click();
     // link.remove();
-    this.cameraOpen = false;
-
-    // const buff = Buffer.from(this.Image.imageAsBase64, 'base64');
   }
 
-  capture() {
-    this.trigger.next();
-  }
-
-  getTrigger() {
-    return this.trigger.asObservable();
-  }
-  handleInitError(error: WebcamInitError): void {
-    if (
-      error.mediaStreamError &&
-      error.mediaStreamError.name === 'NotAllowedError'
-    ) {
-      console.warn('Camera access was not allowed by user!');
-      this.cameraOpen = false;
-      this.errorMsg = `You have denied camera access. We need camera access to take your picture.
-      Please re-allow camera permission and refresh the page to take the picture.`;
-    }
-  }
   retakePhoto() {
     this.cameraOpen = true;
   }
   async addToPassportPhotos() {
-    if (this.Image) {
+    if (this.dataUrl) {
       const image: ImageInterface = {
         photoSize: 'passport',
         orgFilename: `passport.jpg`,
-        imageURL: this.Image.imageAsDataUrl,
+        imageURL: this.dataUrl,
         copies: 1,
         approved: false,
         typeOfImage: 'passport',
@@ -89,5 +140,11 @@ export class TakePictureComponent {
         console.log(err);
       }
     }
+  }
+
+  ngOnDestroy() {
+    (this.videoElem.nativeElement.srcObject as MediaStream)
+      .getVideoTracks()[0]
+      .stop();
   }
 }
