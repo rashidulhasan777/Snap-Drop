@@ -5,6 +5,7 @@
   flex-direction: column;
   /* overflow: hidden; */
 }
+
 .heading {
   color: var(--text);
   margin-top: 10vh;

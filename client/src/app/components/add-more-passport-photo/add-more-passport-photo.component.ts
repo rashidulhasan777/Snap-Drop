@@ -28,7 +28,7 @@ export class AddMorePassportPhotoComponent implements OnInit {
   anotherOne: Observable<string[]> = of([]);
   countryAndCopiesInfo = this.fb.group({
     country: ['', [Validators.required], [this.choseWithinOptions()]],
-    copies: [1, [Validators.required, Validators.min(1)]],
+    copies: [4, [Validators.required, Validators.min(1)]],
   });
   constructor(
     private fb: FormBuilder,
