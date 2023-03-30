@@ -191,6 +191,7 @@ app-pie-chart {
   margin-top: 5%;
   display: flex;
   align-items: center;
+  gap: 5%;
 }
 
 .filter-input {
@@ -218,4 +219,3 @@ mat-header-cell {
 .mat-sort-header-container {
   justify-content: center !important;
 } */
-

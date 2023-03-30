@@ -16,7 +16,7 @@ export class NavAndSidebarComponent {
   labName: string | undefined;
 
   // for shadowing selected panels
-  
+  activatedRoute: string = 'lab-dashboard';
 
   constructor(
     private authService: AuthenticationService,

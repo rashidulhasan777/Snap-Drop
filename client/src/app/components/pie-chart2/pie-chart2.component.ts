@@ -66,7 +66,7 @@ export class PieChart2Component {
     event: ChartEvent;
     active: {}[];
   }): void {
-    console.log(event, active);
+    // console.log(event, active);
   }
 
   addSlice(): void {
