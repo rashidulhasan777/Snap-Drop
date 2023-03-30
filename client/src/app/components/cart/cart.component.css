@@ -3,7 +3,7 @@
   height: var(--body-height);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .heading {
   color: var(--primary);
@@ -90,15 +90,17 @@
 }
 
 .actionButtons {
+  gap: 2vh;
+  bottom: 0%;
   margin-bottom: 10vh;
-  position: fixed;
+  padding: 10px 0px;
+  padding-right: 5vw;
   display: flex;
   flex-direction: column;
   align-items: end;
-  gap: 1rem;
-  width: 100%;
-  padding: 10px;
-  bottom: 2%;
+  justify-content: space-around;
+  /* position: fixed; */
+  /* width: 100%; */
 }
 
 .actionButtons ::ng-deep .buttonSize {

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="1080" height="2340" preserveAspectRatio="none" viewBox="0 0 1080 2340">
+  <defs>
+    <filter id="blur-effect" x="-10" y="-10" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="10" />
+    </filter>
+    <clipPath id="SvgjsClipPath1855">
+      <rect width="1080" height="2340" x="0" y="0"></rect>
+    </clipPath>
+  </defs>
+  <g clip-path="url(&quot;#SvgjsClipPath1855&quot;)" fill="none" filter="url(#blur-effect)">
+    <rect width="1080" height="2340" x="0" y="0" fill="rgba(244, 244, 255, 1)"></rect>
+    <circle r="76.49" cx="491.96" cy="917.81" fill="rgba(217, 216, 251, 1)"></circle>
+    <circle r="59.785" cx="9.67" cy="24.11" fill="rgba(199, 200, 255, 1)"></circle>
+    <circle r="86.895" cx="439.3" cy="2014.65" fill="rgba(217, 216, 251, 1)"></circle>
+    <circle r="61.545" cx="98.86" cy="1138.58" fill="rgba(196, 197, 237, 1)"></circle>
+    <circle r="75.885" cx="508.5" cy="298.11" fill="rgba(239, 229, 249, 1)"></circle>
+    <circle r="52.965" cx="1040.07" cy="1799.17" fill="rgba(219, 205, 255, 1)"></circle>
+    <circle r="42.655" cx="73.73" cy="728.53" fill="rgba(239, 229, 249, 1)"></circle>
+    <circle r="73.155" cx="344.36" cy="1404.78" fill="rgba(199, 200, 255, 1)"></circle>
+    <circle r="105.485" cx="234.11" cy="2160.47" fill="rgba(199, 200, 255, 1)"></circle>
+    <circle r="66.85" cx="487.61" cy="83.3" fill="rgba(199, 200, 255, 1)"></circle>
+    <circle r="73.26" cx="337.69" cy="262.39" fill="rgba(199, 200, 255, 1)"></circle>
+  </g>
+</svg>

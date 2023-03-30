@@ -40,6 +40,7 @@
   color: var(--primary);
   font-size: 1.25rem;
 }
+
 .statusOrder{
   color: var(--primary);
   font-weight: bold;
@@ -108,8 +109,9 @@
     transform: translate3d(0px, 0, 0);
   }
 }
+
 .color-name {
-  color: #673ab7;
+  color: #fac36b;
 }
 .upcoming-card {
   position: relative;

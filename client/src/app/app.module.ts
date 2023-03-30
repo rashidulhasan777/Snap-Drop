@@ -56,6 +56,7 @@ import { AddMorePassportPhotoComponent } from './components/add-more-passport-ph
 import { WarningDialogueComponent } from './components/warning-dialogue/warning-dialogue.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { LoadingInterceptor } from './interceptors/loading/loading.interceptor';
+import { BackgroundComponent } from './components/background/background.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import { LoadingInterceptor } from './interceptors/loading/loading.interceptor';
     ChartComponent,
     WarningDialogueComponent,
     SpinnerComponent,
+    BackgroundComponent,
   ],
   imports: [
     BrowserModule,
