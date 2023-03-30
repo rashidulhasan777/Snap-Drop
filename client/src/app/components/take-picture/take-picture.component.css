@@ -20,8 +20,6 @@ h1 {
 
 .capturedImage {
   max-width: 100%;
-  transform: scaleX(-1);
-  -webkit-transform: scaleX(-1);
 }
 
 .webcamContainer {

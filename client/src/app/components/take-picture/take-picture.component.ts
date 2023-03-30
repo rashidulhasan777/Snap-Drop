@@ -25,12 +25,17 @@ export class TakePictureComponent {
   canvasCtx!: CanvasRenderingContext2D | null;
   cameraOpen = true;
 
+  flipped = true;
+
   dataUrl = '';
   errorMsg = '';
   delayed = false;
   _faceDetector!: FaceDetector.FaceDetection;
   camera!: Camera_Utils.Camera;
   takePicture = false;
+  firstTime = true;
+  instructionMsg = '';
+  currentImage: any;
 
   constructor(
     private idbService: IdbServiceService,
@@ -69,8 +74,25 @@ export class TakePictureComponent {
     });
     await this.camera.start();
   }
-  onResult(results: FaceDetector.Results) {
+  async onResult(results: FaceDetector.Results) {
+    if (results.detections.length < 1) {
+      if (this.firstTime) {
+        this.firstTime = false;
+        this.canvasElem.nativeElement.width = results.image.width;
+        this.canvasElem.nativeElement.height = results.image.height;
+      }
+      this.instructionMsg = 'Please make sure you are on frame';
+      return;
+    }
+    if (results.detections.length > 1) {
+      this.instructionMsg = 'Please make sure only one person is visible';
+      return;
+    }
     if (this.canvasCtx) {
+      const eye1 = results.detections[0].landmarks[0];
+      const eye2 = results.detections[0].landmarks[1];
+      const eyeangle =
+        (Math.atan((eye1.y - eye2.y) / (eye1.x - eye2.x)) * 180) / Math.PI;
       // console.log(results.image);
       // console.log('x', results.detections[0].boundingBox.xCenter * 430);
       // console.log('y', results.detections[0].boundingBox.yCenter * 245);
@@ -81,14 +103,21 @@ export class TakePictureComponent {
         this.canvasElem.nativeElement.height
       );
       if (this.takePicture) {
+        this.takePicture = false;
         this.canvasCtx.save();
+        this.canvasCtx.scale(-1, 1);
         this.canvasCtx.drawImage(
           results.image,
-          0,
+          this.canvasElem.nativeElement.width * -1,
           0,
           this.canvasElem.nativeElement.width,
           this.canvasElem.nativeElement.height
         );
+        this.dataUrl = this.canvasElem.nativeElement.toDataURL('image/jpeg');
+        this.canvasCtx.restore();
+        await this.camera.stop();
+        this.cameraOpen = false;
+        return;
       }
       this.canvasCtx.save();
 
@@ -102,25 +131,21 @@ export class TakePictureComponent {
       this.canvasCtx.restore();
     }
   }
-  @HostListener('window:resize', ['$event'])
-  saveImage(dataUrl: string) {
+
+  saveImage() {
     const link = this.renderer.createElement('a');
-    link.setAttribute('href', dataUrl);
-    link.setAttribute('download', `myface.jpg`);
+    link.setAttribute('href', this.dataUrl);
+    link.setAttribute('download', `Image.jpg`);
     link.click();
     link.remove();
   }
 
   async capture() {
-    // this.dataUrl = this.canvasElem.nativeElement.toDataURL('image/jpg');
-    // const link = this.renderer.createElement('a');
-    // link.setAttribute('href', this.dataUrl);
-    // link.setAttribute('download', `myface.jpg`);
-    // link.click();
-    // link.remove();
+    this.takePicture = true;
   }
 
-  retakePhoto() {
+  async retakePhoto() {
+    await this.camera.start();
     this.cameraOpen = true;
   }
   async addToPassportPhotos() {
