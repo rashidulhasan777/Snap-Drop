@@ -16,10 +16,29 @@ export class ChartComponent implements OnInit {
   @Input() chartData2!: number[];
   @Input() maxBar!: number;
   orders: Order[] = [];
+  delayed?: any;
 
   constructor(private orderService: OrderService) {}
 
   public barChartOptions: ChartConfiguration['options'] = {
+    // animation: {
+    //   onComplete: () => {
+    //     this.delayed = true;
+    //   },
+    //   delay: (context) => {
+    //     // return 10000;
+    //   //   let delay = 0;
+    //   //   console.log(context)
+    //   //   if (
+    //   //     context.type === 'data' &&
+    //   //     context.mode === 'default' &&
+    //   //     !this.delayed
+    //   //   ) {
+    //   //     delay = context.dataIndex * 3000 + context.datasetIndex * 100;
+    //   //   }
+    //   //   return delay;
+    //   // },
+    // },
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
     scales: {
@@ -32,10 +51,18 @@ export class ChartComponent implements OnInit {
     plugins: {
       legend: {
         display: true,
+        position: 'bottom',
       },
       datalabels: {
         anchor: 'end',
         align: 'end',
+      },
+      title: {
+        display: true,
+        text: 'Orders received and delivered',
+        font: {
+          size: 20,
+        },
       },
     },
   };

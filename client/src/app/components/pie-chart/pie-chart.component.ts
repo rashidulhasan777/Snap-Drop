@@ -17,7 +17,14 @@ export class PieChartComponent {
     plugins: {
       legend: {
         display: true,
-        position: 'top',
+        position: 'bottom',
+      },
+      title: {
+        display: true,
+        text: 'Orders by photo type',
+        font: {
+          size: 20,
+        },
       },
       datalabels: {
         formatter: (value, ctx) => {
@@ -28,7 +35,7 @@ export class PieChartComponent {
       },
     },
   };
-  public pieChartData: ChartData<'pie', number[], string | string[]> = {
+  public pieChartData: ChartData<'doughnut', number[], string | string[]> = {
     labels: [['4R'], ['6R'], ['8R'], ['10R'], ['Passport']],
     datasets: [
       {
@@ -36,7 +43,7 @@ export class PieChartComponent {
       },
     ],
   };
-  public pieChartType: ChartType = 'pie';
+  public pieChartType: ChartType = 'doughnut';
   public pieChartPlugins = [DatalabelsPlugin];
 
   // events

@@ -32,10 +32,18 @@ export class LineChartComponent {
     plugins: {
       legend: {
         display: true,
+        position: 'bottom',
       },
       datalabels: {
         anchor: 'end',
         align: 'end',
+      },
+      title: {
+        display: true,
+        text: 'Monthly orders time series',
+        font: {
+          size: 20,
+        },
       },
     },
   };

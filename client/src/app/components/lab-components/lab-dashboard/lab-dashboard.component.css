@@ -166,7 +166,7 @@ app-line-chart {
 
 app-pie-chart {
   width: 50% !important;
-  padding: 5%;
+  padding: 0 5%;
 }
 
 .title-header {
@@ -179,4 +179,17 @@ app-pie-chart {
 
 .table-container {
   width: 60vw;
+}
+
+.KPI {
+  padding-left: 5%;
+}
+
+.pie-container {
+  display: flex;
+  align-items: center;
+}
+
+.filter-input {
+  width: 100%;
 }

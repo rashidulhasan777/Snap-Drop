@@ -46,7 +46,7 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
     const orders = this.orderService
       .getOrdersbyLabId()
       .subscribe((response) => {
-        console.log(response);
+        console.log(response[0].labId);
         this.orders = response;
         this.dataSource = new MatTableDataSource(this.orders);
 
@@ -91,6 +91,8 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
         this.monthlyOrdersData = [...monthArr].reverse();
         this.monthlyDeliveredData = [...monthArr2].reverse();
       });
+      
+    
   }
 
   ngAfterViewInit() {
@@ -105,5 +107,9 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  getPhotosByType(type: string) {
+    console.log(this.orders);
   }
 }

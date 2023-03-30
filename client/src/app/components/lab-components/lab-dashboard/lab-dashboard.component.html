@@ -2,13 +2,14 @@
   <!-- <h1 class="title-header">Welcome</h1> -->
   <div class="example-sidenav-content">
     <div class="charts">
+      <h1 class="KPI">Key Performance Indicators</h1>
       <app-chart
-          *ngIf="chartData.length"
-          [chartData]="chartData"
-          [chartData2]="sentForDelivery"
-          [maxBar]="maxBar"
-        ></app-chart>
-        <!-- <div class="stat-container">
+        *ngIf="chartData.length"
+        [chartData]="chartData"
+        [chartData2]="sentForDelivery"
+        [maxBar]="maxBar"
+      ></app-chart>
+      <!-- <div class="stat-container">
       <mat-card class="example-card example-background">
         <mat-card-header>
           <mat-icon>assessment</mat-icon>
@@ -24,7 +25,12 @@
         <h1 class="count">41</h1>
       </mat-card>
     </div> -->
-      <app-pie-chart class="pie-chart"></app-pie-chart>
+
+      <div class="pie-container">
+        <app-pie-chart class="pie-chart"></app-pie-chart>
+        <app-pie-chart class="pie-chart"></app-pie-chart>
+      </div>
+
       <app-line-chart
         *ngIf="monthlyOrdersData.length"
         [chartData]="monthlyOrdersData"
@@ -34,6 +40,15 @@
     <div class="table-container">
       <h1>Latest Orders</h1>
       <div class="mat-elevation-z8">
+        <mat-form-field class="filter-input" appearance="outline">
+          <mat-label>Filter</mat-label>
+          <input
+            matInput
+            (keyup)="applyFilter($event)"
+            placeholder="Enter search text"
+            #input
+          />
+        </mat-form-field>
         <table mat-table [dataSource]="dataSource" matSort>
           <!-- ID Column -->
           <ng-container matColumnDef="labId">

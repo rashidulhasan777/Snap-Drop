@@ -2,4 +2,9 @@ canvas {
   height: 90% !important;
   width: 90% !important;
   margin-left: 5%;
+  margin-bottom: 5%;
+  margin-top: 5%;
+  
+  padding: 2% 5%;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
