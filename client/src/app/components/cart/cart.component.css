@@ -3,6 +3,7 @@
   height: var(--body-height);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 .heading {
   color: var(--primary);
