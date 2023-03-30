@@ -30,6 +30,8 @@ processes = []
   PATHAO_CLIENT_PASSWORD="qoVQ871Mc"
   BASE_FRONTEND_URL = "https://snap-drop.vercel.app"
   BASE_BACKEND_URL = "https://snapdropbd.fly.dev"
+  STORE_ID = "flyaw641be11fa19cc"
+  STORE_PASSWORD = "flyaw641be11fa19cc@ssl"
   
   VAPID_PUBLIC_KEY ="BGWbwwGSeOp32TFIezGDGCejWllTBcMpn3ASg6wbBp9Uxx14GPdiA9YKoHyg2gGMrcKeAlRtAnpj15OJXZu2S6w"
   VAPID_PRIVATE_KEY = "ydjR-UjvsdeCX7_pN1F0D-aQ8Aocbek5kLY-qMd49Mc"
