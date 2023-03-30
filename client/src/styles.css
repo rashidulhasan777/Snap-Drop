@@ -1,8 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
-  --primary: #282C35;
+  --primary: #282c35;
+
+  /* --primary: #f5f2ff; */
+  /* --secondary: #f5f2ff; ddeep lavendar color*/
+  --secondary: #f9f7ff; /*light lavendar*/
+  --text: #311432;
   --body-height: 100dvh;
+  --accent: #673ab7;
+  --card-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+  --border-radius: 25px;
 }
 
 *,
@@ -11,6 +20,12 @@
   box-sizing: border-box;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 /* .background { background-image: url("./assets/Moon.svg"); background-size: cover; position: fixed; top: 0; left: 0; right: 0; bottom: 0; filter: blur(10px); z-index: -1; } */

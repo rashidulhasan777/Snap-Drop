@@ -1,4 +1,20 @@
-<button mat-icon-button [matMenuTriggerFor]="beforeMenu" class="menuButton">
+
+
+<div class="user-navbar">
+  
+  <button class="navbarIcons" mat-icon-button routerLink="/user_dashboard">
+    <img src="../../../assets/icons/custome-icon/home.svg" alt="">
+  </button>
+  <button class="navbarIcons bigIcon" mat-icon-button routerLink="/cart">
+    <img src="../../../assets/icons/custome-icon/cart.svg" alt="">
+  </button>
+  <button class="navbarIcons" mat-icon-button routerLink="/profile">
+    <img src="../../../assets/icons/custome-icon//menu.svg" alt="">
+  </button>
+</div>
+
+
+<!-- <button mat-icon-button [matMenuTriggerFor]="beforeMenu" class="menuButton">
   <mat-icon>menu</mat-icon>
 </button>
 <mat-menu #beforeMenu="matMenu" xPosition="before">
@@ -14,15 +30,15 @@
     <button mat-menu-item (click)="logout()">
       <mat-icon>logout</mat-icon><span>Logout</span>
     </button>
-    <!-- <button mat-menu-item routerLink="/login"><span>Login</span></button>
-    <button mat-menu-item routerLink="/register"><span>Sign Up</span></button> -->
+    <button mat-menu-item routerLink="/login"><span>Login</span></button>
+    <button mat-menu-item routerLink="/register"><span>Sign Up</span></button>
   </div>
-  <!-- <div> -->
+  <div> -->
     <!-- <button (click)="subscribe()" mat-menu-item>
       <span>Subscribe to Notification</span>
     </button>
     <button mat-menu-item (click)="logOutUser()">
       <mat-icon>logout</mat-icon><span>Logout</span>
     </button> -->
-  <!-- </div> -->
-</mat-menu>
+  <!-- </div>
+</mat-menu>  -->

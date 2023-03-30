@@ -14,7 +14,8 @@ import { Order } from 'src/app/interfaces/order.interface';
 })
 export class UserDashboardComponent {
   order?: Order;
-  User?: User;
+  User!: User;
+  firstName: string =''
   constructor(
     private orderService: OrderService,
     private userData: UserdataService,
@@ -25,6 +26,8 @@ export class UserDashboardComponent {
   ngOnInit() {
     this.userData.getUser().subscribe((res) => {
       this.User = res;
+      let fullname= this.User.name.split(" ");
+      this.firstName= fullname[0];
       if (this.User.newUser) this.openDialog();
     });
     this.orderService.getCustomerLatestOrder().subscribe((res) => {

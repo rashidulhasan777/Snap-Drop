@@ -1,11 +1,11 @@
-.whole-body{
+.whole-body {
   /* border: red solid 20px; */
   height: var(--body-height);
   display: flex;
   flex-direction: column;
 }
-.header{
-  color: var(--primary);
+.header {
+  color: var(--text);
   text-align: center;
   margin: 12vh 0;
   animation: entry 1500ms ease-in-out 200ms 1 forwards;
@@ -29,7 +29,7 @@
 
 .price {
   padding-left: 10px;
-  border-left: 1px solid black;
+  /* border-left: 1px solid black; */
 }
 
 .delivaryTitle {
@@ -66,7 +66,7 @@
 }
 
 .instructionField {
-  width: calc(100% - 20px);
+  width: 81vw;
 }
 
 .instructionWrapper {
@@ -76,15 +76,22 @@
   justify-content: center;
   width: 100%;
 }
-.pay-button-text{
+.pay-button-text {
+  font-size: large;
   color: #ffffff;
 }
+.payment {
+  margin-top: 2vh;
+  align-self: center;
+}
 
-.instructionWrapper ::ng-deep .pay-button {
-  background-color: var(--primary);
+.payment ::ng-deep .pay-button {
+  width: 90vw;
+  background-color: var(--accent);
+  border-radius: var(--border-radius);
 }
 .instructionWrapper ::ng-deep .instructionField {
-  border-radius: 25px;
+  border-radius: var(--border-radius);
 }
 
 /* --------------------Card Design-------------------- */
@@ -95,14 +102,23 @@
   padding-top: 0;
 }
 
+.bold {
+  color: var(--text);
+}
+
+.bold-price {
+  color: var(--accent);
+}
+
 .upcoming-card {
-  border: 1px solid rgb(224, 224, 224);
-  border-radius: 25px;
-  background-color: #ffffff;
+  border-radius: var(--border-radius);
+  background-color: var(--secondary);
+  box-shadow: var(--card-shadow);
   padding: 10px;
 }
 
 .upcoming-card-title {
+  color: var(--text);
   font-size: 1.5em;
   margin-bottom: 5%;
 }
@@ -114,4 +130,14 @@
 .upcoming-card-title {
   font-size: xx-large;
   font-weight: bold;
+}
+.price-card {
+  align-items: center;
+  background-color: var(--secondary);
+  border-radius: var(--border-radius);
+  border: 1px solid rgb(228, 228, 228);
+  padding: 10px 0;
+  width: 90vw;
+  align-self: center;
+  /* box-shadow: ; */
 }

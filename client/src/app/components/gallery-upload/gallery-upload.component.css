@@ -2,7 +2,7 @@
   text-align: center;
   margin-top: 10vh;
   margin-bottom: 8vh;
-  color: var(--primary)
+  color: var(--text)
 }
 
 .whole-body{
@@ -15,7 +15,7 @@
 
 .apply-button{
   height: 5vh;
-  background-color: var(--primary);
+  background-color: var(--accent);
 }
 .apply-text{
   color: #ffffff;
@@ -46,10 +46,12 @@ app-gallery-card {
   max-width: 100%;
   display: flex;
   justify-content: center;
+  margin: 7px;
+  background-color: var(--secondary);
 }
 
 .gallery-controls ::ng-deep .bottom-button {
-  background-color: var(--primary);
+  background-color: var(--accent);
 }
 
 .plus {

@@ -1,11 +1,14 @@
 .user-navbar {
   /* background; */
-  background-color: var(--primary);
+  background-color: white;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   /* height: 8vh; */
   width: 100vw;
+  border-top-right-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius);
+  box-shadow: rgba(130, 129, 129, 0.103) 0px 0px 0px 2px;
 }
 
 .navbarIcons {
@@ -15,7 +18,7 @@
 
 .buttonIcon {
   /* background-color: white; */
-  color: white;
+  color: var(--primary);
   width: 100%;
   height: 100%;
   font-size: 40px;

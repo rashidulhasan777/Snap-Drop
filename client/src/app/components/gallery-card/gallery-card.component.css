@@ -5,6 +5,12 @@
   /* margin: 10px; */
   position: relative;
   overflow-x: hidden;
+  border-radius: var(--border-radius);
+  background-color: var(--secondary);
+  box-shadow: var(--card-shadow);
+}
+.gallery-card ::ng-deep .crossButton{
+  color: var(--accent);
 }
 
 .gallery-image {
