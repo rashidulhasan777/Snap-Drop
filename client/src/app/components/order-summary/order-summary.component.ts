@@ -120,12 +120,8 @@ export class OrderSummaryComponent {
       console.log(this.passportPictures);
       console.log(this.galleryPictures);
 
-      const initialZip = this.passportPictures.length
-        ? zippedPassport
-        : zippedGallery;
-      const initialArr = this.passportPictures.length
-        ? this.passportPictures
-        : this.galleryPictures;
+      const initialZip = this.passportPictures.length ? zippedPassport : zippedGallery;
+      const initialArr = this.passportPictures.length ? this.passportPictures : this.galleryPictures;
 
       initialZip.subscribe((res) => {
         res.forEach((el: any, idx: number) => {
@@ -144,12 +140,12 @@ export class OrderSummaryComponent {
         } else {
           this.createOrder();
         }
+
       });
     } catch (err) {
       console.log(err);
     }
   }
-
   async initiatePayment() {
     this.orderService
       .generateOrderId(this.closestLab?.labId || 95506)
