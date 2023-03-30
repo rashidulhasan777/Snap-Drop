@@ -1,7 +1,7 @@
 app-user-navbar {
   position: fixed;
-  top: 4%;
-  right: 4%;
+  bottom: 0%;
+  /* border-top: 1px solid black; */
   z-index: 9999;
 }
 .paddingForScrolling {

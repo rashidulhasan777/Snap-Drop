@@ -55,6 +55,7 @@ import { WarningDialogueComponent } from './components/warning-dialogue/warning-
 import { baseBackendURL } from 'src/config';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { LoadingInterceptor } from './interceptors/loading/loading.interceptor';
+import { BackgroundComponent } from './components/background/background.component';
 
 const config: SocketIoConfig = { url: baseBackendURL, options: {} };
 export function playerFactory() {
@@ -100,6 +101,7 @@ export function playerFactory() {
     ChartComponent,
     WarningDialogueComponent,
     SpinnerComponent,
+    BackgroundComponent,
   ],
   imports: [
     BrowserModule,

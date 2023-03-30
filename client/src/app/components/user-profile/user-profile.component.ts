@@ -15,6 +15,7 @@ import { UserdataService } from 'src/app/services/userdata/userdata.service';
 })
 export class UserProfileComponent {
   User?: User;
+  firstName: string =''
   isZoneDisabled: boolean = true;
   isAreaDisabled: boolean = true;
   cityPrev: { city_id: number; city_name: string } | string = '';
@@ -62,6 +63,8 @@ export class UserProfileComponent {
     this.disableZone(true);
     this.userDataService.getUser().subscribe((res) => {
       this.User = res;
+      let fullname= this.User.name.split(" ");
+      this.firstName= fullname[0];
       if (this.User.details) {
         this.User.details.contact_number =
           this.User.details?.contact_number.slice(4);

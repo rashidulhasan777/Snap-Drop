@@ -1,7 +1,9 @@
 .onboarding-container {
+  border-radius: var(--border-radius);
   min-width: 80%;
   min-height: 80%;
 }
+
 
 ::ng-deep .mat-horizontal-stepper-header-container {
   display: none !important;
@@ -37,7 +39,7 @@ form {
 }
 
 .init-btn-container-bottom ::ng-deep .first-next{
-  background-color: var(--primary);
+  background-color: var(--accent);
 }
 
 .btn-container-bottom {
@@ -48,5 +50,5 @@ form {
 }
 
 .btn-container-bottom ::ng-deep .first-next{
-  background-color: var(--primary);
+  background-color: var(--accent);
 }

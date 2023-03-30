@@ -8,6 +8,7 @@ import { CartService } from 'src/app/services/cart/cart.service';
   styleUrls: ['./user-navbar.component.css'],
 })
 export class UserNavbarComponent {
+  selectedButton: string="button1";
   cartItemsLen?: number;
 
   constructor(

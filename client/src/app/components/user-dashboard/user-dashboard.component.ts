@@ -15,7 +15,8 @@ import { Order } from 'src/app/interfaces/order.interface';
 })
 export class UserDashboardComponent {
   order?: Order;
-  User?: User;
+  User!: User;
+  firstName: string =''
   constructor(
     private orderService: OrderService,
     private userData: UserdataService,
@@ -48,6 +49,8 @@ export class UserDashboardComponent {
       this.User = res;
       this.socket.emit('gimmeNotification', { userId: res._id });
       this.socket.on;
+      let fullname= this.User.name.split(" ");
+      this.firstName= fullname[0];
       if (this.User.newUser) this.openDialog();
     });
     this.orderService.getCustomerLatestOrder().subscribe((res) => {

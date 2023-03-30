@@ -1,3 +1,6 @@
+.instructions{
+  height: 100vh;
+}
 .instructions-submit-container {
   display: flex;
   align-items: center;
@@ -15,7 +18,9 @@ mat-stepper {
   align-items: center;
   position: relative;
 }
-
+.header{
+  color: var(--text);
+}
 .init-btn-container-bottom {
   justify-self: flex-end;
   display: flex;
@@ -24,7 +29,7 @@ mat-stepper {
 }
 
 .init-btn-container-bottom ::ng-deep .btn-primary{
-  background-color: var(--primary);
+  background-color: var(--accent);
 }
 
 .btn-container-bottom {
@@ -35,7 +40,7 @@ mat-stepper {
   width: 100%;
 }
 .btn-container-bottom ::ng-deep .btn-primary{
-  background-color: var(--primary);
+  background-color: var(--accent);
 }
 
 h1 {

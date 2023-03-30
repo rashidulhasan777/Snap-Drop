@@ -1,14 +1,14 @@
-.whole-body{
+.whole-body {
   /* border: red solid 1px; */
   height: var(--body-height);
   display: flex;
   flex-direction: column;
 }
-.header{
+.header {
   text-align: center;
   margin-top: 10vh;
   margin-bottom: 8vh;
-  color: var(--primary)
+  color: var(--text);
 }
 
 .user-info-form {
@@ -34,21 +34,20 @@
 }
 
 .actionButtons {
+  position: absolute;
   gap: 2vh;
-  padding-bottom: 8vh;
-  bottom: 2%;
-  padding-right: 20px;
-  width: 100%;
-  gap: 20px;
-  justify-content: space-between;
-  margin: 50px;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 10vh;
+  padding: 10px 0;
+  padding-right: 5vw;
   display: flex;
   flex-direction: column;
   align-items: end;
-  position: fixed;
+  justify-content: space-around;
 }
 .actionButtons ::ng-deep .bottom-button {
-  background-color: var(--primary);
+  background-color: var(--accent);
 }
 
 /* .userName {
@@ -71,14 +70,19 @@
   padding-top: 0;
 }
 
+.bold {
+  color: var(--text);
+}
+
 .upcoming-card {
-  border: 1px solid rgb(224, 224, 224);
-  border-radius: 25px;
-  background-color: #ffffff;
+  border-radius: var(--border-radius);
+  background-color: var(--secondary);
+  box-shadow: var(--card-shadow);
   padding: 10px;
 }
 
 .upcoming-card-title {
+  color: var(--text);
   font-size: 1.5em;
   margin-bottom: 5%;
 }
@@ -158,6 +162,8 @@
   margin-bottom: 5%;
 }
 
-.button-container ::ng-deep .submit-address{
-  background-color: var(--primary);
+.button-container ::ng-deep .submit-address {
+  width: 90vw;
+  border-radius: var(--border-radius);
+  background-color: var(--accent);
 }
