@@ -101,7 +101,7 @@ export class OrderService {
     );
   }
 
-  getLabName(labId: number): Observable<{ labName: string }>{
+  getLabName(labId: number): Observable<{ labName: string }> {
     return this.http.post<{ labName: string }>(
       baseBackendURL + '/getLabName',
       { labId },
@@ -111,6 +111,14 @@ export class OrderService {
         },
       }
     );
+  }
+
+  getOrderCountByProductCategory(): Observable<any> {
+    return this.http.get<any>(baseBackendURL + '/orderCountByProductCategory', {
+      headers: {
+        Authorization: `Bearer ${this.jwtToken}`,
+      },
+    });
   }
 
   private get jwtToken() {

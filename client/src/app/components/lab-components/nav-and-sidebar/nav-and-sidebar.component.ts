@@ -14,6 +14,10 @@ export class NavAndSidebarComponent {
   isShowing = false;
   labId: number | undefined;
   labName: string | undefined;
+
+  // for shadowing selected panels
+  
+
   constructor(
     private authService: AuthenticationService,
     private orderService: OrderService

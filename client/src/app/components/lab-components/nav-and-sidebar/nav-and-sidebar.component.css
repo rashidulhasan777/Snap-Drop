@@ -13,7 +13,14 @@
   margin-left: 5%;
 }
 
-:host ::ng-deep .mdc-list-item__content {
+:host ::ng-deep .mat-mdc-list-item-unscoped-content {
   display: flex;
   align-items: center;
+}
+:host ::ng-deep .full-width {
+  padding-top: 5px;
+}
+
+mat-icon {
+  margin-right: 10px;
 }

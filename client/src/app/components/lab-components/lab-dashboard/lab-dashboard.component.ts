@@ -27,6 +27,11 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
 
   monthlyOrdersData: number[] = [];
   monthlyDeliveredData: number[] = [];
+
+  orderCountByProductCategory: number[] = [];
+  productCategories: string[][] = [];
+  chartTitle: string = 'Orders by photo type';
+
   // ---------------------------------------
   orders: Order[] = [];
   opened: boolean = true;
@@ -79,7 +84,10 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
             new Date(this.orders[i].createdAt || '').getDate();
           if (gap < 6) {
             arr[gap]++;
-            if (this.orders[i].orderStatus === 'readyToDeliver') {
+            if (
+              this.orders[i].orderStatus === 'readyToDeliver' ||
+              this.orders[i].orderStatus === 'handedOver'
+            ) {
               arr2[gap]++;
             }
           }
@@ -89,7 +97,10 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
             new Date(this.orders[i].updatedAt || '').getDate();
           if (monthGap < 31) {
             monthArr[monthGap]++;
-            if (this.orders[i].orderStatus === 'readyToDeliver') {
+            if (
+              this.orders[i].orderStatus === 'readyToDeliver' ||
+              this.orders[i].orderStatus === 'handedOver'
+            ) {
               monthArr2[monthGap]++;
             }
           }

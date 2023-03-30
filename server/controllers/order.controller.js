@@ -193,6 +193,30 @@ const generateOrderId = async (req, res) => {
   }
 };
 
+const getOrderCountByProductCategory = async (req, res) => {
+  try {
+    // const orders = await Order.find({ labId: req.currentUser.labId });
+    const orders = await Order.find({ labId: req.currentUser.labId });
+    const stat = {
+      '4R': 0,
+      '6R': 0,
+      '8R': 0,
+      '10R': 0,
+      passport: 0,
+    };
+    orders.forEach((order) => {
+      stat['passport'] += order.passportPictures.length;
+      order.galleryPictures.forEach((galleryPicture) => {
+        stat[galleryPicture.photoSize]++;
+      });
+    });
+    res.status(200).send({ stat });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ errorMessage: 'Cannot fetch stats' });
+  }
+};
+
 module.exports = {
   getAllOrders,
   createOrder,
@@ -207,4 +231,5 @@ module.exports = {
   getUserLastOrder,
   getOneWeekData,
   generateOrderId,
+  getOrderCountByProductCategory,
 };

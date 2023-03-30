@@ -5,11 +5,11 @@ import { BaseChartDirective } from 'ng2-charts';
 import { OrderService } from 'src/app/services/orders/order.service';
 
 @Component({
-  selector: 'app-pie-chart',
-  templateUrl: './pie-chart.component.html',
-  styleUrls: ['./pie-chart.component.css'],
+  selector: 'app-pie-chart2',
+  templateUrl: './pie-chart2.component.html',
+  styleUrls: ['./pie-chart2.component.css'],
 })
-export class PieChartComponent {
+export class PieChart2Component {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   // @Input() chartData!: number[];
   // @Input() chartLabels!: string[][];
@@ -18,6 +18,7 @@ export class PieChartComponent {
   orderCountByProductCategory: number[] = [];
   productCategories: string[][] = [];
   chartTitle: string = 'Orders by photo type';
+  chartData: number[] = [0, 0, 0, 0, 0];
 
   // Pie
   public pieChartOptions: ChartConfiguration['options'] = {
@@ -34,13 +35,13 @@ export class PieChartComponent {
           size: 20,
         },
       },
-      datalabels: {
-        formatter: (value, ctx) => {
-          if (ctx.chart.data.labels) {
-            return ctx.chart.data.labels[ctx.dataIndex];
-          }
-        },
-      },
+      // datalabels: {
+      //   formatter: (value, ctx) => {
+      //     if (ctx.chart.data.labels) {
+      //       return ctx.chart.data.labels[ctx.dataIndex];
+      //     }
+      //   },
+      // },
     },
   };
   public pieChartData!: ChartData<'doughnut', number[], string | string[]>;
@@ -111,17 +112,28 @@ export class PieChartComponent {
   constructor(private orderService: OrderService) {}
 
   ngOnInit() {
-    this.orderService.getOrderCountByProductCategory().subscribe((res) => {
-      this.orderCountByProductCategory = Object.values(res.stat);
-      const categories = Object.keys(res.stat);
-      this.productCategories = categories.map((el) => [el]);
+    this.orderService.getOrdersbyLabId().subscribe((res) => {
+      // console.log(res);
+      for (let el of res) {
+        if (el.orderStatus === 'pending') this.chartData[0]++;
+        else if (el.orderStatus === 'approved') this.chartData[1]++;
+        else if (el.orderStatus === 'printing') this.chartData[2]++;
+        else if (el.orderStatus === 'retake_needed') this.chartData[3]++;
+        else if (el.orderStatus === 'readyToDeliver') this.chartData[4]++;
+      }
       // console.log(this.orderCountByProductCategory);
       this.pieChartData = {
         // labels: this.chartLabels,
-        labels: [['4R'], ['6R'], ['8R'], ['10R'], ['Passport']],
+        labels: [
+          ['pending'],
+          ['approved'],
+          ['printing'],
+          ['retake_needed'],
+          ['readyToDeliver'],
+        ],
         datasets: [
           {
-            data: this.orderCountByProductCategory,
+            data: this.chartData,
           },
         ],
       };

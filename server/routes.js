@@ -143,4 +143,10 @@ router.post('/sendMessage', sendMessageController);
 
 router.post('/getLabName', labController.getLabName);
 
+router.get(
+  '/orderCountByProductCategory',
+  authMiddleware.lab,
+  orderController.getOrderCountByProductCategory
+);
+
 module.exports = router;
