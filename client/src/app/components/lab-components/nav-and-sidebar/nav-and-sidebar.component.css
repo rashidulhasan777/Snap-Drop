@@ -3,6 +3,24 @@
   display: flex;
   justify-content: flex-end;
 }
-.topNav{
+.topNav {
   height: 64px;
+}
+
+.labDeets {
+  border-left: 2px solid white;
+  padding-left: 5%;
+  margin-left: 5%;
+}
+
+:host ::ng-deep .mat-mdc-list-item-unscoped-content {
+  display: flex;
+  align-items: center;
+}
+:host ::ng-deep .full-width {
+  padding-top: 5px;
+}
+
+mat-icon {
+  margin-right: 10px;
 }

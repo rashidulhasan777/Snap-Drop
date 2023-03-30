@@ -3,49 +3,30 @@ import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { OrderService } from 'src/app/services/orders/order.service';
-import { Order } from './../../../interfaces/order.interface';
+import { Order } from './../../interfaces/order.interface';
+
+// import { default as Annotation } from 'chartjs-plugin-annotation';
 
 @Component({
-  selector: 'app-chart',
-  templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.css'],
+  selector: 'app-line-chart',
+  templateUrl: './line-chart.component.html',
+  styleUrls: ['./line-chart.component.css'],
 })
-export class ChartComponent implements OnInit {
+export class LineChartComponent {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   @Input() chartData!: number[];
   @Input() chartData2!: number[];
-  @Input() maxBar!: number;
   orders: Order[] = [];
-  delayed?: any;
 
   constructor(private orderService: OrderService) {}
 
   public barChartOptions: ChartConfiguration['options'] = {
-    // animation: {
-    //   onComplete: () => {
-    //     this.delayed = true;
-    //   },
-    //   delay: (context) => {
-    //     // return 10000;
-    //   //   let delay = 0;
-    //   //   console.log(context)
-    //   //   if (
-    //   //     context.type === 'data' &&
-    //   //     context.mode === 'default' &&
-    //   //     !this.delayed
-    //   //   ) {
-    //   //     delay = context.dataIndex * 3000 + context.datasetIndex * 100;
-    //   //   }
-    //   //   return delay;
-    //   // },
-    // },
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
     scales: {
       x: {},
       y: {
         min: 0,
-        max: 9,
       },
     },
     plugins: {
@@ -59,26 +40,50 @@ export class ChartComponent implements OnInit {
       },
       title: {
         display: true,
-        text: 'Orders received and delivered',
+        text: 'Monthly orders time series',
         font: {
           size: 20,
         },
       },
     },
   };
-  public barChartType: ChartType = 'bar';
+  public barChartType: ChartType = 'line';
   public barChartPlugins = [DataLabelsPlugin];
 
-  public barChartData: ChartData<'bar'> = {
+  public barChartData: ChartData<'line'> = {
     labels: [
-      'Today',
-      'Yesterday',
-      '3 days ago',
-      '4 days ago',
-      '5 days ago',
-      '6 days ago',
-      '7 days ago',
-    ],
+      '0',
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      '9',
+      '10',
+      '11',
+      '12',
+      '13',
+      '14',
+      '15',
+      '16',
+      '17',
+      '18',
+      '19',
+      '20',
+      '21',
+      '22',
+      '23',
+      '24',
+      '25',
+      '26',
+      '27',
+      '28',
+      '29',
+      '30',
+    ].reverse(),
     datasets: [
       { data: this.chartData, label: 'Daily Incoming Orders' },
       { data: this.chartData2, label: 'Sent out for delievery' },
@@ -93,7 +98,7 @@ export class ChartComponent implements OnInit {
     event?: ChartEvent;
     active?: {}[];
   }): void {
-    console.log(event, active);
+    // console.log(event, active);
   }
 
   public chartHovered({

@@ -1,6 +1,13 @@
-.chart{
-    padding-top: 5vh;
-    padding-left: 2vw;
-    width: 45vw;
-    /* height: 30vh; */
-  }
+.chart {
+  /* padding-top: 5vh; */
+  padding-left: 2vw;
+  width: 38vw;
+  /* height: 30vh; */
+}
+
+canvas {
+  width: 97.5% !important;
+  height: 97.5% !important;
+  padding: 2% 5%;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}

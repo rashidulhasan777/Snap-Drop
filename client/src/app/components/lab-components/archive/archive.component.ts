@@ -18,6 +18,7 @@ import { DialogApprovalComponent } from '../dialog-approval/dialog-approval.comp
 
 import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from './../../../interfaces/order.interface';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-archive',
@@ -26,11 +27,16 @@ import { Order } from './../../../interfaces/order.interface';
 })
 export class ArchiveComponent implements AfterViewInit, OnInit {
   orders: Order[] = [];
+  readyOrders: Order[] = [];
+  handedOrders: Order[] = [];
   opened: boolean = true;
   displayedColumns: string[] = [
-    'labId',
+    'orderId',
+    'createDate',
+    'dispatchDate',
     'orderStatus',
     'instruction',
+    'paid',
     'button',
   ];
   dataSource: MatTableDataSource<Order> = new MatTableDataSource(this.orders);
@@ -44,9 +50,34 @@ export class ArchiveComponent implements AfterViewInit, OnInit {
     const orders = this.orderService
       .getOrdersbyStatus('readyToDeliver')
       .subscribe((response) => {
-        console.log(response);
-        this.orders = response;
-        this.dataSource = new MatTableDataSource(this.orders);
+        // console.log(response);
+        this.readyOrders = response.map((el) => {
+          const created = moment(el.createdAt).format('MMM DD');
+          const updated = moment(el.updatedAt).format('MMM DD');
+          // console.log(created);
+          el['createdAt'] = created;
+          el['updatedAt'] = updated;
+          // console.log(el);
+          return el;
+        });
+
+        this.orderService
+          .getOrdersbyStatus('handedOver')
+          .subscribe((response) => {
+            // console.log(response);
+            this.handedOrders = response.map((el2) => {
+              const created = moment(el2.createdAt).format('MMM DD');
+              const updated = moment(el2.updatedAt).format('MMM DD');
+              // console.log(created);
+              el2['createdAt'] = created;
+              el2['updatedAt'] = updated;
+              // console.log(el);
+              return el2;
+            });
+            this.orders = [...this.readyOrders, ...this.handedOrders];
+            console.log(this.orders);
+            this.dataSource = new MatTableDataSource(this.orders);
+          });
       });
   }
 
@@ -62,5 +93,15 @@ export class ArchiveComponent implements AfterViewInit, OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  handOver(order_id: string) {
+    console.log(order_id);
+    this.orderService
+      .changeOrderStatus(order_id, { orderStatus: 'handedOver' })
+      .subscribe((res) => {
+        // console.log(res);
+        this.ngOnInit();
+      });
   }
 }

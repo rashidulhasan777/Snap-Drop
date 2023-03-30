@@ -2,7 +2,9 @@
   <button mat-icon-button (click)="isExpanded = !isExpanded">
     <mat-icon>menu</mat-icon>
   </button>
-  <h1 class="example-app-name">Lab Dashboard</h1>
+  <h1 class="example-app-name">
+    Lab Dashboard <span class="labDeets">{{ labName }} (ID# {{ labId }})</span>
+  </h1>
   <div class="topbarContainer">
     <button (click)="logout()" mat-raised-button>
       <mat-icon>logout</mat-icon>
@@ -10,7 +12,7 @@
     </button>
   </div>
 </mat-toolbar>
-<mat-sidenav-container class="example-container" >
+<mat-sidenav-container class="example-container">
   <mat-sidenav
     #sidenav
     class="example-sidenav"
@@ -59,6 +61,5 @@
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
-  <ng-content>
-  </ng-content>
+  <ng-content> </ng-content>
 </mat-sidenav-container>
