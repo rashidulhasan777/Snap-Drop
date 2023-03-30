@@ -1,13 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="1080" height="2340" preserveAspectRatio="none" viewBox="0 0 1080 2340">
   <defs>
-    <filter id="blur-effect" x="-10" y="-10" width="120%" height="120%">
-      <feGaussianBlur stdDeviation="10" />
+    <filter id="blurFilter">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="12" />
     </filter>
-    <clipPath id="SvgjsClipPath1855">
-      <rect width="1080" height="2340" x="0" y="0"></rect>
-    </clipPath>
   </defs>
-  <g clip-path="url(&quot;#SvgjsClipPath1855&quot;)" fill="none" filter="url(#blur-effect)">
+  <g clip-path="url(&quot;#SvgjsClipPath1855&quot;)" filter="url(#blurFilter)" fill="none">
     <rect width="1080" height="2340" x="0" y="0" fill="rgba(244, 244, 255, 1)"></rect>
     <circle r="76.49" cx="491.96" cy="917.81" fill="rgba(217, 216, 251, 1)"></circle>
     <circle r="59.785" cx="9.67" cy="24.11" fill="rgba(199, 200, 255, 1)"></circle>
@@ -22,3 +19,9 @@
     <circle r="73.26" cx="337.69" cy="262.39" fill="rgba(199, 200, 255, 1)"></circle>
   </g>
 </svg>
+
+
+
+
+
+
