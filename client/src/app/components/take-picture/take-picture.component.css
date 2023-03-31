@@ -93,6 +93,10 @@ h1 {
 }
 
 .captureButton {
+  position:absolute;
+  bottom: 0;
+  margin-bottom: 10vh;
+  padding: 10px 0;
   width: 100vw;
   height: 100px;
   display: flex;
@@ -101,6 +105,13 @@ h1 {
 }
 .button {
   transform: scale(2);
+}
+
+.captureButton ::ng-deep .buttons-camera{
+  color: var(--accent)
+}
+.after-click ::ng-deep .buttons-camera{
+  color: var(--accent)
 }
 
 .hide {
