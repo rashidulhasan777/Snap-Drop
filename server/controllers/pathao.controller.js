@@ -123,7 +123,9 @@ const createOrder = async (req, res, next) => {
 
 const pathaoFindClosestStudio = async (req, res, next) => {
   try {
-    const area = req.currentUser.details.area.area_name;
+    const area = req.currentUser.details.area
+      ? req.currentUser.details.area.area_name
+      : '';
     const zone = req.currentUser.details.zone.zone_name;
     const city = req.currentUser.details.city.city_name;
     const country = 'Bangladesh';

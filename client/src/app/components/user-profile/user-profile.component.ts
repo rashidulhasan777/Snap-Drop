@@ -15,7 +15,7 @@ import { UserdataService } from 'src/app/services/userdata/userdata.service';
 })
 export class UserProfileComponent {
   User?: User;
-  firstName: string =''
+  firstName: string = '';
   isZoneDisabled: boolean = true;
   isAreaDisabled: boolean = true;
   cityPrev: { city_id: number; city_name: string } | string = '';
@@ -37,7 +37,7 @@ export class UserProfileComponent {
     // city: new FormControl<{ city_id: number; city_name: string } | string>(''),
     city: [this.cityPrev, [Validators.required]],
     zone: [this.zonePrev, [Validators.required]],
-    area: [this.areaPrev, [Validators.required]],
+    area: [this.areaPrev],
   });
 
   cities: { city_id: number; city_name: string }[] = [
@@ -63,8 +63,8 @@ export class UserProfileComponent {
     this.disableZone(true);
     this.userDataService.getUser().subscribe((res) => {
       this.User = res;
-      let fullname= this.User.name.split(" ");
-      this.firstName= fullname[0];
+      let fullname = this.User.name.split(' ');
+      this.firstName = fullname[0];
       if (this.User.details) {
         this.User.details.contact_number =
           this.User.details?.contact_number.slice(4);
@@ -138,6 +138,7 @@ export class UserProfileComponent {
     if (this.deliveryInfoForm.valid) {
       const details = JSON.parse(JSON.stringify(this.deliveryInfoForm.value));
       details.contact_number = '+880' + details.contact_number;
+      if (!details.area.area_name) delete details.area;
       this.userDataService.updateUserData(details).subscribe((res) => {
         this.router.navigate(['user_dashboard']);
       });

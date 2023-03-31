@@ -3,11 +3,12 @@ const { Client } = require('@googlemaps/google-maps-services-js');
 
 const client = new Client({});
 
-const userLocationFinder = async (area, zone, city, country) => {
+const userLocationFinder = async (country, city, zone, area = '') => {
+  console.log(`${area ? area + ',' : ''} ${zone}, ${city}, ${country}`);
   const args = {
     params: {
       key: process.env.MAPS_API_KEY,
-      address: `${area}, ${zone}, ${city}, ${country}`,
+      address: `${area ? area + ',' : ''} ${zone}, ${city}, ${country}`,
     },
   };
   try {
@@ -29,7 +30,7 @@ function findDistance(pointA, pointB) {
 async function findClosestStudio(area, zone, city, country) {
   try {
     const allLabs = await Lab.find({});
-    const coordinates = await userLocationFinder(area, zone, city, country);
+    const coordinates = await userLocationFinder(country, city, zone, area);
     const point = { coordinates };
     // console.log(point);
     const labsCoords = allLabs.map((studio) => {
