@@ -180,3 +180,22 @@ section {
   height: 100vh;
   scroll-snap-align: start;
 }
+
+.go-below-container {
+  position: absolute;
+  bottom: 12%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 95%;
+  margin: 0 1%;
+}
+
+.gb-txt {
+  margin-bottom: 0;
+}
+
+.gb {
+  font-size: 33px;
+}
