@@ -48,6 +48,7 @@
     </svg>
   </div>
   <div *ngIf="cameraOpen" class="errorMsg">{{ instructionMsg }}</div>
+  <div  class="errorMsg">{{ logMsg }}</div>
   <div *ngIf="errorMsg" class="errorMsg">{{ errorMsg }}</div>
   <img [ngClass]="{ hide: cameraOpen }" [src]="dataUrl" class="capturedImage" />
   <div *ngIf="delayed" class="captureButton">

@@ -38,7 +38,7 @@ export class TakePictureComponent {
   currentImage: any;
   tiltCount = 0;
   countdownStart = 0;
-
+  logMsg = '';
   valid = false;
   autoCapture = true;
 
@@ -120,6 +120,24 @@ export class TakePictureComponent {
       // console.log('y', results.detections[0].boundingBox.yCenter * 245);
       const { xCenter, yCenter, height, width } =
         results.detections[0].boundingBox;
+      this.logMsg =
+        'xCenter: ' +
+        xCenter +
+        ', yCenter: ' +
+        yCenter +
+        ', height: ' +
+        height +
+        ', width: ' +
+        width +
+        '\n' +
+        'Top percent: ' +
+        (yCenter - height / 2) +
+        ', Bottom percent: ' +
+        (yCenter + height / 2) +
+        ', Left percent: ' +
+        (xCenter - width / 2) +
+        ', Right Percent: ' +
+        (xCenter + width / 2);
       if (
         xCenter - width / 2 > 0.367 &&
         xCenter + width / 2 < 0.61 &&
