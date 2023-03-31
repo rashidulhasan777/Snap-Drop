@@ -4,6 +4,7 @@ import { ImageInterface } from 'src/app/interfaces/image.interface';
 import { Price } from 'src/app/interfaces/price.interface';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { IdbServiceService } from 'src/app/services/idbService/idb-service.service';
+import { PriceCalculationService } from 'src/app/services/price-calculation/price-calculation.service';
 
 @Component({
   selector: 'app-cart',
@@ -13,16 +14,24 @@ import { IdbServiceService } from 'src/app/services/idbService/idb-service.servi
 export class CartComponent {
   passportOrders: ImageInterface[] = [];
   galleryOrders: ImageInterface[] = [];
-  price?: Price;
+  price: Price | undefined;
 
-  constructor(private idbService: IdbServiceService, private router: Router) {}
+  constructor(
+    private idbService: IdbServiceService,
+    private router: Router,
+    private priceService: PriceCalculationService
+  ) {}
 
   async ngOnInit() {
     try {
       const all = await this.idbService.getAllForCart();
-      console.log(all);
       this.passportOrders = all.passportPictures || [];
       this.galleryOrders = all.galleryPictures || [];
+      this.price = await this.priceService.calculateAllPrices({
+        passportPictures: this.passportOrders,
+        galleryPictures: this.galleryOrders,
+      });
+      console.log(this.price);
       console.log(this.passportOrders);
     } catch (error) {
       console.log(error);

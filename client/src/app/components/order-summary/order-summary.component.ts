@@ -120,8 +120,13 @@ export class OrderSummaryComponent {
       console.log(this.passportPictures);
       console.log(this.galleryPictures);
 
-      const initialZip = this.passportPictures.length ? zippedPassport : zippedGallery;
-      const initialArr = this.passportPictures.length ? this.passportPictures : this.galleryPictures;
+      const initialZip = this.passportPictures.length
+        ? zippedPassport
+        : zippedGallery;
+      console.log(initialZip === zippedPassport);
+      const initialArr = this.passportPictures.length
+        ? this.passportPictures
+        : this.galleryPictures;
 
       initialZip.subscribe((res) => {
         res.forEach((el: any, idx: number) => {
@@ -137,10 +142,11 @@ export class OrderSummaryComponent {
             console.log(this.galleryPictures);
             this.createOrder();
           });
+          if (!this.galleryPictures.length) this.createOrder();
         } else {
+          console.log('here before create order');
           this.createOrder();
         }
-
       });
     } catch (err) {
       console.log(err);
@@ -166,6 +172,7 @@ export class OrderSummaryComponent {
   }
 
   createOrder() {
+    console.log('here at create order');
     let pending = false;
     if (this.passportPictures.length) pending = true;
     const order: Order = {

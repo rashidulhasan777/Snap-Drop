@@ -10,7 +10,7 @@ import { baseBackendURL } from 'src/config';
   providedIn: 'root',
 })
 export class PriceCalculationService {
-  baseUrl = baseBackendURL;
+  private baseUrl = baseBackendURL;
   private picturePrices = [
     {
       size: '4R',
@@ -42,20 +42,22 @@ export class PriceCalculationService {
 
   calculateAllPrices(
     cart: Cart,
-    store_id: number,
-    callback: (total: Price) => void
-  ): void {
+    store_id?: number,
+    callback?: (total: Price) => void
+  ): Price | undefined {
     const passport = this.calculatePrice(cart.passportPictures || []);
     const gallery = this.calculatePrice(cart.galleryPictures || []);
-    this.getDelivaryPrice(store_id).subscribe((res) => {
-      const total = passport + gallery + res.priceEstimateData.price;
-      callback({
-        passport,
-        gallery,
-        shipping: res.priceEstimateData.price,
-        total,
+    if (store_id && callback)
+      this.getDelivaryPrice(store_id).subscribe((res) => {
+        const total = passport + gallery + res.priceEstimateData.price;
+        callback({
+          passport,
+          gallery,
+          shipping: res.priceEstimateData.price,
+          total,
+        });
       });
-    });
+    return { passport, gallery, shipping: 0, total: passport + gallery };
     // const total = passport + gallery + shipping;
   }
 

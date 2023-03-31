@@ -85,6 +85,17 @@ export class IdbServiceService {
     return update('passportCopies', (val) => copies);
   }
 
+  async setPassportCopiesOnData() {
+    const copies = await this.getPassportCopies();
+    if (copies)
+      return update('passportPhotos', (val) => {
+        if (val) {
+          val.forEach((el: ImageInterface) => (el.copies = copies));
+          return val;
+        } else return [];
+      });
+  }
+
   getPassportCopies(): Promise<number | undefined> {
     return get('passportCopies');
   }

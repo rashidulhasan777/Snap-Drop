@@ -48,7 +48,7 @@ export class AddMorePassportPhotoComponent implements OnInit {
     try {
       this.passportPhotos = (await this.idbService.getPassportPhotos()) || [];
       prevValue.country = (await this.idbService.getCountry()) || '';
-      prevValue.copies = (await this.idbService.getPassportCopies()) || 1;
+      prevValue.copies = (await this.idbService.getPassportCopies()) || 4;
     } catch (err) {
       console.log(err);
     }
@@ -90,6 +90,7 @@ export class AddMorePassportPhotoComponent implements OnInit {
         await this.idbService.setPassportCopies(
           this.countryAndCopiesInfo.value.copies || 1
         );
+        await this.idbService.setPassportCopiesOnData();
         this.router.navigate(['cart']);
       }
     } catch (err) {
