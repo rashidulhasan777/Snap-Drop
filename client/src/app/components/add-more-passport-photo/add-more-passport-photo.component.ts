@@ -42,7 +42,7 @@ export class AddMorePassportPhotoComponent implements OnInit {
       this.anotherOne = of(res);
     });
   }
-
+  
   async ngOnInit() {
     const prevValue = { country: 'Bangladesh', copies: 4 };
     try {
