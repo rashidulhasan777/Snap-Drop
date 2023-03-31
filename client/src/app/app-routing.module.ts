@@ -141,7 +141,7 @@ const routes: Routes = [
     component: UserProfileComponent,
     canActivate: [AuthGuardGuard, RoleguardUserGuard],
   },
-  { path: '', pathMatch: 'full', redirectTo: 'login' },
+  { path: '', pathMatch: 'full', redirectTo: 'splashScreen' },
 ];
 
 @NgModule({
