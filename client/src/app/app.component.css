@@ -1,9 +1,22 @@
-app-user-navbar {
+/* app-user-navbar1 {
   position: fixed;
   bottom: 0%;
-  /* border-top: 1px solid black; */
-  z-index: 999;
+  /* border-top: 1px solid black; 
+  z-index: 9999;
+} */
+
+/* NEW*/
+app-user-navbar {
+  box-shadow: rgba(130, 129, 129, 0.103) 0px 0px 0px 2px;
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
+  background: var(--secondary);
+  width: 100vw;
+  border-top-right-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius);
 }
 .bottomPadding {
   height: 70px;
 }
+

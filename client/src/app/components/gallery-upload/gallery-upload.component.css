@@ -30,6 +30,7 @@
   flex-wrap: wrap;
   padding-bottom: 100px;
   min-height: calc(50% - 100px);
+  /* border-radius: var(--border-radius); */
 }
 
 .gallery-controls {
@@ -46,7 +47,7 @@ app-gallery-card {
   display: flex;
   justify-content: center;
   margin: 7px;
-  background-color: var(--secondary);
+  /* background-color: var(--secondary); */
 }
 
 .gallery-controls ::ng-deep .bottom-button {
@@ -90,7 +91,9 @@ app-gallery-card {
 
 .card-form {
   display: flex;
+  /* align-self: center; */
   gap: 1rem;
+  justify-content: center;
   align-items: center;
   margin-bottom: 2.5vh;
   width: 97vw;
