@@ -23,9 +23,10 @@ export class IdbServiceService {
   }
 
   removeOnePassportPhoto(idx: number) {
-    return update('passportPhotos', (val) =>
-      val.filter((el: ImageInterface, i: number) => idx !== i)
-    );
+    return update('passportPhotos', (val) => {
+      if (val) return val.filter((el: ImageInterface, i: number) => idx !== i);
+      else return [];
+    });
   }
   removeAllPassportPhotos() {
     return del('passportPhotos');
@@ -36,9 +37,10 @@ export class IdbServiceService {
   }
 
   removeOneGalleryPhoto(idx: number) {
-    return update('galleryPhotos', (val) =>
-      val.filter((el: ImageInterface, i: number) => idx !== i)
-    );
+    return update('galleryPhotos', (val) => {
+      if (val) return val.filter((el: ImageInterface, i: number) => idx !== i);
+      else return [];
+    });
   }
 
   setRetakePhotos(photos: ImageInterface[]) {
