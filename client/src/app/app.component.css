@@ -7,6 +7,7 @@
 
 /* NEW*/
 app-user-navbar {
+  box-shadow: rgba(130, 129, 129, 0.103) 0px 0px 0px 2px;
   position: fixed;
   bottom: 0;
   z-index: 1;
