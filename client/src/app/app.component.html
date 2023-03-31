@@ -1,7 +1,10 @@
 <app-user-navbar *ngIf="role === 'customer'"></app-user-navbar>
 <!-- <app-spinner></app-spinner> -->
 <!-- <router-outlet></router-outlet> -->
-<app-background
-  ><router-outlet></router-outlet>
-  <div class="bottomPadding"></div>
+<app-background>
+  <app-spinner *ngIf="Loading; else mainApp"></app-spinner>
+  <ng-template #mainApp>
+    <router-outlet></router-outlet>
+    <div class="bottomPadding"></div>
+  </ng-template>
 </app-background>

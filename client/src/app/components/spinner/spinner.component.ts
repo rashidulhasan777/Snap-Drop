@@ -9,8 +9,8 @@ import { AnimationOptions } from 'ngx-lottie';
   encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class SpinnerComponent {
-  constructor(public loader: LoaderService) {}
-  spinOptions: AnimationOptions = {
-    path: '../../../assets/spinner_animation/138889-photography.json',
-  };
+  constructor(private loading: LoaderService) {}
+  get msg() {
+    return this.loading.getLoadingMsg();
+  }
 }
