@@ -3,6 +3,7 @@ const transport = require('./../middlewares/nodemailer');
 const { getMailOptions } = require('./../utils/nodemail/mailOptions');
 const User = require('../models/user.model');
 const { sendNotification } = require('../utils/helpers/sendNotifications');
+const sendMessage = require("./../middlewares/twilio");
 
 const getAllOrders = async (req, res) => {
   try {
@@ -136,6 +137,9 @@ const setOrderPaid = async (req, res) => {
       { $set: { paid: true } },
       { new: true }
     );
+    sendMessage("New order has arrived");
+    console.log(req.currentUser);
+    transport(getMailOptions(req.currentUser.email, "Your order has been placed"));
     res.status(201).send(latestOrder);
   } catch (error) {
     console.log(error);
