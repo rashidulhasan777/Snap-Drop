@@ -39,6 +39,7 @@ export class TakePictureComponent {
   tiltCount = 0;
   countdownStart = 0;
   logMsg = '';
+  logMsg2 = '';
   valid = false;
   autoCapture = true;
 
@@ -122,22 +123,22 @@ export class TakePictureComponent {
         results.detections[0].boundingBox;
       this.logMsg =
         'xCenter: ' +
-        xCenter +
+        (xCenter * 100).toFixed(2) +
         ', yCenter: ' +
-        yCenter +
+        (yCenter * 100).toFixed(2) +
         ', height: ' +
-        height +
+        (height * 100).toFixed(2) +
         ', width: ' +
-        width +
-        '\n' +
+        (width * 100).toFixed(2);
+      this.logMsg2 =
         'Top percent: ' +
-        (yCenter - height / 2) +
+        ((yCenter - height / 2) * 100).toFixed(2) +
         ', Bottom percent: ' +
-        (yCenter + height / 2) +
+        ((yCenter + height / 2) * 100).toFixed(2) +
         ', Left percent: ' +
-        (xCenter - width / 2) +
+        ((xCenter - width / 2) * 100).toFixed(2) +
         ', Right Percent: ' +
-        (xCenter + width / 2);
+        ((xCenter + width / 2) * 100).toFixed(2);
       if (
         xCenter - width / 2 > 0.367 &&
         xCenter + width / 2 < 0.61 &&
