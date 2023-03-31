@@ -13,6 +13,7 @@ import { map, Observable, startWith, of } from 'rxjs';
 import { ImageInterface } from 'src/app/interfaces/image.interface';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { IdbServiceService } from 'src/app/services/idbService/idb-service.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { UserdataService } from 'src/app/services/userdata/userdata.service';
 import { WarningDialogueComponent } from '../warning-dialogue/warning-dialogue.component';
 
@@ -35,8 +36,10 @@ export class AddMorePassportPhotoComponent implements OnInit {
     private idbService: IdbServiceService,
     private router: Router,
     private userData: UserdataService,
-    private warning: MatDialog
+    private warning: MatDialog,
+    private loading: LoaderService
   ) {
+    this.loading.setLoading(true);
     this.userData.getCountries().subscribe((res) => {
       this.countries = res;
       this.anotherOne = of(res);
@@ -49,6 +52,7 @@ export class AddMorePassportPhotoComponent implements OnInit {
       this.passportPhotos = (await this.idbService.getPassportPhotos()) || [];
       prevValue.country = (await this.idbService.getCountry()) || 'Bangladesh';
       prevValue.copies = (await this.idbService.getPassportCopies()) || 4;
+      this.loading.setLoading(false);
     } catch (err) {
       console.log(err);
     }

@@ -1,3 +1,8 @@
-<div *ngIf="this.loader.getLoading()" class="cssload-container">
-  <ng-lottie [options]="spinOptions"></ng-lottie>
+<div class="loadingContainer">
+  <div class="dot-pulse"></div>
+</div>
+<div class="loadingContainer">
+  <div class="msg">
+    {{ msg ? msg : "Please wait" }}
+  </div>
 </div>

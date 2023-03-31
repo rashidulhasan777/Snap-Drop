@@ -54,7 +54,6 @@ import { AddMorePassportPhotoComponent } from './components/add-more-passport-ph
 import { WarningDialogueComponent } from './components/warning-dialogue/warning-dialogue.component';
 import { baseBackendURL } from 'src/config';
 import { SpinnerComponent } from './components/spinner/spinner.component';
-import { LoadingInterceptor } from './interceptors/loading/loading.interceptor';
 import { BackgroundComponent } from './components/background/background.component';
 import { LineChartComponent } from './components/line-chart/line-chart.component';
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
@@ -135,11 +134,6 @@ export function playerFactory() {
     SocketIoModule.forRoot(config),
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: LoadingInterceptor,
-      multi: true,
-    },
     { provide: NgChartsConfiguration, useValue: { generateColors: false } },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,

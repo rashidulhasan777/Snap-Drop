@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class LoaderService {
   private loading: boolean = false;
+  private loadingMsg = '';
 
   constructor() {}
 
@@ -14,5 +15,12 @@ export class LoaderService {
 
   getLoading(): boolean {
     return this.loading;
+  }
+  setLoadingMsg(loadingMsg: string) {
+    this.loadingMsg = loadingMsg;
+  }
+
+  getLoadingMsg(): string {
+    return this.loadingMsg;
   }
 }

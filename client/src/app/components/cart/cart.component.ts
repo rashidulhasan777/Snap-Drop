@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { LoadChildren, Router } from '@angular/router';
 import { ImageInterface } from 'src/app/interfaces/image.interface';
 import { Price } from 'src/app/interfaces/price.interface';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { IdbServiceService } from 'src/app/services/idbService/idb-service.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { PriceCalculationService } from 'src/app/services/price-calculation/price-calculation.service';
 
 @Component({
@@ -19,8 +20,11 @@ export class CartComponent {
   constructor(
     private idbService: IdbServiceService,
     private router: Router,
-    private priceService: PriceCalculationService
-  ) {}
+    private priceService: PriceCalculationService,
+    private loading: LoaderService
+  ) {
+    this.loading.setLoading(true);
+  }
 
   async ngOnInit() {
     try {
@@ -31,6 +35,7 @@ export class CartComponent {
         passportPictures: this.passportOrders,
         galleryPictures: this.galleryOrders,
       });
+      this.loading.setLoading(false);
       console.log(this.price);
       console.log(this.passportOrders);
     } catch (error) {
@@ -62,10 +67,12 @@ export class CartComponent {
   }
 
   async clearAll() {
+    this.loading.setLoading(true);
     try {
       await this.idbService.clearAll();
       this.galleryOrders = [];
       this.passportOrders = [];
+      this.loading.setLoading(false);
     } catch (error) {
       console.log(error);
     }
