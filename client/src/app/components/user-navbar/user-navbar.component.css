@@ -11,11 +11,11 @@
   box-shadow: rgba(130, 129, 129, 0.103) 0px 0px 0px 2px;
 }
 
-.selected{
-  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+.selected {
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
   background-color: var(--secondary);
 }
-
 
 .navbarIcons {
   width: 64px;
@@ -49,4 +49,38 @@
   display: inline-block;
   text-align: center;
   width: 100%;
+}
+
+/* ===============NEW CSS FOR NAVBAR================*/
+
+.bottombar {
+  display: flex;
+  justify-content: space-around;
+  height: 64px;
+  width: 100vw;;
+}
+.bottombar a img {
+  display: flex;
+  height: 45px;
+  width: 45px;
+  margin-top: 7px;
+  border-radius: 100%;
+  padding: 5px;
+}
+
+.button-options {
+  display: flex;
+  border: 1px solid purple;
+  border-radius: 10px;
+}
+.icons {
+  /* display: flex;
+  justify-content: center; */
+  /* background: var(--accent); */
+  /* width: 64px; */
+}
+.button-text {
+  color: var(--accent);
+  font-size: 28px;
+  font-weight: 900;
 }

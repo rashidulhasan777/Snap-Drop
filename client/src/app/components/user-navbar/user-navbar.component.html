@@ -1,18 +1,31 @@
-
-
-<div class="user-navbar">
-  
-  <button [ngClass]="{ 'selected': selectedButton === 'button1' }" (click)="selectedButton = 'button1'" class="navbarIcons" mat-icon-button routerLink="/user_dashboard">
-    <img src="assets/icons/custome-icon/home.svg" alt="">
-  </button>
-  <button [ngClass]="{ 'selected': selectedButton === 'button2' }" (click)="selectedButton = 'button2'" class="navbarIcons bigIcon" mat-icon-button routerLink="/cart">
-    <img src="assets/icons/custome-icon/cart.svg" alt="">
-  </button>
-  <button [ngClass]="{ 'selected': selectedButton === 'button3' }" (click)="selectedButton = 'button3'" class="navbarIcons" mat-icon-button routerLink="/profile">
-    <img src="assets/icons/custome-icon//menu.svg" alt="">
-  </button>
+<div class="bottombar">
+  <a routerLink="/user_dashboard">
+    <img
+      [ngClass]="{ selected: selectedButton === 'button1' }"
+      (click)="selectedButton = 'button1'"
+      src="assets/icons/custome-icon/home.svg"
+      alt=""
+    />
+  </a>
+  <a routerLink="/cart">
+    <img
+      [ngClass]="{ selected: selectedButton === 'button2' }"
+      (click)="selectedButton = 'button2'"
+      src="assets/icons/custome-icon/cart.svg"
+      alt=""
+    />
+  </a>
+  <a routerLink="/profile">
+    <img
+      [ngClass]="{ selected: selectedButton === 'button3' }"
+      (click)="selectedButton = 'button3'"
+      src="assets/icons/custome-icon//menu.svg"
+      alt=""
+    />
+  </a>
 </div>
 
+<div class="user-navbar"></div>
 
 <!-- <button mat-icon-button [matMenuTriggerFor]="beforeMenu" class="menuButton">
   <mat-icon>menu</mat-icon>
@@ -34,11 +47,11 @@
     <button mat-menu-item routerLink="/register"><span>Sign Up</span></button>
   </div>
   <div> -->
-    <!-- <button (click)="subscribe()" mat-menu-item>
+<!-- <button (click)="subscribe()" mat-menu-item>
       <span>Subscribe to Notification</span>
     </button>
     <button mat-menu-item (click)="logOutUser()">
       <mat-icon>logout</mat-icon><span>Logout</span>
     </button> -->
-  <!-- </div>
+<!-- </div>
 </mat-menu>  -->
