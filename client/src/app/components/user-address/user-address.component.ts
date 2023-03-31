@@ -38,7 +38,7 @@ export class UserAddressComponent {
     // city: new FormControl<{ city_id: number; city_name: string } | string>(''),
     city: [this.cityPrev, [Validators.required]],
     zone: [this.zonePrev, [Validators.required]],
-    area: [this.areaPrev, [Validators.required]],
+    area: [this.areaPrev],
   });
 
   cities: { city_id: number; city_name: string }[] = [
@@ -147,6 +147,7 @@ export class UserAddressComponent {
       this.loading.setLoading(true);
       const details = JSON.parse(JSON.stringify(this.deliveryInfoForm.value));
       details.contact_number = '+880' + details.contact_number;
+      if (!details.area.area_name) delete details.area;
       this.userDataService.updateUserData(details).subscribe((res) => {
         this.loading.setLoading(false);
         this.router.navigate(['order_summary']);

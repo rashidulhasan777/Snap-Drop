@@ -1,4 +1,4 @@
-const mongoose = require("../db");
+const mongoose = require('../db');
 
 const citySchema = new mongoose.Schema({
   city_id: { type: Number, required: true },
@@ -9,8 +9,8 @@ const zoneSchema = new mongoose.Schema({
   zone_name: { type: String, required: true },
 });
 const areaSchema = new mongoose.Schema({
-  area_id: { type: Number, required: true },
-  area_name: { type: String, required: true },
+  area_id: { type: Number },
+  area_name: { type: String },
 });
 
 const detailsSchema = new mongoose.Schema({
@@ -43,7 +43,6 @@ const detailsSchema = new mongoose.Schema({
   },
   area: {
     type: areaSchema,
-    required: true,
   },
 });
 
