@@ -2,7 +2,7 @@ const accountSid = 'ACcbcf082438219ed4b54aeb2dfb428f8a';
 const authToken = '4f6f60b6d658f42cf4bf0d12441ddce3'; 
 const client = require('twilio')(accountSid, authToken);
 
-function sendMessage(body){
+function sendMessage(body){ 
   console.log('twilio active')
     client.messages
       .create({
