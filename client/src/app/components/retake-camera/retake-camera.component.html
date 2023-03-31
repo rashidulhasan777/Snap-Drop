@@ -52,15 +52,15 @@
   <img [ngClass]="{ hide: cameraOpen }" [src]="dataUrl" class="capturedImage" />
   <div *ngIf="delayed" class="captureButton">
     <ng-container *ngIf="cameraOpen; else retakeOrProceed">
-      <button mat-icon-button (click)="autoCapture = !autoCapture">
+      <button class="buttons-camera" mat-icon-button (click)="autoCapture = !autoCapture">
         <mat-icon> motion_photos_auto </mat-icon>
       </button>
-      <button mat-icon-button (click)="flipped = !flipped">
+      <button class="buttons-camera" mat-icon-button (click)="flipped = !flipped">
         <mat-icon> flip </mat-icon>
       </button>
       <button
         *ngIf="cameraOpen; else retakeOrProceed"
-        class="button"
+        class="button buttons-camera"
         (click)="capture()"
         [disabled]="!valid"
         mat-icon-button
@@ -72,6 +72,7 @@
         <!-- <mat-icon>panorama_fish_eye</mat-icon> -->
       </button>
       <button
+        class="buttons-camera"
         mat-icon-button
         [disabled]="!hasMultipleCamera"
         (click)="autoCapture = !autoCapture"
@@ -80,14 +81,14 @@
       </button>
     </ng-container>
     <ng-template #retakeOrProceed>
-      <button mat-icon-button class="button" (click)="retakePhoto()">
+      <button mat-icon-button class="button buttons-camera" (click)="retakePhoto()">
         <mat-icon>cached</mat-icon>
       </button>
-      <button mat-icon-button class="button" (click)="savePhoto()">
+      <button mat-icon-button class="button buttons-camera" (click)="savePhoto()">
         <mat-icon>download</mat-icon>
       </button>
-      <button mat-icon-button class="button" (click)="updatePhoto()">
-        <mat-icon>done</mat-icon>
+      <button mat-icon-button class="button buttons-camera" (click)="updatePhoto()">
+        <mat-icon>chevron_right</mat-icon>
       </button>
     </ng-template>
   </div>

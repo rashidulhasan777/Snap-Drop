@@ -97,7 +97,7 @@
 }
 
 .actionButtons {
-  position: absolute;
+  position: fixed;
   gap: 2vh;
   bottom: 0;
   right: 5%;

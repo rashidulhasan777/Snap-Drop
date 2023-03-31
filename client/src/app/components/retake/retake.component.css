@@ -4,12 +4,33 @@
 }
 .retakeImageContainer {
   width: 100%;
-  display: flex;
   gap: 20px;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.professionalInstructions {
-  width: 90%
+.top-part{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 8vh;
+}
+.instruction{
+  color: var(--accent);
+}
+.retake-button{
+  background-color: var(--accent);
+}
+.top-part ::ng-deep .retake-button{
+  width: 50vw;
+  color: var(--secondary);
+  border-radius: var(--border-radius);
+}
+
+.bottom-part ::ng-deep .retake-button{
+  width: 50vw;
+  color: var(--secondary);
+  border-radius: var(--border-radius);
 }

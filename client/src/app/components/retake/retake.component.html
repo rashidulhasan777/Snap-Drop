@@ -1,14 +1,15 @@
 <div class="retakeImageContainer">
-  <div *ngFor="let image of passportPicturesToRetake">
+  <div class="top-part" *ngFor="let image of passportPicturesToRetake">
+    <!-- <h2>Your last submitted Passport sized Image: </h2> -->
     <img [src]="image.imageURL" class="imageToRetake" />
-    <div class="professionalInstructions">
-      <b>Professional instructions:</b> {{ image.instructionsForRetake || " " }}
+    <div>
+      <b class="instruction">Professional instructions:</b> {{ image.instructionsForRetake || " " }}
     </div>
-    <button mat-stroked-button (click)="retake(image._id || '')">
+    <button class="retake-button" mat-stroked-button (click)="retake(image._id || '')">
       <mat-icon>camera</mat-icon>Retake Picture
     </button>
   </div>
-  <div>
-    <button (click)="updateOrder()" mat-stroked-button>Send again</button>
+  <div class="bottom-part">
+    <button class="retake-button" (click)="updateOrder()" mat-stroked-button>Send again</button>
   </div>
 </div>
