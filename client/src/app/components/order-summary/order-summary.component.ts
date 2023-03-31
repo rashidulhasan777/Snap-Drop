@@ -13,6 +13,7 @@ import { IdbServiceService } from 'src/app/services/idbService/idb-service.servi
 import { CloudinaryService } from 'src/app/services/cloudinary/cloudinary.service';
 import { firstValueFrom, Observable, zip } from 'rxjs';
 import { ImageInterface } from 'src/app/interfaces/image.interface';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-order-summary',
@@ -39,7 +40,8 @@ export class OrderSummaryComponent {
     private paymentService: PaymentService,
     private router: Router,
     private idbService: IdbServiceService,
-    private cloudinary: CloudinaryService
+    private cloudinary: CloudinaryService,
+    private loading: LoaderService
   ) {}
 
   async ngOnInit() {
@@ -153,6 +155,8 @@ export class OrderSummaryComponent {
     }
   }
   async initiatePayment() {
+    this.loading.setLoadingMsg('Uploading pictures, Please wait.');
+    this.loading.setLoading(true);
     this.orderService
       .generateOrderId(this.closestLab?.labId || 95506)
       .subscribe({
@@ -195,6 +199,8 @@ export class OrderSummaryComponent {
             this.CompletedOrder.totalPrice.total
           )
           .subscribe((response: any) => {
+            this.loading.setLoading(false);
+            this.loading.setLoadingMsg('Please wait');
             console.log(response.url);
             if (response.url) window.location.href = response.url;
           });

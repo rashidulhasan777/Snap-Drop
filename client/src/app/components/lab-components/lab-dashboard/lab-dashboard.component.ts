@@ -13,8 +13,8 @@ import { MatTableDataSource } from '@angular/material/table';
 // import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from './../../../interfaces/order.interface';
-import * as moment from 'moment';
 import { UserdataService } from 'src/app/services/userdata/userdata.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lab-dashboard',
@@ -34,7 +34,7 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
   chartTitle: string = 'Orders by photo type';
 
   // ---------------------------------------
-  orders: Order[] = [];
+  orders: any[] = [];
   opened: boolean = true;
   displayedColumns: string[] = [
     'order_id',
@@ -49,11 +49,11 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
 
   constructor(
     private orderService: OrderService,
-    private userData: UserdataService
+    private userData: UserdataService,
+    private router: Router
   ) {
     userData.requestNotificationPermission();
   }
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -62,15 +62,7 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
       .getOrdersbyLabId()
       .subscribe((response) => {
         // console.log(response[0].labId);
-        this.orders = response.map((el) => {
-          const created = moment(el.createdAt).format('MMM DD');
-          const updated = moment(el.updatedAt).format('MMM DD');
-          // console.log(created);
-          el['createdAt'] = created;
-          el['updatedAt'] = updated;
-          // console.log(el);
-          return el;
-        });
+        this.orders = response;
         this.dataSource = new MatTableDataSource(this.orders);
         this.paginator.length = this.orders.length;
         this.dataSource.paginator = this.paginator;
@@ -149,6 +141,10 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
       switch (sort.active) {
         case 'order_id':
           return this.compare(a.order_id, b.order_id, isAsc);
+        case 'createDate':
+          return this.compare(a.createdAt, b.createdAt, isAsc);
+        case 'dispatchDate':
+          return this.compare(a.updatedAt, b.updatedAt, isAsc);
         case 'orderStatus':
           return this.compare(a.orderStatus!, b.orderStatus!, isAsc);
         case 'gallery':
@@ -168,16 +164,39 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
       }
     });
     this.dataSource = new MatTableDataSource(this.orders);
+    this.dataSource.paginator = this.paginator;
   }
   compare(a: number | string, b: number | string, isAsc: boolean) {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
-  getPhotosByType(type: string) {
-    console.log(this.orders);
-  }
-
   handlePageEvent(e: PageEvent) {
     this.dataSource.paginator = this.paginator;
+  }
+
+  redirectTo(status: string) {
+    // console.log(status);
+    if (status === 'pending') this.router.navigate(['pendingApproval']);
+    else if (status === 'approved') this.router.navigate(['orders']);
+    else if (status === 'printing') this.router.navigate(['printing']);
+    else if (status === 'retake_needed') this.router.navigate(['retakeNeeded']);
+    else this.router.navigate(['archive']);
+  }
+
+  prettifyStatus(status: string): string {
+    switch (status) {
+      case 'pending':
+        return 'Pending Approval';
+      case 'approved':
+        return 'Approved';
+      case 'printing':
+        return 'Printing';
+      case 'retake_needed':
+        return 'Retake Needed';
+      case 'readyToDeliver':
+        return 'Ready To Deliver';
+      default:
+        return 'Handed Over';
+    }
   }
 }

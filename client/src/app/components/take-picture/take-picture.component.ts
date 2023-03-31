@@ -38,7 +38,8 @@ export class TakePictureComponent {
   currentImage: any;
   tiltCount = 0;
   countdownStart = 0;
-
+  logMsg = '';
+  logMsg2 = '';
   valid = false;
   autoCapture = true;
 
@@ -120,11 +121,29 @@ export class TakePictureComponent {
       // console.log('y', results.detections[0].boundingBox.yCenter * 245);
       const { xCenter, yCenter, height, width } =
         results.detections[0].boundingBox;
+      this.logMsg =
+        'xCenter: ' +
+        (xCenter * 100).toFixed(2) +
+        ', yCenter: ' +
+        (yCenter * 100).toFixed(2) +
+        ', height: ' +
+        (height * 100).toFixed(2) +
+        ', width: ' +
+        (width * 100).toFixed(2);
+      this.logMsg2 =
+        'Top percent: ' +
+        ((yCenter - height / 2) * 100).toFixed(2) +
+        ', Bottom percent: ' +
+        ((yCenter + height / 2) * 100).toFixed(2) +
+        ', Left percent: ' +
+        ((xCenter - width / 2) * 100).toFixed(2) +
+        ', Right Percent: ' +
+        ((xCenter + width / 2) * 100).toFixed(2);
       if (
-        xCenter - width / 2 > 0.367 &&
-        xCenter + width / 2 < 0.61 &&
-        yCenter + height / 2 < 0.64 &&
-        yCenter - height / 2 > 0.11
+        xCenter - width / 2 > 0.28 &&
+        xCenter + width / 2 < 0.7 &&
+        yCenter + height / 2 < 0.66 &&
+        yCenter - height / 2 > 0.27
       ) {
         if (Math.abs(eyeangle) > 24) {
           if (this.tiltCount < 30) {

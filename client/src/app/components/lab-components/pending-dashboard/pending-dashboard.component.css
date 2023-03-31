@@ -6,15 +6,15 @@ th.mat-sort-header-sorted {
   color: black;
 }
 
-.filter{
-  width: 40%;
+.filter {
+  width: 100%;
 }
 
 .example-container {
   height: 90vh;
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
-.example-toolbar{
+.example-toolbar {
   height: 10vh;
 }
 .example-sidenav-content {
@@ -26,7 +26,7 @@ th.mat-sort-header-sorted {
   /* justify-content: center; */
 }
 .example-sidenav {
-   user-select: none;
+  user-select: none;
 }
 .full-width {
   width: 100%;
@@ -58,10 +58,15 @@ th.mat-sort-header-sorted {
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at center, rgba(191, 145, 247, 0.63) 0%, rgba(178, 116, 248, 0.575) 50%, rgba(62, 82, 117, 0) 100%);
+  background: radial-gradient(
+    circle at center,
+    rgba(191, 145, 247, 0.63) 0%,
+    rgba(178, 116, 248, 0.575) 50%,
+    rgba(62, 82, 117, 0) 100%
+  );
   animation: backgroundAnimation 20s ease-in-out infinite;
 }
-.stat-container{
+.stat-container {
   display: flex;
   padding-top: 5vh;
   padding-bottom: 5vh;
@@ -82,7 +87,7 @@ th.mat-sort-header-sorted {
   }
 }
 
-.count{
+.count {
   padding-right: 2vw;
   display: flex;
   justify-content: end;
@@ -93,7 +98,7 @@ th.mat-sort-header-sorted {
   position: relative;
   width: 20vw;
   margin: 0 auto;
-  background-color: #F1F4F6;
+  background-color: #f1f4f6;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
 }
@@ -116,7 +121,7 @@ mat-card-image {
 
 mat-card-content {
   padding: 16px;
-  color: #4A4A4A;
+  color: #4a4a4a;
 }
 
 /* mat-card-actions {
@@ -134,4 +139,3 @@ mat-card-content {
 /* mat-card-actions button:first-child {
   margin-left: 0;
 } */
-

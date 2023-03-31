@@ -5,8 +5,8 @@ import {
   ViewChild,
   Inject,
 } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSidenav } from '@angular/material/sidenav';
 import {
@@ -18,7 +18,6 @@ import { DialogApprovalComponent } from '../dialog-approval/dialog-approval.comp
 
 import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from './../../../interfaces/order.interface';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-archive',
@@ -26,7 +25,7 @@ import * as moment from 'moment';
   styleUrls: ['./archive.component.css'],
 })
 export class ArchiveComponent implements AfterViewInit, OnInit {
-  orders: Order[] = [];
+  orders: any[] = [];
   readyOrders: Order[] = [];
   handedOrders: Order[] = [];
   opened: boolean = true;
@@ -51,32 +50,18 @@ export class ArchiveComponent implements AfterViewInit, OnInit {
       .getOrdersbyStatus('readyToDeliver')
       .subscribe((response) => {
         // console.log(response);
-        this.readyOrders = response.map((el) => {
-          const created = moment(el.createdAt).format('MMM DD');
-          const updated = moment(el.updatedAt).format('MMM DD');
-          // console.log(created);
-          el['createdAt'] = created;
-          el['updatedAt'] = updated;
-          // console.log(el);
-          return el;
-        });
+        this.readyOrders = response;
 
         this.orderService
           .getOrdersbyStatus('handedOver')
-          .subscribe((response) => {
+          .subscribe((response2) => {
             // console.log(response);
-            this.handedOrders = response.map((el2) => {
-              const created = moment(el2.createdAt).format('MMM DD');
-              const updated = moment(el2.updatedAt).format('MMM DD');
-              // console.log(created);
-              el2['createdAt'] = created;
-              el2['updatedAt'] = updated;
-              // console.log(el);
-              return el2;
-            });
+            this.handedOrders = response2;
             this.orders = [...this.readyOrders, ...this.handedOrders];
-            console.log(this.orders);
+            // console.log(this.orders);
             this.dataSource = new MatTableDataSource(this.orders);
+            this.paginator.length = this.orders.length;
+            this.dataSource.paginator = this.paginator;
           });
       });
   }
@@ -103,5 +88,36 @@ export class ArchiveComponent implements AfterViewInit, OnInit {
         // console.log(res);
         this.ngOnInit();
       });
+  }
+
+  sortData(sort: Sort) {
+    const data = this.orders.slice();
+    if (!sort.active || sort.direction === '') {
+      this.orders = data;
+      return;
+    }
+    this.orders = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'order_id':
+          return this.compare(a.order_id, b.order_id, isAsc);
+        case 'createDate':
+          return this.compare(a.createdAt, b.createdAt, isAsc);
+        case 'dispatchDate':
+          return this.compare(a.createdAt, b.createdAt, isAsc);
+        case 'orderStatus':
+          return this.compare(a.orderStatus!, b.orderStatus!, isAsc);
+        default:
+          return 0;
+      }
+    });
+    this.dataSource = new MatTableDataSource(this.orders);
+    this.dataSource.paginator = this.paginator;
+  }
+  compare(a: number | string, b: number | string, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
+  handlePageEvent(e: PageEvent) {
+    this.dataSource.paginator = this.paginator;
   }
 }

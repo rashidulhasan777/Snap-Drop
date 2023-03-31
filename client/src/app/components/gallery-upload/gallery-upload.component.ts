@@ -13,6 +13,7 @@ import { ImageInterface } from 'src/app/interfaces/image.interface';
 import { IdbServiceService } from 'src/app/services/idbService/idb-service.service';
 import { MatDialog } from '@angular/material/dialog';
 import { WarningDialogueComponent } from '../warning-dialogue/warning-dialogue.component';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-gallery-upload',
@@ -36,8 +37,11 @@ export class GalleryUploadComponent {
     private fb: FormBuilder,
     private router: Router,
     private idbService: IdbServiceService,
-    private warning: MatDialog
-  ) {}
+    private warning: MatDialog,
+    private loading: LoaderService
+  ) {
+    this.loading.setLoading(true);
+  }
 
   async ngOnInit() {
     this.formatOptionsObservable = of(this.formatOptions);
@@ -56,6 +60,7 @@ export class GalleryUploadComponent {
           })
         );
       });
+      this.loading.setLoading(false);
     } catch (error) {
       console.log(error);
     }

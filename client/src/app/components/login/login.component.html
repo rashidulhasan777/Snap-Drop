@@ -1,7 +1,7 @@
 <div class="containerLogin">
   <h1 class="pageHeader">Login</h1>
   <div class="oauthButtonContainer">
-    <button mat-stroked-button (click)="googleOauth()" class="oauthButtons">
+    <button mat-raised-button (click)="googleOauth()" class="oauthButtons">
       <mat-icon svgIcon="google"></mat-icon>
       Sign in with Google
     </button>
@@ -37,7 +37,7 @@
         formControlName="password"
       />
       <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{
-        !hidePassword ? 'visibility_off' : 'visibility'
+        !hidePassword ? "visibility_off" : "visibility"
       }}</mat-icon>
       <mat-error *ngIf="passwordError">{{ passwordError }} </mat-error>
     </mat-form-field>

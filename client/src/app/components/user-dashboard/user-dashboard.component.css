@@ -73,7 +73,7 @@
   margin-bottom: 20px;
   box-shadow: var(--box-shadow);
 }
- .icon {
+.icon {
   /* border-radius: 10px; */
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
@@ -163,4 +163,20 @@
   }
   0% {
   }
+}
+
+.smoothScroll {
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+section {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  scroll-snap-align: start;
 }

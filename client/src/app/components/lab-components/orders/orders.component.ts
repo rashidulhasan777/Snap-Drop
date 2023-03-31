@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSidenav } from '@angular/material/sidenav';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,10 +14,12 @@ import { Order } from './../../../interfaces/order.interface';
   styleUrls: ['./orders.component.css'],
 })
 export class OrdersComponent implements AfterViewInit, OnInit {
-  orders: Order[] = [];
+  orders: any[] = [];
   opened: boolean = true;
   displayedColumns: string[] = [
-    'labId',
+    'order_id',
+    'createDate',
+    'dispatchDate',
     'orderStatus',
     'instruction',
     'button',
@@ -33,9 +35,11 @@ export class OrdersComponent implements AfterViewInit, OnInit {
     const orders = this.orderService
       .getOrdersbyStatus('approved')
       .subscribe((response) => {
-        console.log(response);
+        // console.log(response);
         this.orders = response;
         this.dataSource = new MatTableDataSource(this.orders);
+        this.paginator.length = this.orders.length;
+        this.dataSource.paginator = this.paginator;
       });
   }
 
@@ -51,5 +55,36 @@ export class OrdersComponent implements AfterViewInit, OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  sortData(sort: Sort) {
+    const data = this.orders.slice();
+    if (!sort.active || sort.direction === '') {
+      this.orders = data;
+      return;
+    }
+    this.orders = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'order_id':
+          return this.compare(a.order_id, b.order_id, isAsc);
+        case 'createDate':
+          return this.compare(a.createdAt, b.createdAt, isAsc);
+        case 'dispatchDate':
+          return this.compare(a.createdAt, b.createdAt, isAsc);
+        case 'orderStatus':
+          return this.compare(a.orderStatus!, b.orderStatus!, isAsc);
+        default:
+          return 0;
+      }
+    });
+    this.dataSource = new MatTableDataSource(this.orders);
+    this.dataSource.paginator = this.paginator;
+  }
+  compare(a: number | string, b: number | string, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
+  handlePageEvent(e: PageEvent) {
+    this.dataSource.paginator = this.paginator;
   }
 }

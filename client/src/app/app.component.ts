@@ -7,6 +7,7 @@ import { PathaoService } from './services/pathao/pathao.service';
 import { SwPush } from '@angular/service-worker';
 import { Socket } from 'ngx-socket-io';
 import { Router } from '@angular/router';
+import { LoaderService } from './services/loader/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,8 @@ export class AppComponent {
     private authService: AuthenticationService,
     private pathao: PathaoService,
     readonly swPush: SwPush,
-    private router: Router
+    private router: Router,
+    private loading: LoaderService
   ) {
     this.maticonService.addSvgIcon(
       'google',
@@ -57,5 +59,9 @@ export class AppComponent {
         this.router.navigate(['login']);
       }
     );
+  }
+
+  get Loading() {
+    return this.loading.getLoading();
   }
 }

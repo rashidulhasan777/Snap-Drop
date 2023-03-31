@@ -21,8 +21,7 @@ const createOrder = async (req, res) => {
       customerId: req.currentUser._id,
       orderDelivaryDetails: req.currentUser.details,
     });
-    const labUser = await User.findOne({ labId: result.labId });
-    sendNotification(labUser._id, 'New order arrived');
+    
     res.status(201);
     res.send(result);
     return result;
@@ -137,6 +136,8 @@ const setOrderPaid = async (req, res) => {
       { $set: { paid: true } },
       { new: true }
     );
+    const labUser = await User.findOne({ labId: latestOrder.labId });
+    sendNotification(labUser._id, 'New order arrived');
     sendMessage("New order has arrived");
     console.log(req.currentUser);
     transport(getMailOptions(req.currentUser.email, "Your order has been placed"));

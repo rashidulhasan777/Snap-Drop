@@ -54,13 +54,13 @@ import { AddMorePassportPhotoComponent } from './components/add-more-passport-ph
 import { WarningDialogueComponent } from './components/warning-dialogue/warning-dialogue.component';
 import { baseBackendURL } from 'src/config';
 import { SpinnerComponent } from './components/spinner/spinner.component';
-import { LoadingInterceptor } from './interceptors/loading/loading.interceptor';
 import { BackgroundComponent } from './components/background/background.component';
 import { LineChartComponent } from './components/line-chart/line-chart.component';
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { PieChart2Component } from './components/pie-chart2/pie-chart2.component';
 import { SplashscreenComponent } from './components/splashscreen/splashscreen.component';
 import { RetakeCameraComponent } from './components/retake-camera/retake-camera.component';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
 
 const config: SocketIoConfig = { url: baseBackendURL, options: {} };
 export function playerFactory() {
@@ -112,6 +112,7 @@ export function playerFactory() {
     PieChart2Component,
     SplashscreenComponent,
     RetakeCameraComponent,
+    ErrorPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -133,11 +134,6 @@ export function playerFactory() {
     SocketIoModule.forRoot(config),
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: LoadingInterceptor,
-      multi: true,
-    },
     { provide: NgChartsConfiguration, useValue: { generateColors: false } },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
