@@ -28,6 +28,7 @@ import { TakePictureComponent } from './components/take-picture/take-picture.com
 import { AddMorePassportPhotoComponent } from './components/add-more-passport-photo/add-more-passport-photo.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { LabDashboardComponent } from './components/lab-components/lab-dashboard/lab-dashboard.component';
+import { RetakeCameraComponent } from './components/retake-camera/retake-camera.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -113,6 +114,11 @@ const routes: Routes = [
   {
     path: 'retake',
     component: RetakeComponent,
+    canActivate: [AuthGuardGuard, RoleguardUserGuard],
+  },
+  {
+    path: 'retake/:id',
+    component: RetakeCameraComponent,
     canActivate: [AuthGuardGuard, RoleguardUserGuard],
   },
   {

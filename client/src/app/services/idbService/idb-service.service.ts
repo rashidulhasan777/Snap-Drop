@@ -41,6 +41,24 @@ export class IdbServiceService {
     );
   }
 
+  setRetakePhotos(photos: ImageInterface[]) {
+    return update('retakePictures', () => photos);
+  }
+  getRetakePhotos(): Promise<ImageInterface[] | undefined> {
+    return get('retakePictures');
+  }
+
+  updateOneRetakeImage(id: string, data: string) {
+    return update('retakePictures', (val) => {
+      val.forEach((el: ImageInterface) => {
+        if (el._id === id) el.imageURL === data;
+      });
+    });
+  }
+  resolveRetake() {
+    return del('retakePictures');
+  }
+
   removeAllGalleryPhotos() {
     return del('galleryPhotos');
   }

@@ -16,41 +16,22 @@ import { Order } from 'src/app/interfaces/order.interface';
 export class UserDashboardComponent {
   order?: Order;
   User!: User;
-  firstName: string =''
+  firstName: string = '';
   constructor(
     private orderService: OrderService,
     private userData: UserdataService,
     private router: Router,
     public dialog: MatDialog,
     private socket: Socket
-  ) {
-    userData.requestNotificationPermission();
-  }
-  // using mock data
-  orders: any[] = [
-    {
-      _id: '123456',
-      orderStatus: 'picked up for Delivery',
-      orderDate: new Date('March 17, 2023 03:24:00'),
-      pictures: [
-        {
-          photoSize: '',
-          copies: 4,
-          imageURL:
-            'https://imglarger.com/Images/before-after/ai-image-enlarger-1-after-2.jpg',
-        },
-      ],
-      orderType: 'passport',
-    },
-  ];
+  ) {}
 
   ngOnInit() {
     this.userData.getUser().subscribe((res) => {
       this.User = res;
       this.socket.emit('gimmeNotification', { userId: res._id });
       this.socket.on;
-      let fullname= this.User.name.split(" ");
-      this.firstName= fullname[0];
+      let fullname = this.User.name.split(' ');
+      this.firstName = fullname[0];
       if (this.User.newUser) this.openDialog();
     });
     this.orderService.getCustomerLatestOrder().subscribe((res) => {
@@ -59,7 +40,6 @@ export class UserDashboardComponent {
         this.router.navigate(['retake']);
       }
       this.order = res;
-      // this.openDialog();
     });
   }
 

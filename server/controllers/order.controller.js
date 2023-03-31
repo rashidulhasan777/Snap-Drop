@@ -154,7 +154,9 @@ const cleanUnpaidOrders = async (req, res) => {
 const updatePassport = async (req, res) => {
   const orderId = req.params.id;
   const filter = { _id: orderId };
-  const update = { $set: { passportPictures: req.body } };
+  const update = {
+    $set: { passportPictures: req.body, orderStatus: 'pending' },
+  };
   try {
     const order = await Order.findOneAndUpdate(filter, update, {
       new: true,
