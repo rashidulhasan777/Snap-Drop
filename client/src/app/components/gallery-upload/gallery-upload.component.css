@@ -91,7 +91,9 @@ app-gallery-card {
 
 .card-form {
   display: flex;
+  /* align-self: center; */
   gap: 1rem;
+  justify-content: center;
   align-items: center;
   margin-bottom: 2.5vh;
   width: 97vw;
