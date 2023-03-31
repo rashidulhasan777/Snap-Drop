@@ -2,7 +2,7 @@ app-user-navbar {
   position: fixed;
   bottom: 0%;
   /* border-top: 1px solid black; */
-  z-index: 9999;
+  z-index: 999;
 }
 .bottomPadding {
   height: 70px;
