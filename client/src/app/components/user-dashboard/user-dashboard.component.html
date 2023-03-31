@@ -20,12 +20,14 @@
       </mat-card-header>
       <mat-card-content>
         <p class="upcoming-card-detailsImage">
-          <b>{{ order?.passportPictures?.length}}</b> Passport sized images
+          <b>{{ order && order.passportPictures && order.passportPictures.length? order.passportPictures.length : 0 }}</b> Passport sized images
         </p>
         <p class="upcoming-card-detailsImage">
-          <b>{{ order?.galleryPictures?.length}}</b> Gallery images
+          <b>{{ order && order.galleryPictures && order.galleryPictures.length? order.galleryPictures.length : 0 }}</b> Gallery images
         </p>
-        <p class="upcoming-card-details"> <span class="statusOrder">Order status :</span>  {{ order?.orderStatus }}</p>
+        <div *ngIf="order && order.orderStatus">
+          <p class="upcoming-card-details"> <span class="statusOrder">Order status :</span>  {{  order.orderStatus }} </p>
+        </div>
         <mat-divider></mat-divider>
       </mat-card-content>
       <mat-card-actions class="upcoming-card-actions">
@@ -54,13 +56,30 @@
       </a>
     </div> -->
   
-    <div class="button-option" routerLink="/passport_photo_instructions">
-      <span class="icon"> <mat-icon>camera</mat-icon> </span>
+    <!-- <div class="button-option" routerLink="/passport_photo_instructions">
+      <div class="icon"> 
+         <img src="assets/icons/custome-icon/camera.svg" alt="">
+      </div>
+      <span class="button-text">Take a passport photo</span>
+    </div> -->
+
+    <div class="button-option">
+      <span class="icon">
+        <img src="assets/icons/custome-icon/camera.svg" alt="">
+      </span>
       <span class="button-text">Take a passport photo</span>
     </div>
-    <div class="button-option" routerLink="/gallery_upload">
-      <span class="icon"> <mat-icon>photo_library</mat-icon> </span>
+    <div class="button-option">
+      <span class="icon">
+        <img src="assets/icons/custome-icon/image.svg" alt="">
+      </span>
       <span class="button-text">Upload pictures from gallery</span>
     </div>
+    <!-- <div class="button-option" routerLink="/gallery_upload">
+      <div class="icon">
+        <img src="assets/icons/custome-icon/image.svg" alt="">
+      </div>
+      <span class="button-text">Upload pictures from gallery</span>
+    </div> -->
   </div>
 </div>

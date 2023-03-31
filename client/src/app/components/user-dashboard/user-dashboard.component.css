@@ -73,17 +73,21 @@
   margin-bottom: 20px;
   box-shadow: var(--box-shadow);
 }
-.button-option .icon {
+ .icon {
   /* border-radius: 10px; */
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
-  flex: 0.4;
-  max-width: 45px;
+
+  /* flex: 0.4; */
   background: var(--accent);
   padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-right: 10px;
   color: var(--secondary);
   font-size: 32px;
+  width: 58px;
 }
 
 .button-option .button-text {
