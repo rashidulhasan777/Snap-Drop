@@ -27,13 +27,17 @@
         <!-- Created date -->
         <ng-container matColumnDef="createDate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Created</th>
-          <td mat-cell *matCellDef="let row">{{ row.createdAt }}</td>
+          <td mat-cell *matCellDef="let row">
+            {{ row.createdAt | date : "MMM d" }}
+          </td>
         </ng-container>
 
         <!-- Dispatch date -->
         <ng-container matColumnDef="dispatchDate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Dispatched</th>
-          <td mat-cell *matCellDef="let row">{{ row.updatedAt }}</td>
+          <td mat-cell *matCellDef="let row">
+            {{ row.updatedAt | date : "MMM d" }}
+          </td>
         </ng-container>
 
         <!-- Progress Column -->
@@ -52,7 +56,7 @@
             Customer Instructor
           </th>
           <td mat-cell *matCellDef="let row">
-            {{ row.instruction || 'No instructions provided' }}
+            {{ row.instruction || "No instructions provided" }}
           </td>
         </ng-container>
 
@@ -68,7 +72,7 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
           <td mat-cell *matCellDef="let row">
             <button
-            class="vd-btn"
+              class="vd-btn"
               [routerLink]="['/order', row._id]"
               mat-raised-button
               color="primary"

@@ -18,7 +18,6 @@ import { DialogApprovalComponent } from '../dialog-approval/dialog-approval.comp
 
 import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from './../../../interfaces/order.interface';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-archive',
@@ -51,29 +50,13 @@ export class ArchiveComponent implements AfterViewInit, OnInit {
       .getOrdersbyStatus('readyToDeliver')
       .subscribe((response) => {
         // console.log(response);
-        this.readyOrders = response.map((el) => {
-          const created = moment(el.createdAt).format('MMM DD');
-          const updated = moment(el.updatedAt).format('MMM DD');
-          // console.log(created);
-          el['createdAt'] = created;
-          el['updatedAt'] = updated;
-          // console.log(el);
-          return el;
-        });
+        this.readyOrders = response;
 
         this.orderService
           .getOrdersbyStatus('handedOver')
-          .subscribe((response) => {
+          .subscribe((response2) => {
             // console.log(response);
-            this.handedOrders = response.map((el2) => {
-              const created = moment(el2.createdAt).format('MMM DD');
-              const updated = moment(el2.updatedAt).format('MMM DD');
-              // console.log(created);
-              el2['createdAt'] = created;
-              el2['updatedAt'] = updated;
-              // console.log(el);
-              return el2;
-            });
+            this.handedOrders = response2;
             this.orders = [...this.readyOrders, ...this.handedOrders];
             // console.log(this.orders);
             this.dataSource = new MatTableDataSource(this.orders);
