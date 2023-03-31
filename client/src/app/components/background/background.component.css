@@ -1,6 +1,6 @@
 .background {
   background-image: url("/assets/Moon.svg");
-  background-size: cover;
+  background-size: 9000px;
   overflow: scroll;
   position: fixed;
   top: 0;
