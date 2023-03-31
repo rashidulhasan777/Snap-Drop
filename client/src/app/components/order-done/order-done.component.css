@@ -1,0 +1,17 @@
+.od-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.check {
+  display: block;
+  margin-bottom: 20%;
+}
+
+.msg {
+  color: #311432;
+}
