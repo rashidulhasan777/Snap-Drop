@@ -48,6 +48,7 @@ export class CartComponent {
   }
 
   async deleteGalleryOrder() {
+    console.log('deleting gallery');
     try {
       await this.idbService.removeAllGalleryPhotos();
       this.galleryOrders = [];

@@ -38,7 +38,11 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'camera', component: TakePictureComponent },
+  {
+    path: 'camera',
+    component: TakePictureComponent,
+    canActivate: [AuthGuardGuard, RoleguardUserGuard],
+  },
   { path: 'oauth_google', component: GoogleLoginComponent },
   { path: 'oauth_fb', component: FacebookLoginComponent },
   {

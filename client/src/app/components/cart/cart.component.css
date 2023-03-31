@@ -48,6 +48,7 @@
 }
 
 .card {
+  position: relative;
   background-color: var(--secondary);
   border-radius: var(--border-radius);
   /* width: clamp(400px, 95vw, 600px); */

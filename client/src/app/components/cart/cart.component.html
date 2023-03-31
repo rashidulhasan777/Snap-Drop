@@ -4,62 +4,54 @@
     <!-- <img class="header-icon" src="../../../assets/Header icons/trolley.png" /> -->
   </h1>
   <div *ngIf="hasOrder; else noOrders">
-    <div
-      *ngIf="passportOrders.length"
-      routerLink="/passport_upload"
-      class="cardContainer"
-    >
+    <div *ngIf="passportOrders.length" class="cardContainer">
       <div class="card">
-        <div class="cardImageContainer">
+        <div class="cardImageContainer" routerLink="/passport_upload">
           <img [src]="passportOrders[0].imageURL" class="cardImage" />
           <div class="imageCount">{{ "x" + passportOrders.length }}</div>
         </div>
-        <div class="detailsContainer">
+        <div class="detailsContainer" routerLink="/passport_upload">
           <div class="detailsText">
             <p>Passport Images</p>
             <p><span>Price: </span> {{ price ? price.passport : 0 }} Taka</p>
           </div>
-          <button
-            (click)="deletePassportOrder()"
-            class="deleteButton"
-            mat-icon-button
-          >
-            <img
-              class="delete"
-              src="assets/icons/custome-icon/delete.svg"
-              alt=""
-            />
-          </button>
         </div>
+        <button
+          (click)="deletePassportOrder()"
+          class="deleteButton"
+          mat-icon-button
+        >
+          <img
+            class="delete"
+            src="assets/icons/custome-icon/delete.svg"
+            alt=""
+          />
+        </button>
       </div>
     </div>
-    <div
-      *ngIf="galleryOrders.length"
-      routerLink="/gallery_upload"
-      class="cardContainer"
-    >
+    <div *ngIf="galleryOrders.length" class="cardContainer">
       <div class="card">
-        <div class="cardImageContainer">
+        <div class="cardImageContainer" routerLink="/gallery_upload">
           <img [src]="galleryOrders[0].imageURL" class="cardImage" />
           <div class="imageCount">{{ "x" + galleryOrders.length }}</div>
         </div>
-        <div class="detailsContainer">
+        <div class="detailsContainer" routerLink="/gallery_upload">
           <div class="detailsText">
             <p>Gallery Images</p>
             <p><span>Price: </span> {{ price ? price.gallery : 0 }} Taka</p>
           </div>
-          <button
-            (click)="deleteGalleryOrder()"
-            class="deleteButton"
-            mat-icon-button
-          >
-            <img
-              class="delete"
-              src="assets/icons/custome-icon/delete.svg"
-              alt=""
-            />
-          </button>
         </div>
+        <button
+          (click)="deleteGalleryOrder()"
+          class="deleteButton"
+          mat-icon-button
+        >
+          <img
+            class="delete"
+            src="assets/icons/custome-icon/delete.svg"
+            alt=""
+          />
+        </button>
       </div>
     </div>
     <div class="actionButtons">
