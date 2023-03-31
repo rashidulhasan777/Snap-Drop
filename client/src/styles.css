@@ -7,7 +7,7 @@
   /* --secondary: #f5f2ff; ddeep lavendar color*/
   --secondary: #f9f7ff; /*light lavendar*/
   --text: #311432;
-  --body-height: 100dvh;
+  --body-height: 100vh;
   --accent: #673ab7;
   --card-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
     rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
