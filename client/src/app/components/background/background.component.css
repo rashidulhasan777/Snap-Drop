@@ -7,4 +7,14 @@
   left: 0;
   right: 0;
   bottom: 0;
+  animation: tras 2s ease-in-out 0 infinite alternate;
+}
+
+@keyframes tras {
+  0% {
+    background-size: 7000px;
+  }
+  100% {
+    background-size: 9000px;
+  }
 }

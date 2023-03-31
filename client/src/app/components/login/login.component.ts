@@ -58,9 +58,7 @@ export class LoginComponent {
               localStorage.setItem('userAccessToken', response.access_token);
               this.authService.userRole().subscribe((res) => {
                 if (res.role === 'customer')
-                  this.router
-                    .navigate(['user_dashboard'])
-                    .then(() => window.location.reload());
+                  this.router.navigate(['user_dashboard']);
                 else if (res.role === 'lab')
                   this.router.navigate(['lab-dashboard']);
                 else this.authService.logout();
