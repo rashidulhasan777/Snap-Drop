@@ -59,6 +59,7 @@ import { BackgroundComponent } from './components/background/background.componen
 import { LineChartComponent } from './components/line-chart/line-chart.component';
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { PieChart2Component } from './components/pie-chart2/pie-chart2.component';
+import { SplashscreenComponent } from './components/splashscreen/splashscreen.component';
 import { RetakeCameraComponent } from './components/retake-camera/retake-camera.component';
 
 const config: SocketIoConfig = { url: baseBackendURL, options: {} };
@@ -109,6 +110,7 @@ export function playerFactory() {
     LineChartComponent,
     PieChartComponent,
     PieChart2Component,
+    SplashscreenComponent,
     RetakeCameraComponent,
   ],
   imports: [

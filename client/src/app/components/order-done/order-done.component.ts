@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Order } from 'src/app/interfaces/order.interface';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { IdbServiceService } from 'src/app/services/idbService/idb-service.service';
@@ -16,13 +17,17 @@ export class OrderDoneComponent {
   constructor(
     private orderService: OrderService,
     private userData: UserdataService,
-    private idbService: IdbServiceService
+    private idbService: IdbServiceService,
+    private router: Router
   ) {
     userData.requestNotificationPermission();
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.orderService.setOrderPaid().subscribe();
-    this.idbService.clearAll();
+    await this.idbService.clearAll();
+    setTimeout(() => {
+      this.router.navigate(['login']);
+    }, 3000);
   }
 }

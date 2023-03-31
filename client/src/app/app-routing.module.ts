@@ -28,9 +28,14 @@ import { TakePictureComponent } from './components/take-picture/take-picture.com
 import { AddMorePassportPhotoComponent } from './components/add-more-passport-photo/add-more-passport-photo.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { LabDashboardComponent } from './components/lab-components/lab-dashboard/lab-dashboard.component';
+import { SplashscreenComponent } from './components/splashscreen/splashscreen.component';
 import { RetakeCameraComponent } from './components/retake-camera/retake-camera.component';
 
 const routes: Routes = [
+  {
+    path: 'splashScreen',
+    component: SplashscreenComponent,
+  },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'camera', component: TakePictureComponent },
@@ -136,7 +141,7 @@ const routes: Routes = [
     component: UserProfileComponent,
     canActivate: [AuthGuardGuard, RoleguardUserGuard],
   },
-  { path: '', pathMatch: 'full', redirectTo: 'login' },
+  { path: '', pathMatch: 'full', redirectTo: 'splashScreen' },
 ];
 
 @NgModule({
