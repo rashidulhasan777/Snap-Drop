@@ -29,7 +29,9 @@ export class PendingDashboardComponent implements AfterViewInit, OnInit {
   name: string = '';
   opened: boolean = true;
   displayedColumns: string[] = [
-    'labId',
+    'order_id',
+    'createDate',
+    'dispatchDate',
     'orderStatus',
     'instruction',
     'button',

@@ -33,7 +33,7 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
   chartTitle: string = 'Orders by photo type';
 
   // ---------------------------------------
-  orders: Order[] = [];
+  orders: any[] = [];
   opened: boolean = true;
   displayedColumns: string[] = [
     'order_id',
@@ -56,15 +56,7 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
       .getOrdersbyLabId()
       .subscribe((response) => {
         // console.log(response[0].labId);
-        this.orders = response.map((el) => {
-          const created = moment(el.createdAt).format('MMM DD');
-          const updated = moment(el.updatedAt).format('MMM DD');
-          // console.log(created);
-          el['createdAt'] = created;
-          el['updatedAt'] = updated;
-          // console.log(el);
-          return el;
-        });
+        this.orders = response;
         this.dataSource = new MatTableDataSource(this.orders);
         this.paginator.length = this.orders.length;
         this.dataSource.paginator = this.paginator;
@@ -143,6 +135,10 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
       switch (sort.active) {
         case 'order_id':
           return this.compare(a.order_id, b.order_id, isAsc);
+        case 'createDate':
+          return this.compare(a.createdAt, b.createdAt, isAsc);
+        case 'dispatchDate':
+          return this.compare(a.createdAt, b.createdAt, isAsc);
         case 'orderStatus':
           return this.compare(a.orderStatus!, b.orderStatus!, isAsc);
         case 'gallery':
