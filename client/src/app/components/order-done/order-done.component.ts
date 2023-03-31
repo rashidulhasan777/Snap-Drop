@@ -30,7 +30,7 @@ export class OrderDoneComponent {
     this.orderService.setOrderPaid().subscribe();
     await this.idbService.clearAll();
     setTimeout(() => {
-      this.router.navigate(['login']);
+      this.router.navigate(['user_dashboard']);
     }, 3000);
   }
 }
