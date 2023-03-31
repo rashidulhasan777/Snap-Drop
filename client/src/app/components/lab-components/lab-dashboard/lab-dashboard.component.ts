@@ -13,7 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
 // import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from './../../../interfaces/order.interface';
-import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lab-dashboard',
@@ -46,7 +46,7 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
   ];
   dataSource: MatTableDataSource<Order> = new MatTableDataSource(this.orders);
 
-  constructor(private orderService: OrderService) {}
+  constructor(private orderService: OrderService, private router: Router) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -138,7 +138,7 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
         case 'createDate':
           return this.compare(a.createdAt, b.createdAt, isAsc);
         case 'dispatchDate':
-          return this.compare(a.createdAt, b.createdAt, isAsc);
+          return this.compare(a.updatedAt, b.updatedAt, isAsc);
         case 'orderStatus':
           return this.compare(a.orderStatus!, b.orderStatus!, isAsc);
         case 'gallery':
@@ -158,16 +158,30 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
       }
     });
     this.dataSource = new MatTableDataSource(this.orders);
+    this.dataSource.paginator = this.paginator;
   }
   compare(a: number | string, b: number | string, isAsc: boolean) {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
-  getPhotosByType(type: string) {
-    console.log(this.orders);
-  }
-
   handlePageEvent(e: PageEvent) {
     this.dataSource.paginator = this.paginator;
+  }
+
+  redirectTo(status: string) {
+    // console.log(status);
+    if (status === 'pending') this.router.navigate(['pendingApproval']);
+    else if (status === 'approved') this.router.navigate(['orders']);
+    else if (status === 'printing') this.router.navigate(['printing']);
+    else if (status === 'retake_needed') this.router.navigate(['retakeNeeded']);
+    else this.router.navigate(['archive']);
+  }
+
+  prettifyStatus(status: string) {
+    if (status === 'pending') return 'Pending Approval';
+    else if (status === 'approved') return 'Approved';
+    else if (status === 'printing') return 'Printing';
+    else if (status === 'retake_needed') return 'Retake Needed';
+    else if (status === 'readyToDeliver') return 'Archived';
   }
 }

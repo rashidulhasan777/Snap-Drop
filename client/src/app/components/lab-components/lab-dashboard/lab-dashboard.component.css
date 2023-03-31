@@ -37,10 +37,10 @@ th.mat-sort-header-sorted {
   height: 10vh;
 } */
 .example-sidenav-content {
-  padding-top: 2vh;
+  padding: 2vh 2vw 0 2vw;
   display: flex;
   flex-direction: row-reverse;
-  height: 93vh;
+  height: 92.8vh;
   /* align-items: center; */
   /* justify-content: center; */
 }
@@ -198,7 +198,6 @@ app-pie-chart {
 .filter-input {
   width: 100%;
 }
-
 
 /* .mdc-data-table__cell, .mdc-data-table__header-cell {
   text-align: center !important;

@@ -12,7 +12,12 @@
     </mat-form-field>
 
     <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" matSort>
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        matSort
+        (matSortChange)="sortData($event)"
+      >
         <!-- ID Column -->
         <ng-container matColumnDef="order_id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Order ID</th>
@@ -22,13 +27,17 @@
         <!-- Created date -->
         <ng-container matColumnDef="createDate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Created</th>
-          <td mat-cell *matCellDef="let row">{{ row.createdAt }}</td>
+          <td mat-cell *matCellDef="let row">
+            {{ row.createdAt | date : 'MMM d' }}
+          </td>
         </ng-container>
 
         <!-- Update date -->
         <ng-container matColumnDef="dispatchDate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Updated</th>
-          <td mat-cell *matCellDef="let row">{{ row.updatedAt }}</td>
+          <td mat-cell *matCellDef="let row">
+            {{ row.updatedAt | date : 'MMM d' }}
+          </td>
         </ng-container>
 
         <!-- Progress Column -->
@@ -44,7 +53,7 @@
         <!-- Name Column -->
         <ng-container matColumnDef="instruction">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Customer Instructor
+            Customer Instructions
           </th>
           <td mat-cell *matCellDef="let row">
             {{ row.instruction || 'No instructions provided' }}
@@ -75,8 +84,11 @@
       </table>
 
       <mat-paginator
-        [pageSizeOptions]="[5, 10, 25, 100]"
+        #paginator
+        showFirstLastButtons
+        [pageSize]="10"
         aria-label="Select page of users"
+        (page)="handlePageEvent($event)"
       ></mat-paginator>
     </div>
   </div>

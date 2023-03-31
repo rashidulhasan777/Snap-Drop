@@ -25,7 +25,7 @@ export class OrderDetailsComponent {
   ) {
     this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
     this.orderService.getOrdersbyId(this.id).subscribe((res) => {
-      console.log(res);
+      // console.log(res);
       this.order = res;
     });
   }

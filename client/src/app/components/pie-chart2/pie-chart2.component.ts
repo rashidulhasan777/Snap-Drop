@@ -113,7 +113,7 @@ export class PieChart2Component {
 
   ngOnInit() {
     this.orderService.getOrdersbyLabId().subscribe((res) => {
-      // console.log(res);
+      console.log(res);
       for (let el of res) {
         if (el.orderStatus === 'pending') this.chartData[0]++;
         else if (el.orderStatus === 'approved') this.chartData[1]++;
@@ -121,7 +121,7 @@ export class PieChart2Component {
         else if (el.orderStatus === 'retake_needed') this.chartData[3]++;
         else if (el.orderStatus === 'readyToDeliver') this.chartData[4]++;
       }
-      // console.log(this.orderCountByProductCategory);
+      console.log(this.chartData);
       this.pieChartData = {
         // labels: this.chartLabels,
         labels: [
