@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { OauthService } from 'src/app/services/oauth/oauth.service';
 
 @Component({
@@ -15,8 +16,12 @@ export class GoogleLoginComponent implements OnInit {
     private oauthService: OauthService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private http: HttpClient
-  ) {}
+    private http: HttpClient,
+    private loading: LoaderService
+  ) {
+    this.loading.setLoadingMsg('Logging you in');
+    this.loading.setLoading(true);
+  }
 
   ngOnInit() {
     if (localStorage.getItem('googleAccessToken')) {

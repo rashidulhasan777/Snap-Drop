@@ -42,7 +42,10 @@ export class OrderSummaryComponent {
     private idbService: IdbServiceService,
     private cloudinary: CloudinaryService,
     private loading: LoaderService
-  ) {}
+  ) {
+    this.loading.setLoadingMsg('');
+    this.loading.setLoading(true);
+  }
 
   async ngOnInit() {
     this.userDataService.getUser().subscribe((res) => {
@@ -68,6 +71,7 @@ export class OrderSummaryComponent {
             this.price = totalPrice;
           }
         );
+        this.loading.setLoading(false);
       } catch (error) {
         console.log(error);
         this.router.navigate(['cart']);
@@ -200,7 +204,7 @@ export class OrderSummaryComponent {
           )
           .subscribe((response: any) => {
             this.loading.setLoading(false);
-            this.loading.setLoadingMsg('Please wait');
+            this.loading.setLoadingMsg('');
             console.log(response.url);
             if (response.url) window.location.href = response.url;
           });

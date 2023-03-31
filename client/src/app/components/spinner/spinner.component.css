@@ -1,4 +1,4 @@
-.dot-pulse {
+/* .dot-pulse {
   position: relative;
   left: -9999px;
   width: 10px;
@@ -68,18 +68,44 @@
   100% {
     box-shadow: 10014px 0 0 -5px;
   }
+} */
+.dots-3 {
+  width: 60px;
+  aspect-ratio: 2;
+  --_g: no-repeat radial-gradient(circle closest-side, #4c3c96 90%, #9e9e9e00);
+  background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+  background-size: calc(100% / 3) 50%;
+  animation: d3 1s infinite linear;
+}
+@keyframes d3 {
+  20% {
+    background-position: 0% 0%, 50% 50%, 100% 50%;
+  }
+  40% {
+    background-position: 0% 100%, 50% 0%, 100% 50%;
+  }
+  60% {
+    background-position: 0% 50%, 50% 100%, 100% 0%;
+  }
+  80% {
+    background-position: 0% 50%, 50% 50%, 100% 100%;
+  }
 }
 
 .loadingContainer {
   position: absolute;
   display: flex;
+  flex-direction: column;
+  gap: 10px;
   width: 100vw;
   height: 100vh;
   justify-content: center;
   align-items: center;
-  background-color: #a7a1ac7e;
+  background-color: #a6a6a77e;
   z-index: 10000;
 }
+
 .msg {
-  margin-top: 50px;
+  font-weight: bold;
+  font-size: large;
 }

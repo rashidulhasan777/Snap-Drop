@@ -7,6 +7,7 @@ import { UserdataService } from 'src/app/services/userdata/userdata.service';
 import { User } from 'src/app/interfaces/user.interface';
 import { Socket } from 'ngx-socket-io';
 import { Order } from 'src/app/interfaces/order.interface';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -22,8 +23,12 @@ export class UserDashboardComponent {
     private userData: UserdataService,
     private router: Router,
     public dialog: MatDialog,
-    private socket: Socket
-  ) {}
+    private socket: Socket,
+    private loading: LoaderService
+  ) {
+    this.loading.setLoadingMsg('');
+    this.loading.setLoading(true);
+  }
 
   ngOnInit() {
     this.userData.getUser().subscribe((res) => {
@@ -33,13 +38,14 @@ export class UserDashboardComponent {
       let fullname = this.User.name.split(' ');
       this.firstName = fullname[0];
       if (this.User.newUser) this.openDialog();
-    });
-    this.orderService.getCustomerLatestOrder().subscribe((res) => {
-      console.log(res);
-      if (res && res.orderStatus === 'retake_needed') {
-        this.router.navigate(['retake']);
-      }
-      this.order = res;
+      this.orderService.getCustomerLatestOrder().subscribe((res) => {
+        console.log(res);
+        if (res && res.orderStatus === 'retake_needed') {
+          this.router.navigate(['retake']);
+        }
+        this.order = res;
+        this.loading.setLoading(false);
+      });
     });
   }
 

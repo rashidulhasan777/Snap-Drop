@@ -19,7 +19,8 @@ export class FacebookLoginComponent implements OnInit {
     private http: HttpClient,
     private loading: LoaderService
   ) {
-    this.loading.setLoading(true)
+    this.loading.setLoadingMsg('Logging you in');
+    this.loading.setLoading(true);
   }
   ngOnInit() {
     if (localStorage.getItem('fbAccessToken')) {

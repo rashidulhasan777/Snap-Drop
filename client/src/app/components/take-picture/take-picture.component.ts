@@ -11,6 +11,7 @@ import { IdbServiceService } from 'src/app/services/idbService/idb-service.servi
 import * as FaceDetector from '@mediapipe/face_detection';
 import * as Camera_Utils from '@mediapipe/camera_utils';
 import * as Drawing_Utils from '@mediapipe/drawing_utils';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-take-picture',
@@ -48,8 +49,12 @@ export class TakePictureComponent {
   constructor(
     private idbService: IdbServiceService,
     private router: Router,
-    private renderer: Renderer2
-  ) {}
+    private renderer: Renderer2,
+    private loading: LoaderService
+  ) {
+    this.loading.setLoadingMsg('');
+    this.loading.setLoading(true);
+  }
 
   async ngOnInit() {
     if ('mediaDevices' in navigator) {
@@ -91,6 +96,7 @@ export class TakePictureComponent {
       height: 10000,
     });
     await this.camera.start();
+    this.loading.setLoading(false);
   }
   async onResult(results: FaceDetector.Results) {
     if (this.firstTime) {

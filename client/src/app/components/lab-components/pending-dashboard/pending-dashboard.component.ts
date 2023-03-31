@@ -18,6 +18,7 @@ import { DialogApprovalComponent } from '../dialog-approval/dialog-approval.comp
 import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from './../../../interfaces/order.interface';
 import { ImageInterface } from 'src/app/interfaces/image.interface';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-pending-dashboard',
@@ -41,7 +42,14 @@ export class PendingDashboardComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public dialog: MatDialog, private orderService: OrderService) {}
+  constructor(
+    public dialog: MatDialog,
+    private orderService: OrderService,
+    private loading: LoaderService
+  ) {
+    this.loading.setLoadingMsg('');
+    this.loading.setLoading(true);
+  }
 
   openDialog(order: Order): void {
     const dialogRef = this.dialog.open(DialogApprovalComponent, {
@@ -62,6 +70,7 @@ export class PendingDashboardComponent implements AfterViewInit, OnInit {
         this.dataSource = new MatTableDataSource(this.orders);
         this.paginator.length = this.orders.length;
         this.dataSource.paginator = this.paginator;
+        this.loading.setLoading(false);
       });
   }
 

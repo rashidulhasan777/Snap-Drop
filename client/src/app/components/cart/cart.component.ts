@@ -23,6 +23,7 @@ export class CartComponent {
     private priceService: PriceCalculationService,
     private loading: LoaderService
   ) {
+    this.loading.setLoadingMsg('');
     this.loading.setLoading(true);
   }
 

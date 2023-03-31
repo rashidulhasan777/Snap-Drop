@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from './../../../interfaces/order.interface';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-orders',
@@ -29,7 +30,14 @@ export class OrdersComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public dialog: MatDialog, private orderService: OrderService) {}
+  constructor(
+    public dialog: MatDialog,
+    private orderService: OrderService,
+    private loading: LoaderService
+  ) {
+    this.loading.setLoadingMsg('');
+    this.loading.setLoading(true);
+  }
 
   ngOnInit() {
     const orders = this.orderService
@@ -40,6 +48,7 @@ export class OrdersComponent implements AfterViewInit, OnInit {
         this.dataSource = new MatTableDataSource(this.orders);
         this.paginator.length = this.orders.length;
         this.dataSource.paginator = this.paginator;
+        this.loading.setLoading(false);
       });
   }
 

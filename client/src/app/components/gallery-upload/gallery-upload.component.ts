@@ -40,6 +40,7 @@ export class GalleryUploadComponent {
     private warning: MatDialog,
     private loading: LoaderService
   ) {
+    this.loading.setLoadingMsg('');
     this.loading.setLoading(true);
   }
 
@@ -98,6 +99,7 @@ export class GalleryUploadComponent {
 
   showPreview(event: Event) {
     const selectedFiles = (event.target as HTMLInputElement).files;
+    this.loading.setLoading(true);
     // returns a file list
     if (selectedFiles && selectedFiles[0]) {
       let numberOfFiles = selectedFiles.length;
@@ -119,6 +121,7 @@ export class GalleryUploadComponent {
               copies: [1, [Validators.required, Validators.min(1)]],
             })
           );
+          this.loading.setLoading(false);
         };
         reader.readAsDataURL(selectedFiles[i]);
       }
@@ -128,6 +131,7 @@ export class GalleryUploadComponent {
   async handleSubmit() {
     if (!this.pictureData.valid) return;
     try {
+      this.loading.setLoading(true);
       await this.idbService.removeAllGalleryPhotos();
       this.previews.forEach(async (el, idx) => {
         const { size, copies } = this.pictureData.at(idx).value;

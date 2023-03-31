@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Order } from 'src/app/interfaces/order.interface';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { IdbServiceService } from 'src/app/services/idbService/idb-service.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { OrderService } from 'src/app/services/orders/order.service';
 import { PriceCalculationService } from 'src/app/services/price-calculation/price-calculation.service';
 import { UserdataService } from 'src/app/services/userdata/userdata.service';
@@ -18,8 +19,10 @@ export class OrderDoneComponent {
     private orderService: OrderService,
     private userData: UserdataService,
     private idbService: IdbServiceService,
-    private router: Router
+    private router: Router,
+    private loading: LoaderService
   ) {
+    this.loading.setLoadingMsg('');
     userData.requestNotificationPermission();
   }
 

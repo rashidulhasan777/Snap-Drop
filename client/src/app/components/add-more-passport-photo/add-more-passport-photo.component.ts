@@ -39,6 +39,7 @@ export class AddMorePassportPhotoComponent implements OnInit {
     private warning: MatDialog,
     private loading: LoaderService
   ) {
+    this.loading.setLoadingMsg('');
     this.loading.setLoading(true);
     this.userData.getCountries().subscribe((res) => {
       this.countries = res;

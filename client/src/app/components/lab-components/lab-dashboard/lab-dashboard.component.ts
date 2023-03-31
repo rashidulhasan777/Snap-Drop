@@ -15,6 +15,7 @@ import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from './../../../interfaces/order.interface';
 import { UserdataService } from 'src/app/services/userdata/userdata.service';
 import { Router } from '@angular/router';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-lab-dashboard',
@@ -50,9 +51,12 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
   constructor(
     private orderService: OrderService,
     private userData: UserdataService,
-    private router: Router
+    private router: Router,
+    private loading: LoaderService
   ) {
     userData.requestNotificationPermission();
+    this.loading.setLoadingMsg('');
+    this.loading.setLoading(true);
   }
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -113,6 +117,7 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
 
         this.monthlyOrdersData = [...monthArr].reverse();
         this.monthlyDeliveredData = [...monthArr2].reverse();
+        this.loading.setLoading(false);
       });
   }
 

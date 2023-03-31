@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 // import { Details } from 'src/app/interfaces/details.interface';
 import { User } from 'src/app/interfaces/user.interface';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { PathaoService } from 'src/app/services/pathao/pathao.service';
 import { UserdataService } from 'src/app/services/userdata/userdata.service';
 
@@ -55,8 +56,12 @@ export class UserAddressComponent {
     private fb: FormBuilder,
     private pathao: PathaoService,
     private userDataService: UserdataService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private loading: LoaderService
+  ) {
+    this.loading.setLoadingMsg('');
+    this.loading.setLoading(true);
+  }
 
   ngOnInit() {
     this.disableArea(true);
@@ -69,6 +74,7 @@ export class UserAddressComponent {
         this.name?.setValue(res.name || '');
         this.hasPreviousInfo = false;
       }
+      this.loading.setLoading(false);
     });
 
     this.filteredCities = this.city?.valueChanges.pipe(
@@ -100,9 +106,11 @@ export class UserAddressComponent {
   }
 
   setZones(city: { city_id: number; city_name: string }) {
+    this.loading.setLoading(true);
     this.pathao.getPathaoZone(city.city_id).subscribe({
       next: (res: any) => {
         this.zones = res.zones;
+        this.loading.setLoading(false);
         this.disableZone(false);
         this.filteredZones = this.zone?.valueChanges.pipe(
           startWith(''),
@@ -117,9 +125,11 @@ export class UserAddressComponent {
   }
 
   setAreas(zone: { zone_id: number; zone_name: string }) {
+    this.loading.setLoading(true);
     this.pathao.getPathaoArea(zone.zone_id).subscribe({
       next: (res: any) => {
         this.areas = res.areas;
+        this.loading.setLoading(false);
         this.disableArea(false);
         this.filteredAreas = this.area?.valueChanges.pipe(
           startWith(''),
@@ -134,9 +144,11 @@ export class UserAddressComponent {
 
   handleSubmit() {
     if (this.deliveryInfoForm.valid) {
+      this.loading.setLoading(true);
       const details = JSON.parse(JSON.stringify(this.deliveryInfoForm.value));
       details.contact_number = '+880' + details.contact_number;
       this.userDataService.updateUserData(details).subscribe((res) => {
+        this.loading.setLoading(false);
         this.router.navigate(['order_summary']);
       });
     }

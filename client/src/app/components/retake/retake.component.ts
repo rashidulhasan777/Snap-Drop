@@ -5,6 +5,7 @@ import { ImageInterface } from 'src/app/interfaces/image.interface';
 import { Order } from 'src/app/interfaces/order.interface';
 import { CloudinaryService } from 'src/app/services/cloudinary/cloudinary.service';
 import { IdbServiceService } from 'src/app/services/idbService/idb-service.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { OrderService } from 'src/app/services/orders/order.service';
 
 @Component({
@@ -19,8 +20,12 @@ export class RetakeComponent {
     private orderService: OrderService,
     private router: Router,
     private idbService: IdbServiceService,
-    private cloudinaryService: CloudinaryService
-  ) {}
+    private cloudinaryService: CloudinaryService,
+    private loading: LoaderService
+  ) {
+    this.loading.setLoadingMsg('');
+    this.loading.setLoading(true);
+  }
 
   async ngOnInit() {
     this.orderService.getCustomerLatestOrder().subscribe(async (res) => {
@@ -39,6 +44,7 @@ export class RetakeComponent {
         });
       if (!this.passportPicturesToRetake.length)
         this.router.navigate(['user-dashboard']);
+      this.loading.setLoading(false);
     });
   }
   retake(id: string) {
@@ -46,6 +52,8 @@ export class RetakeComponent {
   }
 
   async updateOrder() {
+    this.loading.setLoadingMsg('Updating and sending the data');
+    this.loading.setLoading(true);
     const uploadSubsription: Observable<any>[] = [];
     const picToUpload: string[] = [];
     this.passportPicturesToRetake.forEach((pic) => {
@@ -78,6 +86,7 @@ export class RetakeComponent {
         )
         .subscribe(async () => {
           await this.idbService.resolveRetake();
+          this.loading.setLoading(false);
           this.router.navigate(['user_dashboard']);
         });
     });

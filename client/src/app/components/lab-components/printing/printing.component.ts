@@ -19,6 +19,7 @@ import { DialogApprovalComponent } from '../dialog-approval/dialog-approval.comp
 import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from './../../../interfaces/order.interface';
 import { PathaoService } from 'src/app/services/pathao/pathao.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-printing',
@@ -44,8 +45,12 @@ export class PrintingComponent implements AfterViewInit, OnInit {
   constructor(
     public dialog: MatDialog,
     private orderService: OrderService,
-    private pathaoService: PathaoService
-  ) {}
+    private pathaoService: PathaoService,
+    private loading: LoaderService
+  ) {
+    this.loading.setLoadingMsg('');
+    this.loading.setLoading(true);
+  }
 
   ngOnInit() {
     const orders = this.orderService
@@ -56,6 +61,7 @@ export class PrintingComponent implements AfterViewInit, OnInit {
         this.dataSource = new MatTableDataSource(this.orders);
         this.paginator.length = this.orders.length;
         this.dataSource.paginator = this.paginator;
+        this.loading.setLoading(false);
       });
   }
 

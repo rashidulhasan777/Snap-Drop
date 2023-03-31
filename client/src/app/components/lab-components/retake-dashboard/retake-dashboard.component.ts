@@ -13,6 +13,7 @@ import { DialogApprovalComponent } from '../dialog-approval/dialog-approval.comp
 import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from './../../../interfaces/order.interface';
 import { ImageInterface } from 'src/app/interfaces/image.interface';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-retake-dashboard',
@@ -36,7 +37,13 @@ export class RetakeDashboardComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private orderService: OrderService) {}
+  constructor(
+    private orderService: OrderService,
+    private loading: LoaderService
+  ) {
+    this.loading.setLoadingMsg('');
+    this.loading.setLoading(true);
+  }
 
   ngOnInit() {
     const orders = this.orderService
@@ -47,6 +54,7 @@ export class RetakeDashboardComponent implements AfterViewInit, OnInit {
         this.dataSource = new MatTableDataSource(this.orders);
         this.paginator.length = this.orders.length;
         this.dataSource.paginator = this.paginator;
+        this.loading.setLoading(false);
       });
   }
 

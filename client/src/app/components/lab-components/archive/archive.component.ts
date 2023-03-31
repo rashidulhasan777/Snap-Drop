@@ -18,6 +18,7 @@ import { DialogApprovalComponent } from '../dialog-approval/dialog-approval.comp
 
 import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from './../../../interfaces/order.interface';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-archive',
@@ -40,7 +41,14 @@ export class ArchiveComponent implements AfterViewInit, OnInit {
   ];
   dataSource: MatTableDataSource<Order> = new MatTableDataSource(this.orders);
 
-  constructor(public dialog: MatDialog, private orderService: OrderService) {}
+  constructor(
+    public dialog: MatDialog,
+    private orderService: OrderService,
+    private loading: LoaderService
+  ) {
+    this.loading.setLoadingMsg('');
+    this.loading.setLoading(true);
+  }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -62,6 +70,7 @@ export class ArchiveComponent implements AfterViewInit, OnInit {
             this.dataSource = new MatTableDataSource(this.orders);
             this.paginator.length = this.orders.length;
             this.dataSource.paginator = this.paginator;
+            this.loading.setLoading(false);
           });
       });
   }
