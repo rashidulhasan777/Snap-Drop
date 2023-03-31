@@ -35,7 +35,7 @@
 .gallery-controls {
   position: fixed;
   /* top: 50%; */
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,6 +54,8 @@ app-gallery-card {
 }
 
 .plus {
+  /* width: 100%; */
+  left: calc(50vw - 24px);
   margin-top: 20vh;
 }
 
@@ -71,11 +73,13 @@ app-gallery-card {
 }
 
 .bottom {
+  position: fixed;
   gap: 2vh;
   bottom: 0%;
+  right: 5%;
   margin-bottom: 10vh;
   padding: 10px 0px;
-  padding-right: 5vw;
+  /* padding-right: 5vw; */
   display: flex;
   flex-direction: column;
   align-items: end;
