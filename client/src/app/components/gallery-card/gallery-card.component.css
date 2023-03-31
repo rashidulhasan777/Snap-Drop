@@ -14,8 +14,9 @@
 }
 
 .gallery-image {
-  width: 150px;
-  height: 150px;
+  min-width: 37%;
+  max-width: 150px;
+  max-height: 150px;
   aspect-ratio: 1/1;
   object-fit: cover;
   margin-left: 2px;
