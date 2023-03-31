@@ -140,10 +140,10 @@ export class TakePictureComponent {
         ', Right Percent: ' +
         ((xCenter + width / 2) * 100).toFixed(2);
       if (
-        xCenter - width / 2 > 0.367 &&
-        xCenter + width / 2 < 0.61 &&
-        yCenter + height / 2 < 0.64 &&
-        yCenter - height / 2 > 0.11
+        xCenter - width / 2 > 0.28 &&
+        xCenter + width / 2 < 0.7 &&
+        yCenter + height / 2 < 0.66 &&
+        yCenter - height / 2 > 0.27
       ) {
         if (Math.abs(eyeangle) > 24) {
           if (this.tiltCount < 30) {
