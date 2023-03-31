@@ -177,11 +177,20 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
     else this.router.navigate(['archive']);
   }
 
-  prettifyStatus(status: string) {
-    if (status === 'pending') return 'Pending Approval';
-    else if (status === 'approved') return 'Approved';
-    else if (status === 'printing') return 'Printing';
-    else if (status === 'retake_needed') return 'Retake Needed';
-    else if (status === 'readyToDeliver') return 'Archived';
+  prettifyStatus(status: string): string {
+    switch (status) {
+      case 'pending':
+        return 'Pending Approval';
+      case 'approved':
+        return 'Approved';
+      case 'printing':
+        return 'Printing';
+      case 'retake_needed':
+        return 'Retake Needed';
+      case 'readyToDeliver':
+        return 'Ready To Deliver';
+      default:
+        return 'Handed Over';
+    }
   }
 }
