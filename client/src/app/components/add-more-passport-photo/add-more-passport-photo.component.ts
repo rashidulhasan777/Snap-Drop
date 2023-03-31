@@ -44,7 +44,7 @@ export class AddMorePassportPhotoComponent implements OnInit {
   }
 
   async ngOnInit() {
-    const prevValue = { country: '', copies: 1 };
+    const prevValue = { country: '', copies: 4 };
     try {
       this.passportPhotos = (await this.idbService.getPassportPhotos()) || [];
       prevValue.country = (await this.idbService.getCountry()) || '';

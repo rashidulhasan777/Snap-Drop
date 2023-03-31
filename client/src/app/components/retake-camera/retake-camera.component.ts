@@ -1,0 +1,240 @@
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  ViewChild,
+  Renderer2,
+} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ImageInterface } from 'src/app/interfaces/image.interface';
+import { IdbServiceService } from 'src/app/services/idbService/idb-service.service';
+import * as FaceDetector from '@mediapipe/face_detection';
+import * as Camera_Utils from '@mediapipe/camera_utils';
+import * as Drawing_Utils from '@mediapipe/drawing_utils';
+@Component({
+  selector: 'app-retake-camera',
+  templateUrl: './retake-camera.component.html',
+  styleUrls: ['./retake-camera.component.css'],
+})
+export class RetakeCameraComponent {
+  @ViewChild('webcamFeed')
+  videoElem!: ElementRef<HTMLVideoElement>;
+  @ViewChild('canvasImage')
+  canvasElem!: ElementRef<HTMLCanvasElement>;
+  canvasCtx!: CanvasRenderingContext2D | null;
+  cameraOpen = true;
+
+  flipped = false;
+
+  dataUrl = '';
+  errorMsg = '';
+  delayed = false;
+  _faceDetector!: FaceDetector.FaceDetection;
+  camera!: Camera_Utils.Camera;
+  takePicture = false;
+  firstTime = true;
+  instructionMsg = '';
+  currentImage: any;
+  tiltCount = 0;
+  countdownStart = 0;
+
+  valid = false;
+  autoCapture = true;
+  id: string = '';
+
+  hasMultipleCamera = false;
+  constructor(
+    private idbService: IdbServiceService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private renderer: Renderer2
+  ) {}
+  async ngOnInit() {
+    this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
+    if ('mediaDevices' in navigator) {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      let total = 0;
+      devices.forEach((el) => {
+        if (el.kind === 'videoinput') total++;
+      });
+      if (total) this.hasMultipleCamera = true;
+    }
+  }
+
+  async ngAfterViewInit() {
+    setTimeout(() => (this.delayed = !this.delayed), 800);
+    if (this.canvasElem.nativeElement.getContext('2d'))
+      this.canvasCtx = this.canvasElem.nativeElement.getContext('2d');
+    this._faceDetector = new FaceDetector.FaceDetection({
+      locateFile: (file) => {
+        return `https://cdn.jsdelivr.net/npm/@mediapipe/face_detection@0.4/${file}`;
+      },
+    });
+
+    this._faceDetector.setOptions({
+      selfieMode: true,
+      model: 'short',
+      minDetectionConfidence: 0.8,
+    });
+    this._faceDetector.onResults((results: FaceDetector.Results) => {
+      this.onResult(results);
+    });
+    this.camera = new Camera_Utils.Camera(this.videoElem.nativeElement, {
+      onFrame: async () => {
+        await this._faceDetector.send({
+          image: this.videoElem.nativeElement,
+        });
+      },
+      facingMode: 'user',
+      width: 10000,
+      height: 10000,
+    });
+    await this.camera.start();
+  }
+  async onResult(results: FaceDetector.Results) {
+    if (this.firstTime) {
+      this.firstTime = false;
+      this.canvasElem.nativeElement.width = results.image.width;
+      this.canvasElem.nativeElement.height = results.image.height;
+    }
+    if (results.detections.length < 1) {
+      this.instructionMsg = 'Please make sure you are on frame';
+      this.countdownStart = 0;
+      this.valid = false;
+      return;
+    }
+    if (results.detections.length > 1) {
+      this.instructionMsg = 'Please make sure only one person is visible';
+      this.countdownStart = 0;
+      this.valid = false;
+      return;
+    }
+    this.instructionMsg = '';
+    if (this.canvasCtx) {
+      const eye1 = results.detections[0].landmarks[0];
+      const eye2 = results.detections[0].landmarks[1];
+      const eyeangle =
+        (Math.atan((eye1.y - eye2.y) / (eye1.x - eye2.x)) * 180) / Math.PI;
+      // console.log(results.image);
+      // console.log('x', results.detections[0].boundingBox.xCenter * 430);
+      // console.log('y', results.detections[0].boundingBox.yCenter * 245);
+      const { xCenter, yCenter, height, width } =
+        results.detections[0].boundingBox;
+      if (
+        xCenter - width / 2 > 0.367 &&
+        xCenter + width / 2 < 0.61 &&
+        yCenter + height / 2 < 0.64 &&
+        yCenter - height / 2 > 0.11
+      ) {
+        if (Math.abs(eyeangle) > 24) {
+          if (this.tiltCount < 30) {
+            this.tiltCount++;
+            return;
+          }
+          this.countdownStart = 0;
+          this.valid = false;
+          this.instructionMsg = "Please don't tilt your head too much";
+          return;
+        } else {
+          this.tiltCount = 0;
+          this.instructionMsg = '';
+        }
+        this.valid = true;
+        if (this.autoCapture) {
+          this.instructionMsg =
+            'Please stay still and look at the camera and we will take the picture for you.';
+          if (!this.countdownStart) this.countdownStart = Date.now();
+          if (this.countdownStart + 3000 < Date.now()) {
+            this.capture();
+            this.countdownStart = 0;
+          }
+        }
+      } else {
+        this.countdownStart = 0;
+        this.valid = false;
+      }
+      this.clearCanvas();
+      if (this.takePicture) {
+        this.takePicture = false;
+        this.canvasCtx.save();
+        this.canvasCtx.scale(this.flipped ? -1 : 1, 1);
+        this.canvasCtx.drawImage(
+          results.image,
+          this.flipped ? this.canvasElem.nativeElement.width * -1 : 0,
+          0,
+          this.canvasElem.nativeElement.width,
+          this.canvasElem.nativeElement.height
+        );
+        this.dataUrl = this.canvasElem.nativeElement.toDataURL('image/jpeg');
+        this.canvasCtx.restore();
+        await this.camera.stop();
+        this.cameraOpen = false;
+        this.clearCanvas();
+        return;
+      }
+      this.canvasCtx.save();
+
+      if (results.detections.length > 0) {
+        Drawing_Utils.drawRectangle(
+          this.canvasCtx,
+          results.detections[0].boundingBox,
+          { color: 'blue', lineWidth: 4, fillColor: '#00000000' }
+        );
+      }
+      this.canvasCtx.restore();
+    }
+  }
+
+  savePhoto() {
+    const link = this.renderer.createElement('a');
+    link.setAttribute('href', this.dataUrl);
+    link.setAttribute('download', `Image.jpg`);
+    link.click();
+    link.remove();
+  }
+
+  async capture() {
+    this.takePicture = true;
+  }
+
+  async retakePhoto() {
+    this.canvasCtx?.restore();
+    await this.camera.start();
+    this.cameraOpen = true;
+  }
+  clearCanvas() {
+    if (this.canvasCtx) {
+      this.canvasCtx.clearRect(
+        0,
+        0,
+        this.canvasElem.nativeElement.width,
+        this.canvasElem.nativeElement.height
+      );
+    }
+  }
+  switchCamera() {
+    this.camera.stop();
+    this.camera = new Camera_Utils.Camera(this.videoElem.nativeElement, {
+      onFrame: async () => {
+        await this._faceDetector.send({
+          image: this.videoElem.nativeElement,
+        });
+      },
+      facingMode: 'environment',
+      width: 10000,
+      height: 10000,
+    });
+    this.firstTime = true;
+    this.camera.start();
+  }
+  async updatePhoto() {
+    await this.idbService.updateOneRetakeImage(this.id, this.dataUrl);
+    this.router.navigate(['retake']);
+  }
+
+  ngOnDestroy() {
+    (this.videoElem.nativeElement.srcObject as MediaStream)
+      .getVideoTracks()[0]
+      .stop();
+  }
+}

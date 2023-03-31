@@ -43,7 +43,7 @@ export class OrderService {
     });
   }
   updateOrder(id: string, body: ImageInterface[]): Observable<Order> {
-    return this.http.put<Order>(this.baseUrl + '/' + id, body, {
+    return this.http.put<Order>(this.baseUrl + 'Update/' + id, body, {
       headers: {
         Authorization: `Bearer ${this.jwtToken}`,
       },

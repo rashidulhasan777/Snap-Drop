@@ -4,6 +4,6 @@ app-user-navbar {
   /* border-top: 1px solid black; */
   z-index: 9999;
 }
-.paddingForScrolling {
-  height: 88px;
+.bottomPadding {
+  height: 70px;
 }
