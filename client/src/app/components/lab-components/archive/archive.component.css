@@ -48,3 +48,7 @@ th.mat-sort-header-sorted {
 .submenu.expanded {
   transform: scaleY(1);
 }
+
+.vd-btn {
+  margin-right: 20px;
+}

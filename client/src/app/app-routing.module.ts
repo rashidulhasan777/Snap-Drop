@@ -30,6 +30,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { LabDashboardComponent } from './components/lab-components/lab-dashboard/lab-dashboard.component';
 import { SplashscreenComponent } from './components/splashscreen/splashscreen.component';
 import { RetakeCameraComponent } from './components/retake-camera/retake-camera.component';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
 
 const routes: Routes = [
   {
@@ -145,6 +146,7 @@ const routes: Routes = [
     component: UserProfileComponent,
     canActivate: [AuthGuardGuard, RoleguardUserGuard],
   },
+  { path: 'errorPage', component: ErrorPageComponent },
   { path: '', pathMatch: 'full', redirectTo: 'splashScreen' },
 ];
 
