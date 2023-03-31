@@ -1,0 +1,48 @@
+.ep-cnt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.error-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 500px;
+  justify-content: center;
+  text-align: center;
+}
+
+.error-header {
+  color: #673ab7;
+  font-size: 10.5rem;
+  /* letter-spacing: 0.1em; */
+  margin: 0.025em 0;
+  text-shadow: 0.05em 0.05em 0 rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+}
+
+.ghost {
+  animation: spooky 2s alternate infinite linear;
+
+  display: inline-block;
+}
+
+.error-subheader {
+  color: #311432;
+  margin-bottom: 0.4em;
+}
+
+.error-message {
+  color: #311432;
+  margin-top: 0;
+}
+
+@keyframes spooky {
+  from {
+    transform: translatey(0.15em) scaley(0.95);
+  }
+}
