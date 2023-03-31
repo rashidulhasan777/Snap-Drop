@@ -31,6 +31,10 @@ import { LabDashboardComponent } from './components/lab-components/lab-dashboard
 import { SplashscreenComponent } from './components/splashscreen/splashscreen.component';
 
 const routes: Routes = [
+  {
+    path: 'splashScreen',
+    component: SplashscreenComponent,
+  },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'camera', component: TakePictureComponent },
@@ -131,11 +135,6 @@ const routes: Routes = [
     component: UserProfileComponent,
     canActivate: [AuthGuardGuard, RoleguardUserGuard],
   },
-  {
-    path: 'splashScreen',
-    component: SplashscreenComponent,
-  },
-
   { path: '', pathMatch: 'full', redirectTo: 'login' },
 ];
 
