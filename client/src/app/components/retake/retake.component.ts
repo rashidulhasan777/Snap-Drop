@@ -27,7 +27,11 @@ export class RetakeComponent {
       this.currentOrder = res;
       let pImages: ImageInterface[] | undefined =
         await this.idbService.getRetakePhotos();
-      if (!pImages) pImages = res.passportPictures;
+      console.log(pImages);
+      if (!pImages) {
+        pImages = res.passportPictures;
+        await this.idbService.setRetakePhotos(pImages || []);
+      }
       if (!pImages) this.router.navigate(['user-dashboard']);
       else
         pImages.forEach((pic) => {

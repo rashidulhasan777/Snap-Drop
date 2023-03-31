@@ -14,6 +14,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from './../../../interfaces/order.interface';
 import * as moment from 'moment';
+import { UserdataService } from 'src/app/services/userdata/userdata.service';
 
 @Component({
   selector: 'app-lab-dashboard',
@@ -46,7 +47,12 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
   ];
   dataSource: MatTableDataSource<Order> = new MatTableDataSource(this.orders);
 
-  constructor(private orderService: OrderService) {}
+  constructor(
+    private orderService: OrderService,
+    private userData: UserdataService
+  ) {
+    userData.requestNotificationPermission();
+  }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

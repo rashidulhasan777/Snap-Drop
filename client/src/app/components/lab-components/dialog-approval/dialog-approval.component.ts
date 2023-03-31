@@ -23,6 +23,7 @@ export class DialogApprovalComponent {
   imageStatuses = this.formBuiler.array<FormGroup>([]);
   instructionError = false;
   nextImageText = 'Next';
+  country = '';
   constructor(
     private formBuiler: FormBuilder,
     private router: Router,
@@ -30,6 +31,7 @@ export class DialogApprovalComponent {
     public dialogRef: MatDialogRef<PendingDashboardComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Order
   ) {
+    this.country = data.countryForPassport || '';
     this.passportImages = data.passportPictures || [];
     this.currentImage = this.passportImages[0];
     this.passportImages.forEach((el) => {

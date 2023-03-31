@@ -99,7 +99,10 @@ const getOrdersbyStatus = async (req, res) => {
 
 const getOrderByLabId = async (req, res) => {
   try {
-    const orders = await Order.find({ labId: req.currentUser.labId });
+    const orders = await Order.find({
+      labId: req.currentUser.labId,
+      paid: true,
+    });
     res.status(201);
     res.send(orders);
   } catch (error) {
@@ -111,6 +114,7 @@ const getOneWeekData = async (req, res) => {
   try {
     const orders = await Order.find({
       labId: req.currentUser.labId,
+      paid: true,
       timestamp: {
         $gte: new Date(new Date() - 7 * 60 * 60 * 24 * 1000),
       },

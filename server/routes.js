@@ -88,7 +88,7 @@ router.post('/order', authMiddleware.customer, orderController.createOrder);
 router.put('/order/:id', authMiddleware.lab, orderController.changeOrderStatus);
 router.put(
   '/orderUpdate/:id',
-  authMiddleware.lab,
+  authMiddleware.authenticated,
   orderController.updatePassport
 );
 

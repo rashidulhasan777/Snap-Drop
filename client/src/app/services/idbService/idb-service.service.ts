@@ -52,9 +52,14 @@ export class IdbServiceService {
 
   updateOneRetakeImage(id: string, data: string) {
     return update('retakePictures', (val) => {
-      val.forEach((el: ImageInterface) => {
-        if (el._id === id) el.imageURL === data;
-      });
+      if (val)
+        return val.map((el: ImageInterface) => {
+          if (el._id === id) {
+            el.imageURL = data;
+            console.log(el);
+          }
+          return el;
+        });
     });
   }
   resolveRetake() {
