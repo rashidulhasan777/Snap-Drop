@@ -1,6 +1,6 @@
-# fly.toml file generated for dropsnapbd on 2023-03-31T20:17:57+06:00
+# fly.toml file generated for snapdropbd on 2023-03-23T15:47:12+06:00
 
-app = "dropsnapbd"
+app = "snapdropbd"
 kill_signal = "SIGINT"
 kill_timeout = 5
 primary_region = "sin"
@@ -10,7 +10,7 @@ processes = []
   builder = "heroku/buildpacks:20"
 
 [env]
-  PORT = "8080"
+  PORT="8080"
   DB_URL="mongodb+srv://Sajon:8nmtUkx6zBgTH4ub@thesisproject.uyrszo9.mongodb.net/snapdrop_db?retryWrites=true&w=majority"
   JWT_SECRET="plus est en vous"
   GOOGLE_CLIENT_ID="861084726957-9qcs9ivbphq1043ls2b2me5obfhk48ut.apps.googleusercontent.com"
@@ -32,8 +32,10 @@ processes = []
   BASE_BACKEND_URL = "https://snapdropbd.fly.dev"
   STORE_ID = "flyaw641be11fa19cc"
   STORE_PASSWORD = "flyaw641be11fa19cc@ssl"
+  
   VAPID_PUBLIC_KEY ="BGWbwwGSeOp32TFIezGDGCejWllTBcMpn3ASg6wbBp9Uxx14GPdiA9YKoHyg2gGMrcKeAlRtAnpj15OJXZu2S6w"
   VAPID_PRIVATE_KEY = "ydjR-UjvsdeCX7_pN1F0D-aQ8Aocbek5kLY-qMd49Mc"
+  
   CUTOUT_PRO = 'a844d560ceaf44a5baa7edb1fe9c1019'
 
 [experimental]
