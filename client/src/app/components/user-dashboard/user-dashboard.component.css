@@ -66,12 +66,12 @@
 
 .button-option {
   background-color: var(--secondary);
-  border: 1px solid var(--accent);
+  border: 1px solid #683ab7b2;
   border-radius: 12px;
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  box-shadow: var(--box-shadow);
+  box-shadow: var(--card-shadow);
 }
 .icon {
   /* border-radius: 10px; */

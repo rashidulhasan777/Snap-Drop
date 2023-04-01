@@ -3,6 +3,7 @@ import {
   Component,
   OnInit,
   ViewChild,
+  Output,
   Inject,
 } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -54,6 +55,7 @@ export class ArchiveComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit() {
+    // this.onArchive.emit();
     const orders = this.orderService
       .getOrdersbyStatus('readyToDeliver')
       .subscribe((response) => {
