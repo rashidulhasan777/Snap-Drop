@@ -5,6 +5,7 @@
   flex-direction: column;
 }
 .header {
+  font-size: xx-large;
   color: var(--text);
   margin-bottom: 8vh;
   margin-top: 10vh;

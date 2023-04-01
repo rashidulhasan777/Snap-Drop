@@ -111,9 +111,6 @@ h1 {
 .captureButton ::ng-deep .buttons-camera{
   color: var(--accent)
 }
-.after-click ::ng-deep .buttons-camera{
-  color: var(--accent)
-}
 
 .hide {
   display: none;

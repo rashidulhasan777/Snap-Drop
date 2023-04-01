@@ -55,9 +55,6 @@
       <button class="buttons-camera" mat-icon-button (click)="autoCapture = !autoCapture">
         <mat-icon> motion_photos_auto </mat-icon>
       </button>
-      <button class="buttons-camera" mat-icon-button (click)="flipped = !flipped">
-        <mat-icon> flip </mat-icon>
-      </button>
       <button
         *ngIf="cameraOpen; else retakeOrProceed"
         class="button buttons-camera"
@@ -65,26 +62,26 @@
         [disabled]="!valid"
         mat-icon-button
       >
-        <!-- <mat-icon>camera</mat-icon> -->
-        <mat-icon>adjust</mat-icon>
-        <!-- <mat-icon>camera_alt</mat-icon> -->
-        <!-- <mat-icon>lens</mat-icon> -->
-        <!-- <mat-icon>panorama_fish_eye</mat-icon> -->
+        <mat-icon>camera</mat-icon>
+        <!-- <mat-icon>adjust</mat-icon> -->
       </button>
-      <button
+      <button class="buttons-camera" mat-icon-button (click)="flipped = !flipped">
+        <mat-icon> flip </mat-icon>
+      </button>
+      <!-- <button
         class="buttons-camera"
         mat-icon-button
         [disabled]="!hasMultipleCamera"
         (click)="autoCapture = !autoCapture"
       >
         <mat-icon> switch_camera </mat-icon>
-      </button>
+      </button> -->
     </ng-container>
     <ng-template #retakeOrProceed>
-      <button mat-icon-button class="button buttons-camera" (click)="retakePhoto()">
+      <button mat-icon-button class="buttons-camera" (click)="retakePhoto()">
         <mat-icon>cached</mat-icon>
       </button>
-      <button mat-icon-button class="button buttons-camera" (click)="savePhoto()">
+      <button mat-icon-button class="buttons-camera" (click)="savePhoto()">
         <mat-icon>download</mat-icon>
       </button>
       <button mat-icon-button class="button buttons-camera" (click)="addToPassportPhotos()">
