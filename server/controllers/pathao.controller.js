@@ -1,7 +1,7 @@
-const axios = require('axios');
-const Order = require('./../models/order.model');
-const User = require('./../models/user.model');
-const { findClosestStudio } = require('../utils/helpers/nearestLabFinder');
+const axios = require("axios");
+const Order = require("./../models/order.model");
+const User = require("./../models/user.model");
+const { findClosestStudio } = require("../utils/helpers/nearestLabFinder");
 
 const baseUrl = process.env.PATHAO_BASE_URL;
 
@@ -15,12 +15,12 @@ const pathaoAccessToken = async (req, res, next) => {
   };
   try {
     const pathaoToken = await axios.post(
-      baseUrl + '/aladdin/api/v1/issue-token',
+      baseUrl + "/aladdin/api/v1/issue-token",
       issueBody,
       {
         headers: {
-          accept: 'application/json',
-          'content-type': 'application/json',
+          accept: "application/json",
+          "content-type": "application/json",
         },
       }
     );
@@ -28,7 +28,7 @@ const pathaoAccessToken = async (req, res, next) => {
     res.send({ pathaoToken: pathaoToken.data });
   } catch (err) {
     console.log(err);
-    res.status(500).send({ errorMessage: 'Cannot get access token' });
+    res.status(500).send({ errorMessage: "Cannot get access token" });
   }
 };
 
@@ -40,8 +40,8 @@ const pathaoZones = async (req, res, next) => {
       {
         headers: {
           authorization: `Bearer ${pathaoToken}`,
-          accept: 'application/json',
-          'content-type': 'application/json',
+          accept: "application/json",
+          "content-type": "application/json",
         },
       }
     );
@@ -62,8 +62,8 @@ const pathaoAreas = async (req, res, next) => {
       {
         headers: {
           authorization: `Bearer ${pathaoToken}`,
-          accept: 'application/json',
-          'content-type': 'application/json',
+          accept: "application/json",
+          "content-type": "application/json",
         },
       }
     );
@@ -83,23 +83,23 @@ const createOrder = async (req, res, next) => {
     const order = await Order.findById(id);
     const labUser = await User.find({ labId: order.labId });
     orderDetails = {
-      store_id: 55865, //order.labId,
-      merchant_order_id: '',
-      sender_name: 'Karim bhai', //labUser.details.contact_name,
-      sender_phone: '01954875461', //labUser.details.contact_number,
-      recipient_name: 'Rahim Bhai', //order.orderDelivaryDetails.contact_name,
-      recipient_phone: '01954244156', //order.orderDelivaryDetails.contact_number,
-      recipient_address: 'aobnfbnaofenofianeoi', //order.orderDelivaryDetails.address,
+      store_id: order.labId,
+      merchant_order_id: "",
+      sender_name: labUser.details.contact_name,
+      sender_phone: labUser.details.contact_number,
+      recipient_name: order.orderDelivaryDetails.contact_name,
+      recipient_phone: order.orderDelivaryDetails.contact_number,
+      recipient_address: order.orderDelivaryDetails.address,
       recipient_city: order.orderDelivaryDetails.city.city_id,
       recipient_zone: order.orderDelivaryDetails.zone.zone_id,
-      recipient_area: order.orderDelivaryDetails.area.area_id,
+      recipient_area: order.orderDelivaryDetails.area.area_id || "",
       delivery_type: 48,
       item_type: 2,
-      special_instruction: '',
+      special_instruction: "",
       item_quantity: 1,
       item_weight: 0.5,
       amount_to_collect: 0,
-      item_description: '',
+      item_description: "",
     };
 
     const store = await axios.post(
@@ -108,8 +108,8 @@ const createOrder = async (req, res, next) => {
       {
         headers: {
           authorization: `Bearer ${pathaoToken}`,
-          accept: 'application/json',
-          'content-type': 'application/json',
+          accept: "application/json",
+          "content-type": "application/json",
         },
       }
     );
@@ -125,27 +125,27 @@ const pathaoFindClosestStudio = async (req, res, next) => {
   try {
     const area = req.currentUser.details.area
       ? req.currentUser.details.area.area_name
-      : '';
+      : "";
     const zone = req.currentUser.details.zone.zone_name;
     const city = req.currentUser.details.city.city_name;
-    const country = 'Bangladesh';
+    const country = "Bangladesh";
     const nearestStudio = await findClosestStudio(area, zone, city, country);
     res.status(200).send(nearestStudio);
   } catch (err) {
     console.log(err);
-    res.status(400).send({ errorMessage: 'Could not find nearest studio' });
+    res.status(400).send({ errorMessage: "Could not find nearest studio" });
   }
 };
 
 const patahaoPriceCalc = async (req, res, next) => {
   try {
     let { store_id, pathaoToken } = req.body;
-    store_id = '' + store_id;
-    const item_type = '' + 1;
-    const delivery_type = '' + 48;
-    const item_weight = '' + 0.5;
-    const recipient_city = '' + req.currentUser.details.city.city_id;
-    const recipient_zone = '' + req.currentUser.details.zone.zone_id;
+    store_id = "" + store_id;
+    const item_type = "" + 1;
+    const delivery_type = "" + 48;
+    const item_weight = "" + 0.5;
+    const recipient_city = "" + req.currentUser.details.city.city_id;
+    const recipient_zone = "" + req.currentUser.details.zone.zone_id;
     const priceEstimateData = await axios.post(
       `${baseUrl}/aladdin/api/v1/merchant/price-plan`,
       {
@@ -159,8 +159,8 @@ const patahaoPriceCalc = async (req, res, next) => {
       {
         headers: {
           authorization: `Bearer ${pathaoToken}`,
-          accept: 'application/json',
-          'content-type': 'application/json',
+          accept: "application/json",
+          "content-type": "application/json",
         },
       }
     );
