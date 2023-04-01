@@ -1,10 +1,14 @@
 .header {
   text-align: center;
-  margin-top: 10vh;
+  margin-top: 2vh;
   margin-bottom: 8vh;
   color: var(--text);
 }
-
+.logo{
+  height: 120px;
+  width: 120px;
+  /* background-color: var(--secondary); */
+}
 .whole-body {
   height: var(--body-height);
   width: 100vw;

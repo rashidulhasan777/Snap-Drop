@@ -6,9 +6,15 @@
   align-items: center;
   gap: 2rem;
 }
+.logo{
+  height: 120px;
+  width: 120px;
+  /* background-color: var(--secondary); */
+}
 .pageHeader {
   text-align: center;
-  margin: 12vh 0;
+  margin-top: 2vh;
+  margin-bottom: 12vh;
 }
 .oauthButtons {
   display: flex;

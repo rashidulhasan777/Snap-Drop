@@ -1,8 +1,8 @@
 .background {
   /* background: linear-gradient(-45deg,#f7f4fa, #e0d2ee ); */
-  background: var();
+  background: var(--secondary);
   background-size: 100% 200%;
-  animation: gradient 4s ease infinite;
+  /* animation: gradient 4s ease infinite; */
   overflow: scroll;
   position: fixed;
   top: 0;
@@ -12,7 +12,7 @@
 }
 
 
-@keyframes gradient {
+/* @keyframes gradient {
   0% {
       background-position: 0% 0%;
   }
@@ -22,4 +22,4 @@
   100% {
       background-position: 0% 0%;
   }
-}
+} */

@@ -1,5 +1,8 @@
 <div class="whole-body">
   <div *ngIf="User" class="user-info-form">
+    <div class="top-bar">
+      <button class="logout-btn" color="warn" mat-flat-button (click)="logout()"><mat-icon mat-raised-button>logout</mat-icon>Logout</button>
+    </div>
     <h1 class="greeting">
       Hello, <span class="name"> {{ User && firstName }} </span>
       <img class="header-icon" src="assets/icons/wave.png" />
@@ -137,10 +140,5 @@
         </button>
       </div>
     </form>
-    <div class="logout-btn-container">
-      <button class="logout-btn" color="warn" mat-flat-button (click)="logout()">
-        Logout
-      </button>
-    </div>
   </div>
 </div>
