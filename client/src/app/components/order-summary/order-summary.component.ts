@@ -45,6 +45,7 @@ export class OrderSummaryComponent {
   ) {
     this.loading.setLoadingMsg('');
     this.loading.setLoading(true);
+    this.loading.setBlockNavbar(false);
   }
 
   async ngOnInit() {

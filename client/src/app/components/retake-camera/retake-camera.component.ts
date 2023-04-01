@@ -53,6 +53,8 @@ export class RetakeCameraComponent {
   ) {
     this.loading.setLoadingMsg('');
     this.loading.setLoading(true);
+    this.loading.setBlockNavbar(false);
+
   }
   async ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';

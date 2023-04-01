@@ -136,9 +136,9 @@ export class IdbServiceService {
   }> {
     const data = await getMany(['galleryPhotos', 'passportPhotos', 'country']);
     return {
-      galleryPictures: data[0],
-      passportPictures: data[1],
-      countryForPassport: data[2],
+      galleryPictures: data[0] || [],
+      passportPictures: data[1] || [],
+      countryForPassport: data[2] || [],
     };
   }
 }

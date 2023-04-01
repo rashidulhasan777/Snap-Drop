@@ -19,6 +19,8 @@ export class FacebookLoginComponent implements OnInit {
     private http: HttpClient,
     private loading: LoaderService
   ) {
+    this.loading.setBlockNavbar(true);
+
     this.loading.setLoadingMsg('Logging you in');
     this.loading.setLoading(true);
   }

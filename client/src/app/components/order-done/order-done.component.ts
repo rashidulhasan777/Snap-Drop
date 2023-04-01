@@ -23,14 +23,13 @@ export class OrderDoneComponent {
     private loading: LoaderService
   ) {
     this.loading.setLoadingMsg('');
+    this.loading.setBlockNavbar(true);
+
     userData.requestNotificationPermission();
   }
 
   async ngOnInit() {
     this.orderService.setOrderPaid().subscribe();
     await this.idbService.clearAll();
-    setTimeout(() => {
-      this.router.navigate(['login']);
-    }, 3000);
   }
 }

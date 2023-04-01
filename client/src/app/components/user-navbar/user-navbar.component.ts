@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { CartService } from 'src/app/services/cart/cart.service';
+import { IdbServiceService } from 'src/app/services/idbService/idb-service.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-user-navbar',
@@ -8,23 +10,20 @@ import { CartService } from 'src/app/services/cart/cart.service';
   styleUrls: ['./user-navbar.component.css'],
 })
 export class UserNavbarComponent {
-  selectedButton: string="button1";
-  cartItemsLen?: number;
+  selectedButton: string = 'button1';
 
   constructor(
     private authService: AuthenticationService,
-    private cart: CartService
+    private loading: LoaderService
   ) {}
-  ngOnInit() {
-    this.cart.getCart().subscribe((res) => {
-      if (res)
-        this.cartItemsLen =
-          (res.galleryPictures?.length || 0) +
-          (res.passportPictures?.length || 0);
-    });
+  async ngOnInit() {
+    await this.loading.setItemsInCart();
   }
 
   logout() {
     this.authService.logout();
+  }
+  getCartItemsLen() {
+    return this.loading.getItemsInCart();
   }
 }

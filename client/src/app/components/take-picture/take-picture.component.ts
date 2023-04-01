@@ -54,6 +54,7 @@ export class TakePictureComponent {
   ) {
     this.loading.setLoadingMsg('');
     this.loading.setLoading(true);
+    this.loading.setBlockNavbar(true);
   }
 
   async ngOnInit() {

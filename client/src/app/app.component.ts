@@ -64,4 +64,8 @@ export class AppComponent {
   get Loading() {
     return this.loading.getLoading();
   }
+
+  get showNavbar() {
+    return !this.loading.getBlockNavbar();
+  }
 }

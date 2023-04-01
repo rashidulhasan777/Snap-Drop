@@ -28,6 +28,7 @@ export class UserDashboardComponent {
   ) {
     this.loading.setLoadingMsg('');
     this.loading.setLoading(true);
+    this.loading.setBlockNavbar(false);
   }
 
   ngOnInit() {
@@ -35,16 +36,24 @@ export class UserDashboardComponent {
       this.User = res;
       this.socket.emit('gimmeNotification', { userId: res._id });
       this.socket.on;
-      let fullname = this.User.name.split(' ');
-      this.firstName = fullname[0];
+      if (this.User.name) {
+        let fullname = this.User.name.split(' ');
+        this.firstName = fullname[0];
+      }
       if (this.User.newUser) this.openDialog();
-      this.orderService.getCustomerLatestOrder().subscribe((res) => {
-        console.log(res);
-        if (res && res.orderStatus === 'retake_needed') {
-          this.router.navigate(['retake']);
-        }
-        this.order = res;
-        this.loading.setLoading(false);
+      this.orderService.getCustomerLatestOrder().subscribe({
+        next: (res) => {
+          // console.log(res);
+          if (res && res.orderStatus === 'retake_needed') {
+            this.router.navigate(['retake']);
+          }
+          this.order = res;
+          this.loading.setLoading(false);
+        },
+        error: (error) => {
+          console.log(error);
+          this.loading.setLoading(false);
+        },
       });
     });
   }

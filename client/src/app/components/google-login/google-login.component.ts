@@ -21,6 +21,7 @@ export class GoogleLoginComponent implements OnInit {
   ) {
     this.loading.setLoadingMsg('Logging you in');
     this.loading.setLoading(true);
+    this.loading.setBlockNavbar(true);
   }
 
   ngOnInit() {

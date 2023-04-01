@@ -61,6 +61,8 @@ export class UserAddressComponent {
   ) {
     this.loading.setLoadingMsg('');
     this.loading.setLoading(true);
+    this.loading.setBlockNavbar(false);
+
   }
 
   ngOnInit() {
