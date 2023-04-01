@@ -45,7 +45,7 @@ export class ChartComponent implements OnInit {
       x: {},
       y: {
         min: 0,
-        max: 9,
+        max: 20,
       },
     },
     plugins: {

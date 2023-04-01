@@ -9,7 +9,6 @@ import { OrderService } from 'src/app/services/orders/order.service';
   styleUrls: ['./nav-and-sidebar.component.css'],
 })
 export class NavAndSidebarComponent {
-  selectedButton: string="button1";
   @ViewChild('sidenav') sidenav!: MatSidenav;
   isExpanded = true;
   isShowing = false;

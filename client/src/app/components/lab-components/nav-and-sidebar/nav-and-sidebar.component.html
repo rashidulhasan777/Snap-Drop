@@ -23,8 +23,6 @@
   >
     <mat-nav-list>
       <mat-list-item
-        [ngClass]="{ selected: selectedButton === 'button1' }"
-        (click)="selectedButton = 'button1'"
         class="parent"
         routerLink="/lab-dashboard"
       >
@@ -34,8 +32,6 @@
         </span>
       </mat-list-item>
       <mat-list-item
-        [ngClass]="{ selected: selectedButton === 'button2' }"
-        (click)="selectedButton = 'button2'"
         class="parent"
         routerLink="/pendingApproval"
       >
@@ -46,8 +42,6 @@
         <!-- <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon> -->
       </mat-list-item>
       <mat-list-item
-        [ngClass]="{ selected: selectedButton === 'button3' }"
-        (click)="selectedButton = 'button3'"
         class="parent"
         routerLink="/retakeNeeded"
       >
@@ -57,8 +51,6 @@
         </span>
       </mat-list-item>
       <mat-list-item
-        [ngClass]="{ selected: selectedButton === 'button4' }"
-        (click)="selectedButton = 'button4'"
         class="parent"
         routerLink="/orders"
       >
@@ -68,8 +60,6 @@
         </span>
       </mat-list-item>
       <mat-list-item
-        [ngClass]="{ selected: selectedButton === 'button5' }"
-        (click)="selectedButton = 'button5'"
         class="parent"
         routerLink="/printing"
       >
@@ -79,8 +69,6 @@
         </span>
       </mat-list-item>
       <mat-list-item
-        [ngClass]="{ selected: selectedButton === 'button6' }"
-        (click)="selectedButton = 'button6'"
         class="parent"
         routerLink="/archive"
       >
