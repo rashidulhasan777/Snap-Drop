@@ -81,10 +81,17 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
         for (let i = 0; i < 30; ++i) monthArr2.push(0);
 
         for (let i = 0; i < response.length; i++) {
-          const gap =
-            new Date().getDate() -
-            new Date(this.orders[i].createdAt || '').getDate();
-          if (gap < 6) {
+          // console.log(
+          //   Math.ceil((new Date().getTime() -
+          //     new Date(this.orders[i].createdAt).getTime()) /
+          //       (1000 * 60 * 60 * 24))
+          // );
+          const gap = Math.floor(
+            (new Date().getTime() -
+              new Date(this.orders[i].createdAt).getTime()) /
+              (1000 * 60 * 60 * 24)
+          );
+          if (gap < 7) {
             arr[gap]++;
             if (
               this.orders[i].orderStatus === 'readyToDeliver' ||
@@ -94,9 +101,11 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
             }
           }
 
-          const monthGap =
-            new Date().getDate() -
-            new Date(this.orders[i].updatedAt || '').getDate();
+          const monthGap = Math.floor(
+            (new Date().getTime() -
+              new Date(this.orders[i].createdAt).getTime()) /
+              (1000 * 60 * 60 * 24)
+          );
           if (monthGap < 31) {
             monthArr[monthGap]++;
             if (
@@ -107,6 +116,7 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
             }
           }
         }
+        console.log(arr2);
 
         this.chartData = [...arr];
         this.sentForDelivery = [...arr2];

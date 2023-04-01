@@ -79,11 +79,11 @@ export class PrintingComponent implements AfterViewInit, OnInit {
         this.ngOnInit();
       });
 
-    const pathaoOrder = this.pathaoService
-      .createOrder(id)
-      .subscribe((response) => {
-        console.log(response);
-      });
+    // const pathaoOrder = this.pathaoService
+    //   .createOrder(id)
+    //   .subscribe((response) => {
+    //     console.log(response);
+    //   });
   }
 
   applyFilter(event: Event) {
