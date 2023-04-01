@@ -1,20 +1,24 @@
 .background {
-  background-image: url("/assets/Moon.svg");
-  background-size: 7000px;
+  background: linear-gradient(-45deg,#f7f4fa, #e0d2ee );
+  background-size: 100% 200%;
+  animation: gradient 4s ease infinite;
   overflow: scroll;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  /* animation: tras 2s ease-in-out 0 infinite alternate; */
 }
 
-/* @keyframes tras {
+
+@keyframes gradient {
   0% {
-    background-size: 7000px;
+      background-position: 0% 0%;
+  }
+  50% {
+      background-position: 100% 100%;
   }
   100% {
-    background-size: 9000px;
+      background-position: 0% 0%;
   }
-} */
+}

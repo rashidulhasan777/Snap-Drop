@@ -60,6 +60,6 @@
     </div>
   </section>
   <section>
-    <app-order-status></app-order-status>
+    <app-order-status *ngIf="order && order.orderStatus"></app-order-status>
   </section>
 </div>
