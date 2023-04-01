@@ -41,7 +41,7 @@ export class AddMorePassportPhotoComponent implements OnInit {
   ) {
     this.loading.setLoadingMsg('');
     this.loading.setLoading(true);
-    this.loading.setBlockNavbar(true);
+    this.loading.setBlockNavbar(false);
     this.userData.getCountries().subscribe((res) => {
       this.countries = res;
       this.anotherOne = of(res);

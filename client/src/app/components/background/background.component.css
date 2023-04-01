@@ -1,20 +1,20 @@
 .background {
   background-image: url("/assets/Moon.svg");
-  background-size: 9000px;
+  background-size: 7000px;
   overflow: scroll;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  animation: tras 2s ease-in-out 0 infinite alternate;
+  /* animation: tras 2s ease-in-out 0 infinite alternate; */
 }
 
-@keyframes tras {
+/* @keyframes tras {
   0% {
     background-size: 7000px;
   }
   100% {
     background-size: 9000px;
   }
-}
+} */

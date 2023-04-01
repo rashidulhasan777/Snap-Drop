@@ -184,7 +184,7 @@ section {
 
 .go-below-container {
   position: absolute;
-  bottom: 12%;
+  bottom: 68px;
   display: flex;
   justify-content: center;
   align-items: center;
