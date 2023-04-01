@@ -15,7 +15,7 @@
         src="assets/icons/custome-icon/cart.svg"
         alt=""
       />
-      <div class="cartBadge">
+      <div *ngIf="getCartItemsLen()" class="cartBadge">
         <span class="badgeTxt">{{ getCartItemsLen() }}</span>
       </div>
     </a>
