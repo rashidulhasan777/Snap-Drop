@@ -111,9 +111,6 @@ h1 {
 .captureButton ::ng-deep .buttons-camera{
   color: var(--accent)
 }
-.after-click ::ng-deep .buttons-camera{
-  color: var(--accent)
-}
 
 .hide {
   display: none;
@@ -130,6 +127,17 @@ h1 {
 .videoFlip {
   transform: scaleX(-1);
   
+}
+
+.top-button{
+  top:5vh;
+  left:5vw;
+  transform: scale(2);
+}
+
+.back-button ::ng-deep .top-button{
+  color: var(--text);
+  /* background-color: var(--secondary); */
 }
 
 .canvasElement {

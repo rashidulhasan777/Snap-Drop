@@ -1,4 +1,9 @@
 <div class="whole-body">
+  <div class="back-button">
+    <button class="top-button" mat-icon-button color="primary" routerLink="/user_dashboard">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+  </div>
   <h1>Take Your Photo</h1>
   <div #container [ngClass]="{ hide: !cameraOpen }" class="webcamContainer">
     <video
@@ -52,11 +57,12 @@
   <img [ngClass]="{ hide: cameraOpen }" [src]="dataUrl" class="capturedImage" />
   <div *ngIf="delayed" class="captureButton">
     <ng-container *ngIf="cameraOpen; else retakeOrProceed">
-      <button class="buttons-camera" mat-icon-button (click)="autoCapture = !autoCapture">
+      <button
+        class="buttons-camera"
+        mat-icon-button
+        (click)="autoCapture = !autoCapture"
+      >
         <mat-icon> motion_photos_auto </mat-icon>
-      </button>
-      <button class="buttons-camera" mat-icon-button (click)="flipped = !flipped">
-        <mat-icon> flip </mat-icon>
       </button>
       <button
         *ngIf="cameraOpen; else retakeOrProceed"
@@ -65,29 +71,37 @@
         [disabled]="!valid"
         mat-icon-button
       >
-        <!-- <mat-icon>camera</mat-icon> -->
-        <mat-icon>adjust</mat-icon>
-        <!-- <mat-icon>camera_alt</mat-icon> -->
-        <!-- <mat-icon>lens</mat-icon> -->
-        <!-- <mat-icon>panorama_fish_eye</mat-icon> -->
+        <mat-icon>camera</mat-icon>
+        <!-- <mat-icon>adjust</mat-icon> -->
       </button>
       <button
+        class="buttons-camera"
+        mat-icon-button
+        (click)="flipped = !flipped"
+      >
+        <mat-icon> flip </mat-icon>
+      </button>
+      <!-- <button
         class="buttons-camera"
         mat-icon-button
         [disabled]="!hasMultipleCamera"
         (click)="autoCapture = !autoCapture"
       >
         <mat-icon> switch_camera </mat-icon>
-      </button>
+      </button> -->
     </ng-container>
     <ng-template #retakeOrProceed>
-      <button mat-icon-button class="button buttons-camera" (click)="retakePhoto()">
+      <button mat-icon-button class="buttons-camera" (click)="retakePhoto()">
         <mat-icon>cached</mat-icon>
       </button>
-      <button mat-icon-button class="button buttons-camera" (click)="savePhoto()">
+      <button mat-icon-button class="buttons-camera" (click)="savePhoto()">
         <mat-icon>download</mat-icon>
       </button>
-      <button mat-icon-button class="button buttons-camera" (click)="addToPassportPhotos()">
+      <button
+        mat-icon-button
+        class="button buttons-camera"
+        (click)="addToPassportPhotos()"
+      >
         <mat-icon>chevron_right</mat-icon>
       </button>
     </ng-template>
