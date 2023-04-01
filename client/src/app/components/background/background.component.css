@@ -1,5 +1,6 @@
 .background {
-  background: linear-gradient(-45deg,#f7f4fa, #e0d2ee );
+  /* background: linear-gradient(-45deg,#f7f4fa, #e0d2ee ); */
+  background: var();
   background-size: 100% 200%;
   animation: gradient 4s ease infinite;
   overflow: scroll;
