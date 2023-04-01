@@ -28,6 +28,8 @@ export class TakePictureComponent {
 
   flipped = false;
 
+  startCountdown = false;
+  countdown = 3;
   dataUrl = '';
   errorMsg = '';
   delayed = false;
@@ -105,6 +107,20 @@ export class TakePictureComponent {
       this.canvasElem.nativeElement.width = results.image.width;
       this.canvasElem.nativeElement.height = results.image.height;
     }
+    if (this.canvasCtx) {
+      this.clearCanvas();
+
+      this.canvasCtx.save();
+
+      if (results.detections.length > 0) {
+        Drawing_Utils.drawRectangle(
+          this.canvasCtx,
+          results.detections[0].boundingBox,
+          { color: 'blue', lineWidth: 4, fillColor: '#00000000' }
+        );
+      }
+      this.canvasCtx.restore();
+    }
     if (results.detections.length < 1) {
       this.instructionMsg = 'Please make sure you are on frame';
       this.countdownStart = 0;
@@ -170,6 +186,8 @@ export class TakePictureComponent {
           this.instructionMsg =
             'Please stay still and look at the camera and we will take the picture for you.';
           if (!this.countdownStart) this.countdownStart = Date.now();
+          this.countdown =
+            3 - Math.floor((Date.now() - this.countdownStart) / 1000);
           if (this.countdownStart + 3000 < Date.now()) {
             this.capture();
             this.countdownStart = 0;

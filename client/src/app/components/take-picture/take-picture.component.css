@@ -99,7 +99,7 @@ h1 {
   border-top-left-radius: var(--border-radius);
   background-color: white;
   box-shadow: var(--card-shadow);
-  position:fixed;
+  position: fixed;
   bottom: 0;
   /* margin-bottom: 10px; */
   padding: 10px 0;
@@ -114,8 +114,8 @@ h1 {
   transform: scale(2);
 }
 
-.captureButton ::ng-deep .buttons-camera{
-  color: var(--accent)
+.captureButton ::ng-deep .buttons-camera {
+  color: var(--accent);
 }
 
 .hide {
@@ -132,20 +132,19 @@ h1 {
 
 .videoFlip {
   transform: scaleX(-1);
-  
 }
 
-.top-button{
+.top-button {
   /* top:5vh;
   left:5vw; */
   transform: scale(2);
 }
 
-.back-button ::ng-deep .top-button{
+.back-button ::ng-deep .top-button {
   color: var(--text);
   /* background-color: var(--secondary); */
 }
-.back-button{
+.back-button {
   display: flex;
   align-items: center;
 }
@@ -158,4 +157,15 @@ h1 {
 
 .validOutline {
   stroke: green;
+}
+
+.overlayCountdown {
+  background-color: #00000079;
+  bottom: 1%;
+  padding: 5px;
+  right: 0;
+  position: absolute;
+  color: rgb(224, 213, 245);
+  font-size: xx-large;
+  border-radius: 100px 0px 0px 100px;
 }

@@ -1,6 +1,11 @@
 <div class="whole-body">
   <div class="back-button">
-    <button class="top-button" mat-icon-button color="primary" routerLink="/user_dashboard">
+    <button
+      class="top-button"
+      mat-icon-button
+      color="primary"
+      routerLink="/user_dashboard"
+    >
       <mat-icon>chevron_left</mat-icon>
     </button>
     <h1 class="header">Take Your Photo</h1>
@@ -51,6 +56,9 @@
         </g>
       </g>
     </svg>
+    <div *ngIf="valid" class="overlayCountdown">
+      <mat-icon>watch_later</mat-icon> {{ countdown }}
+    </div>
   </div>
   <div *ngIf="cameraOpen" class="errorMsg">{{ instructionMsg }}</div>
   <div *ngIf="errorMsg" class="errorMsg">{{ errorMsg }}</div>
