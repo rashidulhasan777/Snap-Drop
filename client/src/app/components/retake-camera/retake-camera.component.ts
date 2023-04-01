@@ -53,7 +53,7 @@ export class RetakeCameraComponent {
   ) {
     this.loading.setLoadingMsg('');
     this.loading.setLoading(true);
-    this.loading.setBlockNavbar(false);
+    this.loading.setBlockNavbar(true);
 
   }
   async ngOnInit() {
