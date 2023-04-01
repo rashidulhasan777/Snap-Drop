@@ -34,7 +34,7 @@ import { ErrorPageComponent } from './components/error-page/error-page.component
 
 const routes: Routes = [
   {
-    path: 'splashScreen',
+    path: 'home',
     component: SplashscreenComponent,
   },
   { path: 'login', component: LoginComponent },
@@ -147,7 +147,7 @@ const routes: Routes = [
     canActivate: [AuthGuardGuard, RoleguardUserGuard],
   },
   { path: 'errorPage', component: ErrorPageComponent },
-  { path: '', pathMatch: 'full', redirectTo: 'splashScreen' },
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
 ];
 
 @NgModule({

@@ -20,17 +20,16 @@ export class SplashscreenComponent {
   ) {
     this.loading.setBlockNavbar(true);
   }
-  ngOnInit() {
-    setTimeout(() => {
-      if (this.authService.isLoggedIn()) {
-        this.authService.userRole().subscribe((res) => {
-          if (res.role === 'customer') this.router.navigate(['user_dashboard']);
-          else if (res.role === 'lab') this.router.navigate(['lab-dashboard']);
-          else this.authService.logout();
-        });
-      } else {
-        this.router.navigate(['login']);
-      }
-    }, 3000);
+
+  redirect() {
+    if (this.authService.isLoggedIn()) {
+      this.authService.userRole().subscribe((res) => {
+        if (res.role === 'customer') this.router.navigate(['user_dashboard']);
+        else if (res.role === 'lab') this.router.navigate(['lab-dashboard']);
+        else this.authService.logout();
+      });
+    } else {
+      this.router.navigate(['login']);
+    }
   }
 }

@@ -2,19 +2,31 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 80vh;
 }
 
 .splashScreenContainer {
   max-width: 500px;
   height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex-direction: column;
 }
 
 img {
+  padding-left: 4%;
   display: block;
   width: 30%;
+}
+
+h2 {
+  margin-top: 10%;
+  width: 82%;
+  color: #673ab7;
+}
+
+a {
+  width: 50%;
+  border-radius: 10px;
 }
