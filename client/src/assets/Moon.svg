@@ -5,9 +5,10 @@
     </filter>
   </defs>
   <g clip-path="url(&quot;#SvgjsClipPath1855&quot;)" filter="url(#blurFilter)" fill="none">
-    <rect width="1080" height="2340" x="0" y="0" fill="rgba(244, 244, 255, 1)"></rect>
+    <rect width="600" height="2340" x="0" y="0" fill="rgba(244, 244, 255, 1)"></rect>
     <circle r="59.785" cx="9.67" cy="24.11" fill="rgba(199, 200, 255, 1)">
-      <animate attributeName="cx" from="10" to="1070" dur="23s" repeatCount="indefinite" />
+      <animate attributeName="cx" values="10;100;10" dur="10s" repeatCount="indefinite" begin="0.5s" 
+        keyTimes="0;0.5;1"  />
     </circle>
   </g>
 </svg>
