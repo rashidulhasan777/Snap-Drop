@@ -2,10 +2,13 @@
   <h1 class="header">Order Summary</h1>
   <div class="upcoming-card-container">
     <mat-card class="upcoming-card">
-      <mat-card-header>
+      <mat-card-header class="upcoming-card-header">
         <mat-card-title class="upcoming-card-title">{{
           User?.details?.name | titlecase
         }}</mat-card-title>
+        <button mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
       </mat-card-header>
       <mat-card-content>
         <p class="upcoming-card-details">

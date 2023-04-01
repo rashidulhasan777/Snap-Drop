@@ -129,6 +129,17 @@ h1 {
   
 }
 
+.top-button{
+  top:5vh;
+  left:5vw;
+  transform: scale(2);
+}
+
+.back-button ::ng-deep .top-button{
+  color: var(--text);
+  /* background-color: var(--secondary); */
+}
+
 .canvasElement {
   width: 100%;
   height: 100%;
