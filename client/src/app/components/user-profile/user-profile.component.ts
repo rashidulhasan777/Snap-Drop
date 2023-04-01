@@ -63,8 +63,10 @@ export class UserProfileComponent {
     this.disableZone(true);
     this.userDataService.getUser().subscribe((res) => {
       this.User = res;
-      let fullname = this.User.name.split(' ');
-      this.firstName = fullname[0];
+      if (this.User.name) {
+        let fullname = this.User.name.split(' ');
+        this.firstName = fullname[0];
+      } 
       if (this.User.details) {
         this.User.details.contact_number =
           this.User.details?.contact_number.slice(4);

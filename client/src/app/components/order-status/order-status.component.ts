@@ -30,6 +30,7 @@ export class OrderStatusComponent implements OnInit {
     const userOrder = this.orderService
       .getCustomerLatestOrder()
       .subscribe((response) => {
+        if (!response) return;
         this.order = response;
         console.log('order Status:', this.order.orderStatus);
         switch (this.order.orderStatus) {

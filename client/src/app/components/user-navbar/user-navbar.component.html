@@ -7,14 +7,19 @@
       alt=""
     />
   </a>
-  <a routerLink="/cart">
-    <img
-      [ngClass]="{ selected: selectedButton === 'button2' }"
-      (click)="selectedButton = 'button2'"
-      src="assets/icons/custome-icon/cart.svg"
-      alt=""
-    />
-  </a>
+  <div class="cartContainer">
+    <a routerLink="/cart">
+      <img
+        [ngClass]="{ selected: selectedButton === 'button2' }"
+        (click)="selectedButton = 'button2'"
+        src="assets/icons/custome-icon/cart.svg"
+        alt=""
+      />
+      <div class="cartBadge">
+        <span class="badgeTxt">{{ 0 }}</span>
+      </div>
+    </a>
+  </div>
   <a routerLink="/profile">
     <img
       [ngClass]="{ selected: selectedButton === 'button3' }"

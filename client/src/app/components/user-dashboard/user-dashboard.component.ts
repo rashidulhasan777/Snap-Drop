@@ -35,11 +35,13 @@ export class UserDashboardComponent {
       this.User = res;
       this.socket.emit('gimmeNotification', { userId: res._id });
       this.socket.on;
-      let fullname = this.User.name.split(' ');
-      this.firstName = fullname[0];
+      if (this.User.name) {
+        let fullname = this.User.name.split(' ');
+        this.firstName = fullname[0];
+      }
       if (this.User.newUser) this.openDialog();
       this.orderService.getCustomerLatestOrder().subscribe((res) => {
-        console.log(res);
+        // console.log(res);
         if (res && res.orderStatus === 'retake_needed') {
           this.router.navigate(['retake']);
         }
