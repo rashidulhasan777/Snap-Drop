@@ -1,3 +1,8 @@
+.splashScreenPageCont {
+  height: 100vh;
+  background-color: #f9f7ff;
+}
+
 .splashScreenPage {
   display: flex;
   justify-content: center;
@@ -26,7 +31,18 @@ h2 {
   color: #673ab7;
 }
 
-a {
-  width: 50%;
+.btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40%;
   border-radius: 10px;
+  padding: 10px 0;
+  background-color: #673ab7;
+}
+
+a {
+  text-decoration: none;
+  color: white;
 }
