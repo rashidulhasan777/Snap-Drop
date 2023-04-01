@@ -25,6 +25,7 @@ export class RetakeComponent {
   ) {
     this.loading.setLoadingMsg('');
     this.loading.setLoading(true);
+    this.loading.setBlockNavbar(true);
   }
 
   async ngOnInit() {

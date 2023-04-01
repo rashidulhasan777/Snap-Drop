@@ -2,18 +2,18 @@
   text-align: center;
   margin-top: 10vh;
   margin-bottom: 8vh;
-  color: var(--text)
+  color: var(--text);
 }
 
-.whole-body{
-  /* border: red solid 1px; */
+.whole-body {
   height: var(--body-height);
   width: 100vw;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
-.apply-button{
+.apply-button {
   height: 5vh;
   background-color: var(--accent);
 }
@@ -46,8 +46,7 @@ app-gallery-card {
   max-width: 100%;
   display: flex;
   justify-content: center;
-  margin: 7px;
-  /* background-color: var(--secondary); */
+  margin: 7px 0;
 }
 
 .gallery-controls ::ng-deep .bottom-button {
@@ -60,7 +59,7 @@ app-gallery-card {
   margin-top: 20vh;
 }
 
-.data-container{
+.data-container {
   /* border: red solid 1px; */
   overflow-x: hidden;
   width: 100vw;
@@ -109,6 +108,6 @@ app-gallery-card {
   margin-left: 2vw;
 }
 
-.card-form ::ng-deep .inputField{
+.card-form ::ng-deep .inputField {
   height: 6vh;
 }

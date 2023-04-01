@@ -42,6 +42,8 @@ export class GalleryUploadComponent {
   ) {
     this.loading.setLoadingMsg('');
     this.loading.setLoading(true);
+    this.loading.setBlockNavbar(false);
+
   }
 
   async ngOnInit() {
@@ -149,6 +151,7 @@ export class GalleryUploadComponent {
           console.log(error);
         }
       });
+      await this.loading.setItemsInCart();
       this.router.navigate(['cart']);
     } catch (error) {
       console.log(error);
@@ -158,6 +161,7 @@ export class GalleryUploadComponent {
   async removeImage(index: number) {
     try {
       await this.idbService.removeOneGalleryPhoto(index);
+      await this.loading.setItemsInCart();
       this.previews.splice(index, 1);
       this.pictureData.removeAt(index);
     } catch (error) {

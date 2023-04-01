@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { User } from 'src/app/interfaces/user.interface';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { PathaoService } from 'src/app/services/pathao/pathao.service';
 import { UserdataService } from 'src/app/services/userdata/userdata.service';
 
@@ -56,8 +57,11 @@ export class UserProfileComponent {
     private pathao: PathaoService,
     private userDataService: UserdataService,
     private router: Router,
-    private authService: AuthenticationService
-  ) {}
+    private authService: AuthenticationService,
+    private loading: LoaderService
+  ) {
+    this.loading.setBlockNavbar(false);
+  }
   ngOnInit() {
     this.disableArea(true);
     this.disableZone(true);
@@ -66,7 +70,7 @@ export class UserProfileComponent {
       if (this.User.name) {
         let fullname = this.User.name.split(' ');
         this.firstName = fullname[0];
-      } 
+      }
       if (this.User.details) {
         this.User.details.contact_number =
           this.User.details?.contact_number.slice(4);

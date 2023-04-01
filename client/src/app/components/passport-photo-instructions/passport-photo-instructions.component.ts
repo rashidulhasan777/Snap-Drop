@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { AnimationOptions } from 'ngx-lottie';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-passport-photo-instructions',
@@ -19,7 +20,12 @@ export class PassportPhotoInstructionsComponent {
   secondFormGroup = this._formBuilder.group({});
   thirdFormGroup = this._formBuilder.group({});
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(
+    private _formBuilder: FormBuilder,
+    private loading: LoaderService
+  ) {
+    this.loading.setBlockNavbar(false);
+  }
 
   bulbOptions: AnimationOptions = {
     path: '../../../assets/121112-bulb.json',

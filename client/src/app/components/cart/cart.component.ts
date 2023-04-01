@@ -23,6 +23,8 @@ export class CartComponent {
     private priceService: PriceCalculationService,
     private loading: LoaderService
   ) {
+    this.loading.setBlockNavbar(false);
+
     this.loading.setLoadingMsg('');
     this.loading.setLoading(true);
   }
@@ -47,6 +49,7 @@ export class CartComponent {
   async deletePassportOrder() {
     try {
       await this.idbService.removeAllPassportPhotos();
+      await this.loading.setItemsInCart();
       this.passportOrders = [];
     } catch (error) {
       console.log(error);
@@ -57,6 +60,7 @@ export class CartComponent {
     console.log('deleting gallery');
     try {
       await this.idbService.removeAllGalleryPhotos();
+      await this.loading.setItemsInCart();
       this.galleryOrders = [];
     } catch (error) {
       console.log(error);
@@ -71,6 +75,7 @@ export class CartComponent {
     this.loading.setLoading(true);
     try {
       await this.idbService.clearAll();
+      await this.loading.setItemsInCart();
       this.galleryOrders = [];
       this.passportOrders = [];
       this.loading.setLoading(false);

@@ -41,6 +41,7 @@ export class AddMorePassportPhotoComponent implements OnInit {
   ) {
     this.loading.setLoadingMsg('');
     this.loading.setLoading(true);
+    this.loading.setBlockNavbar(true);
     this.userData.getCountries().subscribe((res) => {
       this.countries = res;
       this.anotherOne = of(res);
@@ -53,6 +54,7 @@ export class AddMorePassportPhotoComponent implements OnInit {
       this.passportPhotos = (await this.idbService.getPassportPhotos()) || [];
       prevValue.country = (await this.idbService.getCountry()) || 'Bangladesh';
       prevValue.copies = (await this.idbService.getPassportCopies()) || 4;
+      await this.loading.setItemsInCart();
       this.loading.setLoading(false);
     } catch (err) {
       console.log(err);
@@ -81,6 +83,7 @@ export class AddMorePassportPhotoComponent implements OnInit {
   async removePicture(idx: number) {
     try {
       await this.idbService.removeOnePassportPhoto(idx);
+      await this.loading.setItemsInCart();
       this.passportPhotos.splice(idx, 1);
     } catch (err) {
       console.log(err);
@@ -88,6 +91,7 @@ export class AddMorePassportPhotoComponent implements OnInit {
   }
   async proceed() {
     try {
+      this.loading.setLoading(true);
       if (this.countryAndCopiesInfo.valid) {
         await this.idbService.setCountry(
           this.countryAndCopiesInfo.value.country || ''
@@ -96,6 +100,8 @@ export class AddMorePassportPhotoComponent implements OnInit {
           this.countryAndCopiesInfo.value.copies || 1
         );
         await this.idbService.setPassportCopiesOnData();
+        await this.loading.setItemsInCart();
+        this.loading.setLoading(false);
         this.router.navigate(['cart']);
       }
     } catch (err) {

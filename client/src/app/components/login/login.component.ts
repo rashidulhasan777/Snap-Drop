@@ -4,6 +4,7 @@ import { OauthService } from 'src/app/services/oauth/oauth.service';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { Router } from '@angular/router';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-login',
@@ -19,15 +20,16 @@ export class LoginComponent {
     private authService: AuthenticationService,
     private oauthService: OauthService,
     private formBuilder: FormBuilder,
-    private router: Router
-  ) {}
+    private router: Router,
+    private loading: LoaderService
+  ) {
+    this.loading.setBlockNavbar(true);
+  }
+
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
       this.authService.userRole().subscribe((res) => {
-        if (res.role === 'customer')
-          this.router
-            .navigate(['user_dashboard'])
-            .then(() => window.location.reload());
+        if (res.role === 'customer') this.router.navigate(['user_dashboard']);
         else if (res.role === 'lab') this.router.navigate(['lab-dashboard']);
         else this.authService.logout();
       });
