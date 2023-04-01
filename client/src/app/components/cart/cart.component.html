@@ -1,9 +1,11 @@
 <div class="whole-body">
+  <img class="logo" src="./../../../assets/icons/custome-icon/logo-trans.svg" alt="">
   <h1 class="heading">
     Your Cart
     <!-- <img class="header-icon" src="../../../assets/Header icons/trolley.png" /> -->
   </h1>
-  <div *ngIf="hasOrder; else noOrders">
+  <div class="cart-card" *ngIf="hasOrder; else noOrders">
+    <h3 class="h3text"> You snap, we drop!</h3>
     <div *ngIf="passportOrders.length" class="cardContainer">
       <div class="card">
         <div class="cardImageContainer" routerLink="/passport_upload">

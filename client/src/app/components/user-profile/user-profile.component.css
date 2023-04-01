@@ -40,7 +40,11 @@ h1 {
   justify-content: center;
   align-items: center;
   margin-top: 5%;
-  padding-top: 5%;
+  padding: 3%;
+  margin: 10% 3%;
+  background-color: var(--secondary);
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
 }
 
 .user-profile-form div mat-form-field {
@@ -84,8 +88,14 @@ h1 {
   justify-content: center;
 }
 
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .logout-btn {
-  min-width: 100%;
+  margin: 2%;
+  border-radius: var(--border-radius);
 }
 
 .actionButtons {
