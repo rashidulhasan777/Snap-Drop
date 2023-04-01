@@ -6,6 +6,7 @@ import { CartService } from 'src/app/services/cart/cart.service';
 import { IdbServiceService } from 'src/app/services/idbService/idb-service.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { PriceCalculationService } from 'src/app/services/price-calculation/price-calculation.service';
+import { UserdataService } from 'src/app/services/userdata/userdata.service';
 
 @Component({
   selector: 'app-cart',
@@ -21,7 +22,8 @@ export class CartComponent {
     private idbService: IdbServiceService,
     private router: Router,
     private priceService: PriceCalculationService,
-    private loading: LoaderService
+    private loading: LoaderService,
+    private userData: UserdataService
   ) {
     this.loading.setBlockNavbar(false);
 
@@ -85,6 +87,12 @@ export class CartComponent {
   }
 
   checkOut() {
-    this.router.navigate(['order_summary']);
+    this.userData.getUser().subscribe((res) => {
+      if (res.details) {
+        this.router.navigate(['order_summary']);
+      } else {
+        this.router.navigate(['user_address']);
+      }
+    });
   }
 }

@@ -43,12 +43,23 @@ export class PathaoService {
 
   createOrder(id: string) {
     // console.log(id);
-    return this.http.post(`${this.baseUrl}/pathao/order`, {
-      id,
-      pathaoToken: this.pathaoToken,
-    });
+    return this.http.post(
+      `${this.baseUrl}/pathao/order`,
+      {
+        id,
+        pathaoToken: this.pathaoToken,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${this.jwtToken}`,
+        },
+      }
+    );
   }
 
+  private get jwtToken() {
+    return localStorage.getItem('userAccessToken');
+  }
   get pathaoToken() {
     return JSON.parse(localStorage.getItem('pathaoAccessToken') || "''")
       .access_token;
