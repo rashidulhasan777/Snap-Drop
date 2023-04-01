@@ -136,15 +136,17 @@
 }
 
 .delivery-info-form {
-  padding-top: 15px;
+  padding: 30px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  /* height: 100vh; */
+  height: fit-content;
   margin-bottom: 8vh;
   overflow-y: auto;
+  background-color: var(--secondary);
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
 }
 
 .delivery-info-form div mat-form-field {
@@ -166,4 +168,9 @@
   width: 90vw;
   border-radius: var(--border-radius);
   background-color: var(--accent);
+}
+
+.prefix {
+  margin-left: 20%;
+  border-right: grey solid 1px;
 }

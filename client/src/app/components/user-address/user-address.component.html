@@ -1,17 +1,11 @@
 <div class="whole-body">
   <div class="user-info-form">
     <h1 class="header">Delivery Information</h1>
-    <ng-container *ngIf="hasPreviousInfo; else insertDelivaryInfo">
+    <!-- <ng-container *ngIf="hasPreviousInfo; else insertDelivaryInfo">
       <h3 class="delivery-title">Your current delivery information:</h3>
 
       <div class="upcoming-card-container">
         <mat-card class="upcoming-card">
-          <!-- <img class="absolute left-svg" src="./assets/left.svg" alt="" /> -->
-          <!-- <img class="absolute mid-svg" src="./assets/middle.svg" alt="" /> -->
-
-          <!-- <img class="absolute right-svg" src="./assets/middle.svg" alt="" />
-          <img class="absolute small-svg" src="./assets/middle.svg" alt="" />
-          <img class="absolute big-svg" src="./assets/middle.svg" alt="" /> -->
           <mat-card-header>
             <mat-card-title class="upcoming-card-title">{{
               User?.details?.name | titlecase
@@ -28,22 +22,9 @@
               {{ User?.details?.zone?.zone_name }},
               {{ User?.details?.city?.city_name }}
             </p>
-            <!-- <mat-divider></mat-divider> -->
           </mat-card-content>
         </mat-card>
       </div>
-
-      <!-- <div class="userDetails">
-        <div class="userName">{{ User?.details?.name | titlecase }}</div>
-        <div><b>Mobile:</b> {{ User?.details?.contact_number }}</div>
-        <div><b>Email:</b> {{ User?.email }}</div>
-        <div>
-          <b>Address:</b> {{ User?.details?.address }},
-          {{ User?.details?.area?.area_name }},
-          {{ User?.details?.zone?.zone_name }},
-          {{ User?.details?.city?.city_name }}
-        </div>
-      </div> -->
       <div class="actionButtons">
         <button
           class="bottom-button"
@@ -62,8 +43,8 @@
           <mat-icon>chevron_right</mat-icon>
         </button>
       </div>
-    </ng-container>
-    <ng-template #insertDelivaryInfo>
+    </ng-container> -->
+    <div #insertDelivaryInfo>
       <form
         [formGroup]="deliveryInfoForm"
         (submit)="handleSubmit()"
@@ -221,6 +202,6 @@
           </button>
         </div>
       </form>
-    </ng-template>
+    </div>
   </div>
 </div>

@@ -75,6 +75,8 @@ export class UserProfileComponent {
         this.User.details.contact_number =
           this.User.details?.contact_number.slice(4);
         this.deliveryInfoForm.patchValue(this.User?.details);
+      } else {
+        this.name?.setValue(res.name || '');
       }
     });
 

@@ -28,6 +28,8 @@ export class SplashscreenComponent {
           else if (res.role === 'lab') this.router.navigate(['lab-dashboard']);
           else this.authService.logout();
         });
+      } else {
+        this.router.navigate(['login']);
       }
     }, 3000);
   }

@@ -62,7 +62,6 @@ export class UserAddressComponent {
     this.loading.setLoadingMsg('');
     this.loading.setLoading(true);
     this.loading.setBlockNavbar(false);
-
   }
 
   ngOnInit() {
@@ -70,8 +69,11 @@ export class UserAddressComponent {
     this.disableZone(true);
     this.userDataService.getUser().subscribe((res) => {
       this.User = res;
-      if (res.details) {
+      if (this.User.details) {
         this.hasPreviousInfo = true;
+        this.User.details.contact_number =
+          this.User.details?.contact_number.slice(4);
+        this.deliveryInfoForm.patchValue(this.User?.details);
       } else {
         this.name?.setValue(res.name || '');
         this.hasPreviousInfo = false;

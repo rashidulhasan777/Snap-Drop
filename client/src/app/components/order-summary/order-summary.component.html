@@ -6,7 +6,7 @@
         <mat-card-title class="upcoming-card-title">{{
           User?.details?.name | titlecase
         }}</mat-card-title>
-        <button mat-icon-button>
+        <button routerLink="/user_address" mat-icon-button>
           <mat-icon>edit</mat-icon>
         </button>
       </mat-card-header>
@@ -19,7 +19,7 @@
         </p>
         <p class="upcoming-card-details">
           <b class="bold">Address:</b> {{ User?.details?.address }},
-          {{ User?.details?.area ? User?.details?.area?.area_name + ',' : '' }}
+          {{ User?.details?.area ? User?.details?.area?.area_name + "," : "" }}
           {{ User?.details?.zone?.zone_name }},
           {{ User?.details?.city?.city_name }}
         </p>
