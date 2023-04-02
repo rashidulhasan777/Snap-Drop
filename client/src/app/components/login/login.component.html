@@ -1,48 +1,52 @@
-<img class="logo" src="./../../../assets/icons/custome-icon/logo-trans.svg" alt="">
-<div class="containerLogin">
-  <h1 class="pageHeader">Login</h1>
-  <div class="oauthButtonContainer">
-    <button mat-raised-button (click)="googleOauth()" class="oauthButtons">
-      <mat-icon svgIcon="google"></mat-icon>
-      Sign in with Google
-    </button>
-    <button
-      mat-flat-button
-      color="primary"
-      (click)="facebookOauth()"
-      class="oauthButtons"
-    >
-      <mat-icon svgIcon="facebook"></mat-icon>
-      Sign in with Facebook
-    </button>
+<div class="centerThis">
+  <div>
+    <img class="logo" src="./../../../assets/icons/custome-icon/logo-trans.svg" alt="">
+    <div class="containerLogin">
+      <h1 class="pageHeader">Login</h1>
+      <div class="oauthButtonContainer">
+        <button mat-raised-button (click)="googleOauth()" class="oauthButtons">
+          <mat-icon svgIcon="google"></mat-icon>
+          Sign in with Google
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          (click)="facebookOauth()"
+          class="oauthButtons"
+        >
+          <mat-icon svgIcon="facebook"></mat-icon>
+          Sign in with Facebook
+        </button>
+      </div>
+      <div class="orText">Or,</div>
+      <mat-error *ngIf="errorMessage">{{ errorMessage }} </mat-error>
+      <form (submit)="handleLogin()" class="loginForm" [formGroup]="loginInfo">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            type="email"
+            placeholder="Ex. abc@gmail.com"
+            formControlName="email"
+          />
+          <mat-error *ngIf="emailError">{{ emailError }} </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            [type]="!hidePassword ? 'text' : 'password'"
+            placeholder="Type your password"
+            formControlName="password"
+          />
+          <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{
+            !hidePassword ? "visibility_off" : "visibility"
+          }}</mat-icon>
+          <mat-error *ngIf="passwordError">{{ passwordError }} </mat-error>
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="primary">Login</button>
+      </form>
+      <div>Don't have an account? <a routerLink="/register">Sign Up</a></div>
+    </div>
   </div>
-  <div class="orText">Or,</div>
-  <mat-error *ngIf="errorMessage">{{ errorMessage }} </mat-error>
-  <form (submit)="handleLogin()" class="loginForm" [formGroup]="loginInfo">
-    <mat-form-field appearance="outline">
-      <mat-label>Email</mat-label>
-      <input
-        matInput
-        type="email"
-        placeholder="Ex. abc@gmail.com"
-        formControlName="email"
-      />
-      <mat-error *ngIf="emailError">{{ emailError }} </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Password</mat-label>
-      <input
-        matInput
-        [type]="!hidePassword ? 'text' : 'password'"
-        placeholder="Type your password"
-        formControlName="password"
-      />
-      <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{
-        !hidePassword ? "visibility_off" : "visibility"
-      }}</mat-icon>
-      <mat-error *ngIf="passwordError">{{ passwordError }} </mat-error>
-    </mat-form-field>
-    <button type="submit" mat-raised-button color="primary">Login</button>
-  </form>
-  <div>Don't have an account? <a routerLink="/register">Sign Up</a></div>
 </div>
