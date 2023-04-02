@@ -1,12 +1,12 @@
 .containerLogin {
-  max-width: 500px;
+  width: clamp(300px, 100vw, 500px);
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
   gap: 2rem;
 }
-.logo{
+.logo {
   height: 120px;
   width: 120px;
   /* background-color: var(--secondary); */
@@ -33,4 +33,9 @@
 }
 a {
   text-decoration: none;
+}
+.centerThis {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
 }
