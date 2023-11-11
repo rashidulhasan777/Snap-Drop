@@ -10,7 +10,7 @@ import { MaterialComponentsModule } from './material-components/material-compone
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { LottieModule } from 'ngx-lottie';
 import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
-import player from 'lottie-web';
+// import player from 'lottie-web';
 import { WebcamModule } from 'ngx-webcam';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 

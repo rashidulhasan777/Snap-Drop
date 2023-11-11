@@ -34,7 +34,13 @@
             ],
             "scripts": [],
             "serviceWorker": true,
-            "ngswConfigPath": "ngsw-config.json"
+            "ngswConfigPath": "ngsw-config.json",
+            "allowedCommonJsDependencies": [
+              "@mediapipe/face_detection",
+              "@mediapipe/camera_utils",
+              "@mediapipe/drawing_utils",
+              "lottie-web"
+           ]
           },
           "configurations": {
             "production": {
