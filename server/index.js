@@ -10,7 +10,7 @@ const router = require('./routes');
 const { sendNotification } = require('./utils/helpers/sendNotifications');
 
 const corsConfig = {
-  origin: [process.env.BASE_FRONTEND_URL, 'http://localhost:8000'],
+  origin: [process.env.BASE_FRONTEND_URL, 'http://localhost:8000', 'http://localhost:4200', 'http://localhost:3000'],
   credentials: true,
 };
 const app = express();
