@@ -67,7 +67,7 @@ export class OrderSummaryComponent {
             passportPictures: this.passportPictures,
             galleryPictures: this.galleryPictures,
           },
-          this.closestLab?.labId || 95506,
+          this.closestLab?.labId || 56083,
           (totalPrice: Price) => {
             this.price = totalPrice;
           }
