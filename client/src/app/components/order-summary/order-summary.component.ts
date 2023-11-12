@@ -56,7 +56,6 @@ export class OrderSummaryComponent {
       (await this.idbService.getCountry()) || 'Bangladesh';
 
     this.userDataService.getClosestLab().subscribe(async (res) => {
-      console.log(res);
       this.closestLab = res;
       try {
         await this.setCart();
