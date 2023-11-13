@@ -39,6 +39,11 @@ export class UserDashboardComponent {
       if (this.User.details?.name) {
         let fullname = this.User.details?.name.split(' ');
         this.firstName = fullname[0];
+      } else if (this.User.name) {
+        let fullname = this.User.name.split(' ');
+        this.firstName = fullname[0];
+      } else {
+        this.firstName = this.User.email.split('@')[0];
       }
       if (this.User.newUser) this.openDialog();
       this.orderService.getCustomerLatestOrder().subscribe({
