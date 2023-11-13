@@ -36,8 +36,8 @@ export class UserDashboardComponent {
       this.User = res;
       this.socket.emit('gimmeNotification', { userId: res._id });
       this.socket.on;
-      if (this.User.name) {
-        let fullname = this.User.name.split(' ');
+      if (this.User.details?.name) {
+        let fullname = this.User.details?.name.split(' ');
         this.firstName = fullname[0];
       }
       if (this.User.newUser) this.openDialog();
