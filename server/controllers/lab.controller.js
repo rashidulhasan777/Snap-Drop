@@ -1,4 +1,4 @@
-const Lab = require('./../models/labDetails.model');
+const Lab = require('../models/labDetails/labDetails.model');
 
 const createLab = async (req, res) => {
   try {

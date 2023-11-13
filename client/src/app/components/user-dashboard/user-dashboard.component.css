@@ -180,7 +180,7 @@
   scroll-snap-type: y mandatory;
 }
 
-section {
+.upcoming {
   position: relative;
   width: 100vw;
   height: 100vh;

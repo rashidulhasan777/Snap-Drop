@@ -1,5 +1,5 @@
-const mongoose = require('./../db');
-const detailsSchema = require('./details.model');
+const mongoose = require('../../db');
+const detailsSchema = require('../details/details.model');
 
 const labDetailsSchema = new mongoose.Schema({
   labName: {
