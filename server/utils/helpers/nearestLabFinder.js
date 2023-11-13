@@ -2,6 +2,7 @@ const Lab = require('../../models/labDetails.model');
 const { Client } = require('@googlemaps/google-maps-services-js');
 
 const client = new Client({});
+const baseUrl = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'
 
 const userLocationFinder = async (country, city, zone, area = '') => {
   console.log(`${area ? area + ',' : ''} ${zone}, ${city}, ${country}`);
@@ -13,7 +14,7 @@ const userLocationFinder = async (country, city, zone, area = '') => {
   };
 
   try{
-    const responseFromMapbox = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/{${zone}}.json?access_token=pk.eyJ1IjoiYXNpZnVycmFobWFucGlhbCIsImEiOiJjbG9oaG0zMnQxZDVhMm1yd3c1bTVwZWQ4In0.HjT23K3i1ur6Jy9KaikNEw`);
+    const responseFromMapbox = await fetch(`${baseUrl}{${zone}}.json?access_token=${process.env.MAPBOX_ACCESS_TOKEN}`);
     const data = await responseFromMapbox.json();
     return {lng: data.features[0].geometry.coordinates[0], lat: data.features[0].geometry.coordinates[1]};
 
