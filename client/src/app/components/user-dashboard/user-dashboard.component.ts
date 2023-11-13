@@ -48,7 +48,6 @@ export class UserDashboardComponent {
       if (this.User.newUser) this.openDialog();
       this.orderService.getCustomerLatestOrder().subscribe({
         next: (res) => {
-          // console.log(res);
           if (res && res.orderStatus === 'retake_needed') {
             this.router.navigate(['retake']);
           }

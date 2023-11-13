@@ -1,4 +1,4 @@
-const mongoose = require('../db');
+const mongoose = require('../../db');
 
 const notificationSchema = new mongoose.Schema({
   userId: {

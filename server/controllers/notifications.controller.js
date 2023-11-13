@@ -1,4 +1,4 @@
-const NotificationSubscribers = require('../models/notifications.model');
+const NotificationSubscribers = require('../models/notifications/notifications.model');
 
 const getSubscriberById = async (id) => {
   try {

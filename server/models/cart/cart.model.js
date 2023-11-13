@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const imageSchema = require('./image.model');
+const imageSchema = require('../image/image.model');
 
 const cartSchema = new mongoose.Schema({
   userId: {

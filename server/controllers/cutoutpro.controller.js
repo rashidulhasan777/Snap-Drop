@@ -1,6 +1,6 @@
 const axios = require('axios');
 const cloudinary = require('cloudinary').v2;
-const Orders = require('../models/order.model');
+const Orders = require('../models/order/order.model');
 const countryBasedSizes = require('../utils/data/requirementsFromLab.json');
 
 const cutoutProCropImage = async (imageUrl, country) => {
