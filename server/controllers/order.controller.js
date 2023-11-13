@@ -3,7 +3,7 @@ const transport = require('./../middlewares/nodemailer');
 const { getMailOptions } = require('./../utils/nodemail/mailOptions');
 const User = require('../models/user.model');
 const { sendNotification } = require('../utils/helpers/sendNotifications');
-const sendMessage = require("./../middlewares/twilio");
+const sendMessage = require('./../middlewares/twilio');
 
 const getAllOrders = async (req, res) => {
   try {
@@ -21,7 +21,7 @@ const createOrder = async (req, res) => {
       customerId: req.currentUser._id,
       orderDelivaryDetails: req.currentUser.details,
     });
-    
+
     res.status(201);
     res.send(result);
     return result;
@@ -49,8 +49,6 @@ const changeOrderStatus = async (req, res) => {
         'Your photos has been picked up for delivery'
       );
     }
-    // transport(getMailOptions("nafizfuad0230@gmail.com", "Hello"));
-
     res.status(201).send(order);
   } catch (error) {
     res.status(500).send({ errorMessage: 'Something went wrong' });
@@ -83,6 +81,7 @@ const getOrderByCustomerId = async (req, res) => {
 
 const getOrdersbyStatus = async (req, res) => {
   const orderStatus = req.params.status;
+
   try {
     const orders = await Order.find({
       labId: req.currentUser.labId,
@@ -90,6 +89,7 @@ const getOrdersbyStatus = async (req, res) => {
       paid: true,
     });
     res.status(201);
+
     res.send(orders);
   } catch (error) {
     res.status(500).send({ errorMessage: 'Something went wrong' });
@@ -138,9 +138,11 @@ const setOrderPaid = async (req, res) => {
     );
     const labUser = await User.findOne({ labId: latestOrder.labId });
     sendNotification(labUser._id, 'New order arrived');
-    sendMessage("New order has arrived");
+    sendMessage('New order has arrived');
     console.log(req.currentUser);
-    transport(getMailOptions(req.currentUser.email, "Your order has been placed"));
+    transport(
+      getMailOptions(req.currentUser.email, 'Your order has been placed')
+    );
     res.status(201).send(latestOrder);
   } catch (error) {
     console.log(error);

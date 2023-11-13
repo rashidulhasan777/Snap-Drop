@@ -19,31 +19,14 @@ th.mat-sort-header-sorted {
   padding-left: 10vw;
   padding-bottom: 5vh;
 }
-/* 
-  .example-card {
-    position: relative;
-    width: 20vw;
-    margin: 0 auto;
-    background-color: #F1F4F6;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-    border-radius: 12px;
-  } */
 
-/* .example-container {
-  height: 90vh;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-} */
-/* .example-toolbar {
-  height: 10vh;
-} */
 .example-sidenav-content {
   padding: 2vh 2vw 0 2vw;
   display: flex;
   flex-direction: row-reverse;
-  height: 92.8vh;
-  /* align-items: center; */
-  /* justify-content: center; */
+  height: calc(100vh-64px);
 }
+
 .example-sidenav {
   user-select: none;
 }
@@ -118,7 +101,7 @@ th.mat-sort-header-sorted {
 }
 
 .example-card .example-header-image {
-  background-image: url('https://via.placeholder.com/40x40');
+  background-image: url("https://via.placeholder.com/40x40");
   background-size: cover;
   height: 40px;
   width: 40px;
@@ -138,25 +121,9 @@ mat-card-content {
   color: #4a4a4a;
 }
 
-/* mat-card-actions {
-    display: flex;
-    justify-content: flex-end;
-    padding: 16px;
-  } */
-
-/* mat-card-actions button {
-    color: #0077B6;
-    font-weight: 500;
-    margin-left: 8px;
-  } */
-
-/* mat-card-actions button:first-child {
-    margin-left: 0;
-  } */
-
 app-chart {
   display: block;
-  width: 80% !important;
+  width: 100%;
   padding: 0;
 }
 
@@ -167,7 +134,9 @@ app-line-chart {
 
 app-pie-chart {
   width: 50% !important;
-  padding: 0 5%;
+}
+app-pie-chart2 {
+  width: 50% !important;
 }
 
 .title-header {
@@ -175,44 +144,37 @@ app-pie-chart {
 }
 
 .charts {
-  width: 50vw;
+  width: 40%;
   height: 100%;
   overflow-y: auto;
+  padding-left: 30px;
 }
 
 .table-container {
-  width: 60vw;
+  width: 60%;
 }
 
-.KPI {
-  padding-left: 5%;
+.mat-mdc-table {
+  table-layout: fixed;
 }
 
 .pie-container {
   margin-top: 5%;
   display: flex;
   align-items: center;
-  gap: 5%;
+  gap: 10px;
 }
 
 .filter-input {
   width: 100%;
 }
 
-/* .mdc-data-table__cell, .mdc-data-table__header-cell {
-  text-align: center !important;
-  vertical-align: middle !important;
+.mdc-data-table__cell,
+.mdc-data-table__header-cell {
+  padding: 0px 10px 0px 10px;
 }
 
-mat-header-cell {
-  display: flex;
-  justify-content: flex-end;
-} */
-
-/*  {
-  text-align: center !important;
+.go-to-page-button {
+  padding: 22px 10px;
+  margin: 10px 0;
 }
-
-.mat-sort-header-container {
-  justify-content: center !important;
-} */

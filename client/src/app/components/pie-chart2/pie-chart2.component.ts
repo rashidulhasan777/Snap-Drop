@@ -17,7 +17,7 @@ export class PieChart2Component {
 
   orderCountByProductCategory: number[] = [];
   productCategories: string[][] = [];
-  chartTitle: string = 'Orders by photo type';
+  chartTitle: string = 'Orders by photo status';
   chartData: number[] = [0, 0, 0, 0, 0];
 
   // Pie

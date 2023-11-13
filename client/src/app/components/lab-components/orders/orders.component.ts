@@ -43,7 +43,6 @@ export class OrdersComponent implements AfterViewInit, OnInit {
     const orders = this.orderService
       .getOrdersbyStatus('approved')
       .subscribe((response) => {
-        // console.log(response);
         this.orders = response;
         this.dataSource = new MatTableDataSource(this.orders);
         this.paginator.length = this.orders.length;
