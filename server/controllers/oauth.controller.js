@@ -1,5 +1,5 @@
 const axios = require('axios');
-const User = require('../models/user.model');
+const User = require('../models/user/user.model');
 const jwt = require('jsonwebtoken');
 const SECRET_KEY = process.env.JWT_SECRET;
 

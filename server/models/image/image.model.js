@@ -1,4 +1,4 @@
-const mongoose = require('./../db');
+const mongoose = require('../../db');
 
 const imageSchema = new mongoose.Schema({
   photoSize: {

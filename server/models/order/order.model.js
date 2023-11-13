@@ -1,6 +1,6 @@
-const mongoose = require('./../db');
-const detailsSchema = require('./details.model');
-const imageSchema = require('./image.model');
+const mongoose = require('../../db');
+const detailsSchema = require('../details/details.model');
+const imageSchema = require('../image/image.model');
 
 const priceSchema = new mongoose.Schema({
   passport: { type: Number, required: true },

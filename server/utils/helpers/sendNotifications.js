@@ -1,4 +1,4 @@
-const Notifications = require('../../models/notifications.model');
+const Notifications = require('../../models/notifications/notifications.model');
 
 const webpush = require('web-push');
 

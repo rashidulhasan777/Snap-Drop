@@ -1,7 +1,7 @@
 const axios = require('axios');
-const Order = require('./../models/order.model');
-const User = require('./../models/user.model');
-const Lab = require('../models/labDetails.model');
+const Order = require('../models/order/order.model');
+const User = require('../models/user/user.model');
+const Lab = require('../models/labDetails/labDetails.model');
 const { findClosestStudio } = require('../utils/helpers/nearestLabFinder');
 
 const baseUrl = process.env.PATHAO_BASE_URL;

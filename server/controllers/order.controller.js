@@ -1,7 +1,7 @@
-const Order = require('./../models/order.model');
+const Order = require('../models/order/order.model');
 const transport = require('./../middlewares/nodemailer');
 const { getMailOptions } = require('./../utils/nodemail/mailOptions');
-const User = require('../models/user.model');
+const User = require('../models/user/user.model');
 const { sendNotification } = require('../utils/helpers/sendNotifications');
 const sendMessage = require('./../middlewares/twilio');
 
