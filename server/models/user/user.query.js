@@ -28,13 +28,12 @@ const loginUser = async (data) => {
     console.log(error);
   }
 };
-const updateUserDetails = async (data) => {
-    const {body,id}=data
+const updateUserDetails = async (data, id) => {
     try {
         const user = await User.findByIdAndUpdate(
-            id,
+            { _id: id },
             {
-              $set: { details: { ...body } },
+              $set: { details: { ...data } },
             },
             { new: true }
           );

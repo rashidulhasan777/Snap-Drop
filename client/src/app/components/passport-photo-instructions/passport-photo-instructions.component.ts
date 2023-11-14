@@ -28,11 +28,14 @@ export class PassportPhotoInstructionsComponent {
   }
 
   bulbOptions: AnimationOptions = {
-    path: '../../../assets/121112-bulb.json',
+    // path: '../../../assets/121112-bulb.json',
+    path: '../../../assets/lighting.json',
   };
 
   attireOptions: AnimationOptions = {
-    path: '../../../assets/144444-formal-attire.json',
+    // path: '../../../assets/144444-formal-attire.json',
+    path: '../../../assets/outfit.json',
+    // #E0F3FF
   };
 
   captureOptions: AnimationOptions = {
