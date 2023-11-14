@@ -1,9 +1,13 @@
 <div class="smoothScroll">
   <section class="upcoming">
     <div class="whole-body">
-      <img class="logo" src="./../../../assets/icons/custome-icon/logo-trans.svg" alt="">
+      <img
+        class="logo"
+        src="./../../../assets/icons/custome-icon/logo-trans.svg"
+        alt=""
+      />
       <h1 class="header">
-        Welcome, <span class="color-name"> {{User && firstName }} </span
+        Welcome, <span class="color-name"> {{ User && firstName }} </span
         ><img class="confetti" src="/assets/icons/wave.png" alt="image" />
       </h1>
       <div class="upcoming-card-container">
@@ -60,7 +64,7 @@
       </div>
     </div>
   </section>
-  <section>
-    <app-order-status *ngIf="order && order.orderStatus"></app-order-status>
+  <section *ngIf="order && order.orderStatus">
+    <app-order-status></app-order-status>
   </section>
 </div>
