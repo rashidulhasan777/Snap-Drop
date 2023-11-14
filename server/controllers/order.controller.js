@@ -3,7 +3,8 @@ const transport = require('./../middlewares/nodemailer');
 const { getMailOptions } = require('./../utils/nodemail/mailOptions');
 const User = require('../models/user/user.model');
 const { sendNotification } = require('../utils/helpers/sendNotifications');
-const sendMessage = require('./../middlewares/twilio');
+const sendMessage = require("./../middlewares/twilio");
+const { getMailOptionsForAdmin } = require('../utils/nodemail/mailOptionsForAdmin');
 
 const getAllOrders = async (req, res) => {
   try {
@@ -39,16 +40,18 @@ const changeOrderStatus = async (req, res) => {
     const order = await Order.findOneAndUpdate(filter, update, {
       new: true,
     });
-    if (req.body.orderStatus === 'approved') {
-      sendNotification(order.customerId, 'Your photos has been approved');
-    } else if (req.body.orderStatus === 'retake_needed') {
-      sendNotification(order.customerId, 'Your photos need to be retaken');
-    } else if (req.body.orderStatus === 'readyToDeliver') {
-      sendNotification(
-        order.customerId,
-        'Your photos has been picked up for delivery'
-      );
-    }
+    // if (req.body.orderStatus === 'approved') {
+    //   sendNotification(order.customerId, 'Your photos has been approved');
+    // } else if (req.body.orderStatus === 'retake_needed') {
+    //   sendNotification(order.customerId, 'Your photos need to be retaken');
+    // } else if (req.body.orderStatus === 'readyToDeliver') {
+    //   sendNotification(
+    //     order.customerId,
+    //     'Your photos has been picked up for delivery'
+    //   );
+    // }
+    // transport(getMailOptions("nafizfuad0230@gmail.com", "Hello"));
+
     res.status(201).send(order);
   } catch (error) {
     res.status(500).send({ errorMessage: 'Something went wrong' });
@@ -81,7 +84,6 @@ const getOrderByCustomerId = async (req, res) => {
 
 const getOrdersbyStatus = async (req, res) => {
   const orderStatus = req.params.status;
-
   try {
     const orders = await Order.find({
       labId: req.currentUser.labId,
@@ -89,7 +91,6 @@ const getOrdersbyStatus = async (req, res) => {
       paid: true,
     });
     res.status(201);
-
     res.send(orders);
   } catch (error) {
     res.status(500).send({ errorMessage: 'Something went wrong' });
@@ -136,13 +137,14 @@ const setOrderPaid = async (req, res) => {
       { $set: { paid: true } },
       { new: true }
     );
+    // console.log(latestOrder);
     const labUser = await User.findOne({ labId: latestOrder.labId });
-    sendNotification(labUser._id, 'New order arrived');
-    sendMessage('New order has arrived');
-    console.log(req.currentUser);
-    transport(
-      getMailOptions(req.currentUser.email, 'Your order has been placed')
-    );
+    // console.log(labUser);
+    // sendNotification(labUser._id, 'New order arrived');
+    // sendMessage("New order has arrived");
+    transport(getMailOptionsForAdmin(labUser.email, "New order has arrived"));
+    // console.log(req.currentUser);
+    transport(getMailOptions(req.currentUser.email, "Your order has been placed"));
     res.status(201).send(latestOrder);
   } catch (error) {
     console.log(error);
