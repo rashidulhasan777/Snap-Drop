@@ -1,4 +1,5 @@
 const Carts = require('../models/cart/cart.model');
+const { updateCartsToDb } = require('../models/cart/cart.query');
 
 const getUserCart = async (req, res, next) => {
   try {
@@ -11,14 +12,9 @@ const getUserCart = async (req, res, next) => {
 };
 const updateUserCart = async (req, res, next) => {
   try {
-    const userCart = await Carts.findOneAndUpdate(
-      { userId: req.currentUser._id },
-      req.body,
-      { upsert: true, new: true, setDefaultsOnInsert: true }
-    );
+    const userCart = await updateCartsToDb(req.currentUser,req.body)
     res.status(201).send(userCart);
   } catch (error) {
-    console.log(error);
     res.status(500).send({ errorMessage: 'Something went wrong' });
   }
 };
