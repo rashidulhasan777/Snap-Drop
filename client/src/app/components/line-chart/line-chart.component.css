@@ -1,5 +1,8 @@
-canvas {
-  height: 90% !important;
+.chart {
+  width: 100%;
+}
+canvas.chart {
+  /* height: 90% !important; */
   width: 100%;
 
   padding: 2% 5%;
