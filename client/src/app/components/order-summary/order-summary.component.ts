@@ -162,7 +162,7 @@ export class OrderSummaryComponent {
     this.loading.setLoadingMsg('Uploading pictures, Please wait.');
     this.loading.setLoading(true);
     this.orderService
-      .generateOrderId(this.closestLab?.labId || 95506)
+      .generateOrderId(this.closestLab?.labId || 56083)
       .subscribe({
         next: async (res) => {
           this.order_id = res.orderId;
@@ -170,7 +170,7 @@ export class OrderSummaryComponent {
             console.log(this.closestLab?.labId);
             await this.uploadAllPicture(
               res.orderId,
-              this.closestLab?.labId || 95506
+              this.closestLab?.labId || 56083
             );
           } catch (err) {
             console.log(err);
@@ -185,7 +185,7 @@ export class OrderSummaryComponent {
     if (this.passportPictures.length) pending = true;
     const order: Order = {
       order_id: this.order_id,
-      labId: this.closestLab?.labId || 95506,
+      labId: this.closestLab?.labId || 56083,
       totalPrice: this.price,
       countryForPassport: this.countryForPassport,
       passportPictures: this.passportPictures,

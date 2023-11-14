@@ -64,12 +64,12 @@ export class AddMorePassportPhotoComponent implements OnInit {
     this.filteredOptions =
       this.countryAndCopiesInfo.controls.country.valueChanges.pipe(
         startWith(''),
-        map((value) => this.fiterCountries(value || ''))
+        map((value) => this.filterCountries(value || ''))
       );
   }
 
-  private fiterCountries(contryName: string) {
-    const filter = contryName.toLowerCase();
+  private filterCountries(countryName: string) {
+    const filter = countryName.toLowerCase();
     return this.countries.filter((el) => el.toLowerCase().includes(filter));
   }
 
