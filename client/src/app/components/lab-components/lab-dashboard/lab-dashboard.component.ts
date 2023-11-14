@@ -81,11 +81,6 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
         for (let i = 0; i < 30; ++i) monthArr2.push(0);
 
         for (let i = 0; i < response.length; i++) {
-          // console.log(
-          //   Math.ceil((new Date().getTime() -
-          //     new Date(this.orders[i].createdAt).getTime()) /
-          //       (1000 * 60 * 60 * 24))
-          // );
           const gap = Math.floor(
             (new Date().getTime() -
               new Date(this.orders[i].createdAt).getTime()) /

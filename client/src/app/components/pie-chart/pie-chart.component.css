@@ -2,6 +2,6 @@ canvas {
   height: 100% !important;
   width: 100% !important;
   margin-left: auto;
-  padding: 10% 10%;
+  padding: 10px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
