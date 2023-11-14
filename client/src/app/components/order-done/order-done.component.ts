@@ -1,12 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Order } from 'src/app/interfaces/order.interface';
-import { CartService } from 'src/app/services/cart/cart.service';
+import { take } from 'rxjs';
 import { IdbServiceService } from 'src/app/services/idbService/idb-service.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { OrderService } from 'src/app/services/orders/order.service';
-import { PriceCalculationService } from 'src/app/services/price-calculation/price-calculation.service';
 import { UserdataService } from 'src/app/services/userdata/userdata.service';
 
 @Component({
@@ -29,7 +26,7 @@ export class OrderDoneComponent {
   }
 
   async ngOnInit() {
-    this.orderService.setOrderPaid().subscribe();
+    this.orderService.setOrderPaid().pipe(take(1)).subscribe();
     await this.idbService.clearAll();
   }
 }

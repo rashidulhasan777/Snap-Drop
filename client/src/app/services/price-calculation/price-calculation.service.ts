@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { Cart } from 'src/app/interfaces/cart.interface';
 import { ImageInterface } from 'src/app/interfaces/image.interface';
 import { Price } from 'src/app/interfaces/price.interface';
@@ -48,7 +48,7 @@ export class PriceCalculationService {
     const passport = this.calculatePrice(cart.passportPictures || []);
     const gallery = this.calculatePrice(cart.galleryPictures || []);
     if (store_id && callback)
-      this.getDelivaryPrice(store_id).subscribe((res) => {
+      this.getDelivaryPrice(store_id).pipe(take(1)).subscribe((res) => {
         const total = passport + gallery + res.priceEstimateData.price;
         callback({
           passport,

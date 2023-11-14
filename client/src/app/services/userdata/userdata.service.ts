@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { Lab } from 'src/app/interfaces/lab.interface';
 import { baseBackendURL, VAPID_PUBLIC_KEY } from 'src/config';
 import { Details } from '../../interfaces/details.interface';
@@ -41,7 +41,7 @@ export class UserdataService {
   }
   saveNotificationSub(data: any) {
     let userId = '';
-    this.getUser().subscribe((res) => {
+    this.getUser().pipe(take(1)).subscribe((res) => {
       userId = res._id || '';
       this.http
         .post<{ msg: string }>(
@@ -53,6 +53,7 @@ export class UserdataService {
             },
           }
         )
+        .pipe(take(1))
         .subscribe();
     });
   }

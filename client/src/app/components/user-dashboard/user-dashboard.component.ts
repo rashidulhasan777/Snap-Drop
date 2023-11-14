@@ -8,6 +8,7 @@ import { User } from 'src/app/interfaces/user.interface';
 import { Socket } from 'ngx-socket-io';
 import { Order } from 'src/app/interfaces/order.interface';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -32,7 +33,7 @@ export class UserDashboardComponent {
   }
 
   ngOnInit() {
-    this.userData.getUser().subscribe((res) => {
+    this.userData.getUser().pipe(take(1)).subscribe((res) => {
       this.User = res;
       this.socket.emit('gimmeNotification', { userId: res._id });
       this.socket.on;
@@ -46,7 +47,7 @@ export class UserDashboardComponent {
         this.firstName = this.User.email.split('@')[0];
       }
       if (this.User.newUser) this.openDialog();
-      this.orderService.getCustomerLatestOrder().subscribe({
+      this.orderService.getCustomerLatestOrder().pipe(take(1)).subscribe({
         next: (res) => {
           if (res && res.orderStatus === 'retake_needed') {
             this.router.navigate(['retake']);
@@ -67,8 +68,8 @@ export class UserDashboardComponent {
   }
   openDialog() {
     const dialogRef = this.dialog.open(OnboardingComponent);
-    dialogRef.afterClosed().subscribe((res) => {
-      this.userData.setUserNotNew().subscribe();
+    dialogRef.afterClosed().pipe(take(1)).subscribe((res) => {
+      this.userData.setUserNotNew().pipe(take(1)).subscribe();
     });
   }
 }

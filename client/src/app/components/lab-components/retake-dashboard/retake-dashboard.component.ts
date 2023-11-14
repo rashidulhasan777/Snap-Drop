@@ -14,6 +14,7 @@ import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from './../../../interfaces/order.interface';
 import { ImageInterface } from 'src/app/interfaces/image.interface';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-retake-dashboard',
@@ -48,6 +49,7 @@ export class RetakeDashboardComponent implements AfterViewInit, OnInit {
   ngOnInit() {
     const orders = this.orderService
       .getOrdersbyStatus('retake_needed')
+      .pipe(take(1))
       .subscribe((response) => {
         // console.log(response);
         this.orders = response;

@@ -3,8 +3,7 @@ const transport = require('../');
 const { getMailOptions } = require('./../utils/nodemail/mailOptions');
 const User = require('../models/user/user.model');
 const { sendNotification } = require('../utils/helpers/sendNotifications');
-const sendMessage = require("./../middlewares/twilio");
-const { addOrderToDb, updateOrderStatusToDb, getOneWeekDataFromDb, orderMarkedPaidToDb, getAllOrdersFromDb, getOrderByIdFromDb, getOrderByCustomerIdFromDb, getOrderByStatusFromDb, getOrderByLabIdFromDb, getOrderCountByProductCategoryFromDb, generateOrderIdFromDb, getUserLastOrderFromDb, updatePassportFromDb, cleanUnpaidOrdersFromDb } = require('../models/order/order.query');
+const sendMessage = require('./../middlewares/twilio');
 
 const getAllOrders = async (req, res) => {
   try {
@@ -29,7 +28,19 @@ const changeOrderStatus = async (req, res) => {
   const filter = { _id: orderId };
   const update = { $set: { orderStatus: req.body.orderStatus } };
   try {
-    const order = await updateOrderStatusToDb(orderId, filter, update,req.body.orderStatus);
+    const order = await Order.findOneAndUpdate(filter, update, {
+      new: true,
+    });
+    if (req.body.orderStatus === 'approved') {
+      sendNotification(order.customerId, 'Your photos has been approved');
+    } else if (req.body.orderStatus === 'retake_needed') {
+      sendNotification(order.customerId, 'Your photos need to be retaken');
+    } else if (req.body.orderStatus === 'readyToDeliver') {
+      sendNotification(
+        order.customerId,
+        'Your photos has been picked up for delivery'
+      );
+    }
     res.status(201).send(order);
   } catch (error) {
     res.status(500).send({ errorMessage: 'Something went wrong' });
@@ -146,7 +157,21 @@ const generateOrderId = async (req, res) => {
 
 const getOrderCountByProductCategory = async (req, res) => {
   try {
-    const stat = await getOrderCountByProductCategoryFromDb(req.currentUser.labId)
+    // const orders = await Order.find({ labId: req.currentUser.labId });
+    const orders = await Order.find({ labId: req.currentUser.labId });
+    const stat = {
+      '4R': 0,
+      '6R': 0,
+      '8R': 0,
+      '10R': 0,
+      passport: 0,
+    };
+    orders.forEach((order) => {
+      stat['passport'] += order.passportPictures.length;
+      order.galleryPictures.forEach((galleryPicture) => {
+        stat[galleryPicture.photoSize]++;
+      });
+    });
     res.status(200).send({ stat });
   } catch (error) {
     res.status(500).send({ errorMessage: 'Cannot fetch stats' });

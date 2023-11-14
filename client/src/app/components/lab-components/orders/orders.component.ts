@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from './../../../interfaces/order.interface';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-orders',
@@ -42,6 +43,7 @@ export class OrdersComponent implements AfterViewInit, OnInit {
   ngOnInit() {
     const orders = this.orderService
       .getOrdersbyStatus('approved')
+      .pipe(take(1))
       .subscribe((response) => {
         this.orders = response;
         this.dataSource = new MatTableDataSource(this.orders);

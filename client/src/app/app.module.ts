@@ -55,9 +55,9 @@ import { WarningDialogueComponent } from './components/warning-dialogue/warning-
 import { baseBackendURL } from 'src/config';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { BackgroundComponent } from './components/background/background.component';
-import { LineChartComponent } from './components/line-chart/line-chart.component';
-import { PieChartComponent } from './components/pie-chart/pie-chart.component';
-import { PieChart2Component } from './components/pie-chart2/pie-chart2.component';
+import { LineChartComponent } from './components/lab-components/line-chart/line-chart.component';
+import { PieChartComponent } from './components/lab-components/pie-chart/pie-chart.component';
+import { PieChart2Component } from './components/lab-components/pie-chart2/pie-chart2.component';
 import { SplashscreenComponent } from './components/splashscreen/splashscreen.component';
 import { RetakeCameraComponent } from './components/retake-camera/retake-camera.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';

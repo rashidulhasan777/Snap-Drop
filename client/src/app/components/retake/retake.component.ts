@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, zip } from 'rxjs';
+import { Observable, take, zip } from 'rxjs';
 import { ImageInterface } from 'src/app/interfaces/image.interface';
 import { Order } from 'src/app/interfaces/order.interface';
 import { CloudinaryService } from 'src/app/services/cloudinary/cloudinary.service';
@@ -29,7 +29,7 @@ export class RetakeComponent {
   }
 
   async ngOnInit() {
-    this.orderService.getCustomerLatestOrder().subscribe(async (res) => {
+    this.orderService.getCustomerLatestOrder().pipe(take(1)).subscribe(async (res) => {
       this.currentOrder = res;
       let pImages: ImageInterface[] | undefined =
         await this.idbService.getRetakePhotos();
@@ -72,7 +72,7 @@ export class RetakeComponent {
       }
     });
     const zipSubs = zip(...uploadSubsription);
-    zipSubs.subscribe((res) => {
+    zipSubs.pipe(take(1)).subscribe((res) => {
       res.forEach((cloud: any, idx: number) => {
         this.passportPicturesToRetake.forEach((el) => {
           if (picToUpload[idx] === el._id) {
@@ -85,6 +85,7 @@ export class RetakeComponent {
           this.currentOrder?._id || '',
           this.passportPicturesToRetake
         )
+        .pipe(take(1))
         .subscribe(async () => {
           await this.idbService.resolveRetake();
           this.loading.setLoading(false);

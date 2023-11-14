@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, take } from 'rxjs/operators';
 import { User } from 'src/app/interfaces/user.interface';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
@@ -65,7 +65,7 @@ export class UserProfileComponent {
   ngOnInit() {
     this.disableArea(true);
     this.disableZone(true);
-    this.userDataService.getUser().subscribe((res) => {
+    this.userDataService.getUser().pipe(take(1)).subscribe((res) => {
       this.User = res;
       if (this.User.details?.name) {
         let fullname = this.User.details?.name.split(' ');
@@ -114,7 +114,7 @@ export class UserProfileComponent {
   }
 
   setZones(city: { city_id: number; city_name: string }) {
-    this.pathao.getPathaoZone(city.city_id).subscribe({
+    this.pathao.getPathaoZone(city.city_id).pipe(take(1)).subscribe({
       next: (res: any) => {
         this.zones = res.zones;
         this.disableZone(false);
@@ -131,7 +131,7 @@ export class UserProfileComponent {
   }
 
   setAreas(zone: { zone_id: number; zone_name: string }) {
-    this.pathao.getPathaoArea(zone.zone_id).subscribe({
+    this.pathao.getPathaoArea(zone.zone_id).pipe(take(1)).subscribe({
       next: (res: any) => {
         this.areas = res.areas;
         this.disableArea(false);
@@ -152,7 +152,7 @@ export class UserProfileComponent {
       const details = JSON.parse(JSON.stringify(this.deliveryInfoForm.value));
       details.contact_number = '+880' + details.contact_number;
       if (!details.area.area_name) delete details.area;
-      this.userDataService.updateUserData(details).subscribe((res) => {
+      this.userDataService.updateUserData(details).pipe(take(1)).subscribe((res) => {
         this.router.navigate(['user_dashboard']);
       });
     }

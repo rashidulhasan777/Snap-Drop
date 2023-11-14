@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from 'src/app/interfaces/order.interface';
 import { Router } from '@angular/router';
+import { take } from 'rxjs';
 // import { MatStepper } from '@angular/material/stepper';
 // import { FormBuilder, FormGroup } from '@angular/forms';
 @Component({
@@ -18,6 +19,7 @@ export class OrderStatusComponent implements OnInit {
   ngOnInit() {
     const userOrder = this.orderService
       .getCustomerLatestOrder()
+      .pipe(take(1))
       .subscribe((response) => {
         if (!response) return;
         this.order = response;
