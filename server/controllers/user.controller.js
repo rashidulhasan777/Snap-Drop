@@ -21,7 +21,7 @@ const login = async (req, res) => {
   if (!user) {
     return res.status(401).send({ errorMessage: 'You are not yet registered' });;
   }
-  try { 
+  try {
     const access_token = await loginUser(req.body);
     res.status(201).send({ access_token });
   } catch (error) {
@@ -36,7 +36,7 @@ const getUserDetails = (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const user = await updateUserDetails(req.body, req.currentUser._id);
-    req.createUser = user;
+    req.currentUser = user;
     res.status(201).send(user);
   } catch (error) {
     console.log(error);
