@@ -11,7 +11,7 @@ import { UserdataService } from 'src/app/services/userdata/userdata.service';
 import { PaymentService } from 'src/app/services/payment/payment.service';
 import { IdbServiceService } from 'src/app/services/idbService/idb-service.service';
 import { CloudinaryService } from 'src/app/services/cloudinary/cloudinary.service';
-import { firstValueFrom, Observable, zip } from 'rxjs';
+import { firstValueFrom, Observable, take, zip } from 'rxjs';
 import { ImageInterface } from 'src/app/interfaces/image.interface';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 
@@ -49,13 +49,13 @@ export class OrderSummaryComponent {
   }
 
   async ngOnInit() {
-    this.userDataService.getUser().subscribe((res) => {
+    this.userDataService.getUser().pipe(take(1)).subscribe((res) => {
       this.User = res;
     });
     this.countryForPassport =
       (await this.idbService.getCountry()) || 'Bangladesh';
 
-    this.userDataService.getClosestLab().subscribe(async (res) => {
+    this.userDataService.getClosestLab().pipe(take(1)).subscribe(async (res) => {
       this.closestLab = res;
       try {
         await this.setCart();
@@ -134,14 +134,14 @@ export class OrderSummaryComponent {
         ? this.passportPictures
         : this.galleryPictures;
 
-      initialZip.subscribe((res) => {
+      initialZip.pipe(take(1)).subscribe((res) => {
         res.forEach((el: any, idx: number) => {
           initialArr[idx].imageURL = el.secure_url;
         });
         console.log(this.passportPictures);
 
         if (initialZip === zippedPassport) {
-          zippedGallery.subscribe((res) => {
+          zippedGallery.pipe(take(1)).subscribe((res) => {
             res.forEach((el: any, idx: number) => {
               this.galleryPictures[idx].imageURL = el.secure_url;
             });
@@ -163,6 +163,7 @@ export class OrderSummaryComponent {
     this.loading.setLoading(true);
     this.orderService
       .generateOrderId(this.closestLab?.labId || 56083)
+      .pipe(take(1))
       .subscribe({
         next: async (res) => {
           this.order_id = res.orderId;
@@ -193,8 +194,8 @@ export class OrderSummaryComponent {
       orderStatus: pending ? 'pending' : 'approved',
       instruction: this.instruction || '',
     };
-    this.orderService.cleanUnpaidOrders().subscribe(() => {
-      this.orderService.createOrder(order).subscribe((res) => {
+    this.orderService.cleanUnpaidOrders().pipe(take(1)).subscribe(() => {
+      this.orderService.createOrder(order).pipe(take(1)).subscribe((res) => {
         console.log(res);
         this.CompletedOrder = res;
         this.paymentService
@@ -202,6 +203,7 @@ export class OrderSummaryComponent {
             this.CompletedOrder.order_id,
             this.CompletedOrder.totalPrice.total
           )
+          .pipe(take(1))
           .subscribe((response: any) => {
             this.loading.setLoading(false);
             this.loading.setLoadingMsg('');

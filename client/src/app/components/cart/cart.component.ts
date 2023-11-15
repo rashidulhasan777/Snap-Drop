@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoadChildren, Router } from '@angular/router';
+import { take } from 'rxjs';
 import { ImageInterface } from 'src/app/interfaces/image.interface';
 import { Price } from 'src/app/interfaces/price.interface';
 import { CartService } from 'src/app/services/cart/cart.service';
@@ -87,7 +88,7 @@ export class CartComponent {
   }
 
   checkOut() {
-    this.userData.getUser().subscribe((res) => {
+    this.userData.getUser().pipe(take(1)).subscribe((res) => {
       if (res.details) {
         this.router.navigate(['order_summary']);
       } else {

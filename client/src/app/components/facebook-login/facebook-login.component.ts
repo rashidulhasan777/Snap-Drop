@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { OauthService } from 'src/app/services/oauth/oauth.service';
@@ -34,6 +35,7 @@ export class FacebookLoginComponent implements OnInit {
       if (params['code']) {
         this.oauthService
           .fbOauthGetAccessCode(params['code'])
+          .pipe(take(1))
           .subscribe((res) => {
             localStorage.setItem('fbAccessToken', res.access_token);
             this.http
@@ -42,13 +44,15 @@ export class FacebookLoginComponent implements OnInit {
                   Authorization: `Bearer ${res.access_token}`,
                 },
               })
+              .pipe(take(1))
               .subscribe((res: any) => {
                 const { name, email } = res;
                 this.oauthService
                   .oauthLogin({ name, email, profilePic: '' })
+                  .pipe(take(1))
                   .subscribe((res) => {
                     localStorage.setItem('userAccessToken', res.access_token);
-                    this.authService.userRole().subscribe((res) => {
+                    this.authService.userRole().pipe(take(1)).subscribe((res) => {
                       if (res.role === 'customer')
                         this.router
                           .navigate(['user_dashboard'])
