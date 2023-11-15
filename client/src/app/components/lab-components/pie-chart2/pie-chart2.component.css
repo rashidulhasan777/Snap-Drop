@@ -2,7 +2,7 @@ canvas {
   height: 100% !important;
   width: 100% !important;
   margin-left: auto;
-  padding: 10% 10%;
+  padding: 10px;
   box-shadow: 7px 8px 15px -7px rgba(143, 122, 122, 0.75);
   -webkit-box-shadow: 7px 8px 15px -7px rgba(143, 122, 122, 0.75);
   -moz-box-shadow: 7px 8px 15px -7px rgba(143, 122, 122, 0.75);

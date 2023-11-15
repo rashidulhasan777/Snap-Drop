@@ -20,6 +20,7 @@ import { DialogApprovalComponent } from '../dialog-approval/dialog-approval.comp
 import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from './../../../interfaces/order.interface';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-archive',
@@ -58,12 +59,14 @@ export class ArchiveComponent implements AfterViewInit, OnInit {
     // this.onArchive.emit();
     const orders = this.orderService
       .getOrdersbyStatus('readyToDeliver')
+      .pipe(take(1))
       .subscribe((response) => {
         // console.log(response);
         this.readyOrders = response;
 
         this.orderService
           .getOrdersbyStatus('handedOver')
+          .pipe(take(1))
           .subscribe((response2) => {
             // console.log(response);
             this.handedOrders = response2;
@@ -95,6 +98,7 @@ export class ArchiveComponent implements AfterViewInit, OnInit {
     console.log(order_id);
     this.orderService
       .changeOrderStatus(order_id, { orderStatus: 'handedOver' })
+      .pipe(take(1))
       .subscribe((res) => {
         // console.log(res);
         this.ngOnInit();

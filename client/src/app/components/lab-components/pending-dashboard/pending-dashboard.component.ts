@@ -19,6 +19,7 @@ import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from './../../../interfaces/order.interface';
 import { ImageInterface } from 'src/app/interfaces/image.interface';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-pending-dashboard',
@@ -56,14 +57,18 @@ export class PendingDashboardComponent implements AfterViewInit, OnInit {
       data: order,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((result) => {
+        console.log('The dialog was closed');
+      });
   }
 
   ngOnInit() {
     const orders = this.orderService
       .getOrdersbyStatus('pending')
+      .pipe(take(1))
       .subscribe((response) => {
         // console.log(response);
         this.orders = response;

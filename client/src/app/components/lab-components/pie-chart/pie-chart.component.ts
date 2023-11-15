@@ -2,6 +2,7 @@ import { Component, ViewChild, Input } from '@angular/core';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { take } from 'rxjs';
 import { OrderService } from 'src/app/services/orders/order.service';
 
 @Component({
@@ -111,20 +112,23 @@ export class PieChartComponent {
   constructor(private orderService: OrderService) {}
 
   ngOnInit() {
-    this.orderService.getOrderCountByProductCategory().subscribe((res) => {
-      this.orderCountByProductCategory = Object.values(res.stat);
-      const categories = Object.keys(res.stat);
-      this.productCategories = categories.map((el) => [el]);
-      // console.log(this.orderCountByProductCategory);
-      this.pieChartData = {
-        // labels: this.chartLabels,
-        labels: [['4R'], ['6R'], ['8R'], ['10R'], ['Passport']],
-        datasets: [
-          {
-            data: this.orderCountByProductCategory,
-          },
-        ],
-      };
-    });
+    this.orderService
+      .getOrderCountByProductCategory()
+      .pipe(take(1))
+      .subscribe((res) => {
+        this.orderCountByProductCategory = Object.values(res.stat);
+        const categories = Object.keys(res.stat);
+        this.productCategories = categories.map((el) => [el]);
+        // console.log(this.orderCountByProductCategory);
+        this.pieChartData = {
+          // labels: this.chartLabels,
+          labels: [['4R'], ['6R'], ['8R'], ['10R'], ['Passport']],
+          datasets: [
+            {
+              data: this.orderCountByProductCategory,
+            },
+          ],
+        };
+      });
   }
 }

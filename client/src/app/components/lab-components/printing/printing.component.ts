@@ -15,6 +15,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { DialogApprovalComponent } from '../dialog-approval/dialog-approval.component';
+import { take } from 'rxjs';
 
 import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from './../../../interfaces/order.interface';
@@ -55,6 +56,7 @@ export class PrintingComponent implements AfterViewInit, OnInit {
   ngOnInit() {
     const orders = this.orderService
       .getOrdersbyStatus('printing')
+      .pipe(take(1))
       .subscribe((response) => {
         // console.log(response);
         this.orders = response;
@@ -74,6 +76,7 @@ export class PrintingComponent implements AfterViewInit, OnInit {
     const body = { orderStatus: 'readyToDeliver' };
     const updatedBody = this.orderService
       .changeOrderStatus(id, body)
+      .pipe(take(1))
       .subscribe((response) => {
         //console.log(response);
         this.ngOnInit();
@@ -81,6 +84,7 @@ export class PrintingComponent implements AfterViewInit, OnInit {
 
     const pathaoOrder = this.pathaoService
       .createOrder(id)
+      .pipe(take(1))
       .subscribe((response) => {
         console.log(response);
       });

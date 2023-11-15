@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-order-details',
@@ -28,10 +29,13 @@ export class OrderDetailsComponent {
     this.loading.setLoadingMsg('');
     this.loading.setLoading(true);
     this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
-    this.orderService.getOrdersbyId(this.id).subscribe((res) => {
-      // console.log(res);
-      this.order = res;
-    });
+    this.orderService
+      .getOrdersbyId(this.id)
+      .pipe(take(1))
+      .subscribe((res) => {
+        // console.log(res);
+        this.order = res;
+      });
   }
 
   ngOnInit() {
@@ -40,25 +44,29 @@ export class OrderDetailsComponent {
   downloadAllImages() {
     this.loading.setLoadingMsg('Zipping the datas, please wait');
     this.loading.setLoading(true);
-    this.orderService.cutoutAndDownload(this.id).subscribe({
-      next: (res) => {
-        const link = this.renderer.createElement('a');
-        link.setAttribute('href', res.zipUrl);
-        link.click();
-        link.remove();
-        const body = { orderStatus: 'printing' };
-        const updatedBody = this.orderService
-          .changeOrderStatus(this.id, body)
-          .subscribe((response) => {
-            this.loading.setLoading(false);
-            this.router.navigate(['orders']);
-          });
-      },
-      error: () => {
-        this.loading.setLoadingMsg('Something went wrong. Please wait');
+    this.orderService
+      .cutoutAndDownload(this.id)
+      .pipe(take(1))
+      .subscribe({
+        next: (res) => {
+          const link = this.renderer.createElement('a');
+          link.setAttribute('href', res.zipUrl);
+          link.click();
+          link.remove();
+          const body = { orderStatus: 'printing' };
+          const updatedBody = this.orderService
+            .changeOrderStatus(this.id, body)
+            .pipe(take(1))
+            .subscribe((response) => {
+              this.loading.setLoading(false);
+              this.router.navigate(['orders']);
+            });
+        },
+        error: () => {
+          this.loading.setLoadingMsg('Something went wrong. Please wait');
 
-        setTimeout(() => this.router.navigate(['orders']), 1000);
-      },
-    });
+          setTimeout(() => this.router.navigate(['orders']), 1000);
+        },
+      });
   }
 }
