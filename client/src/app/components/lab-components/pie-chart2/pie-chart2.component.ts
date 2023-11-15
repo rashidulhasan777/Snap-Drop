@@ -3,6 +3,7 @@ import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { OrderService } from 'src/app/services/orders/order.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-pie-chart2',
@@ -112,31 +113,34 @@ export class PieChart2Component {
   constructor(private orderService: OrderService) {}
 
   ngOnInit() {
-    this.orderService.getOrdersbyLabId().subscribe((res) => {
-      console.log(res);
-      for (let el of res) {
-        if (el.orderStatus === 'pending') this.chartData[0]++;
-        else if (el.orderStatus === 'approved') this.chartData[1]++;
-        else if (el.orderStatus === 'printing') this.chartData[2]++;
-        else if (el.orderStatus === 'retake_needed') this.chartData[3]++;
-        else if (el.orderStatus === 'readyToDeliver') this.chartData[4]++;
-      }
-      console.log(this.chartData);
-      this.pieChartData = {
-        // labels: this.chartLabels,
-        labels: [
-          ['pending'],
-          ['approved'],
-          ['printing'],
-          ['retake_needed'],
-          ['readyToDeliver'],
-        ],
-        datasets: [
-          {
-            data: this.chartData,
-          },
-        ],
-      };
-    });
+    this.orderService
+      .getOrdersbyLabId()
+      .pipe(take(1))
+      .subscribe((res) => {
+        console.log(res);
+        for (let el of res) {
+          if (el.orderStatus === 'pending') this.chartData[0]++;
+          else if (el.orderStatus === 'approved') this.chartData[1]++;
+          else if (el.orderStatus === 'printing') this.chartData[2]++;
+          else if (el.orderStatus === 'retake_needed') this.chartData[3]++;
+          else if (el.orderStatus === 'readyToDeliver') this.chartData[4]++;
+        }
+        console.log(this.chartData);
+        this.pieChartData = {
+          // labels: this.chartLabels,
+          labels: [
+            ['pending'],
+            ['approved'],
+            ['printing'],
+            ['retake_needed'],
+            ['readyToDeliver'],
+          ],
+          datasets: [
+            {
+              data: this.chartData,
+            },
+          ],
+        };
+      });
   }
 }

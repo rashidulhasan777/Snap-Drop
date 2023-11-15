@@ -16,6 +16,7 @@ import { Order } from './../../../interfaces/order.interface';
 import { UserdataService } from 'src/app/services/userdata/userdata.service';
 import { Router } from '@angular/router';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-lab-dashboard',
@@ -64,6 +65,7 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
   ngOnInit() {
     const orders = this.orderService
       .getOrdersbyLabId()
+      .pipe(take(1))
       .subscribe((response) => {
         // console.log(response[0].labId);
         this.orders = response;

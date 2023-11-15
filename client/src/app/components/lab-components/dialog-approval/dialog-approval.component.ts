@@ -10,6 +10,7 @@ import { ImageInterface } from 'src/app/interfaces/image.interface';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { OrderService } from 'src/app/services/orders/order.service';
 import { Order } from 'src/app/interfaces/order.interface';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-dialog-approval',
@@ -43,7 +44,7 @@ export class DialogApprovalComponent {
       );
     });
     if (this.passportImages.length === 1) this.nextImageText = 'Done';
-    this.imageStatuses.valueChanges.subscribe((val) => {
+    this.imageStatuses.valueChanges.pipe(take(1)).subscribe((val) => {
       val.forEach((el, idx) => {
         this.passportImages[idx].approved = el.approved;
         this.passportImages[idx].instructionsForRetake = el.instruction;
@@ -61,11 +62,13 @@ export class DialogApprovalComponent {
       }
       this.orderService
         .updateOrder(this.data._id || '', this.passportImages)
+        .pipe(take(1))
         .subscribe(() => {
           this.orderService
             .changeOrderStatus(this.data._id || '', {
               orderStatus: status,
             })
+            .pipe(take(1))
             .subscribe((res) => {
               window.location.reload();
             });

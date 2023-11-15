@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { take } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { OrderService } from 'src/app/services/orders/order.service';
 
@@ -24,12 +25,18 @@ export class NavAndSidebarComponent {
   ) {}
 
   ngOnInit() {
-    this.orderService.getOrdersbyLabId().subscribe((response) => {
-      this.labId = response[0].labId;
-      this.orderService.getLabName(this.labId).subscribe((response) => {
-        this.labName = response.labName;
+    this.orderService
+      .getOrdersbyLabId()
+      .pipe(take(1))
+      .subscribe((response) => {
+        this.labId = response[0].labId;
+        this.orderService
+          .getLabName(this.labId)
+          .pipe(take(1))
+          .subscribe((response) => {
+            this.labName = response.labName;
+          });
       });
-    });
   }
 
   mouseenter() {
