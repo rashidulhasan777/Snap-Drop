@@ -3,7 +3,7 @@ import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { OrderService } from 'src/app/services/orders/order.service';
-import { Order } from './../../interfaces/order.interface';
+import { Order } from '../../../interfaces/order.interface';
 
 // import { default as Annotation } from 'chartjs-plugin-annotation';
 
