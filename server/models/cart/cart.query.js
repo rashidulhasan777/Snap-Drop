@@ -12,7 +12,26 @@ const updateCartsToDb = async (currentUser,data) => {
         console.log(error);
       }
 }
+const getUserCartFromDb = async (id)=>{
+try {
+  const userCart = await Carts.findOne({ userId: id });
+  return userCart;
+} catch (error) {
+  console.log(error); }
+}
+const clearCartFromDb = async (id)=>{
+  try {
+    await Carts.findOneAndDelete({
+      userId: req.currentUser._id,
+    });
+    return true
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 module.exports = {
-    updateCartsToDb
+  updateCartsToDb,
+  getUserCartFromDb,
+  clearCartFromDb
 }

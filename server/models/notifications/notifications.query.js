@@ -16,7 +16,15 @@ const setSubscriberToDb = async (newSub)=>{
         console.log(error);
       }
 }
+const getSubscriberById = async (id) => {
+  try {
+    const sub = await NotificationSubscribers.findOne({ userId: id });
+    return sub;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 module.exports = {
-    setSubscriberToDb
+    setSubscriberToDb,getSubscriberById
 }

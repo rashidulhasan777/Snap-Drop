@@ -3,32 +3,16 @@ const Order = require('../models/order/order.model');
 const User = require('../models/user/user.model');
 const Lab = require('../models/labDetails/labDetails.model');
 const { findClosestStudio } = require('../utils/helpers/nearestLabFinder');
+const { getPathaoAccessToken, getPathaoZones, getPathaoAreas } = require('../models/pathao/query');
 
 const baseUrl = process.env.PATHAO_BASE_URL;
 
 const pathaoAccessToken = async (req, res, next) => {
-  const issueBody = {
-    client_id: process.env.PATHAO_CLIENT_ID,
-    client_secret: process.env.PATHAO_CLIENT_SECRET,
-    username: process.env.PATHAO_CLIENT_EMAIL,
-    password: process.env.PATHAO_CLIENT_PASSWORD,
-    grant_type: process.env.PATHAO_GRANT_TYPE,
-  };
   try {
-    const pathaoToken = await axios.post(
-      baseUrl + '/aladdin/api/v1/issue-token',
-      issueBody,
-      {
-        headers: {
-          accept: 'application/json',
-          'content-type': 'application/json',
-        },
-      }
-    );
+    const pathaoToken = await getPathaoAccessToken()
     res.status(200);
     res.send({ pathaoToken: pathaoToken.data });
   } catch (err) {
-    console.log(err);
     res.status(500).send({ errorMessage: 'Cannot get access token' });
   }
 };
@@ -36,16 +20,7 @@ const pathaoAccessToken = async (req, res, next) => {
 const pathaoZones = async (req, res, next) => {
   const { pathaoToken, city_id } = req.body;
   try {
-    const zones = await axios.get(
-      `${baseUrl}/aladdin/api/v1/cities/${city_id}/zone-list`,
-      {
-        headers: {
-          authorization: `Bearer ${pathaoToken}`,
-          accept: 'application/json',
-          'content-type': 'application/json',
-        },
-      }
-    );
+    const zones = await getPathaoZones(pathaoToken, city_id);
     res.status(200).send({ zones: zones.data.data.data });
   } catch (err) {
     console.log(err);
@@ -58,26 +33,15 @@ const pathaoZones = async (req, res, next) => {
 const pathaoAreas = async (req, res, next) => {
   const { pathaoToken, zone_id } = req.body;
   try {
-    const areas = await axios.get(
-      `${baseUrl}/aladdin/api/v1/zones/${zone_id}/area-list`,
-      {
-        headers: {
-          authorization: `Bearer ${pathaoToken}`,
-          accept: 'application/json',
-          'content-type': 'application/json',
-        },
-      }
-    );
+    const areas = await getPathaoAreas(pathaoToken, zone_id);
     res.status(200).send({ areas: areas.data.data.data });
   } catch (err) {
-    console.log(err);
     res
       .status(401)
       .send({ errorMessage: `Cannot get areas by zone_id ${zone_id}` });
   }
 };
 const createOrder = async (req, res, next) => {
-  console.log(req.body.pathaoToken);
   const { pathaoToken } = req.body;
   const { id } = req.body;
   try {
