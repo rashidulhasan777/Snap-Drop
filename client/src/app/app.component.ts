@@ -8,6 +8,7 @@ import { SwPush } from '@angular/service-worker';
 import { Socket } from 'ngx-socket-io';
 import { Router } from '@angular/router';
 import { LoaderService } from './services/loader/loader.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -40,9 +41,9 @@ export class AppComponent {
       'reset_image',
       this.domSanitizer.bypassSecurityTrustResourceUrl('assets/reset_image.svg')
     );
-    this.authService.userRole().subscribe((res) => (this.role = res.role));
+    this.authService.userRole().pipe(take(1)).subscribe((res) => (this.role = res.role));
     if (!localStorage.getItem('pathaoAccessToken'))
-      this.pathao.getPathaoAccessToken().subscribe({
+      this.pathao.getPathaoAccessToken().pipe(take(1)).subscribe({
         next: (res) => {
           localStorage.setItem(
             'pathaoAccessToken',
@@ -53,7 +54,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.swPush.notificationClicks.subscribe(
+    this.swPush.notificationClicks.pipe(take(1)).subscribe(
       ({ action, notification }: { action: any; notification: any }) => {
         // TODO: Do something in response to notification click.
         this.router.navigate(['login']);

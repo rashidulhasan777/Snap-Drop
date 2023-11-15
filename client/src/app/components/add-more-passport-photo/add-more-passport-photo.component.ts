@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { map, Observable, startWith, of } from 'rxjs';
+import { map, Observable, startWith, of, take } from 'rxjs';
 import { ImageInterface } from 'src/app/interfaces/image.interface';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { IdbServiceService } from 'src/app/services/idbService/idb-service.service';
@@ -42,7 +42,7 @@ export class AddMorePassportPhotoComponent implements OnInit {
     this.loading.setLoadingMsg('');
     this.loading.setLoading(true);
     this.loading.setBlockNavbar(false);
-    this.userData.getCountries().subscribe((res) => {
+    this.userData.getCountries().pipe(take(1)).subscribe((res) => {
       this.countries = res;
       this.anotherOne = of(res);
     });

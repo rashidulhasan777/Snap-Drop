@@ -27,7 +27,7 @@ export class RegisterComponent {
   ) {}
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
-      this.authService.userRole().subscribe((res) => {
+      this.authService.userRole().pipe(take(1)).subscribe((res) => {
         if (res.role === 'customer') this.router.navigate(['user_dashboard']);
         else if (res.role === 'lab') this.router.navigate(['lab-dashboard']);
         else this.authService.logout();
@@ -75,7 +75,7 @@ export class RegisterComponent {
           .subscribe({
             next: (response) => {
               localStorage.setItem('userAccessToken', response.access_token);
-              this.authService.userRole().subscribe((res) => {
+              this.authService.userRole().pipe(take(1)).subscribe((res) => {
                 if (res.role === 'customer')
                   this.router
                     .navigate(['user_dashboard'])
