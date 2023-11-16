@@ -90,8 +90,6 @@ const createOrder = async (req, res, next) => {
 };
 
 const pathaoFindClosestStudio = async (req, res, next) => {
-  console.log("AREA---->",req.body,"REQ-------->",req.currentUser.details);
-
   try {
     const area = req.currentUser.details.area
       ? req.currentUser.details.area.area_name

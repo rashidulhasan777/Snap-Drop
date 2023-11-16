@@ -4,7 +4,7 @@ const { getMailOptions } = require('./../utils/nodemail/mailOptions');
 const User = require('../models/user/user.model');
 const { sendNotification } = require('../utils/helpers/sendNotifications');
 const sendMessage = require("./../middlewares/twilio");
-const { addOrderToDb, updateOrderStatusToDb, getOneWeekDataFromDb, orderMarkedPaidToDb } = require('../models/order/order.query');
+const { addOrderToDb, updateOrderStatusToDb, getOneWeekDataFromDb, orderMarkedPaidToDb, getUserLastOrderFromDb, generateOrderIdFromDb, cleanUnpaidOrdersFromDb, getAllOrdersFromDb, getOrderByIdFromDb, getOrderByCustomerIdFromDb, getOrderByStatusFromDb, getOrderByLabIdFromDb, updatePassportFromDb } = require('../models/order/order.query');
 
 const getAllOrders = async (req, res) => {
   try {
@@ -62,7 +62,7 @@ const getOrderByCustomerId = async (req, res) => {
 const getOrdersbyStatus = async (req, res) => {
   const orderStatus = req.params.status;
   try {
-    const orders = await getOrderByStatusFromDb(orderStatus,req.currentUser.labId)
+    const orders = await getOrderByStatusFromDb(orderStatus,req.body.labId)
     res.status(201);
     res.send(orders);
   } catch (error) {
@@ -73,7 +73,7 @@ const getOrdersbyStatus = async (req, res) => {
 
 const getOrderByLabId = async (req, res) => {
   try {
-    const orders = await getOrderByLabIdFromDb(req.currentUser.labId)
+    const orders = await getOrderByLabIdFromDb(req.body.labId)
     res.status(201);
     res.send(orders);
   } catch (error) {
@@ -83,7 +83,7 @@ const getOrderByLabId = async (req, res) => {
 };
 const getOneWeekData = async (req, res) => {
   try {
-    const orders = getOneWeekDataFromDb(req.currentUser.labId)
+    const orders = getOneWeekDataFromDb(req.body.labId)
     res.status(201);
     res.send(orders);
   } catch (error) {
@@ -127,7 +127,7 @@ const updatePassport = async (req, res) => {
 const getUserLastOrder = async (req, res) => {
   try {
     const latestOrder = await getUserLastOrderFromDb(req.currentUser._id)
-    res.status(200).send(latestOrder[0]);
+    res.status(200).send(latestOrder);
   } catch (error) {
     console.log(error);
     res.status(500).send({ errorMessage: 'Something went wrong.' });
@@ -136,7 +136,7 @@ const getUserLastOrder = async (req, res) => {
 
 const generateOrderId = async (req, res) => {
   try {
-    const orderId = await generateOrderIdFromDb(req.currentUser.labId)
+    const orderId = await generateOrderIdFromDb(req.body.labId)
     res.status(200).send({ orderId });
   } catch (error) {
     console.log(error);
@@ -146,7 +146,7 @@ const generateOrderId = async (req, res) => {
 
 const getOrderCountByProductCategory = async (req, res) => {
   try {
-    const orders = await Order.find({ labId: req.currentUser.labId });
+    const orders = await Order.find({ labId: req.body.labId });
     const stat = {
       '4R': 0,
       '6R': 0,

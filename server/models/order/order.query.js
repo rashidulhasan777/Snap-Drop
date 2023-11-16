@@ -141,11 +141,13 @@ const getOrderCountByProductCategoryFromDb = async (labId) => {
   }
 }
 const generateOrderIdFromDb = async (labId) => {
+
   try {
     const orderCountForLab = await Order.find({
       labId: labId,
     }).count();
     const orderId = `${labId}_${orderCountForLab}`;
+    console.log(orderId)
     return orderId;
   } catch (error) {
     console.log(error);
