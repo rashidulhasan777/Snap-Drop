@@ -31,6 +31,7 @@ import { LabDashboardComponent } from './components/lab-components/lab-dashboard
 import { SplashscreenComponent } from './components/splashscreen/splashscreen.component';
 import { RetakeCameraComponent } from './components/retake-camera/retake-camera.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
+import { OrderHistoryComponent } from './components/order-history/order-history.component';
 
 const routes: Routes = [
   {
@@ -135,6 +136,10 @@ const routes: Routes = [
     path: 'order/:id',
     component: OrderDetailsComponent,
     canActivate: [AuthGuardGuard, RoleguardLabGuard],
+  },
+  {
+    path: 'order_history',
+    component: OrderHistoryComponent,
   },
   {
     path: 'passport_photo_instructions',
