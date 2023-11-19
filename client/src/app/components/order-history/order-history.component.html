@@ -1,14 +1,14 @@
 <div
-  class="w-screen max-h-[calc(100vh-72px)] min-h-[calc(100vh-72px)] border-2"
+  class="w-screen max-h-[calc(100vh-76px)] min-h-[calc(100vh-76px)] border-2"
 >
   <div>
     <div>
-      <h1 class="text-2xl font-bold mt-8 px-4">Order</h1>
+      <h2 class="text-2xl font-bold mt-8 px-4">Order</h2>
     </div>
     <div>
       <div>
         <div
-          class="flex justify-center gap-16 items-center text-[#b6bbc2] mb-[2px] mt-8 text-xl"
+          class="flex justify-center gap-16 items-center text-[#b6bbc2] mb-[2px] mt-8"
         >
           <div class="relative">
             <h1
@@ -19,7 +19,7 @@
             </h1>
             <div
               *ngIf="selectedButton === 'paid'"
-              class="w-[100px] h-1 rounded-full bg-main absolute top-[30px] left-[-30px]"
+              class="w-[100px] h-1 rounded-full bg-main absolute top-[37px] left-[-41px]"
             ></div>
           </div>
           <div class="relative">
@@ -31,7 +31,7 @@
             </h1>
             <div
               *ngIf="selectedButton === 'Unpaid'"
-              class="w-[100px] h-1 rounded-full bg-main absolute top-[30px] left-[-20px]"
+              class="w-[100px] h-1 rounded-full bg-main absolute top-[37px] left-[-29px]"
             ></div>
           </div>
           <div class="relative">
@@ -43,13 +43,13 @@
             </h1>
             <div
               *ngIf="selectedButton === 'Delivered'"
-              class="w-[125px] h-1 rounded-full bg-main absolute top-[30px] left-[-21px]"
+              class="w-[125px] h-1 rounded-full bg-main absolute top-[37px] left-[-33px]"
             ></div>
           </div>
         </div>
       </div>
       <div class="w-full h-1 bg-[#dde0e4]"></div>
-      <div class="w-full p-4 overflow-scroll h-[645px]">
+      <div class="w-full p-4 overflow-scroll h-[655px]">
         <div class="overflow-x-auto" *ngFor="let order of orders">
           <div class="overflow-x-auto">
             <div
@@ -58,24 +58,47 @@
               <div>
                 <div class="flex items-center">
                   <img
-                    class="w-[120px] h-[94px] rounded-l-xl object-cover border mt-[1px]"
+                    class="min-w-[120px] max-w-[120px] h-[94px] rounded-l-xl object-cover border mt-[1px]"
                     src="{{ order?.galleryPictures?.[0]?.imageURL }}"
                     alt="gallery_img"
                   />
-                  <div class="text-main ml-2">
-                    <h1>Gallery: {{ order?.galleryPictures?.length }}</h1>
-                    <h1>Passport: {{ order?.passportPictures?.length }}</h1>
-                    <h1 class="flex items-center">
-                      Cost:<span class="ml-2"
-                        ><img src="../../../assets/taka.svg" alt=""
-                      /></span>
-                      {{ order?.totalPrice?.total }}
-                    </h1>
+                  <div class="text-main ml-2 flex justify-between w-full">
+                    <div>
+                      <h1>Gallery: {{ order?.galleryPictures?.length }}</h1>
+                      <h1>Passport: {{ order?.passportPictures?.length }}</h1>
+                      <h1 class="flex items-center">
+                        Price:<span class="ml-2"
+                          ><img src="../../../assets/taka.svg" alt=""
+                        /></span>
+                        {{ order?.totalPrice?.total }}
+                      </h1>
+                    </div>
+                    <div>
+                      <div
+                        class="text-white px-2 h-[23px] rounded-full mr-2 flex items-center justify-center"
+                        [ngClass]="{
+                          'bg-green-500': order.orderStatus === 'approved',
+                          'bg-orange-500': order.orderStatus === ''
+                        }"
+                      >
+                        <h1 class="text-center">{{ order.orderStatus }}</h1>
+                      </div>
+                      <div class="mt-[38px] mr-2">
+                        <h1>{{ order.createdAt | date }}</h1>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div
+          (click)="clearUnpaidOrder()"
+          class="flex justify-center"
+          *ngIf="selectedButton === 'Unpaid'"
+        >
+          <img src="../../../assets/remove_unpaid.svg" alt="" />
         </div>
       </div>
     </div>

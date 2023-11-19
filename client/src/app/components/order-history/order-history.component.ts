@@ -33,15 +33,35 @@ export class OrderHistoryComponent implements OnInit {
   getPaid() {
     this.selectedButton = 'paid';
     this.orders = this.AllOrders.filter((order) => order.paid === true);
+    this.orders.reverse();
   }
   getUnpaid() {
     this.selectedButton = 'Unpaid';
     this.orders = this.AllOrders.filter((order) => order.paid === false);
+    console.log(this.orders);
   }
   getDelivered() {
     this.selectedButton = 'Delivered';
     this.orders = this.AllOrders.filter(
       (order) => order.orderStatus === 'Delivered'
     );
+  }
+  clearUnpaidOrder() {
+    const unpaidOrders = this.AllOrders.filter((order) => order.paid === false);
+    if (unpaidOrders.length > 0) {
+      unpaidOrders.forEach((order) => {
+        this.orderService
+          .cleanUnpaidOrders()
+          .pipe(take(1))
+          .subscribe({
+            next: (res) => {
+              this.getOrders();
+            },
+            error: (error) => {
+              console.log(error);
+            },
+          });
+      });
+    }
   }
 }
