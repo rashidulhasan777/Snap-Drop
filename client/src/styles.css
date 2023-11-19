@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-
+/* @tailwind base; */
+@tailwind components;
+@tailwind utilities;
 :root {
   --primary: #282c35;
   /* --primary: #f5f2ff; */
@@ -28,9 +30,9 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.mat-mdc-form-field-subscript-wrapper {
+/* .mat-mdc-form-field-subscript-wrapper {
   height: 0px !important;
   visibility: hidden !important;
-}
+} */
 
 /* .background { background-image: url("./assets/Moon.svg"); background-size: cover; position: fixed; top: 0; left: 0; right: 0; bottom: 0; filter: blur(10px); z-index: -1; } */

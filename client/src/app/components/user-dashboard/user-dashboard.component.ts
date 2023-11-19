@@ -73,6 +73,7 @@ export class UserDashboardComponent {
   goTimeline() {
     this.router.navigate(['order-status']);
   }
+
   openDialog() {
     const dialogRef = this.dialog.open(OnboardingComponent);
     dialogRef

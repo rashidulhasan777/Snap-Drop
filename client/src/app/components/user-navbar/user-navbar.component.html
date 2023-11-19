@@ -28,7 +28,21 @@
       alt=""
     />
   </a>
+  <div class="">
+    <a routerLink="/order_history">
+      <img
+        class="orderHistory"
+        [ngClass]="{ selected: selectedButton === 'button4' }"
+        (click)="selectedButton = 'button4'"
+        src="../../../assets/icons//custome-icon/orderHistory.svg"
+        alt=""
+      />
+    </a>
+  </div>
 </div>
+
+
+
 
 <div class="user-navbar"></div>
 

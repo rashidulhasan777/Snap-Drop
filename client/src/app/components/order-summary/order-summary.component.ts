@@ -187,7 +187,6 @@ export class OrderSummaryComponent {
   }
 
   createOrder() {
-    console.log('here at create order');
     let pending = false;
     if (this.passportPictures.length) pending = true;
     const order: Order = {
@@ -201,27 +200,22 @@ export class OrderSummaryComponent {
       instruction: this.instruction || '',
     };
     this.orderService
-      .cleanUnpaidOrders()
+      .createOrder(order)
       .pipe(take(1))
-      .subscribe(() => {
-        this.orderService
-          .createOrder(order)
+      .subscribe((res) => {
+        console.log(res);
+        this.CompletedOrder = res;
+        this.paymentService
+          .initiatePayment(
+            this.CompletedOrder.order_id,
+            this.CompletedOrder.totalPrice.total
+          )
           .pipe(take(1))
-          .subscribe((res) => {
-            console.log(res);
-            this.CompletedOrder = res;
-            this.paymentService
-              .initiatePayment(
-                this.CompletedOrder.order_id,
-                this.CompletedOrder.totalPrice.total
-              )
-              .pipe(take(1))
-              .subscribe((response: any) => {
-                this.loading.setLoading(false);
-                this.loading.setLoadingMsg('');
-                console.log(response.url);
-                if (response.url) window.location.href = response.url;
-              });
+          .subscribe((response: any) => {
+            this.loading.setLoading(false);
+            this.loading.setLoadingMsg('');
+            console.log(response.url);
+            if (response.url) window.location.href = response.url;
           });
       });
   }

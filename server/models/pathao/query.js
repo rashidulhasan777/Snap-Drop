@@ -1,6 +1,5 @@
 const axios = require('axios');
 const Order = require('../order/order.model');
-const User = require('../user/user.model');
 const Lab = require('../labDetails/labDetails.model');
 const { findClosestStudio } = require('../../utils/helpers/nearestLabFinder');
 
@@ -65,7 +64,7 @@ const getPathaoAreas = async (pathaoToken, zone_id) => {
   }
 }
 
-const createOrderToDb = async (data) => {
+const createOrderToDb = async (id,pathaoToken) => {
   try {
     const order = await Order.findById(id);
     const labUser = await Lab.findOne({ labId: order.labId });
@@ -103,18 +102,66 @@ const createOrderToDb = async (data) => {
         },
       }
     );
-    console.log(store.data);
-    res.status(200).send(store.data);
+    return store
   } catch (err) {
     console.log(err.response.data);
-    res.status(401).send({ errorMessage: `Cannot create order` });
   }
 }
+const getPathaoColsetstStudio = async (currentUser)=>{
+  try {
+    const area = currentUser.details.area
+      ? currentUser.details.area.area_name
+      : '';
+    const zone = currentUser.details.zone.zone_name;
+    const city = currentUser.details.city.city_name;
+    const country = 'Bangladesh';
+    const nearestStudio = await findClosestStudio(area, zone, city, country);
+    return nearestStudio;
+  } catch (err) {
+    console.log(err);
+  }
+
+}
+const getPathaoPriceEstimate = async(store_id, pathaoToken,currentUser)=>{
+  try {
+    store_id = '' + store_id;
+    const item_type = '' + 1;
+    const delivery_type = '' + 48;
+    const item_weight = '' + 0.5;
+    const recipient_city = '' + currentUser.details.city.city_id;
+    const recipient_zone = '' + currentUser.details.zone.zone_id;
+    const priceEstimateData = await axios.post(
+      `${baseUrl}/aladdin/api/v1/merchant/price-plan`,
+      {
+        store_id,
+        item_type,
+        delivery_type,
+        item_weight,
+        recipient_city,
+        recipient_zone,
+      },
+      {
+        headers: {
+          authorization: `Bearer ${pathaoToken}`,
+          accept: 'application/json',
+          'content-type': 'application/json',
+        },
+      }
+    );
+    return priceEstimateData
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+
 
 
 module.exports = {
     getPathaoAccessToken,
     getPathaoZones,
     getPathaoAreas,
-    createOrderToDb
+    createOrderToDb,
+    getPathaoColsetstStudio,
+    getPathaoPriceEstimate
 }

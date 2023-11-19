@@ -130,6 +130,13 @@ export class OrderService {
       },
     });
   }
+  getAllOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(baseBackendURL + '/getAllOrders', {
+      headers: {
+        Authorization: `Bearer ${this.jwtToken}`,
+      },
+    });
+  }
 
   private get jwtToken() {
     return localStorage.getItem('userAccessToken');
