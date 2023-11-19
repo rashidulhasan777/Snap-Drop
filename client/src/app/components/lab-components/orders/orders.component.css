@@ -54,3 +54,8 @@ th.mat-sort-header-sorted {
   justify-content: center;
   align-items: center;
 }
+
+.order-pg-btns {
+  display: flex;
+  gap: 15px;
+}

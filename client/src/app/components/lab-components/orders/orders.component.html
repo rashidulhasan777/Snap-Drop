@@ -28,7 +28,7 @@
         <ng-container matColumnDef="createDate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Created</th>
           <td mat-cell *matCellDef="let row">
-            {{ row.createdAt | date : 'MMM d' }}
+            {{ row.createdAt | date : "MMM d" }}
           </td>
         </ng-container>
 
@@ -36,7 +36,7 @@
         <ng-container matColumnDef="dispatchDate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Updated</th>
           <td mat-cell *matCellDef="let row">
-            {{ row.updatedAt | date : 'MMM d' }}
+            {{ row.updatedAt | date : "MMM d" }}
           </td>
         </ng-container>
 
@@ -56,7 +56,7 @@
             Customer Instructions
           </th>
           <td mat-cell *matCellDef="let row">
-            {{ row.instruction || 'No instructions provided' }}
+            {{ row.instruction || "No instructions provided" }}
           </td>
         </ng-container>
 
@@ -64,13 +64,22 @@
         <ng-container matColumnDef="button">
           <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
           <td mat-cell *matCellDef="let row">
-            <button
-              [routerLink]="['/order', row._id]"
-              mat-raised-button
-              color="primary"
-            >
-              Download
-            </button>
+            <div class="order-pg-btns">
+              <button
+                [routerLink]="['/order', row._id]"
+                mat-raised-button
+                color="primary"
+              >
+                Download
+              </button>
+              <button
+                [routerLink]="['/order', row._id]"
+                mat-raised-button
+                color="basic"
+              >
+                Printing
+              </button>
+            </div>
           </td>
         </ng-container>
 

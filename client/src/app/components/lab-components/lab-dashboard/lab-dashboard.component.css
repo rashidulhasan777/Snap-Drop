@@ -1,38 +1,11 @@
-table {
-  width: 100%;
-  height: 100%;
-}
-
-th.mat-sort-header-sorted {
-  color: black;
-}
-
-.filter {
-  width: 40%;
-}
-
-.stat-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding-top: 10vh;
-  padding-left: 10vw;
-  padding-bottom: 5vh;
-}
-
-.example-sidenav-content {
-  padding: 2vh 2vw 0 2vw;
-  display: flex;
-  flex-direction: row-reverse;
-  height: calc(100vh-64px);
-}
-
 .example-sidenav {
   user-select: none;
 }
+
 .full-width {
   width: 100%;
 }
+
 .menu-button {
   transition: 300ms ease-in-out;
   transform: rotate(0deg);
@@ -51,50 +24,40 @@ th.mat-sort-header-sorted {
   transform: scaleY(1);
 }
 
-/* ------------------ */
-
-.example-background {
-  position: fixed;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(
-    circle at center,
-    rgba(191, 145, 247, 0.63) 0%,
-    rgba(178, 116, 248, 0.575) 50%,
-    rgba(62, 82, 117, 0) 100%
-  );
-  animation: backgroundAnimation 20s ease-in-out infinite;
+.title-header {
+  padding-left: 5%;
 }
 
-@keyframes backgroundAnimation {
-  0% {
-    background-size: 400% 400%;
-    background-position: 0 0;
-  }
-  50% {
-    background-size: 400% 400%;
-    background-position: 100% 100%;
-  }
-  100% {
-    background-size: 400% 400%;
-    background-position: 0 0;
-  }
+/* ------------------ */
+
+.stat-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 40px 2vw 0 2vw;
 }
 
 .count {
-  padding-right: 2vw;
   display: flex;
-  justify-content: end;
+  margin: 0px;
+  justify-content: start;
   font-size: xx-large;
+}
+
+mat-card-footer {
+  display: flex;
+  padding: 16px;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .example-card {
   position: relative;
-  width: 20vw;
-  margin: 0 auto;
+  width: 250px;
   background-color: #f1f4f6;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
@@ -109,6 +72,14 @@ th.mat-sort-header-sorted {
   margin-right: 8px;
 }
 
+.example-background {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  animation: backgroundAnimation 20s ease-in-out infinite;
+}
+
 mat-card-image {
   height: 200px;
   object-fit: cover;
@@ -119,6 +90,26 @@ mat-card-image {
 mat-card-content {
   padding: 16px;
   color: #4a4a4a;
+}
+
+.example-sidenav-content {
+  padding: 2vh 2vw 0 2vw;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.charts {
+  width: 40%;
+  height: 100%;
+  overflow-y: auto;
+  padding-left: 30px;
+}
+
+.pie-container {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 app-chart {
@@ -139,34 +130,25 @@ app-pie-chart2 {
   width: 50% !important;
 }
 
-.title-header {
-  padding-left: 5%;
+.filter {
+  width: 40%;
 }
 
-.charts {
-  width: 40%;
-  height: 100%;
-  overflow-y: auto;
-  padding-left: 30px;
+.filter-input {
+  width: 100%;
 }
 
 .table-container {
   width: 60%;
 }
 
+table {
+  width: 100%;
+  height: 100%;
+}
+
 .mat-mdc-table {
   table-layout: fixed;
-}
-
-.pie-container {
-  margin-top: 40px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.filter-input {
-  width: 100%;
 }
 
 .mdc-data-table__cell,
@@ -177,6 +159,25 @@ app-pie-chart2 {
 .go-to-page-button {
   padding: 22px 10px;
   margin: 10px 0;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+@keyframes backgroundAnimation {
+  0% {
+    background-size: 400% 400%;
+    background-position: 0 0;
+  }
+  50% {
+    background-size: 400% 400%;
+    background-position: 100% 100%;
+  }
+  100% {
+    background-size: 400% 400%;
+    background-position: 0 0;
+  }
 }
 
 @media only screen and (max-width: 1400px) {
@@ -196,5 +197,9 @@ app-pie-chart2 {
 
   .table-container {
     width: 100%;
+  }
+
+  .stat-container {
+    justify-content: center;
   }
 }
