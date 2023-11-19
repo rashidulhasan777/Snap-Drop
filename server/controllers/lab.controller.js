@@ -1,22 +1,18 @@
-const Lab = require('../models/labDetails/labDetails.model');
+const { createLabInDb, getLabNameFromDb } = require('../models/labDetails/labDetails.query');
 
 const createLab = async (req, res) => {
   try {
-    const result = await Lab.create(req.body);
+    const result = await createLabInDb(req.body);
     res.status(201);
     res.send(result);
-    return result;
   } catch (error) {
-    res.status(500).send({ errorMessage: 'Something went wrong' });
-    console.log(error);
+    res.status(500).send({ errorMessage: error.message });
   }
 };
 
 const getLabName = async (req, res) => {
   try {
-    const { labId } = req.body;
-    // console.log(labId);
-    const { labName } = await Lab.findOne({ labId: labId });
+    const labName = await getLabNameFromDb(req.body)
     res.status(200).send({ labName });
   } catch (err) {
     res.status(500).send({ errorMessage: 'Lab Name not found' });

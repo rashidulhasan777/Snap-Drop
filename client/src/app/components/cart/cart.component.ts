@@ -43,7 +43,7 @@ export class CartComponent {
       });
       this.loading.setLoading(false);
       console.log(this.price);
-      console.log(this.passportOrders);
+      console.log(this.galleryOrders);
     } catch (error) {
       console.log(error);
     }
@@ -88,12 +88,15 @@ export class CartComponent {
   }
 
   checkOut() {
-    this.userData.getUser().pipe(take(1)).subscribe((res) => {
-      if (res.details) {
-        this.router.navigate(['order_summary']);
-      } else {
-        this.router.navigate(['user_address']);
-      }
-    });
+    this.userData
+      .getUser()
+      .pipe(take(1))
+      .subscribe((res) => {
+        if (res.details) {
+          this.router.navigate(['order_summary']);
+        } else {
+          this.router.navigate(['user_address']);
+        }
+      });
   }
 }

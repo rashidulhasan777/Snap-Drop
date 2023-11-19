@@ -1,65 +1,36 @@
 const axios = require('axios');
 const User = require('../models/user/user.model');
 const jwt = require('jsonwebtoken');
+const { getGoogleAccessCode, getFbAccessCode, oAuthLogin } = require('../models/oAuth/query');
 const SECRET_KEY = process.env.JWT_SECRET;
 
 const googleAccessCode = async (req, res, next) => {
-  const { code } = req.body;
-  const url = new URL('https://oauth2.googleapis.com/token');
-  url.searchParams.append('client_id', process.env.GOOGLE_CLIENT_ID);
-  url.searchParams.append('client_secret', process.env.GOOGLE_CLIENT_SECRET);
-  url.searchParams.append('code', code);
-  url.searchParams.append('grant_type', 'authorization_code');
-  url.searchParams.append('redirect_uri', `${process.env.BASE_FRONTEND_URL}/oauth_google`);
   try {
-    const access_token = await axios.post(url.toString(), {});
+    const access_token = await getGoogleAccessCode(req.body);
     res.status(200);
     res.send({ access_token: access_token.data.access_token });
   } catch (error) {
-    console.log(error.response);
     res.status(500);
     res.send({ errorMessage: 'Something went wrong' });
   }
 };
 
 const fbAccessCode = async (req, res, next) => {
-  const { code } = req.body;
-  console.log(code);
-  const url = new URL('https://graph.facebook.com/oauth/access_token');
-  url.searchParams.append('client_id', process.env.FB_CLIENT_ID);
-  url.searchParams.append('client_secret', process.env.FB_CLIENT_SECRET);
-  url.searchParams.append('code', code);
-  url.searchParams.append(
-    'redirect_uri',
-    `${process.env.BASE_FRONTEND_URL}/oauth_fb`
-  );
   try {
-    const access_token = await axios.post(url.toString(), {});
+    const access_token = await getFbAccessCode(req.body)
     res.status(200);
-    console.log(access_token.data);
     res.send({ access_token: access_token.data.access_token });
   } catch (error) {
-    console.log(error);
     res.status(500);
     res.send({ errorMessage: 'Something went wrong' });
   }
 };
 
 const oauthLogin = async (req, res, next) => {
-  const { email, name, profilePic } = req.body;
   try {
-    let existingUser = await User.findOne({ email });
-    if (!existingUser) {
-      existingUser = await User.create({
-        email,
-        profilePic,
-        name,
-      });
-    }
-    const access_token = jwt.sign({ _id: existingUser._id }, SECRET_KEY);
+    const access_token = await oAuthLogin(req.body)
     res.status(201).send({ access_token });
   } catch (error) {
-    console.log(error);
     res.status(500).send({ errorMessage: 'Something went wrong' });
   }
 };
