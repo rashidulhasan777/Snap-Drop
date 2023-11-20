@@ -33,43 +33,54 @@ export class UserDashboardComponent {
   }
 
   ngOnInit() {
-    this.userData.getUser().pipe(take(1)).subscribe((res) => {
-      this.User = res;
-      this.socket.emit('gimmeNotification', { userId: res._id });
-      this.socket.on;
-      if (this.User.details?.name) {
-        let fullname = this.User.details?.name.split(' ');
-        this.firstName = fullname[0];
-      } else if (this.User.name) {
-        let fullname = this.User.name.split(' ');
-        this.firstName = fullname[0];
-      } else {
-        this.firstName = this.User.email.split('@')[0];
-      }
-      if (this.User.newUser) this.openDialog();
-      this.orderService.getCustomerLatestOrder().pipe(take(1)).subscribe({
-        next: (res) => {
-          if (res && res.orderStatus === 'retake_needed') {
-            this.router.navigate(['retake']);
-          }
-          this.order = res;
-          this.loading.setLoading(false);
-        },
-        error: (error) => {
-          console.log(error);
-          this.loading.setLoading(false);
-        },
+    this.userData
+      .getUser()
+      .pipe(take(1))
+      .subscribe((res) => {
+        this.User = res;
+        this.socket.emit('gimmeNotification', { userId: res._id });
+        this.socket.on;
+        if (this.User.details?.name) {
+          let fullname = this.User.details?.name.split(' ');
+          this.firstName = fullname[0];
+        } else if (this.User.name) {
+          let fullname = this.User.name.split(' ');
+          this.firstName = fullname[0];
+        } else {
+          this.firstName = this.User.email.split('@')[0];
+        }
+        if (this.User.newUser) this.openDialog();
+        this.orderService
+          .getCustomerLatestOrder()
+          .pipe(take(1))
+          .subscribe({
+            next: (res) => {
+              if (res && res.orderStatus === 'retake_needed') {
+                this.router.navigate(['retake']);
+              }
+              this.order = res;
+              console.log(this.order);
+              this.loading.setLoading(false);
+            },
+            error: (error) => {
+              console.log(error);
+              this.loading.setLoading(false);
+            },
+          });
       });
-    });
   }
 
   goTimeline() {
     this.router.navigate(['order-status']);
   }
+
   openDialog() {
     const dialogRef = this.dialog.open(OnboardingComponent);
-    dialogRef.afterClosed().pipe(take(1)).subscribe((res) => {
-      this.userData.setUserNotNew().pipe(take(1)).subscribe();
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((res) => {
+        this.userData.setUserNotNew().pipe(take(1)).subscribe();
+      });
   }
 }

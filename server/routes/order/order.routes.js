@@ -8,6 +8,8 @@ router.get(
     authMiddleware.authenticated,
     orderController.getOrderById
   );
+router.get('/getallorders', authMiddleware.customer, orderController.getAllOrders);
+
   router.get(
     '/order/latestOrder',
     authMiddleware.customer,

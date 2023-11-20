@@ -49,34 +49,40 @@ export class OrderSummaryComponent {
   }
 
   async ngOnInit() {
-    this.userDataService.getUser().pipe(take(1)).subscribe((res) => {
-      this.User = res;
-    });
+    this.userDataService
+      .getUser()
+      .pipe(take(1))
+      .subscribe((res) => {
+        this.User = res;
+      });
     this.countryForPassport =
       (await this.idbService.getCountry()) || 'Bangladesh';
 
-    this.userDataService.getClosestLab().pipe(take(1)).subscribe(async (res) => {
-      this.closestLab = res;
-      try {
-        await this.setCart();
-        this.Cart.galleryPictures = this.galleryPictures;
-        this.Cart.passportPictures = this.passportPictures;
-        this.priceCalculator.calculateAllPrices(
-          {
-            passportPictures: this.passportPictures,
-            galleryPictures: this.galleryPictures,
-          },
-          this.closestLab?.labId || 56083,
-          (totalPrice: Price) => {
-            this.price = totalPrice;
-          }
-        );
-        this.loading.setLoading(false);
-      } catch (error) {
-        console.log(error);
-        this.router.navigate(['cart']);
-      }
-    });
+    this.userDataService
+      .getClosestLab()
+      .pipe(take(1))
+      .subscribe(async (res) => {
+        this.closestLab = res;
+        try {
+          await this.setCart();
+          this.Cart.galleryPictures = this.galleryPictures;
+          this.Cart.passportPictures = this.passportPictures;
+          this.priceCalculator.calculateAllPrices(
+            {
+              passportPictures: this.passportPictures,
+              galleryPictures: this.galleryPictures,
+            },
+            this.closestLab?.labId || 56083,
+            (totalPrice: Price) => {
+              this.price = totalPrice;
+            }
+          );
+          this.loading.setLoading(false);
+        } catch (error) {
+          console.log(error);
+          this.router.navigate(['cart']);
+        }
+      });
   }
 
   async setCart() {
@@ -181,7 +187,6 @@ export class OrderSummaryComponent {
   }
 
   createOrder() {
-    console.log('here at create order');
     let pending = false;
     if (this.passportPictures.length) pending = true;
     const order: Order = {
@@ -194,8 +199,10 @@ export class OrderSummaryComponent {
       orderStatus: pending ? 'pending' : 'approved',
       instruction: this.instruction || '',
     };
-    this.orderService.cleanUnpaidOrders().pipe(take(1)).subscribe(() => {
-      this.orderService.createOrder(order).pipe(take(1)).subscribe((res) => {
+    this.orderService
+      .createOrder(order)
+      .pipe(take(1))
+      .subscribe((res) => {
         console.log(res);
         this.CompletedOrder = res;
         this.paymentService
@@ -211,6 +218,5 @@ export class OrderSummaryComponent {
             if (response.url) window.location.href = response.url;
           });
       });
-    });
   }
 }

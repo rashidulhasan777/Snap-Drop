@@ -61,6 +61,7 @@ import { PieChart2Component } from './components/lab-components/pie-chart2/pie-c
 import { SplashscreenComponent } from './components/splashscreen/splashscreen.component';
 import { RetakeCameraComponent } from './components/retake-camera/retake-camera.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
+import { OrderHistoryComponent } from './components/order-history/order-history.component';
 
 const config: SocketIoConfig = { url: baseBackendURL, options: {} };
 export function playerFactory() {
@@ -113,6 +114,7 @@ export function playerFactory() {
     SplashscreenComponent,
     RetakeCameraComponent,
     ErrorPageComponent,
+    OrderHistoryComponent,
   ],
   imports: [
     BrowserModule,

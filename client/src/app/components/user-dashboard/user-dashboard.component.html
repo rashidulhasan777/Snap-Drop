@@ -6,10 +6,16 @@
         src="./../../../assets/icons/custome-icon/logo-trans.svg"
         alt=""
       />
-      <h1 class="header">
-        Welcome, <span class="color-name"> {{ User && firstName }} </span
-        ><img class="confetti" src="/assets/icons/wave.png" alt="image" />
-      </h1>
+
+      <div class="flex items-center justify-center gap-2">
+        <h1 class="header font-bold">
+          Welcome, <span class="color-name font-normal"> {{ User && firstName }} </span
+          >
+        </h1>
+        <img class="w-8 h-8 mb-[44px]" src="/assets/icons/wave.png" alt="image" />
+      </div>
+
+
       <div class="upcoming-card-container">
         <mat-card class="upcoming-card">
           <mat-card-header>
