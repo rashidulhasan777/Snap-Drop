@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const SECRET_KEY = process.env.JWT_SECRET;
 const createUser = async (data) => {
   const { password } = data;
+  console.log(data)
   try {
     if (password === "") throw new Error();
     const hash = await bcrypt.hash(password, 10);

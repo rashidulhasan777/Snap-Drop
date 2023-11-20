@@ -1,7 +1,7 @@
 const Carts = require('../models/cart/cart.model');
 const { updateCartsToDb,clearCartFromDb,getUserCartFromDb } = require('../models/cart/cart.query');
 
-const getUserCart = async (req, res, next) => {
+const getUserCart = async (req, res, next) => { 
   try {
     const userCart = await getUserCartFromDb(req.currentUser._id)
     res.status(200).send(userCart);
