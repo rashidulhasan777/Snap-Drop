@@ -36,7 +36,8 @@ const getFbAccessCode = async(data)=>{
   }
 }
 const oAuthLogin = async(data)=>{
-    const { email, name, profilePic } = data;
+    const { id, email, name, profilePic } = data;
+    console.log(id, email, name, profilePic);
     try {
       let existingUser = await User.findOne({ email });
       if (!existingUser) {

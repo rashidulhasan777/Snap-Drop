@@ -41,7 +41,10 @@ export class AppComponent {
       'reset_image',
       this.domSanitizer.bypassSecurityTrustResourceUrl('assets/reset_image.svg')
     );
-    this.authService.userRole().pipe(take(1)).subscribe((res) => (this.role = res.role));
+    this.authService.userRole().pipe(take(1)).subscribe((res) => {
+      if (res.role)
+        (this.role = res.role)
+    });
     if (!localStorage.getItem('pathaoAccessToken'))
       this.pathao.getPathaoAccessToken().pipe(take(1)).subscribe({
         next: (res) => {
@@ -60,6 +63,8 @@ export class AppComponent {
         this.router.navigate(['login']);
       }
     );
+    console.log(this.role, this.showNavbar);
+
   }
 
   get Loading() {

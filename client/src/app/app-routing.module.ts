@@ -32,6 +32,7 @@ import { SplashscreenComponent } from './components/splashscreen/splashscreen.co
 import { RetakeCameraComponent } from './components/retake-camera/retake-camera.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
+import { FacebookPhotoComponent } from './facebook-photo/facebook-photo.component';
 
 const routes: Routes = [
   {
@@ -60,6 +61,11 @@ const routes: Routes = [
   {
     path: 'passport_upload',
     component: AddMorePassportPhotoComponent,
+    canActivate: [AuthGuardGuard, RoleguardUserGuard],
+  },
+  {
+    path: 'facebook_upload',
+    component: FacebookPhotoComponent,
     canActivate: [AuthGuardGuard, RoleguardUserGuard],
   },
   {

@@ -62,6 +62,7 @@ import { SplashscreenComponent } from './components/splashscreen/splashscreen.co
 import { RetakeCameraComponent } from './components/retake-camera/retake-camera.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
+import { FacebookPhotoComponent } from './facebook-photo/facebook-photo.component';
 
 const config: SocketIoConfig = { url: baseBackendURL, options: {} };
 export function playerFactory() {
@@ -115,6 +116,7 @@ export function playerFactory() {
     RetakeCameraComponent,
     ErrorPageComponent,
     OrderHistoryComponent,
+    FacebookPhotoComponent,
   ],
   imports: [
     BrowserModule,

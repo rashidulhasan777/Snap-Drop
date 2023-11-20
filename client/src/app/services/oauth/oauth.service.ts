@@ -33,9 +33,9 @@ export class OauthService {
   }
 
   fbOauthInit() {
-    const client_id = '1869465020092669';
+    const client_id = '896761518480969';
     const redirect_uri = `${baseFrontendURL}/oauth_fb`;
-    const scopes = 'public_profile email';
+    const scopes = 'public_profile email user_photos';
     const response_type = 'code';
     const url = new URL('https://www.facebook.com/v11.0/dialog/oauth');
     url.searchParams.append('client_id', client_id);
