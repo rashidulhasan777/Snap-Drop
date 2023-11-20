@@ -37,6 +37,9 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
 
   // ---------------------------------------
   orders: any[] = [];
+  revenue: number = 0;
+  expense: number = 0;
+  profit: number = 0;
   opened: boolean = true;
   displayedColumns: string[] = [
     'order_id',
@@ -69,6 +72,17 @@ export class LabDashboardComponent implements AfterViewInit, OnInit {
       .subscribe((response) => {
         // console.log(response[0].labId);
         this.orders = response;
+        this.revenue = this.orders.reduce(
+          (accumulator, currentValue) =>
+            accumulator + currentValue.totalPrice.total,
+          0
+        );
+        this.expense = this.orders.reduce(
+          (accumulator, currentValue) =>
+            accumulator + currentValue.totalPrice.shipping,
+          0
+        );
+        this.profit = this.revenue - this.expense;
         this.dataSource = new MatTableDataSource(this.orders);
         this.paginator.length = this.orders.length;
         this.dataSource.paginator = this.paginator;

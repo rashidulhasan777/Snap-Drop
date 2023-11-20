@@ -1,11 +1,12 @@
-const User = require("./user.model");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const User = require('./user.model');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const SECRET_KEY = process.env.JWT_SECRET;
 const createUser = async (data) => {
-  const { password } = data;
+  const { username, password } = data;
   try {
-    if (password === "") throw new Error();
+    console.log(username, password);
+    if (password === '') throw new Error("password can't be empty");
     const hash = await bcrypt.hash(password, 10);
     const user = { ...data, password: hash };
     const newUser = await User.create(user);
@@ -21,7 +22,7 @@ const loginUser = async (data) => {
   try {
     const user = await User.findOne({ email });
     const validatedPass = await bcrypt.compare(password, user.password);
-    if (!validatedPass) throw new Error("Password is incorrect");
+    if (!validatedPass) throw new Error('Password is incorrect');
     const access_token = jwt.sign({ _id: user._id }, SECRET_KEY);
     return access_token;
   } catch (error) {
@@ -29,18 +30,18 @@ const loginUser = async (data) => {
   }
 };
 const updateUserDetails = async (data, id) => {
-    try {
-        const user = await User.findByIdAndUpdate(
-            { _id: id },
-            {
-              $set: { details: { ...data } },
-            },
-            { new: true }
-          );
-          return user;
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    const user = await User.findByIdAndUpdate(
+      { _id: id },
+      {
+        $set: { details: { ...data } },
+      },
+      { new: true }
+    );
+    return user;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 module.exports = {

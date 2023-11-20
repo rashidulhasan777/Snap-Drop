@@ -1,5 +1,57 @@
 <app-nav-and-sidebar>
   <!-- <h1 class="title-header">Welcome</h1> -->
+
+  <div class="stat-container">
+    <mat-card class="example-card example-background">
+      <mat-card-header>
+        <mat-card-title>Total Orders</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h1 class="count">{{ orders.length }}</h1>
+      </mat-card-content>
+      <mat-card-footer>
+        <span routerLink="/lab-dashboard">view all orders</span>
+        <mat-icon color="primary">assessment</mat-icon>
+      </mat-card-footer>
+    </mat-card>
+    <mat-card class="example-card example-background">
+      <mat-card-header>
+        <mat-card-title>Total Revenue</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h1 class="count">{{ revenue }}</h1>
+      </mat-card-content>
+      <mat-card-footer>
+        <span routerLink="/archive">view completed orders</span>
+        <mat-icon color="primary">trending_up</mat-icon>
+      </mat-card-footer>
+    </mat-card>
+    <mat-card class="example-card example-background">
+      <mat-card-header>
+        <mat-card-title>Total Expense</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h1 class="count">{{ expense }}</h1>
+      </mat-card-content>
+      <mat-card-footer>
+        <span routerLink="/archive">view completed orders</span>
+        <mat-icon color="primary">money_off</mat-icon>
+      </mat-card-footer>
+    </mat-card>
+    <mat-card class="example-card example-background">
+      <mat-card-header>
+        <mat-card-title>Total profit</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <h1 class="count">{{ profit }}</h1>
+      </mat-card-content>
+      <mat-card-footer>
+        <span routerLink="/archive">view completed orders</span>
+        <mat-icon color="primary">monetization_on</mat-icon>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+
   <div class="example-sidenav-content">
     <div class="charts">
       <h1 class="KPI">Key Performance Indicators</h1>
@@ -9,22 +61,6 @@
         [chartData2]="sentForDelivery"
         [maxBar]="maxBar"
       ></app-chart>
-      <!-- <div class="stat-container">
-      <mat-card class="example-card example-background">
-        <mat-card-header>
-          <mat-icon>assessment</mat-icon>
-          <mat-card-title>Total Order </mat-card-title>
-        </mat-card-header>
-        <h1 class="count">{{ orders.length }}</h1>
-      </mat-card>
-      <mat-card class="example-card example-background">
-        <mat-card-header>
-          <mat-icon>check_circle</mat-icon>
-          <mat-card-title>Completed Orders </mat-card-title>
-        </mat-card-header>
-        <h1 class="count">41</h1>
-      </mat-card>
-    </div> -->
 
       <div class="pie-container">
         <app-pie-chart class="pie-chart"></app-pie-chart>
