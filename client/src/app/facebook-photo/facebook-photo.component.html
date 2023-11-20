@@ -1,0 +1,7 @@
+<button (click)="onClickPrev()">Prev</button>
+<button (click)="onClickNext()">Next</button>
+<div>
+  <img *ngFor="let photo of photoLinks" [src]="photo" alt="" width="300" height="300">
+</div>
+
+
