@@ -35,6 +35,7 @@ const authenticated = async (req, res, next) => {
 const customer = async (req, res, next) => {
   try {
     await checkAuthentication(req, res);
+    console.log(req.currentUser);
     if (!req.currentUser || req.currentUser.typeOfUser !== 'customer') {
       console.log(req.currentUser);
       res.status(401).send({ errorMessage: 'Unauthorized Request' });
@@ -47,6 +48,7 @@ const customer = async (req, res, next) => {
 const lab = async (req, res, next) => {
   try {
     await checkAuthentication(req, res);
+    // console.log(req.currentUser.labId);
 
     if (!req.currentUser || req.currentUser.typeOfUser !== 'lab')
       res.status(401).send({ errorMessage: 'Unauthorized Request' });

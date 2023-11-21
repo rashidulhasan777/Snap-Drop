@@ -6,7 +6,9 @@ const orderController = require('../../controllers/order.controller');
 const labController = require('../../controllers/lab.controller');
 const sendMessageController = require('../../controllers/sendMessageController');
 const { uploadToOrder } = require('../../controllers/cutoutpro.controller');
-const { setASubscriber } = require('../../controllers/notifications.controller');
+const {
+  setASubscriber,
+} = require('../../controllers/notifications.controller');
 
 router.post('/lab', labController.createLab);
 
@@ -25,11 +27,5 @@ router.post(
 router.post('/sendMessage', sendMessageController);
 
 router.post('/getLabName', labController.getLabName);
-
-router.get(
-  '/orderCountByProductCategory',
-  authMiddleware.lab,
-  orderController.getOrderCountByProductCategory
-);
 
 module.exports = router;

@@ -3,12 +3,26 @@ const transport = require('../');
 const { getMailOptions } = require('./../utils/nodemail/mailOptions');
 const User = require('../models/user/user.model');
 const { sendNotification } = require('../utils/helpers/sendNotifications');
-const sendMessage = require("./../middlewares/twilio");
-const { addOrderToDb, updateOrderStatusToDb, getOneWeekDataFromDb, orderMarkedPaidToDb, getUserLastOrderFromDb, generateOrderIdFromDb, cleanUnpaidOrdersFromDb, getAllOrdersFromDb, getOrderByIdFromDb, getOrderByCustomerIdFromDb, getOrderByStatusFromDb, getOrderByLabIdFromDb, updatePassportFromDb } = require('../models/order/order.query');
+const sendMessage = require('./../middlewares/twilio');
+const {
+  addOrderToDb,
+  updateOrderStatusToDb,
+  getOneWeekDataFromDb,
+  orderMarkedPaidToDb,
+  getUserLastOrderFromDb,
+  generateOrderIdFromDb,
+  cleanUnpaidOrdersFromDb,
+  getAllOrdersFromDb,
+  getOrderByIdFromDb,
+  getOrderByCustomerIdFromDb,
+  getOrderByStatusFromDb,
+  getOrderByLabIdFromDb,
+  updatePassportFromDb,
+} = require('../models/order/order.query');
 
 const getAllOrders = async (req, res) => {
   try {
-    const orders = await getAllOrdersFromDb()
+    const orders = await getAllOrdersFromDb();
     res.status(200).send(orders);
   } catch (error) {
     res.status(500).send(error);
@@ -39,7 +53,7 @@ const changeOrderStatus = async (req, res) => {
 const getOrderById = async (req, res) => {
   const orderId = req.params.id;
   try {
-    const order = await getOrderByIdFromDb(orderId)
+    const order = await getOrderByIdFromDb(orderId);
     res.status(200);
     res.send(order);
   } catch (error) {
@@ -50,7 +64,7 @@ const getOrderById = async (req, res) => {
 
 const getOrderByCustomerId = async (req, res) => {
   try {
-    const orders = await getOrderByCustomerIdFromDb(req.currentUser._id)
+    const orders = await getOrderByCustomerIdFromDb(req.currentUser._id);
     res.status(201);
     res.send(orders);
   } catch (error) {
@@ -62,7 +76,10 @@ const getOrderByCustomerId = async (req, res) => {
 const getOrdersbyStatus = async (req, res) => {
   const orderStatus = req.params.status;
   try {
-    const orders = await getOrderByStatusFromDb(orderStatus,req.body.labId)
+    const orders = await getOrderByStatusFromDb(
+      orderStatus,
+      req.currentUser.labId
+    );
     res.status(201);
     res.send(orders);
   } catch (error) {
@@ -73,7 +90,7 @@ const getOrdersbyStatus = async (req, res) => {
 
 const getOrderByLabId = async (req, res) => {
   try {
-    const orders = await getOrderByLabIdFromDb(req.body.labId)
+    const orders = await getOrderByLabIdFromDb(req.currentUser.labId);
     res.status(201);
     res.send(orders);
   } catch (error) {
@@ -83,17 +100,22 @@ const getOrderByLabId = async (req, res) => {
 };
 const getOneWeekData = async (req, res) => {
   try {
-    const orders = getOneWeekDataFromDb(req.body.labId)
+    const orders = getOneWeekDataFromDb(req.body.labId);
     res.status(201);
     res.send(orders);
   } catch (error) {
-    res.status(500).send({ error:error,errorMessage: 'Something went wrong' });
+    res
+      .status(500)
+      .send({ error: error, errorMessage: 'Something went wrong' });
   }
 };
 
 const setOrderPaid = async (req, res) => {
   try {
-    const latestOrder = await orderMarkedPaidToDb(req.currentUser._id,req.currentUser.email)
+    const latestOrder = await orderMarkedPaidToDb(
+      req.currentUser._id,
+      req.currentUser.email
+    );
     res.status(201).send(latestOrder);
   } catch (error) {
     res.status(500).send({ errorMessage: 'Something went wrong' });
@@ -102,7 +124,7 @@ const setOrderPaid = async (req, res) => {
 
 const cleanUnpaidOrders = async (req, res) => {
   try {
-    await cleanUnpaidOrdersFromDb(req.currentUser._id)
+    await cleanUnpaidOrdersFromDb(req.currentUser._id);
     res.sendStatus(204);
   } catch (error) {
     console.log(error);
@@ -117,7 +139,7 @@ const updatePassport = async (req, res) => {
     $set: { passportPictures: req.body, orderStatus: 'pending' },
   };
   try {
-    const order = await updatePassportFromDb(orderId, filter, update)
+    const order = await updatePassportFromDb(orderId, filter, update);
     res.status(201).send(order);
   } catch (error) {
     res.status(500).send({ errorMessage: 'Something went wrong' });
@@ -126,7 +148,7 @@ const updatePassport = async (req, res) => {
 
 const getUserLastOrder = async (req, res) => {
   try {
-    const latestOrder = await getUserLastOrderFromDb(req.currentUser._id)
+    const latestOrder = await getUserLastOrderFromDb(req.currentUser._id);
     res.status(200).send(latestOrder);
   } catch (error) {
     console.log(error);
@@ -136,7 +158,7 @@ const getUserLastOrder = async (req, res) => {
 
 const generateOrderId = async (req, res) => {
   try {
-    const orderId = await generateOrderIdFromDb(req.body.labId)
+    const orderId = await generateOrderIdFromDb(req.body.labId);
     res.status(200).send({ orderId });
   } catch (error) {
     console.log(error);
@@ -146,7 +168,7 @@ const generateOrderId = async (req, res) => {
 
 const getOrderCountByProductCategory = async (req, res) => {
   try {
-    const orders = await Order.find({ labId: req.body.labId });
+    const orders = await Order.find({ labId: req.currentUser.labId });
     const stat = {
       '4R': 0,
       '6R': 0,
