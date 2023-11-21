@@ -14,11 +14,15 @@ const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
 
-
 const { sendNotification } = require('./utils/helpers/sendNotifications');
 
 const corsConfig = {
-  origin: [process.env.BASE_FRONTEND_URL, 'http://localhost:8000', 'http://localhost:4200', 'http://localhost:3000'],
+  origin: [
+    process.env.BASE_FRONTEND_URL,
+    'http://localhost:8000',
+    'http://localhost:4200',
+    'http://localhost:3000',
+  ],
   credentials: true,
 };
 const app = express();
@@ -32,7 +36,15 @@ io.on('connection', async (socket) => {
 app.use(cors(corsConfig));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(userRouter, sslCommerzRouter, pathaoRouter, cartRouter, labRouter, oauthRouter, orderRouter);
+app.use(
+  userRouter,
+  sslCommerzRouter,
+  pathaoRouter,
+  cartRouter,
+  labRouter,
+  oauthRouter,
+  orderRouter
+);
 
 (async function () {
   try {
@@ -43,3 +55,5 @@ app.use(userRouter, sslCommerzRouter, pathaoRouter, cartRouter, labRouter, oauth
     console.log(`Something went wrong! ${error}`);
   }
 })();
+
+module.exports = { app, io };
